@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const srcDir = '/Users/macbook/Proyectos/08-chilaquiles-aristeus';
+const srcDir = path.join(__dirname, '..');
 const destDir = path.join(srcDir, 'public');
 
 if (!fs.existsSync(destDir)) fs.mkdirSync(destDir);
@@ -16,7 +16,7 @@ function sanitize(p) {
 }
 
 // List of all possible source locations
-const folders = ['', 'fotos de productos ', 'IMAGENES'];
+const folders = ['', 'assets', 'fotos de productos ', 'IMAGENES'];
 
 // Get all files from these locations
 let allFiles = [];
@@ -37,10 +37,10 @@ folders.forEach(f => {
 // Copy and rename
 allFiles.forEach(f => {
     if (fs.lstatSync(f.fullPath).isFile()) {
-        const newName = sanitize(f.relPath);
+        const newName = sanitize(path.basename(f.fullPath)); // Flat name
         const destPath = path.join(destDir, newName);
         fs.copyFileSync(f.fullPath, destPath);
-        console.log(`Copied: ${f.relPath} -> ${newName}`);
+        console.log(`Copied: ${f.name} -> ${newName}`);
     }
 });
 

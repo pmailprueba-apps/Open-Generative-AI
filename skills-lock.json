@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "228f87d57035100d9dc6efcfc05aafd4b6e3962adacaa04b8217ab2fadb15dc8"
+    },
+    "competitive-analysis": {
+      "source": "mverab/eGEOagents",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/competitive-analysis/SKILL.md",
+      "computedHash": "022fbe382e905baef8ed94caea024097b93b72d980eed34d924a9c6a545eddfb"
+    },
+    "content-scoring": {
+      "source": "mverab/eGEOagents",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/content-scoring/SKILL.md",
+      "computedHash": "87b5d51ea01c1d39d4085a0ab6a4737df1b22b3a371721eb958176cda0575843"
+    },
+    "schema-generator": {
+      "source": "mverab/eGEOagents",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/schema-generator/SKILL.md",
+      "computedHash": "04cbb39f6dabec5b91aa70ee16b1b348038299177ab0548dac0b5073061f221f"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "d606a1146be6d54fb9e73f718b5320b9acac5ff2ba2d7230a555df4b5a923b4a"
+    },
+    "validation-doctor": {
+      "source": "mverab/eGEOagents",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/validation-doctor/SKILL.md",
+      "computedHash": "2544394d0bc776c153494f55dc48ef6272c8d91f31d98fb80679c605706be823"
+    }
+  }
+}

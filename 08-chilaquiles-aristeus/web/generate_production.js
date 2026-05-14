@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = '/Users/macbook/Proyectos/08-chilaquiles-aristeus/menu-aristeus-ultra-premium-vf-2026.html';
-const outputPath = '/Users/macbook/Proyectos/08-chilaquiles-aristeus/public/index.html';
+const filePath = path.join(__dirname, 'menu-aristeus-ultra-premium-vf-2026.html');
+const outputPath = path.join(__dirname, '..', 'public', 'index.html');
 
 let content = fs.readFileSync(filePath, 'utf8');
 

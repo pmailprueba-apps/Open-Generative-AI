@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.log
+BACKUPS/
+.gemini/
+.agents/skills/*/node_modules/
+public/
+dist/
+build/
