@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .test-box { 
+            padding: 20px;
+            background: linear-gradient(45deg, #f06, #4a90e2); /* Vibrant gradient to test transparency */
+            border: 2px solid white;
+            border-radius: 10px;
+        }
+        img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .label { margin-bottom: 10px; font-weight: bold; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Multi-Logo Transparency Test</h1>
+    <div class="test-grid">
+        <div class="test-box">
+            <div class="label">transparencia aristeus vf .png</div>
+            <img src="transparencia  aristeus vf .png">
+        </div>
+        <div class="test-box">
+            <div class="label">aristeus_final_logo.png</div>
+            <img src="aristeus_final_logo.png">
+        </div>
+        <div class="test-box">
+            <div class="label">logo aristeus sin fondo letras blancas.png</div>
+            <img src="logo aristeus sin fondo letras blancas.png">
+        </div>
+        <div class="test-box">
+            <div class="label">revisar que sea transparencia.png</div>
+            <img src="revisar que sea transparencia.png">
+        </div>
+    </div>
+</body>
+</html>

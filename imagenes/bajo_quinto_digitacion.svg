@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" width="1400" height="1100">
+  <rect width="1400" height="1100" fill="#1a1a2e"/>
+
+  <!-- ======================== -->
+  <!-- TÍTULO -->
+  <!-- ======================== -->
+  <text x="700" y="45" text-anchor="middle" fill="#f0e68c" font-size="32" font-weight="bold" font-family="Arial, sans-serif">BAJO QUINTO - DIGITACIÓN Y REPRESENTACIÓN DE NOTAS</text>
+  <text x="700" y="80" text-anchor="middle" fill="#aaaaaa" font-size="18" font-family="Arial, sans-serif">Cómo colocar los dedos y qué significa cada círculo</text>
+
+  <!-- ======================== -->
+  <!-- SECCIÓN 1: MANO IZQUIERDA (DIGITACIÓN) -->
+  <!-- ======================== -->
+  <rect x="50" y="110" width="380" height="350" rx="15" ry="15" fill="#2a2a4e" stroke="#f0e68c" stroke-width="2"/>
+  <text x="240" y="145" text-anchor="middle" fill="#f0e68c" font-size="22" font-weight="bold" font-family="Arial, sans-serif">MANO IZQUIERDA - DIGITACIÓN</text>
+
+  <!-- Dedo 1 - ÍNDICE -->
+  <rect x="70" y="165" width="60" height="90" rx="8" ry="8" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="215" text-anchor="middle" fill="#1a1a2e" font-size="36" font-weight="bold" font-family="Arial, sans-serif">1</text>
+  <text x="100" y="265" text-anchor="middle" fill="#ff6b6b" font-size="14" font-family="Arial, sans-serif">ÍNDICE</text>
+  <text x="100" y="280" text-anchor="middle" fill="#aaaaaa" font-size="11" font-family="Arial, sans-serif">Traste 1</text>
+  <text x="100" y="295" text-anchor="middle" fill="#888888" font-size="10" font-family="Arial, sans-serif">Cuerdas: todas</text>
+
+  <!-- Dedo 2 - MEDIO -->
+  <rect x="150" y="165" width="60" height="90" rx="8" ry="8" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="180" y="215" text-anchor="middle" fill="#1a1a2e" font-size="36" font-weight="bold" font-family="Arial, sans-serif">2</text>
+  <text x="180" y="265" text-anchor="middle" fill="#4ecdc4" font-size="14" font-family="Arial, sans-serif">MEDIO</text>
+  <text x="180" y="280" text-anchor="middle" fill="#aaaaaa" font-size="11" font-family="Arial, sans-serif">Traste 2</text>
+  <text x="180" y="295" text-anchor="middle" fill="#888888" font-size="10" font-family="Arial, sans-serif">Cuerdas: todas</text>
+
+  <!-- Dedo 3 - ANULAR -->
+  <rect x="230" y="165" width="60" height="90" rx="8" ry="8" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="260" y="215" text-anchor="middle" fill="#1a1a2e" font-size="36" font-weight="bold" font-family="Arial, sans-serif">3</text>
+  <text x="260" y="265" text-anchor="middle" fill="#ffe66d" font-size="14" font-family="Arial, sans-serif">ANULAR</text>
+  <text x="260" y="280" text-anchor="middle" fill="#aaaaaa" font-size="11" font-family="Arial, sans-serif">Traste 3</text>
+  <text x="260" y="295" text-anchor="middle" fill="#888888" font-size="10" font-family="Arial, sans-serif">Cuerdas: todas</text>
+
+  <!-- Dedo 4 - MEÑIQUE -->
+  <rect x="310" y="165" width="60" height="90" rx="8" ry="8" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="340" y="215" text-anchor="middle" fill="#1a1a2e" font-size="36" font-weight="bold" font-family="Arial, sans-serif">4</text>
+  <text x="340" y="265" text-anchor="middle" fill="#95e1d3" font-size="14" font-family="Arial, sans-serif">MEÑIQUE</text>
+  <text x="340" y="280" text-anchor="middle" fill="#aaaaaa" font-size="11" font-family="Arial, sans-serif">Traste 4</text>
+  <text x="340" y="295" text-anchor="middle" fill="#888888" font-size="10" font-family="Arial, sans-serif">Cuerdas: todas</text>
+
+  <!-- NOTA: Secuencia de digitación -->
+  <rect x="70" y="320" width="300" height="60" rx="8" ry="8" fill="#3a3a5e" stroke="#666688" stroke-width="1"/>
+  <text x="220" y="345" text-anchor="middle" fill="#cccccc" font-size="13" font-family="Arial, sans-serif">SECUENCIA EN CADA CUERDA:</text>
+  <text x="220" y="365" text-anchor="middle" fill="#f0e68c" font-size="14" font-family="Arial, sans-serif">1 → 2 → 3 → 4 → 1 → 2 → 3 → 4...</text>
+
+  <!-- Ilustración de mano (simplificada) -->
+  <text x="240" y="410" text-anchor="middle" fill="#888888" font-size="12" font-style="italic" font-family="Arial, sans-serif">(Vista lateral de la mano)</text>
+  <!-- Palma -->
+  <ellipse cx="200" cy="440" rx="40" ry="30" fill="#e0c8b0" stroke="#8b7355" stroke-width="2"/>
+  <!-- Dedo índice arriba -->
+  <rect x="160" y="390" width="18" height="50" rx="6" ry="6" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <!-- Dedo medio -->
+  <rect x="185" y="385" width="18" height="55" rx="6" ry="6" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <!-- Dedo anular -->
+  <rect x="210" y="388" width="18" height="52" rx="6" ry="6" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <!-- Dedo meñique -->
+  <rect x="235" y="395" width="15" height="45" rx="5" ry="5" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <!-- Etiquetas dedos -->
+  <text x="169" y="385" text-anchor="middle" fill="#ff6b6b" font-size="10" font-weight="bold" font-family="Arial, sans-serif">1</text>
+  <text x="194" y="380" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="bold" font-family="Arial, sans-serif">2</text>
+  <text x="219" y="383" text-anchor="middle" fill="#ffe66d" font-size="10" font-weight="bold" font-family="Arial, sans-serif">3</text>
+  <text x="242" y="390" text-anchor="middle" fill="#95e1d3" font-size="10" font-weight="bold" font-family="Arial, sans-serif">4</text>
+
+  <!-- ======================== -->
+  <!-- SECCIÓN 2: QUE ES CADA ELEMENTO -->
+  <!-- ======================== -->
+  <rect x="450" y="110" width="420" height="350" rx="15" ry="15" fill="#2a2a4e" stroke="#f0e68c" stroke-width="2"/>
+  <text x="660" y="145" text-anchor="middle" fill="#f0e68c" font-size="22" font-weight="bold" font-family="Arial, sans-serif">¿QUÉ REPRESENTA CADA ELEMENTO?</text>
+
+  <!-- Círculo de nota -->
+  <circle cx="520" cy="200" r="30" fill="#ff6b6b" stroke="white" stroke-width="3"/>
+  <text x="520" y="207" text-anchor="middle" fill="#1a1a2e" font-size="24" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="600" y="195" text-anchor="start" fill="#ffffff" font-size="16" font-weight="bold" font-family="Arial, sans-serif">= NOTA A TOCAR</text>
+  <text x="600" y="218" text-anchor="start" fill="#aaaaaa" font-size="13" font-family="Arial, sans-serif">El círculo muestra la nota</text>
+  <text x="600" y="235" text-anchor="start" fill="#aaaaaa" font-size="13" font-family="Arial, sans-serif">que debes presionar</text>
+
+  <!-- Flecha al dedo -->
+  <path d="M 520 240 L 520 280 L 490 270" stroke="#ff6b6b" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="525" y="260" text-anchor="start" fill="#ff6b6b" font-size="12" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- Número del dedo -->
+  <rect x="475" y="275" width="90" height="40" rx="8" ry="8" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="520" y="302" text-anchor="middle" fill="#1a1a2e" font-size="22" font-weight="bold" font-family="Arial, sans-serif">① ÍNDICE</text>
+
+  <!-- Explicación adicionales -->
+  <line x1="470" y1="340" x2="840" y2="340" stroke="#555577" stroke-width="1"/>
+  <text x="660" y="365" text-anchor="middle" fill="#f0e68c" font-size="14" font-weight="bold" font-family="Arial, sans-serif">COLOR DEL CÍRCULO = DEDO A USAR</text>
+
+  <!-- Leyenda de colores -->
+  <circle cx="510" cy="400" r="15" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="510" y="405" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="Arial, sans-serif">①</text>
+  <text x="535" y="405" text-anchor="start" fill="#ff6b6b" font-size="14" font-family="Arial, sans-serif">Índice</text>
+
+  <circle cx="620" cy="400" r="15" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="620" y="405" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="Arial, sans-serif">②</text>
+  <text x="645" y="405" text-anchor="start" fill="#4ecdc4" font-size="14" font-family="Arial, sans-serif">Medio</text>
+
+  <circle cx="730" cy="400" r="15" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="730" y="405" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="Arial, sans-serif">③</text>
+  <text x="755" y="405" text-anchor="start" fill="#ffe66d" font-size="14" font-family="Arial, sans-serif">Anular</text>
+
+  <circle cx="500" cy="440" r="15" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="500" y="445" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="Arial, sans-serif">④</text>
+  <text x="525" y="445" text-anchor="start" fill="#95e1d3" font-size="14" font-family="Arial, sans-serif">Meñique</text>
+
+  <circle cx="620" cy="440" r="15" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="620" y="445" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+  <text x="645" y="445" text-anchor="start" fill="#dda0dd" font-size="14" font-family="Arial, sans-serif">Pulgar</text>
+
+  <!-- ======================== -->
+  <!-- SECCIÓN 3: DIAGRAMA SIMPLIFICADO -->
+  <!-- ======================== -->
+  <rect x="890" y="110" width="460" height="350" rx="15" ry="15" fill="#2a2a4e" stroke="#f0e68c" stroke-width="2"/>
+  <text x="1120" y="145" text-anchor="middle" fill="#f0e68c" font-size="22" font-weight="bold" font-family="Arial, sans-serif">DIAGRAMA SIMPLIFICADO (Trastes 1-5)</text>
+
+  <!-- Mini diapasón -->
+  <!-- Cuerdas -->
+  <line x1="920" y1="210" x2="1320" y2="210" stroke="#c0c0c0" stroke-width="2"/>
+  <line x1="920" y1="250" x2="1320" y2="250" stroke="#c0c0c0" stroke-width="2"/>
+  <line x1="920" y1="290" x2="1320" y2="290" stroke="#c0c0c0" stroke-width="2"/>
+  <line x1="920" y1="330" x2="1320" y2="330" stroke="#c0c0c0" stroke-width="2"/>
+  <line x1="920" y1="370" x2="1320" y2="370" stroke="#c0c0c0" stroke-width="2"/>
+
+  <!-- Trastes -->
+  <line x1="1000" y1="180" x2="1000" y2="400" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1080" y1="180" x2="1080" y2="400" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1160" y1="180" x2="1160" y2="400" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1240" y1="180" x2="1240" y2="400" stroke="#8b7355" stroke-width="2"/>
+
+  <!-- Nombres de cuerdas -->
+  <text x="905" y="215" text-anchor="middle" fill="#f0e68c" font-size="16" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="905" y="255" text-anchor="middle" fill="#f0e68c" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="905" y="295" text-anchor="middle" fill="#f0e68c" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="905" y="335" text-anchor="middle" fill="#f0e68c" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="905" y="375" text-anchor="middle" fill="#f0e68c" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C</text>
+
+  <!-- Números de traste -->
+  <text x="1000" y="420" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">1</text>
+  <text x="1080" y="420" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">2</text>
+  <text x="1160" y="420" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">3</text>
+  <text x="1240" y="420" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">4</text>
+
+  <!-- Notas ejemplo - E al aire -->
+  <circle cx="920" cy="210" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="920" y="215" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">E</text>
+
+  <!-- F en traste 1 -->
+  <circle cx="1000" cy="210" r="20" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1000" y="215" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">F</text>
+
+  <!-- G en traste 3 -->
+  <circle cx="1160" cy="210" r="20" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1160" y="215" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">G</text>
+
+  <!-- A en traste 5 -->
+  <circle cx="1320" cy="210" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1320" y="215" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">A</text>
+
+  <!-- A al aire -->
+  <circle cx="920" cy="250" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="920" y="255" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">A</text>
+
+  <!-- B en traste 2 -->
+  <circle cx="1080" cy="250" r="20" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1080" y="255" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">B</text>
+
+  <!-- C en traste 3 -->
+  <circle cx="1160" cy="250" r="20" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1160" y="255" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">C</text>
+
+  <!-- D en traste 5 -->
+  <circle cx="1320" cy="250" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1320" y="255" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">D</text>
+
+  <!-- D al aire -->
+  <circle cx="920" cy="290" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="920" y="295" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">D</text>
+
+  <!-- E en traste 2 -->
+  <circle cx="1080" cy="290" r="20" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1080" y="295" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">E</text>
+
+  <!-- F en traste 3 -->
+  <circle cx="1160" cy="290" r="20" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1160" y="295" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">F</text>
+
+  <!-- G en traste 5 -->
+  <circle cx="1320" cy="290" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1320" y="295" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">G</text>
+
+  <!-- G al aire -->
+  <circle cx="920" cy="330" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="920" y="335" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">G</text>
+
+  <!-- A en traste 2 -->
+  <circle cx="1080" cy="330" r="20" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1080" y="335" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">A</text>
+
+  <!-- B en traste 4 -->
+  <circle cx="1240" cy="330" r="20" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1240" y="335" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">B</text>
+
+  <!-- C al aire -->
+  <circle cx="920" cy="370" r="20" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="920" y="375" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">C</text>
+
+  <!-- D en traste 2 -->
+  <circle cx="1080" cy="370" r="20" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1080" y="375" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">D</text>
+
+  <!-- E en traste 3 -->
+  <circle cx="1160" cy="370" r="20" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1160" y="375" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold" font-family="Arial, sans-serif">E</text>
+
+  <!-- ======================== -->
+  <!-- DIAGRAMA PRINCIPAL -->
+  <!-- ======================== -->
+  <text x="700" y="500" text-anchor="middle" fill="#f0e68c" font-size="28" font-weight="bold" font-family="Arial, sans-serif">DIAGRAMA COMPLETO - TRASTES 1-12</text>
+  <text x="700" y="530" text-anchor="middle" fill="#aaaaaa" font-size="16" font-family="Arial, sans-serif">5 Cuerdas | E - A - D - G - C | Cada nota muestra el dedo para presionarla</text>
+
+  <!-- Cuerdas principales -->
+  <line x1="100" y1="580" x2="1300" y2="580" stroke="#c0c0c0" stroke-width="4"/>
+  <line x1="100" y1="640" x2="1300" y2="640" stroke="#c0c0c0" stroke-width="3.5"/>
+  <line x1="100" y1="700" x2="1300" y2="700" stroke="#c0c0c0" stroke-width="3"/>
+  <line x1="100" y1="760" x2="1300" y2="760" stroke="#c0c0c0" stroke-width="2.5"/>
+  <line x1="100" y1="820" x2="1300" y2="820" stroke="#c0c0c0" stroke-width="2"/>
+
+  <!-- Nombres cuerdas -->
+  <text x="60" y="585" text-anchor="middle" fill="#f0e68c" font-size="24" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="60" y="645" text-anchor="middle" fill="#f0e68c" font-size="24" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="60" y="705" text-anchor="middle" fill="#f0e68c" font-size="24" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="60" y="765" text-anchor="middle" fill="#f0e68c" font-size="24" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="60" y="825" text-anchor="middle" fill="#f0e68c" font-size="24" font-weight="bold" font-family="Arial, sans-serif">C</text>
+
+  <!-- Travesaño -->
+  <rect x="100" y="550" width="1200" height="8" fill="#d4af37"/>
+
+  <!-- Trastes 1-12 -->
+  <line x1="200" y1="550" x2="200" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="300" y1="550" x2="300" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="400" y1="550" x2="400" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="500" y1="550" x2="500" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="600" y1="550" x2="600" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="700" y1="550" x2="700" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="800" y1="550" x2="800" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="900" y1="550" x2="900" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1000" y1="550" x2="1000" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1100" y1="550" x2="1100" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1200" y1="550" x2="1200" y2="860" stroke="#8b7355" stroke-width="2"/>
+  <line x1="1300" y1="550" x2="1300" y2="860" stroke="#8b7355" stroke-width="2"/>
+
+  <!-- Números de traste -->
+  <text x="150" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">0</text>
+  <text x="250" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">1</text>
+  <text x="350" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">2</text>
+  <text x="450" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">3</text>
+  <text x="550" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">4</text>
+  <text x="650" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">5</text>
+  <text x="750" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">6</text>
+  <text x="850" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">7</text>
+  <text x="950" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">8</text>
+  <text x="1050" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">9</text>
+  <text x="1150" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">10</text>
+  <text x="1250" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">11</text>
+  <text x="1350" y="890" text-anchor="middle" fill="#aaaaaa" font-size="14" font-family="Arial, sans-serif">12</text>
+
+  <!-- ======== CUERDA E ======== -->
+  <!-- E al aire (traste 0) - Índice -->
+  <circle cx="100" cy="580" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="100" y="550" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- F traste 1 - Medio -->
+  <circle cx="200" cy="580" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="200" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">F</text>
+  <text x="200" y="550" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- F# traste 2 - Anular -->
+  <circle cx="300" cy="580" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="300" y="585" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">F#</text>
+  <text x="300" y="550" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- G traste 3 - Meñique -->
+  <circle cx="400" cy="580" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="400" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="400" y="550" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- G# traste 4 - Pulgar -->
+  <circle cx="500" cy="580" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="500" y="585" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G#</text>
+  <text x="500" y="550" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- A traste 5 - Índice -->
+  <circle cx="600" cy="580" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="600" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="600" y="550" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- A# traste 6 - Medio -->
+  <circle cx="700" cy="580" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="700" y="585" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A#</text>
+  <text x="700" y="550" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- B traste 7 - Anular -->
+  <circle cx="800" cy="580" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="800" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">B</text>
+  <text x="800" y="550" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- C traste 8 - Meñique -->
+  <circle cx="900" cy="580" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="900" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="900" y="550" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- C# traste 9 - Pulgar -->
+  <circle cx="1000" cy="580" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="1000" y="585" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C#</text>
+  <text x="1000" y="550" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- D traste 10 - Índice -->
+  <circle cx="1100" cy="580" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1100" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="1100" y="550" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- D# traste 11 - Medio -->
+  <circle cx="1200" cy="580" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1200" y="585" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D#</text>
+  <text x="1200" y="550" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- E traste 12 - Anular -->
+  <circle cx="1300" cy="580" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1300" y="585" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="1300" y="550" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- ======== CUERDA A ======== -->
+  <!-- A al aire - Índice -->
+  <circle cx="100" cy="640" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="100" y="610" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- A# traste 1 - Medio -->
+  <circle cx="200" cy="640" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="200" y="645" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A#</text>
+  <text x="200" y="610" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- B traste 2 - Anular -->
+  <circle cx="300" cy="640" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="300" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">B</text>
+  <text x="300" y="610" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- C traste 3 - Meñique -->
+  <circle cx="400" cy="640" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="400" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="400" y="610" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- C# traste 4 - Pulgar -->
+  <circle cx="500" cy="640" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="500" y="645" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C#</text>
+  <text x="500" y="610" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- D traste 5 - Índice -->
+  <circle cx="600" cy="640" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="600" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="600" y="610" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- D# traste 6 - Medio -->
+  <circle cx="700" cy="640" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="700" y="645" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D#</text>
+  <text x="700" y="610" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- E traste 7 - Anular -->
+  <circle cx="800" cy="640" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="800" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="800" y="610" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- F traste 8 - Meñique -->
+  <circle cx="900" cy="640" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="900" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">F</text>
+  <text x="900" y="610" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- F# traste 9 - Pulgar -->
+  <circle cx="1000" cy="640" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="1000" y="645" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">F#</text>
+  <text x="1000" y="610" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- G traste 10 - Índice -->
+  <circle cx="1100" cy="640" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1100" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="1100" y="610" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- G# traste 11 - Medio -->
+  <circle cx="1200" cy="640" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1200" y="645" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G#</text>
+  <text x="1200" y="610" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- A traste 12 - Anular -->
+  <circle cx="1300" cy="640" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1300" y="645" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="1300" y="610" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- ======== CUERDA D ======== -->
+  <!-- D al aire - Índice -->
+  <circle cx="100" cy="700" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="100" y="670" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- D# traste 1 - Medio -->
+  <circle cx="200" cy="700" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="200" y="705" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D#</text>
+  <text x="200" y="670" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- E traste 2 - Anular -->
+  <circle cx="300" cy="700" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="300" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="300" y="670" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- F traste 3 - Meñique -->
+  <circle cx="400" cy="700" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="400" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">F</text>
+  <text x="400" y="670" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- F# traste 4 - Pulgar -->
+  <circle cx="500" cy="700" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="500" y="705" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">F#</text>
+  <text x="500" y="670" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- G traste 5 - Índice -->
+  <circle cx="600" cy="700" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="600" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="600" y="670" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- G# traste 6 - Medio -->
+  <circle cx="700" cy="700" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="700" y="705" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G#</text>
+  <text x="700" y="670" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- A traste 7 - Anular -->
+  <circle cx="800" cy="700" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="800" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="800" y="670" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- A# traste 8 - Meñique -->
+  <circle cx="900" cy="700" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="900" y="705" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A#</text>
+  <text x="900" y="670" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- B traste 9 - Pulgar -->
+  <circle cx="1000" cy="700" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="1000" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">B</text>
+  <text x="1000" y="670" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- C traste 10 - Índice -->
+  <circle cx="1100" cy="700" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1100" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="1100" y="670" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- C# traste 11 - Medio -->
+  <circle cx="1200" cy="700" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1200" y="705" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C#</text>
+  <text x="1200" y="670" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- D traste 12 - Anular -->
+  <circle cx="1300" cy="700" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1300" y="705" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="1300" y="670" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- ======== CUERDA G ======== -->
+  <!-- G al aire - Índice -->
+  <circle cx="100" cy="760" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="100" y="730" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- G# traste 1 - Medio -->
+  <circle cx="200" cy="760" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="200" y="765" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G#</text>
+  <text x="200" y="730" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- A traste 2 - Anular -->
+  <circle cx="300" cy="760" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="300" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="300" y="730" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- A# traste 3 - Meñique -->
+  <circle cx="400" cy="760" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="400" y="765" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A#</text>
+  <text x="400" y="730" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- B traste 4 - Pulgar -->
+  <circle cx="500" cy="760" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="500" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">B</text>
+  <text x="500" y="730" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- C traste 5 - Índice -->
+  <circle cx="600" cy="760" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="600" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="600" y="730" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- C# traste 6 - Medio -->
+  <circle cx="700" cy="760" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="700" y="765" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C#</text>
+  <text x="700" y="730" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- D traste 7 - Anular -->
+  <circle cx="800" cy="760" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="800" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="800" y="730" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- D# traste 8 - Meñique -->
+  <circle cx="900" cy="760" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="900" y="765" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D#</text>
+  <text x="900" y="730" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- E traste 9 - Pulgar -->
+  <circle cx="1000" cy="760" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="1000" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="1000" y="730" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- F traste 10 - Índice -->
+  <circle cx="1100" cy="760" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1100" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">F</text>
+  <text x="1100" y="730" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- F# traste 11 - Medio -->
+  <circle cx="1200" cy="760" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1200" y="765" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">F#</text>
+  <text x="1200" y="730" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- G traste 12 - Anular -->
+  <circle cx="1300" cy="760" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1300" y="765" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="1300" y="730" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- ======== CUERDA C ======== -->
+  <!-- C al aire - Índice -->
+  <circle cx="100" cy="820" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="100" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="100" y="790" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- C# traste 1 - Medio -->
+  <circle cx="200" cy="820" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="200" y="825" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">C#</text>
+  <text x="200" y="790" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- D traste 2 - Anular -->
+  <circle cx="300" cy="820" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="300" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">D</text>
+  <text x="300" y="790" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- D# traste 3 - Meñique -->
+  <circle cx="400" cy="820" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="400" y="825" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">D#</text>
+  <text x="400" y="790" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- E traste 4 - Pulgar -->
+  <circle cx="500" cy="820" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="500" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">E</text>
+  <text x="500" y="790" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- F traste 5 - Índice -->
+  <circle cx="600" cy="820" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="600" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">F</text>
+  <text x="600" y="790" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- F# traste 6 - Medio -->
+  <circle cx="700" cy="820" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="700" y="825" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">F#</text>
+  <text x="700" y="790" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- G traste 7 - Anular -->
+  <circle cx="800" cy="820" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="800" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">G</text>
+  <text x="800" y="790" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- G# traste 8 - Meñique -->
+  <circle cx="900" cy="820" r="24" fill="#95e1d3" stroke="white" stroke-width="2"/>
+  <text x="900" y="825" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">G#</text>
+  <text x="900" y="790" text-anchor="middle" fill="#95e1d3" font-size="11" font-weight="bold" font-family="Arial, sans-serif">④</text>
+
+  <!-- A traste 9 - Pulgar -->
+  <circle cx="1000" cy="820" r="24" fill="#dda0dd" stroke="white" stroke-width="2"/>
+  <text x="1000" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">A</text>
+  <text x="1000" y="790" text-anchor="middle" fill="#dda0dd" font-size="11" font-weight="bold" font-family="Arial, sans-serif">⑤</text>
+
+  <!-- A# traste 10 - Índice -->
+  <circle cx="1100" cy="820" r="24" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+  <text x="1100" y="825" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold" font-family="Arial, sans-serif">A#</text>
+  <text x="1100" y="790" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold" font-family="Arial, sans-serif">①</text>
+
+  <!-- B traste 11 - Medio -->
+  <circle cx="1200" cy="820" r="24" fill="#4ecdc4" stroke="white" stroke-width="2"/>
+  <text x="1200" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">B</text>
+  <text x="1200" y="790" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="Arial, sans-serif">②</text>
+
+  <!-- C traste 12 - Anular -->
+  <circle cx="1300" cy="820" r="24" fill="#ffe66d" stroke="white" stroke-width="2"/>
+  <text x="1300" y="825" text-anchor="middle" fill="#1a1a2e" font-size="18" font-weight="bold" font-family="Arial, sans-serif">C</text>
+  <text x="1300" y="790" text-anchor="middle" fill="#ffe66d" font-size="11" font-weight="bold" font-family="Arial, sans-serif">③</text>
+
+  <!-- ======================== -->
+  <!-- LEYENDA FINAL -->
+  <!-- ======================== -->
+  <rect x="100" y="940" width="1200" height="80" rx="10" ry="10" fill="#2a2a4e"/>
+  <text x="700" y="975" text-anchor="middle" fill="#f0e68c" font-size="18" font-weight="bold" font-family="Arial, sans-serif">RESUMEN: CÓMO LEER EL DIAGRAMA</text>
+
+  <text x="200" y="1000" text-anchor="middle" fill="#ff6b6b" font-size="14" font-family="Arial, sans-serif">CÍRCULO</text>
+  <text x="200" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">= Nota</text>
+
+  <text x="380" y="1000" text-anchor="middle" fill="#4ecdc4" font-size="14" font-family="Arial, sans-serif">COLOR</text>
+  <text x="380" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">= Dedo</text>
+
+  <text x="550" y="1000" text-anchor="middle" fill="#ffe66d" font-size="14" font-family="Arial, sans-serif">① ② ③ ④ ⑤</text>
+  <text x="550" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">= Dedo #</text>
+
+  <text x="750" y="1000" text-anchor="middle" fill="#95e1d3" font-size="14" font-family="Arial, sans-serif">E A D G C</text>
+  <text x="750" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">= Cuerdas</text>
+
+  <text x="950" y="1000" text-anchor="middle" fill="#dda0dd" font-size="14" font-family="Arial, sans-serif">TRastes 0-12</text>
+  <text x="950" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">= Posición</text>
+
+  <text x="1150" y="1000" text-anchor="middle" fill="#ffffff" font-size="14" font-family="Arial, sans-serif">SECUENCIA</text>
+  <text x="1150" y="1015" text-anchor="middle" fill="#cccccc" font-size="12" font-family="Arial, sans-serif">1→2→3→4→1→2...</text>
+
+  <!-- ======================== -->
+  <!-- PIE -->
+  <!-- ======================== -->
+  <text x="700" y="1060" text-anchor="middle" fill="#666666" font-size="14" font-style="italic" font-family="Arial, sans-serif">Bajo eléctrico 5 cuerdas standard | Digitación básica en secuencia cíclica</text>
+
+</svg>

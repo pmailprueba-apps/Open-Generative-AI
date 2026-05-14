@@ -1,0 +1,30 @@
+{
+  "name": "telegram-claude-bot",
+  "version": "1.0.0",
+  "description": "Bot de Telegram integrado con Claude AI",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "claude",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.95.0",
+    "dotenv": "^17.4.2",
+    "grammy": "^1.42.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,4 @@
+lib/
+manifest.json
+package-lock.json
+*.md

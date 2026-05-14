@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Menú Aristeus — Kilómetro 57</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --asphalt: #0f172a;
+            --road-line: #d4af37;
+            --neon-gold: #f1d592;
+            --white: #ffffff;
+            --glass: rgba(15, 23, 42, 0.9);
+            --accent-red: #c0392b;
+            --edit-outline: 2px dashed var(--road-line);
+        }
+
+        body {
+            background-color: var(--asphalt);
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
+                url('https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=2070');
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding-bottom: 100px;
+        }
+
+        [contenteditable="true"]:hover {
+            outline: var(--edit-outline);
+            cursor: text;
+        }
+
+        /* === HEADER === */
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 8px solid var(--road-line);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .logo-main {
+            width: 180px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px var(--road-line));
+        }
+
+        .brand-name { font-weight: 900; letter-spacing: 10px; font-size: 1.2rem; color: var(--road-line); }
+        .slogan { font-size: 0.8rem; letter-spacing: 4px; opacity: 0.7; margin-top: 5px; }
+        
+        h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; margin: 20px 0 10px; color: var(--white); }
+        .subtitle { font-style: italic; color: var(--neon-gold); font-size: 1.1rem; opacity: 0.9; }
+
+        /* === CONTENEDOR === */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+
+        .section {
+            background: var(--glass);
+            border-radius: 40px;
+            padding: 50px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem;
+            color: var(--road-line);
+            margin: 0;
+        }
+
+        .section-header span {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-gold);
+        }
+
+        /* === GRID ELEMENTS === */
+        .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start; }
+        
+        .image-placeholder {
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+        }
+
+        .content-list { display: flex; flex-direction: column; gap: 25px; }
+
+        .item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .item-row { display: flex; justify-content: space-between; align-items: baseline; }
+        .item-name { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--neon-gold); }
+        .item-price { font-weight: 700; font-size: 1.4rem; color: var(--road-line); }
+        .item-desc { font-size: 0.9rem; color: #cbd5e1; margin-top: 5px; line-height: 1.4; }
+
+        .combo-box {
+            background: var(--asphalt);
+            border: 2px solid var(--road-line);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .protein-list {
+            margin-top: 20px;
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .protein-list h4 { color: var(--road-line); text-transform: uppercase; margin-bottom: 10px; font-size: 0.8rem; }
+        .protein-option { font-size: 0.9rem; margin-bottom: 5px; color: #fff; }
+
+        /* === FLOATING CONTROLS === */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .btn {
+            background: var(--road-line);
+            color: var(--asphalt);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 850px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+        }
+
+        @media print {
+            .controls { display: none; }
+            body { background: white; color: black; }
+            .section { box-shadow: none; border: 1px solid #ccc; background: white; }
+            .item-name, .item-price, h1, h2 { color: black !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <img src="aristeus_final_logo.png" alt="Aristeus Logo" class="logo-main">
+        <div class="brand-name" contenteditable="true">ARISTEUS</div>
+        <div class="slogan" contenteditable="true">LOS MEJORES CHILAQUILES ARTESANALES</div>
+        <h1 contenteditable="true">MENÚ ARISTEUS: PARADA DE LEYENDA</h1>
+        <div class="subtitle" contenteditable="true">“SABOR ARTESANAL A TODA VELOCIDAD EN EL KILÓMETRO 57”</div>
+    </header>
+
+    <div class="container" id="menu-container">
+
+        <!-- SECCIÓN 01: CHILAQUILES -->
+        <section class="section">
+            <div class="section-header">
+                <h2 contenteditable="true">CHILAQUILES DE AUTOR</h2>
+                <span contenteditable="true">(Artesanal & Picosito)</span>
+            </div>
+            <div class="grid">
+                <div class="image-placeholder">
+                    [IMAGEN DE SARTÉN CON CHILAQUILES]
+                </div>
+                <div class="content-list">
+                    <div class="combo-box">
+                        <div class="item-name" contenteditable="true">⭐ COMBO ARISTEUS: FULL TANK</div>
+                        <div class="item-price" contenteditable="true">$ --</div>
+                        <p class="item-desc" contenteditable="true">Chilaquiles Imperial o Dulces + Proteína + Frijoles Refritos Aristeus</p>
+                    </div>
+                    
+                    <div class="item">
+                        <div class="item-row">
+                            <span class="item-name" contenteditable="true">Salsa Imperial (Verde Especial)</span>
+                            <span class="item-price" contenteditable="true">$ --</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Salsa artesanal a base de Chorizo. Receta Secreta de la casa.</p>
+                    </div>
+
+                    <div class="image-placeholder" style="min-height: 150px;">
+                        [IMAGEN DE PLATO EL TESORO DULCE]
+                    </div>
+                    <div class="item">
+                        <div class="item-name" contenteditable="true">El Tesoro Dulce</div>
+                        <p class="item-desc" contenteditable="true">Equilibrio perfecto de azúcar, canela y el toque Aristeus.</p>
+                    </div>
+
+                    <div class="protein-list">
+                        <h4 contenteditable="true">Add Proteins</h4>
+                        <div class="protein-option" contenteditable="true">• El Despertar de Aristeus (Huevo ⭐)</div>
+                        <div class="protein-option" contenteditable="true">• El Guerrero de la Sierra (Pollo)</div>
+                        <div class="protein-option" contenteditable="true">• Joyas del Mar (Camarón)</div>
+                        <div class="protein-option" contenteditable="true">• Arrachera (Banquete del Patrón)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 02: DELICIAS DEL MAR -->
+        <section class="section">
+            <div class="section-header">
+                <h2 contenteditable="true">DELICIAS DEL MAR</h2>
+                <span contenteditable="true">(Frescura Innovadora)</span>
+            </div>
+            <div class="grid">
+                <div class="content-list">
+                    <div class="item">
+                        <div class="item-row">
+                            <span class="item-name" contenteditable="true">Tacos “Gobernador Supremo”</span>
+                            <span class="item-price" contenteditable="true">$ --</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Camarón, queso fundido, salsa de chipotle y repollo morado.</p>
+                    </div>
+                    <div class="image-placeholder" style="min-height: 120px;">[TRES TACOS DE CAMARÓN]</div>
+
+                    <div class="item">
+                        <div class="item-row">
+                            <span class="item-name" contenteditable="true">Pescadillas “Sirena Aristeus”</span>
+                            <span class="item-price" contenteditable="true">$ --</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Guiso artesanal de Pescado o Atún seleccionado (3 piezas).</p>
+                    </div>
+                </div>
+                <div class="content-list">
+                    <div class="image-placeholder">[PESCADO ENTERO PREPARADO]</div>
+                    <div class="item">
+                        <div class="item-name" contenteditable="true">Especial de Camarón y Aguacate</div>
+                        <span class="item-price" contenteditable="true">$ --</span>
+                        <p class="item-desc" contenteditable="true">Preparado con ingredientes frescos del día.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 03: TORITOS & ESFERAS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 contenteditable="true">TORITOS & ESFERAS</h2>
+                <span contenteditable="true">(Especialidades al Fuego)</span>
+            </div>
+            <div class="grid">
+                <div class="image-placeholder">[TORITO EN SARTÉN DE HIERRO]</div>
+                <div class="content-list">
+                    <div class="item">
+                        <div class="item-row">
+                            <span class="item-name" contenteditable="true">Torito Imperial</span>
+                            <span class="item-price" contenteditable="true">$ --</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Chile relleno de camarón y tocino a las brasas.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-row">
+                            <span class="item-name" contenteditable="true">Torito de Sabor</span>
+                            <span class="item-price" contenteditable="true">$ --</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Chile relleno de queso crema y tocino crujiente.</p>
+                    </div>
+
+                    <div class="image-placeholder" style="min-height: 150px;">[TRES ESFERAS DE ARROZ]</div>
+                    <div class="protein-list">
+                        <div class="item-row"><span class="protein-option" contenteditable="true">Esfera del Mar</span> <span class="item-price" contenteditable="true">$ --</span></div>
+                        <div class="item-row"><span class="protein-option" contenteditable="true">Esfera del Patrón</span> <span class="item-price" contenteditable="true">$ --</span></div>
+                        <div class="item-row"><span class="protein-option" contenteditable="true">Esfera Crujiente</span> <span class="item-price" contenteditable="true">$ --</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div contenteditable="true">ARISTEUS FOOD TRUCK — SAN LUIS POTOSÍ, CARRETERA 57</div>
+        <div contenteditable="true">© 2026 CHILAQUILES ARISTEUS</div>
+    </footer>
+
+    <div class="controls">
+        <button class="btn" onclick="saveMenu()">💾 Guardar Cambios</button>
+        <button class="btn" onclick="window.print()" style="background: var(--white); color: var(--asphalt);">🖨️ Imprimir / PDF</button>
+    </div>
+
+    <script>
+        function saveMenu() {
+            const content = document.body.innerHTML;
+            localStorage.setItem('aristeusMenuContent', content);
+            alert('¡Menú guardado localmente! Los cambios persistirán en este navegador.');
+        }
+
+        window.onload = function() {
+            const saved = localStorage.getItem('aristeusMenuContent');
+            if (saved) {
+                // Opcional: Cargar automáticamente
+                // document.body.innerHTML = saved;
+            }
+        };
+    </script>
+</body>
+</html>

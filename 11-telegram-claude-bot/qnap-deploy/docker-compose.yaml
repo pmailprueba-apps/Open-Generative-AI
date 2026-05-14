@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-claude-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=8706527433:AAG4-93gmyT-hhQ6qAQj5uNWI1R2FBbqWzI
+      - ANTHROPIC_API_KEY=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
+    ports:
+      - "3000:3000"

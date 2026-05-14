@@ -1,0 +1,14 @@
+{
+    "BMW": {
+        "contexto_industrial": "Inversión de 800M EUR para la producción de vehículos eléctricos y baterías de alto voltaje. Nueva planta de 80,000 m² con alta complejidad logística.",
+        "gancho_personalizado": "Hola [Nombre], he seguido de cerca la expansión de 80,000 m² para la línea Neue Klasse en su planta de SLP. Entiendo que el manejo de baterías de alto voltaje requiere equipo de carga extremadamente preciso y confiable. En Montacargas del Norte contamos con equipos de alto tonelaje ideales para esta transición técnica."
+    },
+    "Nestle": {
+        "contexto_industrial": "Enfoque en optimización operativa y eficiencia en centros de distribución existentes tras el Plan México 2025-2027.",
+        "gancho_personalizado": "Hola [Nombre], con el nuevo Plan México 2027, sabemos que la eficiencia operativa en SLP es clave para complementar la red nacional. Ofrecemos soluciones de renta flexible que garantizan cero paros en su cadena de suministro local, optimizando el movimiento de pallets con equipo de última generación."
+    },
+    "Kellogg's": {
+        "contexto_industrial": "Mantenimiento de altos estándares de seguridad y eficiencia en producción de cereales y snacks en la región Bajío.",
+        "gancho_personalizado": "Hola [Nombre], para una planta de producción continua como la de Kellogg's en SLP, la disponibilidad de equipo es crítica. Nuestros montacargas eléctricos y de combustión están diseñados para operar 24/7 con soporte técnico local inmediato, asegurando que su línea de snacks nunca se detenga."
+    }
+}

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Menú Aristeus</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --navy: #0a192f;
+            --navy-light: #112240;
+            --gold: #d4af37;
+            --gold-glow: #f1d592;
+            --white: #ffffff;
+            --chile-red: #c0392b;
+            --asphalt: #0f172a;
+            --glass: rgba(10, 25, 47, 0.85);
+            --shadow: 0 20px 50px rgba(0,0,0,0.4);
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--asphalt);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* TOOLBAR */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            padding: 15px 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .toolbar h1 {
+            font-family: 'DM Serif Display', serif;
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .btn-export {
+            background: var(--navy-light);
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-export:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        /* EDITABLE INDICATOR */
+        .edit-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        [contenteditable]:focus {
+            outline: 2px dashed var(--gold);
+            outline-offset: 4px;
+        }
+
+        /* PREVIEW AREA */
+        .preview-area {
+            padding-top: 90px;
+        }
+
+        body {
+            background-color: var(--asphalt);
+            background-image:
+                linear-gradient(rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.5)),
+                url('plantilla vf de menu .png');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .main-logo, .footer-logo, .ruta-shield {
+            background: transparent;
+        }
+
+        .ruta-shield {
+            width: 80px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        header {
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            background: transparent;
+        }
+
+        .main-logo {
+            max-width: 280px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            background: transparent;
+            mix-blend-mode: multiply;
+        }
+
+        .tagline {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 0.85rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: transparent;
+            border-radius: 40px;
+            padding: 50px;
+            margin-bottom: 60px;
+            border: none;
+            box-shadow: none;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--gold);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .item-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-glow);
+            line-height: 1.1;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 5px 15px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .badge-road { background: var(--gold); color: var(--navy); }
+        .badge-chile { background: rgba(192, 57, 43, 0.2); color: #ff7675; border: 1px solid var(--chile-red); }
+
+        footer {
+            text-align: center;
+            padding: 100px 20px;
+            background: #050d1a;
+            color: white;
+        }
+
+        .footer-logo { width: 150px; margin-bottom: 30px; opacity: 0.8; background: transparent; mix-blend-mode: multiply; }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 700;
+            z-index: 2000;
+            transform: translateX(200%);
+            transition: transform 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        /* HIDDEN FOR EXPORT */
+        .export-hide { display: none !important; }
+
+        @media (max-width: 768px) {
+            .toolbar { padding: 10px 15px; }
+            .toolbar h1 { font-size: 1rem; width: 100%; text-align: center; }
+            .btn { padding: 10px 15px; font-size: 0.8rem; }
+            .section-title { font-size: 2rem; }
+            .section { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <h1>Editor Menú Aristeus</h1>
+        <button class="btn btn-success" onclick="guardarCambios()">
+            💾 Guardar
+        </button>
+        <button class="btn btn-primary" onclick="exportarImagen()">
+            🖼️ Imagen
+        </button>
+        <button class="btn btn-primary" onclick="exportarPDF()">
+            📄 PDF
+        </button>
+        <button class="btn btn-export" onclick="recargarMenu()">
+            🔄 Recargar
+        </button>
+    </div>
+
+    <!-- EDIT INDICATOR -->
+    <div class="edit-indicator">
+        ✏️ Haz clic en cualquier texto para editar
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">¡Cambios guardados!</div>
+
+    <!-- PREVIEW/MENU AREA -->
+    <div class="preview-area" id="menuExport">
+
+        <header>
+                        <img src="aristeus_final_logo.png" alt="Aristeus Logo" class="main-logo">
+            <p class="tagline" contenteditable="true">LOS MEJORES CHILAQUILES ARTESANALES</p>
+        </header>
+
+        <div class="container">
+
+            <section class="section">
+                <h2 class="section-title" contenteditable="true">Parada Obligatoria</h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge badge-road" contenteditable="true">Firma Aristeus</span>
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Salsa Imperial</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Salsa artesanal a base de Chorizo (Receta Secreta). El combustible para iniciar el viaje.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="badge badge-road" contenteditable="true">Innovación</span>
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">El Tesoro Dulce</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Totopos crujientes con el equilibrio perfecto de azúcar, canela y el toque Aristeus.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Despertar de Aristeus</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Dos huevos al gusto montados sobre chilaquiles bañados en gloria picosita.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="badge badge-road" contenteditable="true">Premium</span>
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Banquete del Patrón</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Arrachera premium marinada y asada a las brasas. El corte real de la carretera.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title" contenteditable="true">Delicias del Mar</h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge badge-road" contenteditable="true">Recomendación</span>
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Tacos Gobernador</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Tacos de camarón al punto con queso fundido, salsa especial de chipotle y repollo morado.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Sirena Aristeus</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Quesadillas rellenas de nuestro guiso artesanal de Pescado o Atún seleccionado.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Pesquidatos Fritos</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Un exquisito pescado frito sazonado con especias de la casa y pico de gallo fresco.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title" contenteditable="true">Toritos & Esferas</h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge badge-chile" contenteditable="true">Picosito Bravo</span>
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Torito Imperial</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Chile Cuaresmeño relleno de camarón, enrollado en tocino crujiente y llevado a las brasas.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="item-header">
+                            <span class="item-name" contenteditable="true">Esfera del Mar</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Bola de arroz frita rellena de una mezcla cremosa de queso y camarón seleccionado.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="item-header">
+                            <span class="item-name" contentedifiable="true">Esfera del Patrón</span>
+                        </div>
+                        <p class="item-desc" contenteditable="true">Crujiente bola de arroz rellena de queso crema y arrachera de primera.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div style="background: transparent; padding: 40px; border-radius: 30px; text-align: center; color: var(--white); border: 2px solid var(--gold);">
+                <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--gold);" contenteditable="true">Combo Aristeus: Full Tank</h2>
+                <p style="font-weight: 600; font-size: 1.1rem; color: var(--white);" contenteditable="true">Chilaquiles + Proteína Premium + Frijoles Refritos con Veneno</p>
+                <p style="margin-top: 15px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 900; color: var(--gold-glow);" contenteditable="true">La Experiencia Completa del Kilómetro 57</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <img src="aristeus_final_logo.png" alt="Aristeus" class="footer-logo">
+            <p style="font-weight: 700; color: var(--gold);">CHILAQUILES ARISTEUS</p>
+            <p contenteditable="true">San Luis Potosí — Carretera 57</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;" contenteditable="true">© 2026 Sabor de Leyenda en Movimiento</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // GUARDAR EN LOCALSTORAGE
+        function guardarCambios() {
+            const contenido = document.getElementById('menuExport').innerHTML;
+            localStorage.setItem('menuAristeus', contenido);
+            mostrarToast('¡Cambios guardados!');
+        }
+
+        // CARGAR DESDE LOCALSTORAGE
+        function cargarMenu() {
+            const guardado = localStorage.getItem('menuAristeus');
+            if (guardado) {
+                document.getElementById('menuExport').innerHTML = guardado;
+            }
+        }
+
+        // RECARGAR (RESTAURAR ORIGINAL)
+        function recargarMenu() {
+            if (confirm('¿Restaurar el menú original? Los cambios no guardados se perderán.')) {
+                localStorage.removeItem('menuAristeus');
+                location.reload();
+            }
+        }
+
+        // EXPORTAR COMO IMAGEN
+        async function exportarImagen() {
+            const element = document.getElementById('menuExport');
+            const editIndicator = document.querySelector('.edit-indicator');
+
+            // Ocultar elementos de edición
+            editIndicator.classList.add('export-hide');
+
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    backgroundColor: '#0f172a',
+                    useCORS: true,
+                    allowTaint: true
+                });
+
+                const link = document.createElement('a');
+                link.download = 'menu-aristeus.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                mostrarToast('¡Imagen descargada!');
+            } catch (error) {
+                alert('Error al exportar imagen: ' + error.message);
+            } finally {
+                editIndicator.classList.remove('export-hide');
+            }
+        }
+
+        // EXPORTAR COMO PDF
+        async function exportarPDF() {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('menuExport');
+            const editIndicator = document.querySelector('.edit-indicator');
+
+            editIndicator.classList.add('export-hide');
+
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    backgroundColor: '#0f172a',
+                    useCORS: true,
+                    allowTaint: true
+                });
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'px',
+                    format: [canvas.width / 2, canvas.height / 2]
+                });
+
+                pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
+                pdf.save('menu-aristeus.pdf');
+
+                mostrarToast('¡PDF descargado!');
+            } catch (error) {
+                alert('Error al exportar PDF: ' + error.message);
+            } finally {
+                editIndicator.classList.remove('export-hide');
+            }
+        }
+
+        // MOSTRAR TOAST
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toast');
+            toast.textContent = mensaje;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // CARGAR AL INICIAR
+        window.addEventListener('DOMContentLoaded', cargarMenu);
+    </script>
+
+</body>
+</html>

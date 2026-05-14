@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alejandro Implkant | Portfolio & Implementación</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --accent: #fceabb;
+            --dark-bg: #030305;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f0f0f0;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Premium */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 30px;
+            background: rgba(3, 3, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; color: white; }
+        .logo span { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 5%;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* Portfolio Grid */
+        .section { padding: 100px 5%; max-width: 1300px; margin: 0 auto; }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 210, 255, 0.1);
+        }
+
+        .work-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .work-info { padding: 30px; }
+        .work-info h3 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 10px; color: var(--primary); }
+        .work-info p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        .tag-list {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(0, 210, 255, 0.3); }
+
+        /* WhatsApp Sticky */
+        .wa-sticky {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .wa-sticky:hover { transform: scale(1.1); }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            nav { width: 95%; padding: 10px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">IMPL<span>KANT.</span></div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#proyectos" style="color: white; text-decoration: none; font-size: 14px; font-weight: 600;">Proyectos</a>
+            <a href="#servicios" style="color: white; text-decoration: none; font-size: 14px; font-weight: 600;">Servicios</a>
+        </div>
+        <a href="https://wa.me/526141073188" class="btn btn-primary" style="padding: 10px 20px; font-size: 12px;">Agendar Auditoría</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Ingeniería de <span>Resultados</span> para tu Negocio.</h1>
+                <p>No soy una agencia. Soy tu aliado de implementación. Transformo procesos manuales en sistemas automatizados que facturan mientras duermes.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#proyectos" class="btn btn-primary">Ver Casos de Éxito</a>
+                    <a href="#contacto" class="btn" style="border: 1px solid var(--border); color: white;">Mi Metodología</a>
+                </div>
+            </div>
+            <div class="hero-visual" style="position: relative;">
+                <img src="hero_premium.png" alt="Branding" style="width: 100%; border-radius: 30px; box-shadow: 0 50px 100px rgba(0,0,0,0.5);">
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="proyectos">
+        <div class="section-title">
+            <h2>Casos de Estudio</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Ejemplos reales de implementaciones que han transformado negocios en las últimas semanas.</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Proyecto 1: BarberApp -->
+            <div class="work-card">
+                <img src="portfolio_barberapp_mockup_1778198994356.png" class="work-img" alt="BarberApp">
+                <div class="work-info">
+                    <div class="tag-list">
+                        <span class="tag">Servicios Locales</span>
+                        <span class="tag">Booking IA</span>
+                    </div>
+                    <h3>BarberApp Pro</h3>
+                    <p>Transformación digital completa para barberías. Automatizamos la agenda, pagos y recordatorios por WhatsApp, reduciendo el no-show en un 85%.</p>
+                    <a href="https://wa.me/526141073188?text=Me%20interesa%20ver%20la%20demo%20de%20BarberApp" class="btn" style="margin-top: 20px; padding: 10px 20px; font-size: 14px; border: 1px solid var(--primary); color: var(--primary);">Ver Demo <i data-lucide="external-link"></i></a>
+                </div>
+            </div>
+
+            <!-- Proyecto 2: LogiStock -->
+            <div class="work-card">
+                <img src="portfolio_logistics_automation_1778199010130.png" class="work-img" alt="Logistics">
+                <div class="work-info">
+                    <div class="tag-list">
+                        <span class="tag">Logística B2B</span>
+                        <span class="tag">Stock IA</span>
+                    </div>
+                    <h3>LogiStock Master</h3>
+                    <p>Sistema de gestión para renta de maquinaria pesada. Implementamos control de inventario en tiempo real y facturación automatizada por proyecto.</p>
+                    <a href="https://wa.me/526141073188?text=Me%20interesa%20saber%20sobre%20LogiStock" class="btn" style="margin-top: 20px; padding: 10px 20px; font-size: 14px; border: 1px solid var(--primary); color: var(--primary);">Caso de Éxito <i data-lucide="file-text"></i></a>
+                </div>
+            </div>
+
+            <!-- Proyecto 3: Gastronomy Funnel -->
+            <div class="work-card">
+                <img src="portfolio_gastronomy_funnel_1778199023341.png" class="work-img" alt="Food">
+                <div class="work-info">
+                    <div class="tag-list">
+                        <span class="tag">E-commerce Food</span>
+                        <span class="tag">CRO Optimized</span>
+                    </div>
+                    <h3>Aristeus Funnel</h3>
+                    <p>Estructura de ventas para gastronomía de alto flujo. Optimizamos el menú digital para aumentar el ticket promedio mediante upsells inteligentes.</p>
+                    <a href="https://wa.me/526141073188?text=Me%20interesa%20el%20Funnel%20para%20Gastronomía" class="btn" style="margin-top: 20px; padding: 10px 20px; font-size: 14px; border: 1px solid var(--primary); color: var(--primary);">Ver Resultados <i data-lucide="trending-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="metodologia" style="background: rgba(255,255,255,0.01); border-radius: 50px;">
+        <div class="section-title">
+            <h2>El Método IMPLKANT</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <div style="padding: 40px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border);">
+                <i data-lucide="search" style="color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>01. Auditoría IA</h3>
+                <p style="color: var(--text-muted);">Analizamos tus procesos actuales para encontrar dónde estás perdiendo dinero y tiempo.</p>
+            </div>
+            <div style="padding: 40px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border);">
+                <i data-lucide="code" style="color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>02. Implementación</h3>
+                <p style="color: var(--text-muted);">Construimos la infraestructura digital: Apps, Landings, SEO y Agentes de IA.</p>
+            </div>
+            <div style="padding: 40px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border);">
+                <i data-lucide="rocket" style="color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>03. Escalamiento</h3>
+                <p style="color: var(--text-muted);">Encendemos los motores de tráfico y optimizamos para maximizar el ROI.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 100px 5%; text-align: center;">
+        <div class="logo" style="font-size: 2rem; margin-bottom: 20px;">IMPL<span>KANT.</span></div>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Estrategia que se ejecuta. Implementación que factura.</p>
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <a href="https://wa.me/526141073188" class="btn btn-primary">Hablar con Alejandro</a>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/526141073188" class="wa-sticky">
+        <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
+    </a>
+
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from(".work-card", {
+            scrollTrigger: ".portfolio-grid",
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power4.out"
+        });
+    </script>
+</body>
+</html>

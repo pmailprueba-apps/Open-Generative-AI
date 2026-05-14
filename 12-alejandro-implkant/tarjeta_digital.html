@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card | Alejandro Implkant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --dark: #030305;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #030305 100%);
+        }
+
+        /* 3D Glass Card */
+        .card-container {
+            perspective: 1000px;
+            width: 380px;
+            min-height: 600px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.3);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, white, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .social-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .social-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .qr-section {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            width: 120px;
+            height: 120px;
+            margin-top: 10px;
+        }
+
+        .qr-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-text {
+            margin-top: 15px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative blobs */
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            filter: blur(100px);
+            z-index: -1;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob" style="top: -100px; left: -100px; background: var(--primary);"></div>
+    <div class="blob" style="bottom: -100px; right: -100px;"></div>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="profile-img">AI</div>
+            <h1>Alejandro Implkant</h1>
+            <p class="tagline">Implementation Strategist</p>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/alejandro-implkant" target="_blank" class="social-item"><i data-lucide="linkedin"></i> LinkedIn</a>
+                <a href="https://wa.me/526141073188?text=Hola%20Alejandro,%20vi%20tu%20tarjeta%20digital%20y%20me%20gustaría%20hablar%20sobre%20una%20implementación." target="_blank" class="social-item"><i data-lucide="message-square"></i> WhatsApp</a>
+                <a href="presentacion.html" class="social-item"><i data-lucide="globe"></i> Portfolio</a>
+                <a href="mailto:hola@implkant.com" class="social-item"><i data-lucide="mail"></i> Email</a>
+            </div>
+
+            <button onclick="shareCard()" class="btn btn-primary" style="margin-top: 20px; width: 100%; justify-content: center; font-size: 14px;">
+                <i data-lucide="share-2"></i> Compartir Tarjeta
+            </button>
+
+            <div class="qr-section">
+                <!-- Generaremos un QR real si fuera necesario, por ahora un placeholder elegante -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://implkant.com" alt="QR Code">
+            </div>
+            <p class="footer-text">Escanea para mi presentación completa</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Tilt Effect
+        const card = document.querySelector('.card');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Web Share API Function
+        async function shareCard() {
+            const shareData = {
+                title: 'Alejandro Implkant | Digital Card',
+                text: 'Te comparto la tarjeta digital de Alejandro Implkant, Estratega de Implementación e IA.',
+                url: window.location.href
+            }
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // Fallback for desktop/non-compatible browsers
+                    const waUrl = `https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`;
+                    window.open(waUrl, '_blank');
+                }
+            } catch (err) {
+                console.error('Error sharing:', err);
+            }
+        }
+    </script>
+</body>
+</html>

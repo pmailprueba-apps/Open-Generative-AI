@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 50px; }
+        .test-box { 
+            display: inline-block;
+            padding: 20px;
+            background: red; /* If the image is transparent, we should see RED here */
+            border: 5px solid white;
+        }
+        img { max-width: 400px; display: block; }
+        .label { margin-bottom: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Prueba de Transparencia Real</h1>
+    <p>Si el logo fuera transparente, el fondo debajo de él sería <strong>ROJO</strong>.</p>
+    
+    <div class="test-box">
+        <div class="label">Nuevo archivo (VF)</div>
+        <img src="transparencia  aristeus vf .png" alt="Test Logo">
+    </div>
+
+    <div style="margin-top: 50px;">
+        <p>Como puedes ver, se siguen viendo los cuadritos grises. Eso significa que los cuadritos son parte de la imagen (están pintados).</p>
+    </div>
+</body>
+</html>

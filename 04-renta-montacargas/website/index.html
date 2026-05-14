@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montacargas del Norte | Renta de Montacargas en Monterrey, Saltillo, Aguascalientes y SLP</title>
+    <meta name="description" content="Renta de montacargas en el noreste de México. Cobertura en Monterrey, Saltillo, Aguascalientes y San Luis Potosí. Mantenimiento incluido. Un solo proveedor para las 4 ciudades.">
+    <meta name="keywords" content="renta de montacargas, montacargas Monterrey, arrendamiento montacargas Saltillo, montacargas Aguascalientes, renta montacargas San Luis Potosi, montacargas para bodega">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://montacargasnorte.com">
+    <meta property="og:title" content="Montacargas del Norte | Renta de Montacargas Noreste de México">
+    <meta property="og:description" content="Cobertura en 4 ciudades con un solo proveedor. Renta de montacargas eléctricos y diesel con mantenimiento incluido.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://montacargasnorte.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org LocalBusiness markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Montacargas del Norte",
+        "description": "Renta de montacargas con cobertura en Monterrey, Saltillo, Aguascalientes y San Luis Potosí. Mantenimiento preventivo y correctivo incluido.",
+        "url": "https://montacargasnorte.com",
+        "telephone": "+52-81-XXXX-XXXX",
+        "email": "montacargasnorte.oficial@gmail.com",
+        "address": [{
+            "@type": "PostalAddress",
+            "addressLocality": "Monterrey",
+            "addressRegion": "Nuevo León",
+            "addressCountry": "MX"
+        },{
+            "@type": "PostalAddress",
+            "addressLocality": "Saltillo",
+            "addressRegion": "Coahuila",
+            "addressCountry": "MX"
+        },{
+            "@type": "PostalAddress",
+            "addressLocality": "Aguascalientes",
+            "addressRegion": "Aguascalientes",
+            "addressCountry": "MX"
+        },{
+            "@type": "PostalAddress",
+            "addressLocality": "San Luis Potosí",
+            "addressRegion": "San Luis Potosí",
+            "addressCountry": "MX"
+        }],
+        "areaServed": ["Monterrey", "Saltillo", "Aguascalientes", "San Luis Potosí"],
+        "priceRange": "$$",
+        "openingHours": "Mo-Su 00:00-23:59",
+        "serviceType": ["Renta de Montacargas", "Mantenimiento de Montacargas", "Venta de Montacargas"]
+    }
+    </script>
+
+    <style>
+        :root {
+            --orange: #FF6B00;
+            --orange-dark: #E65A00;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--black);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--orange);
+        }
+
+        .btn {
+            background: var(--orange);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--orange-dark);
+            color: var(--white);
+        }
+
+        .btn-header {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+            color: var(--white);
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #CCC;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 16px 32px;
+            font-size: 18px;
+        }
+
+        .btn-hero-secondary {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn-hero-secondary:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .cities-badge {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .city-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .city-badge-icon {
+            font-size: 20px;
+        }
+
+        .city-badge-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* SERVICES */
+        .services {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        /* COVERAGE */
+        .coverage {
+            padding: 100px 0;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .coverage-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .coverage-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 35px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .coverage-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .coverage-card .state {
+            color: var(--orange);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .coverage-card p {
+            font-size: 14px;
+            color: #AAA;
+        }
+
+        /* DIFFERENTIATORS */
+        .diff {
+            padding: 100px 0;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .diff .section-title h2 {
+            color: var(--white);
+        }
+
+        .diff .section-title p {
+            color: #AAA;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .diff-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .diff-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .diff-number {
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .diff-content h4 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .diff-content p {
+            color: #AAA;
+            font-size: 15px;
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #DDD;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .contact-info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item-icon {
+            background: var(--orange);
+            color: var(--white);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .contact-item-text {
+            font-size: 16px;
+        }
+
+        .contact-item-text strong {
+            display: block;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 50px 0 30px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-brand p {
+            color: #AAA;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--orange);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: #AAA;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark">MN</div>
+                <div class="logo-text">Montacargas del Norte</div>
+            </a>
+            <nav>
+                <a href="#servicios">Servicios</a>
+                <a href="#cobertura">Cobertura</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#contacto" class="btn btn-header">Cotizar Ahora</a>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>Tu operación <span>nunca se detiene</span></h1>
+            <p>4 ciudades, 1 proveedor, 0 excusas. Renta de montacargas con mantenimiento incluido en Monterrey, Saltillo, Aguascalientes y San Luis Potosí.</p>
+            <div class="hero-cta">
+                <a href="#contacto" class="btn btn-hero">Cotizar Ahora</a>
+                <a href="tel:+528100000000" class="btn btn-hero btn-hero-secondary">Llamar Ahora</a>
+            </div>
+            <div class="cities-badge">
+                <div class="city-badge">
+                    <span class="city-badge-icon">🏭</span>
+                    <span class="city-badge-name">Monterrey</span>
+                </div>
+                <div class="city-badge">
+                    <span class="city-badge-icon">🏭</span>
+                    <span class="city-badge-name">Saltillo</span>
+                </div>
+                <div class="city-badge">
+                    <span class="city-badge-icon">🏭</span>
+                    <span class="city-badge-name">Aguascalientes</span>
+                </div>
+                <div class="city-badge">
+                    <span class="city-badge-icon">🏭</span>
+                    <span class="city-badge-name">San Luis Potosí</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Soluciones completas de manejo de materiales para tu empresa</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Renta de Montacargas</h3>
+                    <p>Renta diaria, semanal y mensual. Eléctricos y diesel de 1.5 a 5+ toneladas. Mantenimiento preventivo y correctivo incluido en todos los contratos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚛</div>
+                    <h3>Mantenimiento</h3>
+                    <p>Servicio preventivo mensual con técnicos locales en cada ciudad. Respuesta en menos de 4 horas. Refacciones y mano de obra incluidas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Venta de Equipos</h3>
+                    <p>Montacargas nuevos y seminuevos certificados. Financiamiento disponible. Equipos de las mejores marcas del mercado.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Equipos de Respaldo</h3>
+                    <p>Mientras tu equipo está en mantenimiento, te proporcionamos un reemplazo sin costo adicional. Tu operación nunca se detiene.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COVERAGE -->
+    <section class="coverage" id="cobertura">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cobertura en 4 Ciudades</h2>
+                <p>Un solo contrato, una factura, un contacto directo para todas tus plantas</p>
+            </div>
+            <div class="coverage-grid">
+                <div class="coverage-card">
+                    <h3>Monterrey</h3>
+                    <span class="state">Nuevo León</span>
+                    <p>Principal mercado industrial. Flota de 25+ equipos con técnicos locales.</p>
+                </div>
+                <div class="coverage-card">
+                    <h3>Saltillo</h3>
+                    <span class="state">Coahuila</span>
+                    <p>Cluster automotriz. Cobertura para plantas en toda la región.</p>
+                </div>
+                <div class="coverage-card">
+                    <h3>Aguascalientes</h3>
+                    <span class="state">Aguascalientes</span>
+                    <p>Proximidad a GM y empresas de alimentos. Cobertura en expansión.</p>
+                </div>
+                <div class="coverage-card">
+                    <h3>San Luis Potosí</h3>
+                    <span class="state">San Luis Potosí</span>
+                    <p>Manufactura en crecimiento. Servicio dedicado para esta región.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFFERENTIATORS -->
+    <section class="diff" id="nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Por qué Montacargas del Norte?</h2>
+                <p>La diferencia entre un proveedor y un socio</p>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-item">
+                    <div class="diff-number">1</div>
+                    <div class="diff-content">
+                        <h4>Cobertura Regional</h4>
+                        <p>La única empresa con presencia en las 4 ciudades industriales del noreste. Un contrato para todas tus plantas.</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <div class="diff-number">2</div>
+                    <div class="diff-content">
+                        <h4>Mantenimiento Incluido</h4>
+                        <p>Preventivo y correctivo sin costo extra. Refacciones y mano de obra incluidas. No sorpresas en la factura.</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <div class="diff-number">3</div>
+                    <div class="diff-content">
+                        <h4>Respuesta en Menos de 4 Horas</h4>
+                        <p>Técnicos locales en cada ciudad. No enviamos a alguien desde otra plaza. Llegamos rápido porque estamos cerca.</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <div class="diff-number">4</div>
+                    <div class="diff-content">
+                        <h4>Flexibilidad Total</h4>
+                        <p>¿Necesitas más equipos en temporada alta? ¿Menos en temporada baja? Lo resolvemos sin penalizaciones.</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <div class="diff-number">5</div>
+                    <div class="diff-content">
+                        <h4>Equipos Siempre Nuevos</h4>
+                        <p>Flota con menos de 3 años de uso. Equipos conectados con GPS y sensores de mantenimiento predictivo.</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <div class="diff-number">6</div>
+                    <div class="diff-content">
+                        <h4>Un Solo Contacto</h4>
+                        <p>Una factura, un contrato, una persona dedicada. No más Coordinar con 3 proveedores diferentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="contact-inner">
+                <div class="contact-info">
+                    <h2>¿Listo para simplificar tu operación?</h2>
+                    <p>Agenda una junta sin compromiso. Analizamos tu situación y te presentamos una propuesta personalizada.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📧</div>
+                        <div class="contact-item-text">
+                            <strong>Email</strong>
+                            montacargasnorte.oficial@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📱</div>
+                        <div class="contact-item-text">
+                            <strong>WhatsApp</strong>
+                            +52 81 0000 0000
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">🌐</div>
+                        <div class="contact-item-text">
+                            <strong>Web</strong>
+                            montacargasnorte.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📍</div>
+                        <div class="contact-item-text">
+                            <strong>Cobertura</strong>
+                            Monterrey | Saltillo | Aguascalientes | SLP
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="correo@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="844 123 4567">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudad">Ciudad de operación</label>
+                            <select id="ciudad" name="ciudad">
+                                <option value="">Selecciona una ciudad</option>
+                                <option value="Monterrey">Monterrey</option>
+                                <option value="Saltillo">Saltillo</option>
+                                <option value="Aguascalientes">Aguascalientes</option>
+                                <option value="San Luis Potosi">San Luis Potosí</option>
+                                <option value="Multiple">Múltiples ciudades</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="equipos">Cantidad de equipos</label>
+                                <select id="equipos" name="equipos">
+                                    <option value="">Selecciona</option>
+                                    <option value="1">1 equipo</option>
+                                    <option value="2-3">2-3 equipos</option>
+                                    <option value="4-5">4-5 equipos</option>
+                                    <option value="6+">6+ equipos</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo">Tipo de equipo</label>
+                                <select id="tipo" name="tipo">
+                                    <option value="">Selecciona</option>
+                                    <option value="Electrico">Eléctrico</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Mixto">Mixto</option>
+                                    <option value="No estoy seguro">No estoy seguro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje (opcional)</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tu operación o necesidades específicas..."></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width:100%;">Enviar Solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="logo-mark">MN</div>
+                        <div class="logo-text" style="color:white;">Montacargas del Norte</div>
+                    </div>
+                    <p>Tu operación nunca se detiene. Cobertura en 4 ciudades con un solo proveedor para todas tus necesidades de manejo de materiales.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Renta de Montacargas</a></li>
+                        <li><a href="#servicios">Mantenimiento</a></li>
+                        <li><a href="#servicios">Venta de Equipos</a></li>
+                        <li><a href="#servicios">Equipos de Respaldo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Cobertura</h4>
+                    <ul>
+                        <li><a href="#cobertura">Monterrey</a></li>
+                        <li><a href="#cobertura">Saltillo</a></li>
+                        <li><a href="#cobertura">Aguascalientes</a></li>
+                        <li><a href="#cobertura">San Luis Potosí</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="mailto:montacargasnorte.oficial@gmail.com">Email</a></li>
+                        <li><a href="tel:+528100000000">Teléfono</a></li>
+                        <li><a href="#contacto">Formulario</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Montacargas del Norte. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/528100000000?text=Hola%2C%20me%20interesa%20saber%20más%20sobre%20renta%20de%20montacargas" class="whatsapp-float" target="_blank" rel="noopener">💬</a>
+
+</body>
+</html>

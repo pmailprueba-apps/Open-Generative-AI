@@ -1,0 +1,23 @@
+{
+  "templates": [
+    {
+      "type": 1,
+      "title": "Telegram Claude Bot",
+      "sub_title": "Bot de Telegram con IA Claude",
+      "description": "Bot de Telegram que usa Claude AI para responder mensajes y transcribir audios",
+      "platform": "linux/amd64",
+      "image": "node:20-alpine",
+      "env": [
+        { "name": "TELEGRAM_BOT_TOKEN", "value": "" },
+        { "name": "ANTHROPIC_API_KEY", "value": "" }
+      ],
+      "ports": ["3000:3000/tcp"],
+      "restart_policy": "always",
+      "interactive": false,
+      "tty": true,
+      "volumes": [
+        { "container": "/app/data" }
+      ]
+    }
+  ]
+}

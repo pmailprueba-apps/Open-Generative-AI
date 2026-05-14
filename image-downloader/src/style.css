@@ -1,0 +1,183 @@
+@import 'nouislider/dist/nouislider.min.css';
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--breakpoint-2xs: 24rem;
+	--breakpoint-xs: 30rem;
+	--ease-elastic: cubic-bezier(0.5, 2.5, 0.5, 0.5);
+}
+
+@utility corner-* {
+	corner-shape: --value('bevel', 'notch', 'round', 'scoop', 'square', 'squircle');
+}
+
+@utility small-caps {
+	font-variant: small-caps;
+}
+
+@utility text-shadow {
+	text-shadow: 0 0 2px var(--color-slate-800);
+}
+
+@utility text-2xs {
+	font-size: 0.625rem;
+}
+
+@layer base {
+	* {
+		corner-shape: squircle;
+	}
+
+	:root,
+	body {
+		@apply text-slate-950 dark:text-white;
+		font:
+			16px/1.5 'Lucida Grande',
+			Arial,
+			sans-serif;
+	}
+
+	main {
+		min-height: 100vh;
+	}
+
+	a {
+		@apply text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300;
+	}
+
+	/* https://stackoverflow.com/questions/11243337/a-taller-than-its-img-child */
+	a > img {
+		display: block;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	svg {
+		fill: currentColor;
+	}
+
+	input[type='text'],
+	select,
+	button {
+		height: 32px;
+	}
+
+	select,
+	button,
+	label,
+	input[type='checkbox'] {
+		cursor: pointer;
+	}
+
+	input[type='text'],
+	select {
+		min-width: 0;
+		border-radius: 12px;
+		@apply border border-[color-mix(in_srgb,var(--color-slate-400)_20%,transparent)] dark:border-[color-mix(in_srgb,var(--color-slate-600)_20%,transparent)];
+		padding: 0 8px;
+		@apply bg-slate-100 text-slate-950 dark:bg-slate-200;
+	}
+
+	button,
+	.btn {
+		border-radius: 12px;
+		@apply border border-[color-mix(in_srgb,var(--color-slate-400)_20%,transparent)] dark:border-[color-mix(in_srgb,var(--color-slate-600)_20%,transparent)];
+		text-align: center;
+		line-height: 1;
+		transition: background-color 200ms;
+		@apply bg-slate-200 text-slate-950 hover:bg-slate-300 active:bg-slate-400 dark:bg-slate-300 dark:hover:bg-slate-400 dark:active:bg-slate-500;
+	}
+
+	label {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	p:not(:only-child) {
+		margin: 16px 0;
+	}
+
+	small {
+		font-size: 0.9em;
+	}
+
+	hr {
+		@apply border-t border-dotted border-slate-300;
+	}
+}
+
+.noUi-state-drag {
+	cursor: grabbing;
+}
+
+.noUi-horizontal {
+	height: 12px;
+}
+
+.noUi-target {
+	@apply border border-sky-600;
+	transition: border-color 200ms;
+}
+
+.noUi-target[disabled] {
+	@apply border border-slate-400;
+}
+
+.noUi-connects {
+	cursor: pointer;
+}
+
+.noUi-connect {
+	@apply bg-sky-600;
+	transition: background-color 200ms;
+}
+
+.noUi-target[disabled] .noUi-connect {
+	@apply bg-slate-100;
+}
+
+.noUi-horizontal .noUi-origin .noUi-handle {
+	cursor: grab;
+	top: -5px;
+	right: -9px;
+	width: 20px;
+	height: 20px;
+	box-shadow: none;
+	outline: 1px solid white;
+	border-radius: 50%;
+	@apply border border-sky-600;
+	@apply bg-sky-600;
+	transition: all 200ms;
+}
+
+.noUi-horizontal .noUi-origin[disabled] .noUi-handle {
+	cursor: help;
+	@apply border border-slate-400;
+	@apply bg-slate-100;
+}
+
+.noUi-handle::before,
+.noUi-handle::after {
+	top: 4px;
+	height: 10px;
+	background-color: white;
+	transition: all 200ms;
+}
+
+.noUi-origin[disabled] .noUi-handle::before,
+.noUi-origin[disabled] .noUi-handle::after {
+	@apply bg-slate-400;
+}
+
+.noUi-handle::before {
+	left: 6.5px;
+}
+
+.noUi-handle::after {
+	left: 9.5px;
+}

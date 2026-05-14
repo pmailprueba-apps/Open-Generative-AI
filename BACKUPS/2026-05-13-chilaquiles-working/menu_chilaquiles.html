@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Chilaquiles - Uber Eats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfbf7;
+            --text-dark: #1a1a1a;
+            --accent-red: #b22222;
+            --accent-green: #2e8b57;
+            --accent-brown: #5d4037;
+            --border-light: #e0e0e0;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .menu-container {
+            background-color: var(--bg-color);
+            width: 800px;
+            padding: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin: 0;
+            letter-spacing: 4px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .item-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 4px;
+            object-fit: cover;
+            filter: grayscale(10%) contrast(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .item-image:hover {
+            transform: scale(1.02);
+        }
+
+        .item-details {
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 20px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .item-price {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .item-protein {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .tag-red { color: var(--accent-red); }
+        .tag-green { color: var(--accent-green); }
+        .tag-sweet { color: var(--accent-brown); }
+
+        @media print {
+            body { background-color: white; }
+            .menu-container { box-shadow: none; width: 100%; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <img src="aristeus_final_logo.png" alt="Aristeus Chilakos" style="height: 250px; margin-bottom: 20px;">
+            <p>SABORES TRADICIONALES • DISEÑO CONTEMPORÁNEO</p>
+        </div>
+
+        <div class="menu-grid">
+            <!-- ROJOS -->
+            <div class="menu-item">
+                <img src="IMAGENES/chilaquiles_rojos.png" alt="Rojos" class="item-image">
+                <div class="item-details">
+                    <div class="item-header">
+                        <h2 class="item-title tag-red">Chilaquiles Rojos</h2>
+                        <span class="item-price">$160 MXN</span>
+                    </div>
+                    <p class="item-description">Totopos crujientes bañados en la salsa roja especial de la casa (receta secreta de la abuela del Bajío) con un toque único.</p>
+                    <span class="item-protein">+ Pollo / Huevo / Chorizo</span>
+                </div>
+            </div>
+
+            <!-- VERDES -->
+            <div class="menu-item">
+                <img src="IMAGENES/chilaquiles_verdes.png" alt="Verdes" class="item-image">
+                <div class="item-details">
+                    <div class="item-header">
+                        <h2 class="item-title tag-green">Chilaquiles Verdes</h2>
+                        <span class="item-price">$160 MXN</span>
+                    </div>
+                    <p class="item-description">Salsa de tomatillo y jalapeño, queso fresco, aguacate y un toque de cilantro fresco.</p>
+                    <span class="item-protein">+ Pollo / Huevo / Chorizo</span>
+                </div>
+            </div>
+
+            <!-- DULCES -->
+            <div class="menu-item">
+                <img src="IMAGENES/chilaquiles_dulces.png" alt="Dulces" class="item-image">
+                <div class="item-details">
+                    <div class="item-header">
+                        <h2 class="item-title tag-sweet">Chilaquiles Dulces</h2>
+                        <span class="item-price">$120 MXN</span>
+                    </div>
+                    <p class="item-description">Tortilla de harina con mermelada artesanal de frutos rojos, cajeta o chocolate.</p>
+                    <span class="item-protein">Sin proteína • Postre Gourmet</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>EXCLUSIVO UBER EATS • DISFRUTA LA TRADICIÓN EN CASA</p>
+        </div>
+    </div>
+</body>
+</html>
