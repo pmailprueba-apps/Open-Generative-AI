@@ -38,7 +38,7 @@
       "image": "https://aristeus-premium-menu.web.app/transparencia_aristeus_vf.png",
       "@id": "https://aristeus-premium-menu.web.app",
       "url": "https://aristeus-premium-menu.web.app",
-      "telephone": "+526141073188",
+      "telephone": "+52 55 6148 5296",
       "priceRange": "$$",
       "menu": "https://aristeus-premium-menu.web.app",
       "servesCuisine": "Mexicana",
@@ -153,7 +153,7 @@
             width: 100%;
             min-height: 100vh;
             background-color: var(--deep-navy);
-            background-image: url('plantilla_v2.png');
+            background-image: url('assets/plantilla_vf.png');
             background-repeat: repeat-y;
             background-size: 100% auto;
             background-position: top center;
@@ -178,7 +178,7 @@
 
         /* === EDIT BAR === */
         .edit-bar {
-            display: none !important; /* OCULTADO POR PETICIÓN DEL USUARIO */
+            display: none; /* Oculto por defecto */
             position: fixed;
             top: 0;
             left: 0;
@@ -186,7 +186,6 @@
             z-index: 1000;
             background: rgba(15, 23, 42, 0.95);
             padding: 12px 20px;
-            display: flex;
             justify-content: center;
             gap: 12px;
             border-bottom: 1px solid var(--harvest-gold);
@@ -297,7 +296,7 @@
 
         /* === INDEX INDICATORS === */
         .index-ref {
-            display: none !important; /* OCULTADO POR PETICIÓN DEL USUARIO */
+            display: none; 
             font-size: 0.65rem;
             color: var(--harvest-gold);
             background: rgba(0, 0, 0, 0.3);
@@ -310,7 +309,7 @@
         }
 
         .img-index {
-            display: none !important; /* OCULTADO POR PETICIÓN DEL USUARIO */
+            display: none;
             position: absolute;
             top: 10px;
             left: 10px;
@@ -327,13 +326,13 @@
         }
 
         /* === EDITABLE STATES === */
-        [contenteditable="false"]:hover {
+        [contenteditable="true"]:hover {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 4px;
             cursor: edit;
         }
 
-        [contenteditable="false"]:focus {
+        [contenteditable="true"]:focus {
             outline: 1px dashed var(--harvest-gold);
             background: rgba(255, 255, 255, 0.1);
             padding: 2px;
@@ -798,6 +797,82 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 40px;
+            letter-spacing: 2px;
+        }
+
+        /* === SCAN TO ORDER QR === */
+        .footer-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-order-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(201, 169, 110, 0.4);
+            border: 2px solid var(--harvest-gold);
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+            max-width: 280px;
+        }
+
+        .qr-order-container:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .qr-image-asset {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .qr-order-text {
+            color: var(--deep-navy);
+            font-weight: 900;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            text-align: left;
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .qr-order-text span {
+            color: var(--chile-red);
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--harvest-gold);
+            color: var(--deep-navy);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .location-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--harvest-gold);
+        }
             letter-spacing: 3px;
         }
 
@@ -837,62 +912,6 @@
                 justify-content: center;
             }
         }
-    
-        body {
-            background-image: url('plantilla_vf.png') !important;
-            background-size: 100% auto !important;
-            background-attachment: scroll !important;
-            background-position: top center !important;
-            background-repeat: repeat-y !important;
-        }
-
-        /* === MOBILE PRODUCTION OVERRIDES === */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 40px 10px 10px !important;
-            }
-            .hero-logo {
-                width: 85% !important;
-                max-width: 320px !important;
-            }
-            .subtitle-logo {
-                width: 220px !important;
-            }
-            .hero h1 {
-                font-size: 2.5rem !important;
-            }
-            .section-header h2 {
-                font-size: 2.2rem !important;
-            }
-            .menu-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px !important;
-            }
-            .item-img-container {
-                height: 280px !important;
-            }
-            .item-name {
-                font-size: 1.7rem !important;
-            }
-            .item-desc {
-                font-size: 1rem !important;
-            }
-            .footer-bg-logo {
-                width: 200px !important;
-            }
-        }
-        
-        .price-value {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            color: var(--harvest-gold);
-            font-size: 1.4rem;
-        }
-
-        /* OCULTAR PRECIOS EN PRODUCCIÓN HASTA NUEVA ORDEN */
-        .item-price-row {
-            display: none !important;
-        }
     </style>
 </head>
 
@@ -900,13 +919,22 @@
     <div class="main-wrapper">
         <div class="main-overlay"></div>
         <div class="content-relative">
+        <main id="main-content">
 
     <!-- LOGO DE FONDO FIJO -->
     <div class="hero-logo-container">
-        <img src="transparencia_aristeus_vf.png" alt="Aristeus Background" class="bg-logo">
+        <img src="assets/transparencia_aristeus_vf.png" alt="Aristeus Background" class="bg-logo">
     </div>
 
-    
+    <div class="edit-bar">
+        <button onclick="guardar()">💾 Guardar Precios</button>
+        <button onclick="cargar()">📂 Cargar Precios</button>
+        <button onclick="mode('local')">🏠 Local</button>
+        <button onclick="mode('delivery')">🛵 Delivery</button>
+        <button onclick="capturarImagen()">📸 Capturar PNG</button>
+        <button onclick="exportar()">📄 Exportar Final</button>
+        <span id="status" class="status"></span>
+    </div>
 
     <!-- START_LIGHTBOX_PROTECTED -->
     <div id="lightbox" onclick="closeLightbox()">
@@ -917,53 +945,53 @@
 
     <div id="print-area">
         <section class="hero">
-            
+            <span class="index-ref">[0.0]</span>
             <div style="position: relative; display: inline-block; margin: 20px 0;">
-                
-                <img src="transparencia_aristeus_vf.png" alt="Aristeus" class="hero-logo">
+                <span class="img-index">[F-0.1]</span>
+                <img src="assets/transparencia_aristeus_vf.png" alt="Aristeus" class="hero-logo">
             </div>
 
-            
+            <span class="index-ref">[0.1]</span>
             <div style="position: relative; display: inline-block;">
-                <img src="logo_acero_transparente_-_file.png" alt="Parada de Leyenda" class="subtitle-logo">
+                <img src="assets/logo acero transparente - file.png" alt="Parada de Leyenda" class="subtitle-logo">
             </div>
-            <h1 contenteditable="false">RUTA 57</h1>
+            <h1 contenteditable="false" data-editable="true">RUTA 57</h1>
         </section>
 
         <div class="container">
 
         <div class="section-header">
-            <h2 contenteditable="false">Chilaquiles de Autor</h2>
+            <h2 contenteditable="false" data-editable="true"><span class="index-ref">[1.0]</span>Chilaquiles de Autor</h2>
         </div>
 
         <div class="menu-grid">
             <!-- [1.1] FULL TANK (OCULTO) -->
             <div class="menu-item hero-item" style="display: none;">
                 <div class="item-img-container">
-                    
-                    <img src="chilaquiles_rojos.png" class="item-img">
+                    <span class="img-index">[F-1.1]</span>
+                    <img src="assets/fotos de productos /chilaquiles_rojos.png" class="item-img" alt="Combo Full Tank - Chilaquiles Rojos">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="badge badge-gold" contenteditable="false">EL FAVORITO DE LA RUTA</span>
-                    <span class="item-name"><span contenteditable="false">⛽ Combo
+                    <span class="badge badge-gold" contenteditable="false" data-editable="true">EL FAVORITO DE LA RUTA</span>
+                    <span class="item-name"><span class="index-ref">[1.1]</span><span contenteditable="false" data-editable="true">⛽ Combo
                             Full Tank</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="full-tank"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="full-tank"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Nuestra experiencia completa. Chilaquiles Imperiales o
+                    <p class="item-desc" contenteditable="false" data-editable="true">Nuestra experiencia completa. Chilaquiles Imperiales o
                         Dulces, proteína extra, frijoles refritos artesanales y bebida de 500ml. El tanque lleno para
                         seguir el viaje.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
 
             <!-- [1.2] EL DESPERTAR -->
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="chilaquiles_rojos.png" class="item-img">
-                    <img src="chilaquiles_con_huevo_estrallado_.png" class="item-img">
+                    <span class="img-index">[F-1.2]</span>
+                    <img src="assets/fotos de productos /chilaquiles_rojos.png" class="item-img" alt="Combo Full Tank - Chilaquiles Rojos">
+                    <img src="assets/fotos de productos /chilaquiles con huevo estrallado .png" class="item-img" alt="Chilaquiles con Huevo Estrellado">
                     <div class="carousel-dots">
                         <div class="dot active"></div>
                         <div class="dot"></div>
@@ -971,24 +999,24 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">El
+                    <span class="item-name"><span class="index-ref">[1.2]</span><span contenteditable="false" data-editable="true">El
                             Despertar de Aristeus</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="despertar"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="despertar"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Salsa Imperial con base de chorizo, una salsa rica y especiada con un toque ahumado que envuelve el plato en sabor. Acompañada de dos huevos al gusto — estrellados, revueltos — crema, queso y cebolla. Acompañados con frijoles. Un desayuno con carácter que combina lo robusto del chorizo con la frescura del rancho.</p>
-                    <div class="badges"><span class="badge badge-red" contenteditable="false">🌶️ RECETA SECRETA</span>
+                    <p class="item-desc" contenteditable="false" data-editable="true">Salsa Imperial con base de chorizo, una salsa rica y especiada con un toque ahumado que envuelve el plato en sabor. Acompañada de dos huevos al gusto — estrellados, revueltos — crema, queso y cebolla. Acompañados con frijoles. Un desayuno con carácter que combina lo robusto del chorizo con la frescura del rancho.</p>
+                    <div class="badges"><span class="badge badge-red" contenteditable="false" data-editable="true">🌶️ RECETA SECRETA</span>
                     </div>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
 
             <!-- [1.3] EL PATRÓN -->
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="chilaquiles_con_pollo_.png" class="item-img">
-                    <img src="chilaquiles_verdes.png" class="item-img">
+                    <span class="img-index">[F-1.3]</span>
+                    <img src="assets/fotos de productos /chilaquiles con pollo .png" class="item-img" alt="Banquete del Patrón - Chilaquiles con Pollo">
+                    <img src="assets/fotos de productos /chilaquiles_verdes.png" class="item-img" alt="Chilaquiles Verdes">
                     <div class="carousel-dots">
                         <div class="dot active"></div>
                         <div class="dot"></div>
@@ -999,37 +1027,37 @@
                     <span class="item-name"><span contenteditable="false">Banquete
                             del Patrón</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="banquete"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="banquete"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Chilaquiles verdes o salsa de la casa con pollo. armados con totopos crujientes bañados en nuestra salsa artesanal verde o roja receta especial, coronados con pechuga de pollo deshebrada, queso fresco, crema, cebolla al gusto y un toque de cilantro fresco. Acompañados de frijoles negros. Una explosión de sabores auténticos. La tradición de la Ruta 57.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Chilaquiles verdes o salsa de la casa con pollo. armados con totopos crujientes bañados en nuestra salsa artesanal verde o roja receta especial, coronados con pechuga de pollo deshebrada, queso fresco, crema, cebolla al gusto y un toque de cilantro fresco. Acompañados de frijoles negros. Una explosión de sabores auténticos. La tradición de la Ruta 57.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
 
             <!-- [1.4] JOYAS -->
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="chilakiles_con_camaron_.png" class="item-img">
+                    <span class="img-index">[F-1.4]</span>
+                    <img src="assets/fotos de productos /chilakiles con camaron .png" class="item-img" alt="Joyas del Mar - Chilaquiles con Camarón">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Joyas del
+                    <span class="item-name"><span class="index-ref">[1.4]</span><span contenteditable="false" data-editable="true">Joyas del
                             Mar</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="joyas"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="joyas"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Camarones frescos con mantequilla y un toque de perejil, descansando sobre una cama de totopos crujientes bañados en nuestros chilaquiles verdes o en la salsa secreta de la casa y un toque de crema. Coronados con queso fresco y un drizzle de crema. El matrimonio perfecto entre el mar y la tradición.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Camarones frescos con mantequilla y un toque de perejil, descansando sobre una cama de totopos crujientes bañados en nuestros chilaquiles verdes o en la salsa secreta de la casa y un toque de crema. Coronados con queso fresco y un drizzle de crema. El matrimonio perfecto entre el mar y la tradición.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
 
             <!-- [1.5] TESORO -->
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="chilaquiles_dulces.png" class="item-img">
-                    <img src="chilaquiles_duclces_de_cajeta.png" class="item-img">
+                    <span class="img-index">[F-1.4]</span>
+                    <img src="assets/fotos de productos /chilaquiles_dulces.png" class="item-img" alt="Tesoro Dulce - Chilaquiles de Frutos Rojos">
+                    <img src="assets/fotos de productos /chilaquiles duclces de cajeta.png" class="item-img" alt="Chilaquiles de Cajeta">
                     <div class="carousel-dots">
                         <div class="dot active"></div>
                         <div class="dot"></div>
@@ -1037,147 +1065,157 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Tesoro
+                    <span class="item-name"><span class="index-ref">[1.5]</span><span contenteditable="false" data-editable="true">Tesoro
                             Dulce</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="tesoro"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="tesoro"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Frutos rojos en su máxima expresión: fresas, zarzamora reducido en una mermelada casera bursting de color y sabor. Elige solo con la mermelada o acomóñala con una nube de crema. Disponible también con cajeta para los más tradicionales. El broche de oro para cualquier banquete.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Frutos rojos en su máxima expresión: fresas, zarzamora reducido en una mermelada casera bursting de color y sabor. Elige solo con la mermelada o acomóñala con una nube de crema. Disponible también con cajeta para los más tradicionales. El broche de oro para cualquier banquete.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
         </div>
 
         <!-- SECCIÓN 2 -->
         <div class="section-header">
-            <h2 contenteditable="false">Delicias del Mar</h2>
+            <h2 contenteditable="false" data-editable="true"><span class="index-ref">[2.0]</span>Delicias del Mar</h2>
         </div>
 
         <div class="menu-grid">
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="filetitos_de_pescados.png" class="item-img">
+                    <span class="img-index">[F-2.1]</span>
+                    <img src="assets/fotos de productos /filetitos de pescados.png" class="item-img" alt="Filetitos Dorados de Pescado">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Filetitos Dorados</span></span>
+                    <span class="item-name"><span class="index-ref">[2.1]</span><span contenteditable="false" data-editable="true">Filetitos Dorados</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="gobernador"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="gobernador"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Crujientes pescaditos dorados, empanizados en una capa ligera y aireada que revela el pescado fresco y tierno en su interior. Fritos hasta alcanzar un dorado perfecto. Servidos con salsas de la casa: chipotle para un toque ahumado o miel y mostaza para los que prefieren algo dulce. Acompañados de rodajas de limón y una pestaña de ensalada fresca. Irresistibles desde el primer bocado.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Crujientes pescaditos dorados, empanizados en una capa ligera y aireada que revela el pescado fresco y tierno en su interior. Fritos hasta alcanzar un dorado perfecto. Servidos con salsas de la casa: chipotle para un toque ahumado o miel y mostaza para los que prefieren algo dulce. Acompañados de rodajas de limón y una pestaña de ensalada fresca. Irresistibles desde el primer bocado.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="pescadillas_aristeus.png" class="item-img">
+                    <span class="img-index">[F-2.2]</span>
+                    <img src="assets/IMAGENES/pescadillas aristeus.png" class="item-img" alt="Sirena Aristeus - Pescadillas Crujientes">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Sirena
+                    <span class="item-name"><span class="index-ref">[2.2]</span><span contenteditable="false" data-editable="true">Sirena
                             Aristeus</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="sirena"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="sirena"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Pescadillas crujientes doradas a la perfección, rellenas de un guiso de mar preciado — pescado tilapia o atún con un blend de especias secretas que nuestro chef guarda con recelo. Cada mordida es una explosión de texturas: la capa exterior crujiente, el guiso húmedo y lleno de sabor. Un bocado de lujo que une el océano con la tradición.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Pescadillas crujientes doradas a la perfección, rellenas de un guiso de mar preciado — pescado tilapia o atún con un blend de especias secretas que nuestro chef guarda con recelo. Cada mordida es una explosión de texturas: la capa exterior crujiente, el guiso húmedo y lleno de sabor. Un bocado de lujo que une el océano con la tradición.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
         </div>
 
         <!-- SECCIÓN 3 -->
         <div class="section-header">
-            <h2 contenteditable="false">Los Toritos & Esferas</h2>
+            <h2 contenteditable="false" data-editable="true"><span class="index-ref">[3.0]</span>Los Toritos & Esferas</h2>
         </div>
 
         <div class="menu-grid">
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="toritos_aristeus.png" class="item-img">
+                    <span class="img-index">[F-3.1]</span>
+                    <img src="assets/IMAGENES/toritos aristeus.png" class="item-img" alt="Torito Imperial - Chiles Rellenos de Camarón">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Torito Imperial (Orden de 2)</span></span>
+                    <span class="item-name"><span class="index-ref">[3.1]</span><span contenteditable="false" data-editable="true">Torito Imperial (Orden de 2)</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input"
                                 data-id="torito-imperial"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Chiles cuaresmeños carnosos, rellenos con dos camarones frescos enteros cada uno. Envueltos en lonjas de tocino ahumado y cocinados a las brasas hasta que el tocino dore y caramelice, impartiendo su sabor a cada capa. El resultado: un contraste perfecto entre el picor del chile, la textura del camarón y la crujencia del tocino. Para quienes buscan fuego con fuego.</p>
-                    <div class="badges"><span class="badge badge-red" contenteditable="false">🔥 AL FUEGO</span></div>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">Chiles cuaresmeños carnosos, rellenos con dos camarones frescos enteros cada uno. Envueltos en lonjas de tocino ahumado y cocinados a las brasas hasta que el tocino dore y caramelice, impartiendo su sabor a cada capa. El resultado: un contraste perfecto entre el picor del chile, la textura del camarón y la crujencia del tocino. Para quienes buscan fuego con fuego.</p>
+                    <div class="badges"><span class="badge badge-red" contenteditable="false" data-editable="true">🔥 AL FUEGO</span></div>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
             <div class="menu-item">
                 <div class="item-img-container">
-                    
-                    <img src="bola_de_arroz_aristeus.png" class="item-img">
+                    <span class="img-index">[F-3.2]</span>
+                    <img src="assets/IMAGENES/bola de arroz aristeus.png" class="item-img" alt="Esferas de Arroz - Bola de Arroz Rellena">
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Esferas de Arroz: Esfera de Sabor</span></span>
+                    <span class="item-name"><span class="index-ref">[3.2]</span><span contenteditable="false" data-editable="true">Esferas de Arroz: Esfera de Sabor</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="esferas"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="esferas"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">¡La Favorita de Todos! Nuestra bola de arroz dorada y crujiente por fuera, suave por dentro, rellena de queso Philadelphia de la más alta calidad que se funde en cada mordida. Acompañada de trozos cremosos de aguacate, pepino en cuadritos frescos y tu elección de proteína: camarones suaves o atún fresco, bañados en la salsa receta de la casa con un toque de chipotle. Un bocado que combina lo crujiente, lo cremoso, lo fresco y lo marino en perfecta armonía.</p>
-                    <img src="transparencia_aristeus_vf.png" class="item-watermark">
+                    <p class="item-desc" contenteditable="false" data-editable="true">¡La Favorita de Todos! Nuestra bola de arroz dorada y crujiente por fuera, suave por dentro, rellena de queso Philadelphia de la más alta calidad que se funde en cada mordida. Acompañada de trozos cremosos de aguacate, pepino en cuadritos frescos y tu elección de proteína: camarones suaves o atún fresco, bañados en la salsa receta de la casa con un toque de chipotle. Un bocado que combina lo crujiente, lo cremoso, lo fresco y lo marino en perfecta armonía.</p>
+                    <img src="assets/transparencia_aristeus_vf.png" class="item-watermark" alt="Logo Aristeus Watermark">
                 </div>
             </div>
         </div>
 
         <!-- SECCIÓN 4 (OCULTA POR PETICIÓN) -->
         <div class="section-header" style="display: none;">
-            <h2 contenteditable="false">Bebidas & Cafetería</h2>
+            <h2 contenteditable="false" data-editable="true"><span class="index-ref">[4.0]</span>Bebidas & Cafetería</h2>
         </div>
 
         <div class="menu-grid" style="display: none;">
             <div class="menu-item">
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Aguas de la
+                    <span class="item-name"><span class="index-ref">[4.1]</span><span contenteditable="false" data-editable="true">Aguas de la
                             Ruta (500ml)</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="horchata"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="horchata"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Horchata artesanal o Jamaica fresca del día.</p>
+                    <p class="item-desc" contenteditable="false" data-editable="true">Horchata artesanal o Jamaica fresca del día.</p>
                 </div>
             </div>
             <div class="menu-item">
                 <div class="item-content">
-                    <span class="item-name"><span contenteditable="false">Café de
+                    <span class="item-name"><span class="index-ref">[4.2]</span><span contenteditable="false" data-editable="true">Café de
                             Olla Aristeus</span></span>
                     <div class="item-price-row">
-                        <span class="item-price">$ <span class="price-value" data-id="cafe"></span></span>
+                        <span class="item-price">$ <input type="text" class="price-input" data-id="cafe"></span>
                     </div>
-                    <p class="item-desc" contenteditable="false">Preparado tradicionalmente con piloncillo y canela.</p>
+                    <p class="item-desc" contenteditable="false" data-editable="true">Preparado tradicionalmente con piloncillo y canela.</p>
                 </div>
             </div>
         </div>
 
-    </div>
+        </div><!-- /.container -->
+    </main><!-- /#main-content -->
 
     <footer class="footer">
         <!-- Logo de fondo (detrás de la A) -->
-        <img src="transparencia_aristeus_vf.png" alt="Aristeus Background" class="footer-bg-logo">
+        <img src="assets/transparencia_aristeus_vf.png" alt="Aristeus Branding Background" class="footer-bg-logo">
         
         <div class="footer-container">
+            <span class="index-ref" style="display: none; margin-bottom: 30px;">[5.0]</span>
             
-            
-            <div class="footer-main-row">
-                <div class="qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aristeus-premium-menu.web.app" alt="QR Menú">
+            <div class="footer-cta">
+                <div class="qr-order-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://wa.me/message/6HQIB5PSPJCLG1" alt="Escanea QR Aristeus" class="qr-image-asset">
+                    <p class="qr-order-text">ESCANEA PARA<br>ORDENAR AQUÍ 🌶️<span>Artesanos de la Salsa</span></p>
                 </div>
-                
+            </div>
+
+            <div class="footer-main-row">
                 <div class="footer-info-block">
                     <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" style="text-decoration: none; color: inherit;">
-                        <p class="footer-info" contenteditable="false"><i class="fas fa-map-marker-alt"></i> “El Lavadero SLP”, Calle 2a #185, Col. Aviación, San Luis Potosí</p>
+                        <p class="footer-info" contenteditable="false" data-editable="true"><i class="fas fa-map-marker-alt"></i> “El Lavadero SLP”, Calle 2a #185, Col. Aviación, San Luis Potosí</p>
                     </a>
-                    <p class="footer-info" contenteditable="false"><i class="fab fa-whatsapp"></i> +52 614 107 31 88</p>
-                    <p class="footer-info" contenteditable="false"><i class="fas fa-clock"></i> Mar-Vie: 9am-5pm | Sáb-Dom: 8am-3pm (Lun: Cerrado)</p>
-                    <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" class="location-btn">
-                        <i class="fas fa-directions"></i> CÓMO LLEGAR
-                    </a>
+                    <p class="footer-info" contenteditable="false" data-editable="true"><i class="fab fa-whatsapp"></i> +52 55 6148 5296</p>
+                    <p class="footer-info" contenteditable="false" data-editable="true"><i class="fas fa-clock"></i> Mar-Vie: 9am-5pm | Sáb-Dom: 8am-3pm (Lun: Cerrado)</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 20px;">
+                        <a href="https://wa.me/message/6HQIB5PSPJCLG1" target="_blank" class="location-btn" style="background: #075E54; color: white;">
+                            <i class="fab fa-whatsapp"></i> PEDIR POR WHATSAPP
+                        </a>
+                        <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" class="location-btn">
+                            <i class="fas fa-directions"></i> CÓMO LLEGAR (UBICACIÓN)
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -1187,7 +1225,7 @@
                 <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
             </div>
 
-            <p class="social-hashtag" contenteditable="false">#CHILAQUILESARISTEUS</p>
+            <p class="social-hashtag" contenteditable="false" data-editable="true">#CHILAQUILESARISTEUS</p>
         </div>
     </footer>
     </div>
@@ -1195,11 +1233,6 @@
     <!-- Cargar html2canvas para captura de imagen -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
-    <!-- LIGHTBOX PARA PREVISUALIZACIÓN -->
-    <div id="lightbox" onclick="closeLightbox()">
-        <span class="close-lb">&times;</span>
-        <img id="lightbox-img" src="" alt="Preview">
-    </div>
 
     <script>
         function capturarImagen() {
@@ -1285,11 +1318,59 @@
             });
         }
 
-        // Inicializar todo al cargar
+        // === SISTEMA DE SEGURIDAD: ADMIN MODE ===
+        function checkAdminMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'aristeus') {
+                localStorage.setItem('aristeus_admin', 'true');
+                window.history.replaceState({}, document.title, window.location.pathname); // Limpiar URL
+            }
+
+            const isAdmin = localStorage.getItem('aristeus_admin') === 'true';
+            
+            if (isAdmin) {
+                // Mostrar herramientas
+                document.querySelector('.edit-bar').style.display = 'flex';
+                document.querySelectorAll('.index-ref, .img-index').forEach(el => el.style.display = 'inline-block');
+                
+                // Habilitar edición
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                });
+                
+                // Habilitar inputs de precio
+                document.querySelectorAll('.price-input').forEach(el => {
+                    el.removeAttribute('disabled');
+                    el.style.opacity = '1';
+                    el.style.pointerEvents = 'auto';
+                });
+
+                // Botón de salir del modo admin
+                const logoutBtn = document.createElement('button');
+                logoutBtn.textContent = '🔒 Salir Admin';
+                logoutBtn.style.background = '#e74c3c';
+                logoutBtn.onclick = () => {
+                    localStorage.removeItem('aristeus_admin');
+                    location.reload();
+                };
+                document.querySelector('.edit-bar').appendChild(logoutBtn);
+            } else {
+                // Deshabilitar inputs de precio en vista cliente
+                document.querySelectorAll('.price-input').forEach(el => {
+                    el.setAttribute('disabled', 'true');
+                    el.style.opacity = '0.9';
+                    el.style.pointerEvents = 'none';
+                    el.style.border = 'none';
+                    el.style.background = 'transparent';
+                });
+            }
+        }
+
         window.addEventListener('load', () => {
             try {
+                checkAdminMode(); // Verificar permisos antes de interacciones
                 initInteractions();
-            } catch(e) { console.error("Error en interacciones:", e); }
+            } catch(e) { console.error("Error en carga:", e); }
             
             try {
                 if (typeof cargar === 'function') cargar();
@@ -1302,7 +1383,7 @@
 
         function guardar() {
             const data = {};
-            const inputs = document.querySelectorAll('.price-value');
+            const inputs = document.querySelectorAll('.price-input');
             if (inputs.length === 0) return; // No hay nada que guardar en producción
             inputs.forEach(i => data[i.dataset.id] = i.value);
             localStorage.setItem('aristeus-ultra-precios', JSON.stringify(data));
@@ -1321,7 +1402,7 @@
         }
 
         function inyectar(lista) {
-            document.querySelectorAll('.price-value').forEach(i => i.textContent = lista[i.dataset.id] || '');
+            document.querySelectorAll('.price-input').forEach(i => i.value = lista[i.dataset.id] || '');
         }
 
         function msg(t) {

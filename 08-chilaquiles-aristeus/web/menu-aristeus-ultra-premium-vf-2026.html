@@ -38,7 +38,7 @@
       "image": "https://aristeus-premium-menu.web.app/transparencia_aristeus_vf.png",
       "@id": "https://aristeus-premium-menu.web.app",
       "url": "https://aristeus-premium-menu.web.app",
-      "telephone": "+526141073188",
+      "telephone": "+52 55 6148 5296",
       "priceRange": "$$",
       "menu": "https://aristeus-premium-menu.web.app",
       "servesCuisine": "Mexicana",
@@ -798,6 +798,82 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 40px;
+            letter-spacing: 2px;
+        }
+
+        /* === SCAN TO ORDER QR === */
+        .footer-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-order-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(201, 169, 110, 0.4);
+            border: 2px solid var(--harvest-gold);
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+            max-width: 280px;
+        }
+
+        .qr-order-container:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .qr-image-asset {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .qr-order-text {
+            color: var(--deep-navy);
+            font-weight: 900;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            text-align: left;
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .qr-order-text span {
+            color: var(--chile-red);
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--harvest-gold);
+            color: var(--deep-navy);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .location-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--harvest-gold);
+        }
             letter-spacing: 3px;
         }
 
@@ -1116,20 +1192,29 @@
         <div class="footer-container">
             <span class="index-ref" style="display: none; margin-bottom: 30px;">[5.0]</span>
             
-            <div class="footer-main-row">
-                <div class="qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aristeus-premium-menu.web.app" alt="QR Menú">
+            <div class="footer-cta">
+                <div class="qr-order-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://wa.me/message/6HQIB5PSPJCLG1" alt="Escanea QR Aristeus" class="qr-image-asset">
+                    <p class="qr-order-text">ESCANEA PARA<br>ORDENAR AQUÍ 🌶️<span>Artesanos de la Salsa</span></p>
                 </div>
-                
+            </div>
+
+            <div class="footer-main-row">
                 <div class="footer-info-block">
                     <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" style="text-decoration: none; color: inherit;">
                         <p class="footer-info" contenteditable="true"><i class="fas fa-map-marker-alt"></i> “El Lavadero SLP”, Calle 2a #185, Col. Aviación, San Luis Potosí</p>
                     </a>
-                    <p class="footer-info" contenteditable="true"><i class="fab fa-whatsapp"></i> +52 614 107 31 88</p>
+                    <p class="footer-info" contenteditable="true"><i class="fab fa-whatsapp"></i> +52 55 6148 5296</p>
                     <p class="footer-info" contenteditable="true"><i class="fas fa-clock"></i> Mar-Vie: 9am-5pm | Sáb-Dom: 8am-3pm (Lun: Cerrado)</p>
-                    <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" class="location-btn">
-                        <i class="fas fa-directions"></i> CÓMO LLEGAR
-                    </a>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 20px;">
+                        <a href="https://wa.me/message/6HQIB5PSPJCLG1" target="_blank" class="location-btn" style="background: #25D366; color: white;">
+                            <i class="fab fa-whatsapp"></i> PEDIR POR WHATSAPP
+                        </a>
+                        <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" class="location-btn">
+                            <i class="fas fa-directions"></i> CÓMO LLEGAR (UBICACIÓN)
+                        </a>
+                    </div>
                 </div>
             </div>
 

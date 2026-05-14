@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aristeus | Mockup Facebook</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #050505;
+            --fb-bg: #18191a;
+        }
+
+        body {
+            background-color: var(--fb-bg);
+            color: #e4e6eb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        .fb-post {
+            background: #242526;
+            width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px 0 rgba(0,0,0,0.2);
+        }
+
+        .fb-header {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fb-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+        }
+
+        .fb-avatar img {
+            width: 100%;
+        }
+
+        .fb-user-info b {
+            color: #e4e6eb;
+            font-size: 15px;
+        }
+
+        .fb-user-info span {
+            display: block;
+            font-size: 13px;
+            color: #b0b3b8;
+        }
+
+        .fb-content {
+            padding: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-image {
+            width: 100%;
+            display: block;
+            opacity: 0.9;
+        }
+
+        /* LOGO OVERLAY - THE IMPORTANT PART */
+        .logo-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fb-footer {
+            padding: 12px;
+            border-top: 1px solid #3e4042;
+            display: flex;
+            justify-content: space-around;
+            color: #b0b3b8;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-call {
+            background: var(--gold);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 12px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="fb-post">
+        <div class="fb-header">
+            <div class="fb-avatar">
+                <img src="../assets/aristeus_final_logo.png" alt="Aristeus">
+            </div>
+            <div class="fb-user-info">
+                <b>Aristeus: Parada de Leyenda</b>
+                <span>Publicidad • San Luis Potosí</span>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <!-- POST IMAGE -->
+            <div class="post-image-container">
+                <img src="../assets/dueños_manos.png" alt="Artesanos Aristeus trabajando" class="post-image">
+                <img src="../assets/aristeus_final_logo.png" alt="Logo Aristeus" class="logo-overlay">
+            </div>
+
+            <!-- POST CONTENT -->
+            <div class="post-body">
+                <p>No somos solo un Food Truck, somos <strong>Artesanos de la Salsa</strong>. 🌶️✨</p>
+                <p>En Aristeus, cada orden se prepara a cuatro manos con una Receta Secreta que San Luis Potosí aún no conoce. </p>
+                <p>¿Nuestra joya de la corona? Las exclusivas <strong>Bolas de Arroz</strong>. 🍱 Crujientes por fuera, una explosión de sabor por dentro. El complemento que va a cambiar tus mañanas.</p>
+                <p>¡Próxima apertura! Mantente atento para conocer nuestra ubicación exacta. 📍🔥</p>
+                <p class="hashtags">#ChilaquilesAristeus #ArtesanosDeLaSalsa #SLP #FoodTruck #BolasDeArroz #RecetaSecreta</p>
+            </div>
+        </div>
+
+        <div style="text-align: right;">
+            <a href="https://wa.me/message/6HQIB5PSPJCLG1" class="btn-call">Enviar mensaje</a>
+        </div>
+
+        <div class="fb-footer">
+            <span>Me gusta</span>
+            <span>Comentar</span>
+            <span>Compartir</span>
+        </div>
+    </div>
+</body>
+</html>
