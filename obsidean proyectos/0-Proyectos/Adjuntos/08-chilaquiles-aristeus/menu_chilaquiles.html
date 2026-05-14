@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aristeus — Menú de Autor</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a192f;
+            --navy-light: #112240;
+            --gold: #d4af37;
+            --gold-glow: #f1d592;
+            --white: #ffffff;
+            --fresh-green: #27ae60;
+            --chile-red: #c0392b;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --glass: rgba(255, 255, 255, 0.95);
+            --radius-xl: 30px;
+            --radius-md: 15px;
+            --shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--navy);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* === HEADER === */
+        header {
+            background: var(--navy);
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-bottom: 6px solid var(--gold);
+        }
+
+        .logo-wrap {
+            max-width: 220px;
+            margin: 0 auto 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .main-logo { width: 100%; height: auto; }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-size: 0.8rem;
+            color: var(--gold-glow);
+            font-weight: 600;
+        }
+
+        /* === CONTAINER === */
+        .container {
+            max-width: 1100px;
+            margin: -50px auto 80px;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow);
+            border: 1px solid white;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        /* === GRID === */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-md);
+            border: 1px solid #f0f0f0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--gold);
+        }
+
+        .card.special {
+            background: var(--navy);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .card.special .item-name { color: var(--gold); }
+        .card.special .item-desc { color: rgba(255,255,255,0.7); }
+        .card.special .price { color: white; }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .item-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            line-height: 1.1;
+        }
+
+        .price { font-weight: 700; font-size: 1.3rem; }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .badge-list { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .badge-gold { background: var(--gold); color: var(--navy); }
+        .badge-green { background: rgba(39, 174, 96, 0.1); color: var(--fresh-green); border: 1px solid var(--fresh-green); }
+        .badge-red { background: rgba(192, 57, 43, 0.1); color: var(--chile-red); border: 1px solid var(--chile-red); }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--navy);
+            color: white;
+        }
+
+        .footer-logo { width: 100px; margin-bottom: 20px; filter: grayscale(1) brightness(2); }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .section { padding: 30px 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-wrap">
+            <!-- RUTA LOCAL CORREGIDA PARA QUE SE VEA EN TU MAC -->
+            <img src="../imagenes/08-chilaquiles/logo-chilaquiles.png" alt="Aristeus Logo" class="main-logo">
+        </div>
+        <h1>Aristeus</h1>
+        <p class="tagline">Sabor de Leyenda · San Luis Potosí</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- SECCIÓN 01: CHILAQUILES -->
+        <section class="section">
+            <h2 class="section-title">Chilaquiles de Autor</h2>
+            <div class="grid">
+                <div class="card special">
+                    <div class="item-header">
+                        <span class="item-name">Combo Aristeus</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">La experiencia completa: Chilaquiles (Imperial o Dulces) + Proteína Premium + Frijoles Refritos con Veneno.</p>
+                    <div class="badge-list">
+                        <span class="badge badge-gold">★ El Favorito</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">El Despertar de Aristeus</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Nuestra firma: Dos huevos al gusto sobre chilaquiles bañados en la Salsa Imperial de Chorizo (Receta Secreta).</p>
+                    <div class="badge-list">
+                        <span class="badge badge-green">Receta Secreta</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Banquete del Patrón</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Arrachera premium marinada y asada a las brasas sobre base picosita.</p>
+                    <div class="badge-list"><span class="badge badge-red">Bravo</span></div>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Tesoro Dulce</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">El equilibrio perfecto de azúcar, canela y el toque Aristeus. Únicos en su clase.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 02: DELICIAS DE MAR -->
+        <section class="section">
+            <h2 class="section-title">Delicias del Mar</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Taco Gobernador</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Camarón, queso fundido, salsa especial de chipotle y crujiente repollo morado.</p>
+                    <div class="badge-list"><span class="badge badge-green">Especialidad</span></div>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Sirena Aristeus</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Pescadillas rellenas de nuestro guiso artesanal de Pescado o Atún (3 piezas).</p>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Pesquidatos Fritos</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Bocadillos crujientes de mar con pico de gallo y especias de la casa.</p>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Camarón & Aguacate</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Platillo fresco con camarones seleccionados y láminas de aguacate perfecto.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 03: ESPECIALIDADES -->
+        <section class="section">
+            <h2 class="section-title">Toritos & Esferas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Torito Imperial</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Chile Cuaresmeño relleno de camarón, envuelto en tocino a las brasas con salsa agridulce de habanero.</p>
+                    <div class="badge-list"><span class="badge badge-red">Picosito</span></div>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Torito de Sabor</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Chile Cuaresmeño relleno de queso crema y envuelto en tocino crujiente.</p>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Esfera del Mar</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Bola de arroz frita rellena de queso crema y camarón.</p>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Esfera del Patrón</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Bola de arroz frita rellena de queso crema y arrachera.</p>
+                </div>
+
+                <div class="card">
+                    <div class="item-header">
+                        <span class="item-name">Esfera Crujiente</span>
+                        <span class="price">$ --</span>
+                    </div>
+                    <p class="item-desc">Bola de arroz frita rellena de queso crema y tocino.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <img src="../imagenes/08-chilaquiles/logo-chilaquiles.png" alt="Aristeus" class="footer-logo">
+        <p>&copy; 2026 Chilaquiles Aristeus · San Luis Potosí</p>
+    </footer>
+
+</body>
+</html>

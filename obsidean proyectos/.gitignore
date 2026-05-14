@@ -1,0 +1,36 @@
+# ─── Obsidian internos ───────────────────────────
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/
+.obsidian/themes/
+
+# ─── Seguridad — NUNCA subir ──────────────────────
+*.env
+*.env.local
+.env*
+*secret*
+*password*
+*credencial*
+*private_key*
+
+# ─── Sistema macOS ────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ─── Archivos temporales ──────────────────────────
+*.tmp
+*.bak
+*.swp
+*~
+
+# ─── Archivos pesados (imágenes/video grandes) ────
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# ─── Mantener estructura de carpetas vacías ───────
+!.gitkeep
