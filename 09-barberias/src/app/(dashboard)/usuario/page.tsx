@@ -31,7 +31,8 @@ export default function ClienteDashboard() {
   const [citas, setCitas] = useState<CitaCliente[]>([]);
   const [loading, setLoading] = useState(true);
   const [puntos, setPuntos] = useState(0);
-  const [filtro, setFiltro] = useState<"proximas" | "historial">("proximas");
+  const [historialPuntos, setHistorialPuntos] = useState<any[]>([]);
+  const [filtro, setFiltro] = useState<"proximas" | "historial" | "puntos">("proximas");
   const [selectedCitaForRating, setSelectedCitaForRating] = useState<CitaCliente | null>(null);
   const [isCancelling, setIsCancelling] = useState<string | null>(null);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -53,6 +54,7 @@ export default function ClienteDashboard() {
       if (puntosRes.ok) {
         const p = await puntosRes.json();
         setPuntos(p.puntos || 0);
+        setHistorialPuntos(p.historial || []);
       }
 
       if (citasRes.ok) {
@@ -94,8 +96,34 @@ export default function ClienteDashboard() {
   const canRedeem = puntos >= 500;
 
   const handleRedeem = async () => {
-    if (!canRedeem) return;
-    toast.success("¡Felicidades! Presenta este código en tu próxima visita para obtener un corte gratis o un producto especial.");
+    if (!canRedeem || !user) return;
+    
+    const confirm = window.confirm("¿Canjear 500 puntos por un Bono Especial BarberApp?");
+    if (!confirm) return;
+
+    try {
+      const res = await fetch("/api/puntos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await user.getIdToken()}`
+        },
+        body: JSON.stringify({
+          puntosRequeridos: 500,
+          recompensa: "Bono Especial BarberApp"
+        })
+      });
+
+      if (res.ok) {
+        toast.success("¡Canje exitoso! Presenta tu código en sucursal.");
+        cargarDatos();
+      } else {
+        const data = await res.json();
+        toast.error(data.error || "Error al canjear puntos");
+      }
+    } catch (e) {
+      toast.error("Error al procesar el canje");
+    }
   };
 
   const citasProximas = citas.filter(
@@ -271,12 +299,45 @@ export default function ClienteDashboard() {
               : "bg-[var(--card)] text-[var(--muted)] hover:text-[var(--white)]"
           }`}
         >
-          Historial ({citasPasadas.length})
+          Visitas ({citasPasadas.length})
+        </button>
+        <button
+          onClick={() => setFiltro("puntos")}
+          className={`px-4 py-2 rounded-xl font-semibold text-sm transition-colors ${
+            filtro === "puntos"
+              ? "bg-[var(--gold)] text-[var(--dark)]"
+              : "bg-[var(--card)] text-[var(--muted)] hover:text-[var(--white)]"
+          }`}
+        >
+          Puntos
         </button>
       </div>
 
+      {/* Lista de Puntos (si está seleccionado) */}
+      {filtro === "puntos" && (
+        <div className="space-y-3">
+          {historialPuntos.length === 0 ? (
+            <div className="p-8 rounded-2xl bg-[var(--card)] border border-[rgba(201,168,76,0.1)] text-center">
+              <p className="text-[var(--muted)]">No tienes movimientos de puntos aún.</p>
+            </div>
+          ) : (
+            historialPuntos.map((mov) => (
+              <div key={mov.id} className="p-4 rounded-2xl bg-[var(--card)] border border-white/5 flex items-center justify-between">
+                <div>
+                  <p className="font-bold text-[var(--white)]">{mov.descripcion}</p>
+                  <p className="text-xs text-[var(--muted)]">{new Date(mov.fecha).toLocaleDateString()} {new Date(mov.fecha).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                </div>
+                <div className={`text-lg font-black ${mov.tipo === 'acumulacion' ? 'text-green-500' : 'text-red-500'}`}>
+                  {mov.puntos > 0 ? `+${mov.puntos}` : mov.puntos}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
       {/* Lista de citas */}
-      <div className="space-y-3">
+      <div className={`${filtro === 'puntos' ? 'hidden' : 'space-y-3'}`}>
         {citasMostrar.length === 0 ? (
           <div className="p-8 rounded-2xl bg-[var(--card)] border border-[rgba(201,168,76,0.1)] text-center">
             <Calendar className="w-12 h-12 mx-auto mb-3 text-[var(--muted)] opacity-50" />

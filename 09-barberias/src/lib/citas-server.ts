@@ -275,8 +275,8 @@ export async function actualizarEstadoCitaServer(
   if (estado === "completada" && cita?.cliente_id) {
     try {
       const { acumularPuntosServer } = await import("./puntos-server");
-      const puntosGanados = await acumularPuntosServer(cita.cliente_id, cita.precio || 100);
-      console.log(`[CITAS-SERVER] Cliente ${cita.cliente_id} ganó ${puntosGanados} puntos`);
+      const puntosGanados = await acumularPuntosServer(cita.cliente_id, cita.precio || 100, citaId);
+      console.log(`[CITAS-SERVER] Cliente ${cita.cliente_id} ganó ${puntosGanados} puntos por cita ${citaId}`);
     } catch (e) {
       console.error("[CITAS-SERVER] Error acumulando puntos:", e);
     }
@@ -291,7 +291,9 @@ export async function actualizarEstadoCitaServer(
           db.collection("barberias").doc(barberiaId).get()
         ]);
         
-        const clienteNombre = clienteDoc.data()?.nombre || "cliente";
+        const clienteData = clienteDoc.data();
+        const clienteNombre = clienteData?.nombre || "cliente";
+        const clienteTelefono = clienteData?.telefono;
         const barberiaNombre = barberiaDoc.data()?.nombre || "la barbería";
 
         let title = "Actualización de tu cita";
@@ -300,6 +302,24 @@ export async function actualizarEstadoCitaServer(
         if (estado === "confirmada") {
           title = "¡Cita Confirmada! ✂️";
           body = `¡Buenas noticias ${clienteNombre}! Tu cita en ${barberiaNombre} para el ${cita.fecha} a las ${cita.hora} ha sido confirmada. ¡Te esperamos!`;
+          
+          // ENVIAR WHATSAPP (Phase 1: ManyChat)
+          if (clienteTelefono) {
+            try {
+              const { enviarConfirmacionCita } = await import("./whatsapp");
+              await enviarConfirmacionCita({
+                telefono: clienteTelefono,
+                nombre: clienteNombre,
+                fecha: cita.fecha,
+                hora: cita.hora,
+                servicio: cita.servicio_nombre,
+                barbero: cita.barbero_nombre || "el barbero"
+              });
+              console.log(`[CITAS-SERVER] WhatsApp de confirmación enviado a ${clienteTelefono}`);
+            } catch (wsError) {
+              console.error("[CITAS-SERVER] Error enviando WhatsApp:", wsError);
+            }
+          }
         } else if (estado === "cancelada_admin") {
           title = "Cita Cancelada ⚠️";
           body = `Lo sentimos ${clienteNombre}, tu cita en ${barberiaNombre} para el ${cita.fecha} ha sido cancelada por la barbería. Por favor, contacta con nosotros para reprogramar.`;

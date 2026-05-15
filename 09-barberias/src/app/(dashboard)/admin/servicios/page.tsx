@@ -3,23 +3,18 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { barberiaService } from "@/services/barberiaService";
-import { Plus, Scissors, Clock, DollarSign, Trash2, Edit2, Save, X, Loader2 } from "lucide-react";
+import { Scissors, Clock, DollarSign, Save, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { Servicio } from "@/types/firebase";
 import { formatPrecio } from "@/lib/utils";
+import { SERVICIOS_CATALOGO } from "@/lib/constants";
+import { toast } from "sonner";
 
 export default function ServiciosPage() {
   const { user } = useAuth();
   const [servicios, setServicios] = useState<Servicio[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-
-  const [formData, setFormData] = useState<Omit<Servicio, "id">>({
-    nombre: "",
-    duracion_min: 30,
-    precio: 0,
-    activo: true,
-  });
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (user?.barberia_id) {
@@ -30,64 +25,58 @@ export default function ServiciosPage() {
   const cargarServicios = async (barberiaId: string) => {
     try {
       const barberia = await barberiaService.getById(barberiaId);
-      if (barberia?.servicios) {
-        setServicios(barberia.servicios);
-      }
+      
+      // Combinar catálogo con los servicios ya configurados
+      const configurados = barberia?.servicios || [];
+      
+      const iniciales = SERVICIOS_CATALOGO.map(base => {
+        const custom = configurados.find(s => s.id === base.id);
+        return {
+          id: base.id,
+          nombre: base.nombre,
+          duracion_min: custom?.duracion_min || base.duracion_default,
+          precio: custom?.precio || base.precio_default,
+          activo: custom ? custom.activo : false,
+        };
+      });
+
+      setServicios(iniciales);
     } catch (e) {
       console.error(e);
+      toast.error("Error al cargar servicios");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleToggle = (id: string) => {
+    setServicios(prev => prev.map(s => 
+      s.id === id ? { ...s, activo: !s.activo } : s
+    ));
+    setSuccess(false);
+  };
+
+  const handleChange = (id: string, field: "precio" | "duracion_min", value: number) => {
+    setServicios(prev => prev.map(s => 
+      s.id === id ? { ...s, [field]: value } : s
+    ));
+    setSuccess(false);
+  };
+
+  const saveServicios = async () => {
     if (!user?.barberia_id) return;
     setSaving(true);
-
     try {
-      let nuevosServicios: Servicio[];
-      if (editingId) {
-        nuevosServicios = servicios.map(s => s.id === editingId ? { ...formData, id: editingId } : s);
-      } else {
-        const nuevo: Servicio = { ...formData, id: Math.random().toString(36).substr(2, 9) };
-        nuevosServicios = [...servicios, nuevo];
-      }
-
-      await barberiaService.update(user.barberia_id, { servicios: nuevosServicios });
-      setServicios(nuevosServicios);
-      resetForm();
+      await barberiaService.update(user.barberia_id, { servicios });
+      setSuccess(true);
+      toast.success("Servicios actualizados correctamente");
+      setTimeout(() => setSuccess(false), 3000);
     } catch (e) {
       console.error(e);
+      toast.error("Error al guardar cambios");
     } finally {
       setSaving(false);
     }
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!user?.barberia_id || !confirm("¿Eliminar este servicio?")) return;
-    try {
-      const nuevosServicios = servicios.filter(s => s.id !== id);
-      await barberiaService.update(user.barberia_id, { servicios: nuevosServicios });
-      setServicios(nuevosServicios);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const startEdit = (s: Servicio) => {
-    setEditingId(s.id);
-    setFormData({
-      nombre: s.nombre,
-      duracion_min: s.duracion_min,
-      precio: s.precio,
-      activo: s.activo,
-    });
-  };
-
-  const resetForm = () => {
-    setEditingId(null);
-    setFormData({ nombre: "", duracion_min: 30, precio: 0, activo: true });
   };
 
   if (loading) {
@@ -99,121 +88,101 @@ export default function ServiciosPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-[var(--white)]">Servicios</h1>
-          <p className="text-sm text-[var(--muted)] mt-1">Define los cortes y tratamientos que ofreces</p>
+          <h1 className="text-3xl font-black text-[var(--white)]">Catálogo de Servicios</h1>
+          <p className="text-sm text-[var(--muted)] mt-1">Activa los servicios que ofreces y personaliza precios</p>
         </div>
+        <button
+          onClick={saveServicios}
+          disabled={saving}
+          className="flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[var(--gold)] text-[var(--dark)] font-bold hover:brightness-110 transition-all disabled:opacity-50 shadow-lg shadow-[var(--gold)]/20"
+        >
+          {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
+          Guardar Cambios
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Form */}
-        <div className="lg:col-span-1">
-          <form onSubmit={handleSave} className="p-6 rounded-2xl bg-[var(--card)] border border-[rgba(201,168,76,0.18)] sticky top-6">
-            <h2 className="text-lg font-bold text-[var(--white)] mb-6 flex items-center gap-2">
-              {editingId ? <Edit2 className="w-5 h-5 text-[var(--gold)]" /> : <Plus className="w-5 h-5 text-[var(--gold)]" />}
-              {editingId ? "Editar Servicio" : "Nuevo Servicio"}
-            </h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs text-[var(--muted)] uppercase tracking-wider mb-1">Nombre</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  className="w-full px-4 py-2 rounded-lg bg-[var(--dark)] border border-[rgba(201,168,76,0.1)] text-[var(--white)] focus:border-[var(--gold)] outline-none transition-colors"
-                  placeholder="Ej: Corte Clásico"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs text-[var(--muted)] uppercase tracking-wider mb-1">Precio</label>
-                  <div className="relative">
-                    <DollarSign className="absolute left-3 top-2.5 w-4 h-4 text-[var(--muted)]" />
-                    <input
-                      type="number"
-                      required
-                      value={formData.precio}
-                      onChange={(e) => setFormData({ ...formData, precio: Number(e.target.value) })}
-                      className="w-full pl-10 pr-4 py-2 rounded-lg bg-[var(--dark)] border border-[rgba(201,168,76,0.1)] text-[var(--white)] focus:border-[var(--gold)] outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs text-[var(--muted)] uppercase tracking-wider mb-1">Duración (min)</label>
-                  <div className="relative">
-                    <Clock className="absolute left-3 top-2.5 w-4 h-4 text-[var(--muted)]" />
-                    <input
-                      type="number"
-                      required
-                      value={formData.duracion_min}
-                      onChange={(e) => setFormData({ ...formData, duracion_min: Number(e.target.value) })}
-                      className="w-full pl-10 pr-4 py-2 rounded-lg bg-[var(--dark)] border border-[rgba(201,168,76,0.1)] text-[var(--white)] focus:border-[var(--gold)] outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 flex gap-3">
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[var(--gold)] text-[var(--dark)] font-bold hover:opacity-90 transition-opacity disabled:opacity-50"
-                >
-                  {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-                  {editingId ? "Actualizar" : "Añadir"}
-                </button>
-                {editingId && (
-                  <button
-                    type="button"
-                    onClick={resetForm}
-                    className="p-3 rounded-xl border border-[rgba(201,168,76,0.1)] text-[var(--muted)] hover:text-[var(--white)]"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                )}
-              </div>
-            </div>
-          </form>
+      {success && (
+        <div className="flex items-center gap-2 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500 text-sm animate-in fade-in slide-in-from-top-2">
+          <CheckCircle2 className="w-5 h-5" />
+          Configuración guardada con éxito
         </div>
+      )}
 
-        {/* List */}
-        <div className="lg:col-span-2 space-y-4">
-          {servicios.length === 0 ? (
-            <div className="p-12 text-center rounded-2xl bg-[var(--card)] border border-dashed border-[rgba(201,168,76,0.18)]">
-              <Scissors className="w-12 h-12 mx-auto mb-4 text-[var(--muted)] opacity-20" />
-              <p className="text-[var(--muted)]">Aún no has configurado servicios</p>
-            </div>
-          ) : (
-            servicios.map((s) => (
-              <div key={s.id} className="p-5 rounded-2xl bg-[var(--card)] border border-[rgba(201,168,76,0.18)] flex items-center justify-between group hover:border-[var(--gold)] transition-colors">
+      <div className="grid grid-cols-1 gap-4">
+        {servicios.map((s) => (
+          <div 
+            key={s.id} 
+            className={`p-6 rounded-3xl bg-[var(--card)] border transition-all duration-300 ${
+              s.activo 
+                ? "border-[rgba(201,168,76,0.3)] shadow-[0_0_20px_rgba(201,168,76,0.05)]" 
+                : "border-white/5 opacity-60"
+            }`}
+          >
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="flex items-center gap-5">
+                <button
+                  onClick={() => handleToggle(s.id)}
+                  className={`w-14 h-7 rounded-full transition-all relative flex-shrink-0 ${s.activo ? "bg-[var(--gold)]" : "bg-[var(--dark)] border border-white/10"}`}
+                >
+                  <div className={`absolute top-1 w-5 h-5 rounded-full bg-[var(--dark)] transition-all ${s.activo ? "left-8" : "left-1"}`} />
+                </button>
+                
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-[var(--gold)]/10 flex items-center justify-center text-[var(--gold)]">
-                    <Scissors className="w-5 h-5" />
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${s.activo ? "bg-[var(--gold)]/20 text-[var(--gold)]" : "bg-white/5 text-[var(--muted)]"}`}>
+                    <Scissors className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-[var(--white)]">{s.nombre}</h3>
-                    <div className="flex items-center gap-3 text-xs text-[var(--muted)] mt-1">
-                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {s.duracion_min} min</span>
-                      <span className="flex items-center gap-1 font-bold text-[var(--gold)]"><DollarSign className="w-3 h-3" /> {formatPrecio(s.precio)}</span>
+                    <h3 className={`font-black text-lg transition-colors ${s.activo ? "text-[var(--white)]" : "text-[var(--muted)]"}`}>
+                      {s.nombre}
+                    </h3>
+                    {!s.activo && <span className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Inactivo</span>}
+                  </div>
+                </div>
+              </div>
+
+              {s.activo && (
+                <div className="flex flex-wrap items-center gap-4 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex-1 min-w-[140px]">
+                    <label className="block text-[10px] text-[var(--muted)] uppercase tracking-widest mb-1.5 font-bold">Precio (MXN)</label>
+                    <div className="relative">
+                      <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--gold)]" />
+                      <input
+                        type="number"
+                        value={s.precio}
+                        onChange={(e) => handleChange(s.id, "precio", Number(e.target.value))}
+                        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[var(--dark)] border border-white/10 text-[var(--white)] font-bold focus:border-[var(--gold)] outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 min-w-[140px]">
+                    <label className="block text-[10px] text-[var(--muted)] uppercase tracking-widest mb-1.5 font-bold">Duración (min)</label>
+                    <div className="relative">
+                      <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                      <input
+                        type="number"
+                        step="5"
+                        value={s.duracion_min}
+                        onChange={(e) => handleChange(s.id, "duracion_min", Number(e.target.value))}
+                        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[var(--dark)] border border-white/10 text-[var(--white)] font-bold focus:border-[var(--gold)] outline-none transition-all"
+                      />
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button onClick={() => startEdit(s)} className="p-2 rounded-lg hover:bg-white/5 text-[var(--muted)] hover:text-[var(--gold)]">
-                    <Edit2 className="w-4 h-4" />
-                  </button>
-                  <button onClick={() => handleDelete(s.id)} className="p-2 rounded-lg hover:bg-white/5 text-[var(--muted)] hover:text-red-500">
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 flex gap-4">
+        <AlertCircle className="w-6 h-6 text-blue-500 flex-shrink-0" />
+        <div className="text-sm text-blue-200/80 leading-relaxed">
+          <p className="font-bold text-blue-400 mb-1">Información sobre el Catálogo</p>
+          <p>Los servicios marcados aquí aparecerán automáticamente en tu página de reservas. Los precios y tiempos que definas se usarán para calcular la disponibilidad de tus barberos y la acumulación de puntos de tus clientes.</p>
         </div>
       </div>
     </div>

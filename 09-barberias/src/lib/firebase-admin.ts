@@ -28,29 +28,11 @@ export function getAdminApp() {
       return null;
     }
 
-    // RECONSTRUCCIÓN SÚPER-FLEXIBLE
-    // 1. Extraer solo el contenido entre los guiones o limpiar todo lo que no sea base64
-    let content = rawKey
-      .replace(/-----BEGIN [^-]+-----/g, "")
-      .replace(/-----END [^-]+-----/g, "")
-      .replace(/\\n/g, "")
-      .replace(/\n/g, "")
-      .replace(/\s+/g, "")
-      .replace(/['"]/g, "")
-      .trim();
-
-    // 2. Re-envolver en el formato estándar que Firebase AMA
-    const header = "-----BEGIN PRIVATE KEY-----";
-    const footer = "-----END PRIVATE KEY-----";
+    console.log(`Auth: Initializing with ProjectID: ${projectId}, Email: ${clientEmail}`);
     
-    if (content.length < 500) {
-      throw new Error(`La llave privada es demasiado corta (${content.length} caracteres). Está incompleta en Vercel.`);
-    }
-
-    const matches = content.match(/.{1,64}/g);
-    const privateKey = matches 
-      ? `${header}\n${matches.join("\n")}\n${footer}`
-      : `${header}\n${content}\n${footer}`;
+    // RECONSTRUCCIÓN ROBUSTA
+    // Manejar el caso común donde las nuevas líneas están escapadas como el string "\n"
+    const privateKey = rawKey.replace(/\\n/g, "\n").replace(/['"]/g, "").trim();
 
     try {
       _app = initializeApp({

@@ -40,10 +40,14 @@ export async function POST(request: NextRequest) {
         break;
       }
       case "lead_property_updated": {
-        const { field_name, new_value } = data;
-        // ManyChat triggers this when a custom field is updated
-        // Used for: barberia_slug, fecha_reserva, hora_reserva, servicioId
-        console.log(`[ManyChat] Field ${field_name} updated to: ${new_value}`);
+        const { field_name, new_value, subscriber_id } = data;
+        console.log(`[ManyChat] Subscriber ${subscriber_id} updated field ${field_name} to: ${new_value}`);
+        
+        // Logic for specific fields
+        if (field_name === "custom_field_barberia_slug") {
+          // Sync or validate slug
+          console.log(`[ManyChat] User interested in barberia: ${new_value}`);
+        }
         break;
       }
       case "subscriber_tag_updated": {

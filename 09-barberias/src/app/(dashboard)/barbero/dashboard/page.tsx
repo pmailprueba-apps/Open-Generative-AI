@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { formatFecha, formatPrecio } from "@/lib/utils";
-import { Check, X, Calendar, Clock, Scissors, User, AlertTriangle } from "lucide-react";
+import { Check, X, Calendar, Clock, Scissors, User, AlertTriangle, XCircle } from "lucide-react";
 import { CitaService } from "@/services/citaService";
 import { toast } from "sonner";
 import { ConfirmCancelModal } from "@/components/ui/confirm-cancel-modal";
@@ -56,7 +56,7 @@ export default function BarberoDashboardPage() {
       
       const [misCitas, misPendientes] = await Promise.all([
         CitaService.getByBarberia(user.barberia_id, { fecha: hoy, barberoId: user.barbero_id }, token),
-        CitaService.getByBarberia(user.barberia_id, { estado: "pendiente" }, token)
+        CitaService.getByBarberia(user.barberia_id, { estado: "pendiente", barberoId: user.barbero_id }, token)
       ]);
 
       setCitas(misCitas);
@@ -105,6 +105,7 @@ export default function BarberoDashboardPage() {
     pendiente: "bg-[var(--gold)]",
     en_curso: "bg-[var(--blue)]",
     completada: "bg-[var(--green)]",
+    no_show: "bg-[var(--red)]",
     cancelada_cliente: "bg-[var(--red)]",
     cancelada_admin: "bg-[var(--red)]",
   };
@@ -277,6 +278,16 @@ export default function BarberoDashboardPage() {
                         </button>
                       )}
 
+                      {cita.estado === "confirmada" && (
+                        <button
+                          onClick={() => handleEstadoCita(cita.id, "no_show")}
+                          className="p-2 rounded-xl bg-[var(--red)]/10 text-[var(--red)] hover:bg-[var(--red)] hover:text-white transition-all"
+                          title="No se presentó"
+                        >
+                          <XCircle size={14} />
+                        </button>
+                      )}
+                      
                       <button
                         onClick={() => openCancelModal(cita)}
                         className="p-2 rounded-xl bg-[var(--red)]/20 text-[var(--red)] hover:bg-[var(--red)] hover:text-white transition-all opacity-0 group-hover:opacity-100"

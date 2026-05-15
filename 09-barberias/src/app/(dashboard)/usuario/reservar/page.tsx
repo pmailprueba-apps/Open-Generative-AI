@@ -100,8 +100,11 @@ export default function ReservarPage() {
         return;
       }
 
-      console.log(`Cargando slots para barberia: ${barberia.id}, fecha: ${fecha}, barbero: ${barberoId}`);
-      const s = await disponibilidadPorFecha(barberia.id, fecha, barberoId);
+      const selectedService = servicios.find(s => s.id === servicioId);
+      const duracionMin = selectedService?.duracion_min || 30;
+
+      console.log(`Cargando slots para barberia: ${barberia.id}, fecha: ${fecha}, barbero: ${barberoId}, duracion: ${duracionMin}`);
+      const s = await disponibilidadPorFecha(barberia.id, fecha, barberoId, duracionMin);
       setSlots(s);
     } catch (e: any) {
       console.error("Error en cargarSlots:", e);
@@ -109,7 +112,7 @@ export default function ReservarPage() {
     } finally {
       setLoadingSlots(false);
     }
-  }, [barberia?.id, fecha, barberoId, barberia?.dias_anticipacion]);
+  }, [barberia?.id, fecha, barberoId, barberia?.dias_anticipacion, servicioId, servicios]);
 
   useEffect(() => {
     cargarSlots();

@@ -28,7 +28,19 @@ export default function BarberosPage() {
     try {
       const users = await userService.getByBarberia(barberiaId);
       const barbs = users.filter(u => u.role === "barbero");
-      setBarberos(barbs.filter(b => b.activo));
+      
+      // Añadir barbero virtual "Cualquiera" para visualización del admin
+      const barberoCualquiera: Usuario = {
+        uid: "cualquiera",
+        nombre: "Barbero Cualquiera",
+        email: "sistema@barberia.com",
+        role: "barbero",
+        activo: true,
+        barberia_id: barberiaId,
+        foto_url: ""
+      };
+
+      setBarberos([barberoCualquiera, ...barbs.filter(b => b.activo)]);
       setPendientes(barbs.filter(b => !b.activo));
     } catch (e) {
       console.error(e);
@@ -219,12 +231,14 @@ export default function BarberosPage() {
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 rounded-full border-2 border-[var(--card)]" />
                   )}
                 </div>
-                <button 
-                  onClick={() => handleDeleteBarbero(barbero)}
-                  className="text-[var(--muted)] hover:text-red-500 transition-colors p-2"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
+                {barbero.uid !== "cualquiera" && (
+                  <button 
+                    onClick={() => handleDeleteBarbero(barbero)}
+                    className="text-[var(--muted)] hover:text-red-500 transition-colors p-2"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                )}
               </div>
               
               <h3 className="font-bold text-[var(--white)] text-lg">{barbero.nombre || "Barbero sin nombre"}</h3>
@@ -234,17 +248,24 @@ export default function BarberosPage() {
               </div>
               
               <div className="mt-6 flex items-center justify-between pt-4 border-t border-[rgba(201,168,76,0.05)]">
-                <button 
-                  onClick={() => handleToggleStatus(barbero)}
-                  className={`flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors ${
-                    barbero.activo ? "text-green-500 hover:text-green-400" : "text-amber-500 hover:text-amber-400"
-                  }`}
-                >
-                  <Shield className="w-3 h-3" />
-                  {barbero.activo ? "Validado / Activo" : "Pendiente / Inactivo"}
-                </button>
+                {barbero.uid === "cualquiera" ? (
+                  <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-blue-500">
+                    <Shield className="w-3 h-3" />
+                    Sistema / Automático
+                  </div>
+                ) : (
+                  <button 
+                    onClick={() => handleToggleStatus(barbero)}
+                    className={`flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors ${
+                      barbero.activo ? "text-green-500 hover:text-green-400" : "text-amber-500 hover:text-amber-400"
+                    }`}
+                  >
+                    <Shield className="w-3 h-3" />
+                    {barbero.activo ? "Validado / Activo" : "Pendiente / Inactivo"}
+                  </button>
+                )}
                 <div className="text-xs text-[var(--gold)] font-bold">
-                  {barbero.activo ? "En línea" : "Off"}
+                  {barbero.uid === "cualquiera" ? "Always On" : (barbero.activo ? "En línea" : "Off")}
                 </div>
               </div>
             </div>

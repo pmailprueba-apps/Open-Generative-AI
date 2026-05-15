@@ -48,7 +48,9 @@ export async function GET(
           const uDoc = await dbAdmin.collection("usuarios").doc(cita.clienteId).get();
           if (uDoc.exists) clienteNombre = uDoc.data()?.nombre || "Cliente";
         }
-        if (cita.barberoId) {
+        if (cita.barberoId === "cualquiera") {
+          barberoNombre = "Cualquiera (Por asignar)";
+        } else if (cita.barberoId) {
           const bDoc = await dbAdmin.collection("usuarios").doc(cita.barberoId).get();
           if (bDoc.exists) barberoNombre = bDoc.data()?.nombre || "Barbero";
         }

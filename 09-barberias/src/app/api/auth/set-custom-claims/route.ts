@@ -16,12 +16,26 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { role, barberia_id, barbero_id } = body as {
       uid?: string;
+      email?: string;
       role: Role;
       barberia_id?: string;
       barbero_id?: string;
     };
 
-    const targetUid = body.uid || caller.uid;
+    let targetUid = body.uid;
+    const auth = getAdminAuth();
+
+    // Si no hay UID pero hay email, buscar el usuario
+    if (!targetUid && body.email) {
+      try {
+        const userRecord = await auth.getUserByEmail(body.email);
+        targetUid = userRecord.uid;
+      } catch (e) {
+        return NextResponse.json({ error: "No se encontró ningún usuario con ese correo electrónico" }, { status: 404 });
+      }
+    }
+
+    if (!targetUid) targetUid = caller.uid;
 
     // 2. Lógica de Autorización Progresiva
     let authorized = false;
@@ -69,19 +83,25 @@ export async function POST(request: NextRequest) {
     if (barberia_id) claims.barberia_id = barberia_id;
     if (barbero_id) claims.barbero_id = barbero_id;
 
-    const auth = getAdminAuth();
     await auth.setCustomUserClaims(targetUid, claims);
     
     // 4. Sincronizar con Firestore
     const db = getAdminDb();
-    await db.collection("usuarios").doc(targetUid).set({
+    const updateData: any = {
       role: role,
       barberia_id: barberia_id || null,
       barbero_id: barbero_id || (role === "barbero" ? targetUid : null),
       updatedAt: new Date(),
-    }, { merge: true });
+    };
 
-    console.log(`Auth Security: Claims updated for ${targetUid} by ${caller.uid}. Role: ${role}`);
+    // Si es un barbero nuevo o un cliente nuevo siendo asignado, empezar como inactivo (pendiente de validación)
+    if ((role === "barbero" && caller.role === "admin") || role === "cliente") {
+      updateData.activo = false;
+    }
+
+    await db.collection("usuarios").doc(targetUid).set(updateData, { merge: true });
+
+    console.log(`Auth Security: Claims updated for ${targetUid} by ${caller.uid}. Role: ${role}, Activo: ${updateData.activo ?? 'N/A'}`);
     
     return NextResponse.json({ success: true, claims });
   } catch (error: any) {
@@ -92,4 +112,3 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-

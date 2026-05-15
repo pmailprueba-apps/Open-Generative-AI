@@ -101,7 +101,8 @@ export function generarSlotsBase(horario: HorarioDia, duracion: number, fechaStr
 export async function disponibilidadPorFecha(
   barberiaId: string,
   fecha: string,
-  barberoIdReq?: string
+  barberoIdReq?: string,
+  duracionMin: number = 30
 ): Promise<Slot[]> {
   try {
     if (!barberiaId || !fecha) return [];
@@ -109,21 +110,18 @@ export async function disponibilidadPorFecha(
     const barberia = await getBarberia(barberiaId);
     if (!barberia || !barberia.horarios) return [];
 
-    // --- NUEVO: Validar días de anticipación ---
+    // --- Validar días de anticipación ---
     const diasLimite = barberia.dias_anticipacion || 30;
     const hoy = new Date();
     hoy.setHours(0,0,0,0);
     const fechaSolicitada = new Date(fecha + "T00:00:00");
     
-    // Calcular diferencia en días
     const diffTime = fechaSolicitada.getTime() - hoy.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     if (diffDays > diasLimite) {
-      console.log(`Fecha bloqueada por límite (${diasLimite} días): ${fecha}`);
-      return []; // No retornar slots si excede el límite
+      return [];
     }
-    // ------------------------------------------
 
     const dateObj = new Date(fecha + "T12:00:00");
     if (isNaN(dateObj.getTime())) return [];
@@ -134,9 +132,8 @@ export async function disponibilidadPorFecha(
 
     if (!horario || !horario.abre || !horario.cierra || !horario.activo) return [];
 
-    // 1. Obtener barberos de forma segura (paralelo)
+    // 1. Obtener barberos de forma segura
     const barberosMap = new Map<string, { id: string; nombre: string }>();
-    
     const queries = [
       query(collection(db, "usuarios"), where("barberia_id", "==", barberiaId), where("role", "==", "barbero")),
       query(collection(db, "usuarios"), where("barberiaId", "==", barberiaId), where("role", "==", "barbero")),
@@ -144,45 +141,34 @@ export async function disponibilidadPorFecha(
       query(collection(db, "empleados"), where("barberiaId", "==", barberiaId), where("rol", "==", "barbero"))
     ];
 
-    const snapshots = await Promise.all(queries.map(q => 
-      getDocs(q).catch(err => {
-        console.warn("Falla en query de barberos:", err.message);
-        return { docs: [] } as any;
-      })
-    ));
-    
-    snapshots.forEach((snap, i) => {
-      console.log(`[slots] Query ${i} encontró ${snap.docs?.length || 0} barberos`);
+    const snapshots = await Promise.all(queries.map(q => getDocs(q).catch(() => ({ docs: [] } as any))));
+    snapshots.forEach(snap => {
       snap.docs?.forEach((d: any) => {
         const data = d.data();
         if (data && !barberosMap.has(d.id)) {
-          // Normalizar el nombre para evitar vacíos
-          const nombre = data.nombre || data.displayName || data.email?.split("@")[0] || "Barbero";
-          barberosMap.set(d.id, { id: d.id, nombre });
+          barberosMap.set(d.id, { 
+            id: d.id, 
+            nombre: data.nombre || data.displayName || data.email?.split("@")[0] || "Barbero" 
+          });
         }
       });
     });
 
     const barberos = Array.from(barberosMap.values());
-    if (barberos.length === 0) {
-      console.warn(`[slots] No se encontraron barberos para la barbería ${barberiaId} en ninguna colección`);
-      return [];
-    }
-    
-    console.log(`[slots] Total barberos únicos encontrados: ${barberos.length}`);
+    if (barberos.length === 0) return [];
 
     // 2. Obtener citas
     const citas = await getCitasPorFecha(barberiaId, fecha).catch(() => []);
     
-    // 3. Generar slots base con margen de reserva (default 30 min)
+    // 3. Generar slots base (siempre paso 30 para tener granularidad)
     const margen = barberia.margen_reserva_minutos ?? 30;
     let slots = generarSlotsBase(horario, 30, fecha, margen);
 
-    // 4. Calcular ocupación por slot
-    slots = slots.map(slot => {
+    // 4. Calcular ocupación REAL por cada barbero en cada slot
+    const slotsConOcupacion = slots.map(slot => {
       const [hS, mS] = slot.hora.split(":").map(Number);
       const minS = hS * 60 + mS;
-      const durS = 30; // Suponemos 30min por slot para la verificación de disponibilidad
+      const durSlot = 30;
 
       const barberosOcupadosIds = new Set<string>();
 
@@ -195,34 +181,51 @@ export async function disponibilidadPorFecha(
         const minC = hC * 60 + mC;
         const durC = c.duracion_min || 30;
 
-        // Si la cita existente se solapa con este slot
-        const solapa = (minS >= minC && minS < minC + durC) || (minS + durS > minC && minS < minC);
+        // Traslape de tiempos
+        const solapa = (minS < minC + durC) && (minS + durSlot > minC);
         
         if (solapa && c.barberoId) {
           barberosOcupadosIds.add(c.barberoId);
         }
       });
-      
-      const barberosOcupados = barberos.filter(b => barberosOcupadosIds.has(b.id));
-      const barberosLibres = barberos.filter(b => !barberosOcupadosIds.has(b.id));
-
-      let disponible = slot.disponible;
-      if (barberoIdReq && barberoIdReq !== "" && barberoIdReq !== "cualquiera") {
-        const estaLibre = barberosLibres.some(b => b.id === barberoIdReq);
-        disponible = disponible && estaLibre;
-      } else {
-        disponible = disponible && barberosLibres.length > 0;
-      }
 
       return {
         ...slot,
-        disponible,
-        barberosOcupados,
-        barberosLibres
+        barberosLibres: barberos.filter(b => !barberosOcupadosIds.has(b.id)),
+        barberosOcupados: barberos.filter(b => barberosOcupadosIds.has(b.id))
       };
     });
 
-    return slots;
+    // 5. Filtrar disponibilidad final basándose en duracionMin
+    return slotsConOcupacion.map((slot, index) => {
+      let disponible = slot.disponible;
+      if (!disponible) return slot;
+
+      // Para este slot, ¿hay algún barbero que esté libre durante toda la duración?
+      const barberosQueCumplen = slot.barberosLibres.filter(barbero => {
+        // Si el usuario pidió un barbero específico, solo ese cuenta
+        if (barberoIdReq && barberoIdReq !== "" && barberoIdReq !== "cualquiera") {
+          if (barbero.id !== barberoIdReq) return false;
+        }
+
+        // Revisar slots consecutivos
+        const numSlotsNecesarios = Math.ceil(duracionMin / 30);
+        for (let i = 0; i < numSlotsNecesarios; i++) {
+          const nextSlot = slotsConOcupacion[index + i];
+          // Si no hay siguiente slot (fin del día) o el barbero está ocupado en ese slot
+          if (!nextSlot || !nextSlot.barberosLibres.some(b => b.id === barbero.id)) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      return {
+        ...slot,
+        disponible: barberosQueCumplen.length > 0,
+        barberosLibres: barberosQueCumplen
+      };
+    });
   } catch (e) {
     console.error("Error en disponibilidadPorFecha:", e);
     throw e; 

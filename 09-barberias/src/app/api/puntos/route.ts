@@ -1,24 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPuntosUsuario, canjearPuntos } from "@/lib/puntos";
-import { getAdminAuth } from "@/lib/firebase-admin";
+import { canjearPuntosServer } from "@/lib/puntos-server";
 import { verifyAuth } from "@/lib/auth-server";
-
-
+import { getAdminDb } from "@/lib/firebase-admin";
 
 export async function GET(request: NextRequest) {
   try {
-    // 1. Verificar autenticación
-    let user;
-    try {
-      user = await verifyAuth(request);
-    } catch (authError: any) {
-      return NextResponse.json({ error: authError.message }, { status: 401 });
+    const user = await verifyAuth(request);
+    const db = getAdminDb();
+    const userDoc = await db.collection("usuarios").doc(user.uid).get();
+    
+    if (!userDoc.exists) {
+      return NextResponse.json({ puntos: 0, historial: [] });
     }
-    const uid = user.uid;
 
+    const puntos = userDoc.data()?.puntos || 0;
+    
+    // Obtener historial reciente
+    const historialSnap = await db.collection("usuarios")
+      .doc(user.uid)
+      .collection("puntos_historial")
+      .orderBy("fecha", "desc")
+      .limit(10)
+      .get();
+    
+    const historial = historialSnap.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      fecha: doc.data().fecha?.toDate?.()?.toISOString() || new Date().toISOString()
+    }));
 
-    const puntos = await getPuntosUsuario(uid);
-    return NextResponse.json({ puntos });
+    return NextResponse.json({ puntos, historial });
   } catch (error) {
     console.error("Error getPuntos:", error);
     return NextResponse.json({ error: "Error obteniendo puntos" }, { status: 500 });
@@ -27,24 +38,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Verificar autenticación
-    let user;
-    try {
-      user = await verifyAuth(request);
-    } catch (authError: any) {
-      return NextResponse.json({ error: authError.message }, { status: 401 });
-    }
-    const uid = user.uid;
-
-
+    const user = await verifyAuth(request);
     const body = await request.json();
-    const { puntosRequeridos } = body;
+    const { puntosRequeridos, recompensa } = body;
 
     if (!puntosRequeridos || typeof puntosRequeridos !== "number") {
       return NextResponse.json({ error: "puntosRequeridos requerido" }, { status: 400 });
     }
 
-    const resultado = await canjearPuntos(uid, puntosRequeridos);
+    const resultado = await canjearPuntosServer(user.uid, puntosRequeridos, recompensa);
 
     if (!resultado.success) {
       return NextResponse.json({ error: resultado.error }, { status: 409 });

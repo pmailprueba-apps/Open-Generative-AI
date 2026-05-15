@@ -18,6 +18,10 @@ export const superAdminService = {
 
       const barberiasCount = barberiasSnap.size;
       const usuariosCount = usuariosSnap.size;
+      let puntosGlobales = 0;
+      usuariosSnap.forEach(doc => {
+        puntosGlobales += (doc.data().puntos || 0);
+      });
       
       let ingresosTotales = 0;
       transaccionesSnap.forEach(doc => {
@@ -33,7 +37,8 @@ export const superAdminService = {
         barberiasCount,
         usuariosCount,
         ingresosTotales,
-        suscripcionesActivas
+        suscripcionesActivas,
+        puntosGlobales
       };
     } catch (error) {
       console.error("Error fetching dashboard stats:", error);

@@ -7,16 +7,15 @@ import { Barberia } from "@/types/firebase";
 import { 
   ChevronLeft, 
   Save, 
-  Trash2, 
-  Settings, 
-  Clock, 
-  Calendar, 
-  CreditCard,
-  Building2,
-  Phone,
-  Mail,
-  MapPin
+  MapPin,
+  Loader2,
+  Scissors,
+  Trash2 as TrashIcon,
+  Shield,
+  UserPlus
 } from "lucide-react";
+import { userService } from "@/services/userService";
+import { Usuario } from "@/types/firebase";
 import Link from "next/link";
 import { ConfirmCancelModal } from "@/components/ui/confirm-cancel-modal";
 import { toast } from "sonner";
@@ -238,6 +237,12 @@ export default function BarberiaDetailPage() {
               ))}
             </div>
           </div>
+          <div className="bg-[var(--card)] p-8 rounded-2xl border border-[rgba(201,168,76,0.18)] shadow-xl">
+            <h2 className="text-xl font-bold text-[var(--gold)] mb-6 flex items-center gap-2">
+              <Building2 size={20} /> Staff y Equipo
+            </h2>
+            <BarberosList barberiaId={barberia.id} />
+          </div>
         </div>
 
         {/* Sidebar Info */}
@@ -325,6 +330,70 @@ export default function BarberiaDetailPage() {
         descripcion={pendingStatusChange === 'suspendida' ? "¿Deseas suspender temporalmente esta barbería?" : "¿Deseas reactivar esta barbería?"}
         nombreCliente={barberia.nombre}
       />
+    </div>
+  );
+}
+
+function BarberosList({ barberiaId }: { barberiaId: string }) {
+  const [barberos, setBarberos] = useState<Usuario[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (barberiaId) {
+      cargarBarberos();
+    }
+  }, [barberiaId]);
+
+  const cargarBarberos = async () => {
+    try {
+      const users = await userService.getByBarberia(barberiaId);
+      setBarberos(users.filter(u => u.role === "barbero"));
+    } catch (e) {
+      console.error(e);
+      toast.error("Error al cargar barberos");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return (
+    <div className="flex justify-center py-8">
+      <Loader2 className="animate-spin text-[var(--gold)]" />
+    </div>
+  );
+
+  return (
+    <div className="space-y-4">
+      {barberos.length === 0 ? (
+        <p className="text-[var(--muted)] text-center py-4">No hay barberos registrados en esta barbería.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {barberos.map((barbero) => (
+            <div key={barbero.uid} className="p-4 rounded-xl bg-[var(--dark)] border border-[rgba(201,168,76,0.1)] flex items-center justify-between group hover:border-[var(--gold)] transition-all">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[rgba(201,168,76,0.1)] flex items-center justify-center text-[var(--gold)]">
+                  {barbero.foto_url ? (
+                    <img src={barbero.foto_url} alt="" className="w-full h-full rounded-full object-cover" />
+                  ) : (
+                    <Scissors size={20} />
+                  )}
+                </div>
+                <div>
+                  <p className="font-bold text-white text-sm">{barbero.nombre || "Sin nombre"}</p>
+                  <p className="text-xs text-[var(--muted)]">{barbero.email}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] uppercase px-2 py-0.5 rounded border ${
+                  barbero.activo ? 'bg-green-500/10 text-green-500 border-green-500/20' : 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                }`}>
+                  {barbero.activo ? 'Activo' : 'Pendiente'}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

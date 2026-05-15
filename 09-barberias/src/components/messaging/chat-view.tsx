@@ -50,7 +50,7 @@ export default function ChatView() {
     if (!user) return [];
     const userRole = (user.role as string)?.toLowerCase();
     
-    if (userRole === "superadmin") return ["admin"];
+    if (userRole === "superadmin") return ["admin", "barbero"];
     if (userRole === "admin") return ["superadmin", "barbero", "cliente"];
     if (userRole === "barbero") return ["admin", "cliente"];
     if (userRole === "cliente" || userRole === "usuario") return ["barbero", "admin"];
@@ -111,7 +111,7 @@ export default function ChatView() {
 
         // Permissions Logic
         if (userRole === "superadmin") {
-          q = query(usersRef, where("role", "==", "admin"));
+          q = query(usersRef, where("role", "in", ["admin", "barbero"]));
         } else if (userRole === "admin") {
           q = query(usersRef, where("role", "in", ["superadmin", "barbero", "cliente", "usuario"]));
         } else if (userRole === "barbero") {

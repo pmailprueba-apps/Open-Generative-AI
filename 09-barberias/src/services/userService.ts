@@ -48,6 +48,17 @@ export const userService = {
     return snapshot.docs.map(doc => ({ uid: doc.id, ...doc.data() } as Usuario));
   },
 
+  async getClientesPendientes(barberiaId: string) {
+    const q = query(
+      collection(db, COLLECTION_NAME), 
+      where("barberia_id", "==", barberiaId),
+      where("role", "==", "cliente"),
+      where("activo", "==", false)
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ uid: doc.id, ...doc.data() } as Usuario));
+  },
+
   async update(uid: string, data: Partial<Usuario>) {
     const docRef = doc(db, COLLECTION_NAME, uid);
     await setDoc(docRef, {

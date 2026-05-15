@@ -41,6 +41,7 @@ const NAV_ITEMS: Record<string, { label: string; href: string; icon: any }[]> = 
   barbero: [
     { label: "Dashboard", href: "/barbero/dashboard", icon: LayoutDashboard },
     { label: "Citas", href: "/barbero/citas", icon: Calendar },
+    { label: "Clientes", href: "/barbero/clientes", icon: Users },
     { label: "Perfil", href: "/barbero/perfil", icon: User },
     { label: "Mensajería", href: "/barbero/mensajeria", icon: MessageSquare },
   ],

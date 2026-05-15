@@ -1,5 +1,5 @@
 import { ClientesView } from "@/components/dashboard/clientes-view";
 
-export default function ClientesPage() {
+export default function BarberoClientesPage() {
   return <ClientesView />;
 }
