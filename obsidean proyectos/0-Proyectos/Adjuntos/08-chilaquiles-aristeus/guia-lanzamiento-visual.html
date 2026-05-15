@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aristeus: Parada de Leyenda | Chilaquiles Gourmet Ruta 57</title>
+    <meta name="description" content="La parada obligatoria para motociclistas y amantes de los autos. Chilaquiles de alto gourmet en un entorno industrial premium. Ruta 57, el pit-stop del sabor.">
+    <link rel="icon" href="../assets/logo_aristeus_premium.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #996515;
+            --black: #050505;
+            --deep-gray: #121212;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(180deg, #000 0%, var(--deep-gray) 100%);
+            position: relative;
+            padding: 20px;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--dark-gold) 0%, transparent 70%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Content Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: scale 0.5s;
+        }
+
+        .card:hover .image-wrapper img {
+            scale: 1.1;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: black;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .usage-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(0deg, #000 0%, var(--black) 100%);
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; translateY(20px); }
+            to { opacity: 1; translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="../assets/logo_aristeus_premium.png" alt="Aristeus Logo" style="width: 80px; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(255,215,0,0.3));">
+        <div class="subtitle fade-in" style="animation-delay: 0.1s;">Visual Strategy</div>
+        <h1 class="fade-in" style="animation-delay: 0.3s;">ARISTEUS</h1>
+        <div class="subtitle fade-in" style="animation-delay: 0.5s;">Lanzamiento Premium 2026</div>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            
+            <!-- FOTO HERO (REAL) -->
+            <div class="card fade-in" style="animation-delay: 0.6s;">
+                <div class="image-wrapper">
+                    <div class="badge">El Origen</div>
+                    <img src="../assets/hero_real_aristeus.png" alt="Aristeus Food Truck Real Location">
+                </div>
+                <div class="card-title">🔥 Tu Local Real</div>
+                <p class="card-desc">Mostramos la autenticidad de la "Parada de Leyenda". Tu Food Truck negro con iluminación premium es el imán perfecto.</p>
+                <div class="usage-tags">
+                    <span class="tag">Facebook Portada</span>
+                    <span class="tag">IG Post #1</span>
+                    <span class="tag">Legitimidad</span>
+                </div>
+            </div>
+
+            <!-- FOTO RESULTADO (COMUNIDAD) -->
+            <div class="card fade-in" style="animation-delay: 0.7s;">
+                <div class="image-wrapper">
+                    <div class="badge">Deseo</div>
+                    <img src="../assets/transformation_v2.png" alt="Resultado Final con Equipo Motor">
+                </div>
+                <div class="card-title">💎 Resultado + Estilo</div>
+                <p class="card-desc">Chilaquiles gourmet junto a equipo de motociclista. El placer después de la carretera.</p>
+                <div class="usage-tags">
+                    <span class="tag">IG Carrusel</span>
+                    <span class="tag">TikTok Transición</span>
+                    <span class="tag">Motor Lifestyle</span>
+                </div>
+            </div>
+
+            <!-- FOTO LIFESTYLE (PIT-STOP) -->
+            <div class="card fade-in" style="animation-delay: 0.8s;">
+                <div class="image-wrapper">
+                    <div class="badge">Pertenencia</div>
+                    <img src="../assets/lifestyle_v2.png" alt="Comunidad Motor en Aristeus">
+                </div>
+                <div class="card-title">🧠 Pit-Stop Social</div>
+                <p class="card-desc">La comunidad (motos y autos exóticos) disfrutando de la Ruta 57. Crea conexión emocional.</p>
+                <div class="usage-tags">
+                    <span class="tag">IG Feed</span>
+                    <span class="tag">FB Community</span>
+                    <span class="tag">Social Proof</span>
+                </div>
+            </div>
+
+            <!-- FOTO DETALLE (PRECISIÓN) -->
+            <div class="card fade-in" style="animation-delay: 0.9s;">
+                <div class="image-wrapper">
+                    <div class="badge">Calidad</div>
+                    <img src="../assets/detail_v2.png" alt="Detalle Gourmet">
+                </div>
+                <div class="card-title">⚡ Precisión de Motor</div>
+                <p class="card-desc">Macro de texturas. Refleja la misma calidad que los amantes de los autos exigen en sus máquinas.</p>
+                <div class="usage-tags">
+                    <span class="tag">IG Stories</span>
+                    <span class="tag">Reels / Shorts</span>
+                    <span class="tag">Gourmet Focus</span>
+                </div>
+            </div>
+
+            <!-- FOTO AUTORIDAD (EL PIT CREW) -->
+            <div class="card fade-in" style="animation-delay: 1.0s;">
+                <div class="image-wrapper">
+                    <div class="badge">Confianza</div>
+                    <img src="../assets/authority_v2.png" alt="Equipo Aristeus">
+                </div>
+                <div class="card-title">👑 El Pit Crew</div>
+                <p class="card-desc">El equipo de cocina trabajando con disciplina mecánica. Transmite seguridad y limpieza.</p>
+                <div class="usage-tags">
+                    <span class="tag">IG Highlight</span>
+                    <span class="tag">Behind the Scenes</span>
+                    <span class="tag">Expertos</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <img src="../assets/logo_aristeus_premium.png" alt="Aristeus Logo" style="width: 50px; margin-bottom: 0.5rem; opacity: 0.7;">
+        <div class="footer-logo">ARISTEUS</div>
+        <p style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px;">UNA PARADA DE LEYENDA | RUTA 57 | 2026</p>
+    </footer>
+
+</body>
+</html>

@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chilaquiles Aristeus — Ruta 57 Ultra Premium</title>
+    <title>Chilaquiles Aristeus — Artesanos de la Salsa</title>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;600;800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Descubre el sabor de leyenda en Aristëus Chilaquiles. Los mejores chilaquiles artesanales de la Ruta 57 en SLP. ¡Visítanos en El Lavadero o pide por WhatsApp!">
+    <meta name="description" content="Descubre el sabor de leyenda en Aristëus Chilaquiles. Los mejores chilaquiles artesanales de la Colonia Aviación en SLP. ¡Visítanos en El Lavadero o pide por WhatsApp!">
     <meta name="keywords" content="chilaquiles, desayunos slp, ruta 57, comida mexicana, el lavadero slp, aristeus chilaquiles">
     <link rel="canonical" href="https://aristeus-premium-menu.web.app">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aristeus-premium-menu.web.app">
-    <meta property="og:title" content="Aristëus Chilaquiles — Ruta 57 Ultra Premium">
-    <meta property="og:description" content="La parada de sabor más legendaria de la Ruta 57. Chilaquiles artesanales, frescos y crujientes en San Luis Potosí.">
+    <meta property="og:title" content="Aristëus Chilaquiles — Artesanos de la Salsa">
+    <meta property="og:description" content="El sabor artesanal que define a la Colonia Aviación. Chilaquiles frescos y crujientes en San Luis Potosí.">
     <meta property="og:image" content="https://aristeus-premium-menu.web.app/anuncio-1-chilaquiles-verdes.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://aristeus-premium-menu.web.app">
-    <meta property="twitter:title" content="Aristëus Chilaquiles — Ruta 57 Ultra Premium">
-    <meta property="twitter:description" content="La parada de sabor más legendaria de la Ruta 57. Chilaquiles artesanales, frescos y crujientes en San Luis Potosí.">
+    <meta property="twitter:title" content="Aristëus Chilaquiles — Artesanos de la Salsa">
+    <meta property="twitter:description" content="El sabor artesanal que define a la Colonia Aviación. Chilaquiles frescos y crujientes en San Luis Potosí.">
     <meta property="twitter:image" content="https://aristeus-premium-menu.web.app/anuncio-1-chilaquiles-verdes.png">
 
     <!-- JSON-LD Structured Data (Restaurant Schema) -->
@@ -178,19 +178,27 @@
 
         /* === EDIT BAR === */
         .edit-bar {
-            display: none !important; /* OCULTADO POR PETICIÓN DEL USUARIO */
+            display: none; /* Se mostrará vía JS en Admin Mode */
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
+            z-index: 10000; /* Super high for Safari */
             background: rgba(15, 23, 42, 0.95);
             padding: 12px 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 12px;
             border-bottom: 1px solid var(--harvest-gold);
             backdrop-filter: blur(10px);
+        }
+
+        /* Container for the auto-injected capture button */
+        .capture-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .edit-bar button {
@@ -289,8 +297,8 @@
             margin-top: -10px;
             margin-bottom: 10px;
             background: linear-gradient(to bottom, #fff, var(--harvest-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
@@ -327,13 +335,13 @@
         }
 
         /* === EDITABLE STATES === */
-        [contenteditable="true"]:hover {
+        [data-editable="true"]:hover {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 4px;
             cursor: edit;
         }
 
-        [contenteditable="true"]:focus {
+        [data-editable="true"]:focus {
             outline: 1px dashed var(--harvest-gold);
             background: rgba(255, 255, 255, 0.1);
             padding: 2px;
@@ -358,8 +366,8 @@
             position: relative;
             display: inline-block;
             background: linear-gradient(to bottom, #fff, var(--harvest-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 20px rgba(0,0,0,0.3);
             text-transform: capitalize;
@@ -548,8 +556,8 @@
             display: flex;
             align-items: center;
             background: linear-gradient(to bottom, #fff, var(--harvest-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
         }
@@ -794,8 +802,8 @@
             font-family: 'DM Serif Display', serif;
             font-size: 1.3rem;
             background: linear-gradient(to bottom, #fff, var(--harvest-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 40px;
             letter-spacing: 2px;
@@ -923,15 +931,15 @@
 
     <!-- LOGO DE FONDO FIJO -->
     <div class="hero-logo-container">
-        <img src="../assets/transparencia_aristeus_vf.png" alt="Aristeus Background" class="bg-logo">
+            <img src="../assets/transnparente%20aristeus.png" alt="Aristeus Background" class="bg-logo">
     </div>
 
     <div class="edit-bar">
+        <div class="capture-controls"></div>
         <button onclick="guardar()">💾 Guardar Precios</button>
         <button onclick="cargar()">📂 Cargar Precios</button>
         <button onclick="mode('local')">🏠 Local</button>
         <button onclick="mode('delivery')">🛵 Delivery</button>
-        <button onclick="capturarImagen()">📸 Capturar PNG</button>
         <button onclick="exportar()">📄 Exportar Final</button>
         <span id="status" class="status"></span>
     </div>
@@ -943,7 +951,7 @@
     </div>
     <!-- END_LIGHTBOX_PROTECTED -->
 
-    <div id="print-area">
+    <div id="captureArea">
         <section class="hero">
             <span class="index-ref">[0.0]</span>
             <div style="position: relative; display: inline-block; margin: 20px 0;">
@@ -953,15 +961,15 @@
 
             <span class="index-ref">[0.1]</span>
             <div style="position: relative; display: inline-block;">
-                <img src="../assets/logo acero transparente - file.png" alt="Parada de Leyenda" class="subtitle-logo">
+                <img src="../assets/logo%20acero%20transparente%20-%20file.png" alt="Parada de Leyenda" class="subtitle-logo">
             </div>
-            <h1 contenteditable="true">RUTA 57</h1>
+            <h1 data-editable="true">RUTA 57</h1>
         </section>
 
         <div class="container">
 
         <div class="section-header">
-            <h2 contenteditable="true"><span class="index-ref">[1.0]</span>Chilaquiles de Autor</h2>
+            <h2 data-editable="true"><span class="index-ref">[1.0]</span>Chilaquiles de Autor</h2>
         </div>
 
         <div class="menu-grid">
@@ -973,13 +981,13 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="badge badge-gold" contenteditable="true">EL FAVORITO DE LA RUTA</span>
-                    <span class="item-name"><span class="index-ref">[1.1]</span><span contenteditable="true">⛽ Combo
+                    <span class="badge badge-gold" data-editable="true">EL FAVORITO DE LA RUTA</span>
+                    <span class="item-name"><span class="index-ref">[1.1]</span><span data-editable="true">⛽ Combo
                             Full Tank</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="full-tank"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Nuestra experiencia completa. Chilaquiles Imperiales o
+                    <p class="item-desc" data-editable="true">Nuestra experiencia completa. Chilaquiles Imperiales o
                         Dulces, proteína extra, frijoles refritos artesanales y bebida de 500ml. El tanque lleno para
                         seguir el viaje.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
@@ -999,13 +1007,13 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[1.2]</span><span contenteditable="true">El
+                    <span class="item-name"><span class="index-ref">[1.2]</span><span data-editable="true">El
                             Despertar de Aristeus</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="despertar"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Salsa Imperial con base de chorizo, una salsa rica y especiada con un toque ahumado que envuelve el plato en sabor. Acompañada de dos huevos al gusto — estrellados, revueltos — crema, queso y cebolla. Acompañados con frijoles. Un desayuno con carácter que combina lo robusto del chorizo con la frescura del rancho.</p>
-                    <div class="badges"><span class="badge badge-red" contenteditable="true">🌶️ RECETA SECRETA</span>
+                    <p class="item-desc" data-editable="true">Salsa Imperial con base de chorizo, una salsa rica y especiada con un toque ahumado que envuelve el plato en sabor. Acompañada de dos huevos al gusto — estrellados, revueltos — crema, queso y cebolla. Acompañados con frijoles. Un desayuno con carácter que combina lo robusto del chorizo con la frescura del rancho.</p>
+                    <div class="badges"><span class="badge badge-red" data-editable="true">🌶️ RECETA SECRETA</span>
                     </div>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
@@ -1029,7 +1037,7 @@
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="banquete"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Chilaquiles verdes o salsa de la casa con pollo. armados con totopos crujientes bañados en nuestra salsa artesanal verde o roja receta especial, coronados con pechuga de pollo deshebrada, queso fresco, crema, cebolla al gusto y un toque de cilantro fresco. Acompañados de frijoles negros. Una explosión de sabores auténticos. La tradición de la Ruta 57.</p>
+                    <p class="item-desc" data-editable="true">Chilaquiles verdes o salsa de la casa con pollo. armados con totopos crujientes bañados en nuestra salsa artesanal verde o roja receta especial, coronados con pechuga de pollo deshebrada, queso fresco, crema, cebolla al gusto y un toque de cilantro fresco. Acompañados de frijoles negros. Una explosión de sabores auténticos. La verdadera tradición artesanal de San Luis Potosí.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1042,12 +1050,12 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[1.4]</span><span contenteditable="true">Joyas del
+                    <span class="item-name"><span class="index-ref">[1.4]</span><span data-editable="true">Joyas del
                             Mar</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="joyas"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Camarones frescos con mantequilla y un toque de perejil, descansando sobre una cama de totopos crujientes bañados en nuestros chilaquiles verdes o en la salsa secreta de la casa y un toque de crema. Coronados con queso fresco y un drizzle de crema. El matrimonio perfecto entre el mar y la tradición.</p>
+                    <p class="item-desc" data-editable="true">Camarones frescos con mantequilla y un toque de perejil, descansando sobre una cama de totopos crujientes bañados en nuestros chilaquiles verdes o en la salsa secreta de la casa y un toque de crema. Coronados con queso fresco y un drizzle de crema. El matrimonio perfecto entre el mar y la tradición.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1065,12 +1073,12 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[1.5]</span><span contenteditable="true">Tesoro
+                    <span class="item-name"><span class="index-ref">[1.5]</span><span data-editable="true">Tesoro
                             Dulce</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="tesoro"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Frutos rojos en su máxima expresión: fresas, zarzamora reducido en una mermelada casera bursting de color y sabor. Elige solo con la mermelada o acomóñala con una nube de crema. Disponible también con cajeta para los más tradicionales. El broche de oro para cualquier banquete.</p>
+                    <p class="item-desc" data-editable="true">Frutos rojos en su máxima expresión: fresas, zarzamora reducido en una mermelada casera bursting de color y sabor. Elige solo con la mermelada o acomóñala con una nube de crema. Disponible también con cajeta para los más tradicionales. El broche de oro para cualquier banquete.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1078,7 +1086,7 @@
 
         <!-- SECCIÓN 2 -->
         <div class="section-header">
-            <h2 contenteditable="true"><span class="index-ref">[2.0]</span>Delicias del Mar</h2>
+            <h2 data-editable="true"><span class="index-ref">[2.0]</span>Delicias del Mar</h2>
         </div>
 
         <div class="menu-grid">
@@ -1089,11 +1097,11 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[2.1]</span><span contenteditable="true">Filetitos Dorados</span></span>
+                    <span class="item-name"><span class="index-ref">[2.1]</span><span data-editable="true">Filetitos Dorados</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="gobernador"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Crujientes pescaditos dorados, empanizados en una capa ligera y aireada que revela el pescado fresco y tierno en su interior. Fritos hasta alcanzar un dorado perfecto. Servidos con salsas de la casa: chipotle para un toque ahumado o miel y mostaza para los que prefieren algo dulce. Acompañados de rodajas de limón y una pestaña de ensalada fresca. Irresistibles desde el primer bocado.</p>
+                    <p class="item-desc" data-editable="true">Crujientes pescaditos dorados, empanizados en una capa ligera y aireada que revela el pescado fresco y tierno en su interior. Fritos hasta alcanzar un dorado perfecto. Servidos con salsas de la casa: chipotle para un toque ahumado o miel y mostaza para los que prefieren algo dulce. Acompañados de rodajas de limón y una pestaña de ensalada fresca. Irresistibles desde el primer bocado.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1104,12 +1112,12 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[2.2]</span><span contenteditable="true">Sirena
+                    <span class="item-name"><span class="index-ref">[2.2]</span><span data-editable="true">Sirena
                             Aristeus</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="sirena"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Pescadillas crujientes doradas a la perfección, rellenas de un guiso de mar preciado — pescado tilapia o atún con un blend de especias secretas que nuestro chef guarda con recelo. Cada mordida es una explosión de texturas: la capa exterior crujiente, el guiso húmedo y lleno de sabor. Un bocado de lujo que une el océano con la tradición.</p>
+                    <p class="item-desc" data-editable="true">Pescadillas crujientes doradas a la perfección, rellenas de un guiso de mar preciado — pescado tilapia o atún con un blend de especias secretas que nuestro chef guarda con recelo. Cada mordida es una explosión de texturas: la capa exterior crujiente, el guiso húmedo y lleno de sabor. Un bocado de lujo que une el océano con la tradición.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1117,7 +1125,7 @@
 
         <!-- SECCIÓN 3 -->
         <div class="section-header">
-            <h2 contenteditable="true"><span class="index-ref">[3.0]</span>Los Toritos & Esferas</h2>
+            <h2 data-editable="true"><span class="index-ref">[3.0]</span>Los Toritos & Esferas</h2>
         </div>
 
         <div class="menu-grid">
@@ -1128,13 +1136,13 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[3.1]</span><span contenteditable="true">Torito Imperial (Orden de 2)</span></span>
+                    <span class="item-name"><span class="index-ref">[3.1]</span><span data-editable="true">Torito Imperial (Orden de 2)</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input"
                                 data-id="torito-imperial"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Chiles cuaresmeños carnosos, rellenos con dos camarones frescos enteros cada uno. Envueltos en lonjas de tocino ahumado y cocinados a las brasas hasta que el tocino dore y caramelice, impartiendo su sabor a cada capa. El resultado: un contraste perfecto entre el picor del chile, la textura del camarón y la crujencia del tocino. Para quienes buscan fuego con fuego.</p>
-                    <div class="badges"><span class="badge badge-red" contenteditable="true">🔥 AL FUEGO</span></div>
+                    <p class="item-desc" data-editable="true">Chiles cuaresmeños carnosos, rellenos con dos camarones frescos enteros cada uno. Envueltos en lonjas de tocino ahumado y cocinados a las brasas hasta que el tocino dore y caramelice, impartiendo su sabor a cada capa. El resultado: un contraste perfecto entre el picor del chile, la textura del camarón y la crujencia del tocino. Para quienes buscan fuego con fuego.</p>
+                    <div class="badges"><span class="badge badge-red" data-editable="true">🔥 AL FUEGO</span></div>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1145,11 +1153,11 @@
                     <div class="item-overlay"></div>
                 </div>
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[3.2]</span><span contenteditable="true">Esferas de Arroz: Esfera de Sabor</span></span>
+                    <span class="item-name"><span class="index-ref">[3.2]</span><span data-editable="true">Esferas de Arroz: Esfera de Sabor</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="esferas"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">¡La Favorita de Todos! Nuestra bola de arroz dorada y crujiente por fuera, suave por dentro, rellena de queso Philadelphia de la más alta calidad que se funde en cada mordida. Acompañada de trozos cremosos de aguacate, pepino en cuadritos frescos y tu elección de proteína: camarones suaves o atún fresco, bañados en la salsa receta de la casa con un toque de chipotle. Un bocado que combina lo crujiente, lo cremoso, lo fresco y lo marino en perfecta armonía.</p>
+                    <p class="item-desc" data-editable="true">¡La Favorita de Todos! Nuestra bola de arroz dorada y crujiente por fuera, suave por dentro, rellena de queso Philadelphia de la más alta calidad que se funde en cada mordida. Acompañada de trozos cremosos de aguacate, pepino en cuadritos frescos y tu elección de proteína: camarones suaves o atún fresco, bañados en la salsa receta de la casa con un toque de chipotle. Un bocado que combina lo crujiente, lo cremoso, lo fresco y lo marino en perfecta armonía.</p>
                     <img src="../assets/transparencia_aristeus_vf.png" class="item-watermark">
                 </div>
             </div>
@@ -1157,28 +1165,28 @@
 
         <!-- SECCIÓN 4 (OCULTA POR PETICIÓN) -->
         <div class="section-header" style="display: none;">
-            <h2 contenteditable="true"><span class="index-ref">[4.0]</span>Bebidas & Cafetería</h2>
+            <h2 data-editable="true"><span class="index-ref">[4.0]</span>Bebidas & Cafetería</h2>
         </div>
 
         <div class="menu-grid" style="display: none;">
             <div class="menu-item">
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[4.1]</span><span contenteditable="true">Aguas de la
+                    <span class="item-name"><span class="index-ref">[4.1]</span><span data-editable="true">Aguas de la
                             Ruta (500ml)</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="horchata"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Horchata artesanal o Jamaica fresca del día.</p>
+                    <p class="item-desc" data-editable="true">Horchata artesanal o Jamaica fresca del día.</p>
                 </div>
             </div>
             <div class="menu-item">
                 <div class="item-content">
-                    <span class="item-name"><span class="index-ref">[4.2]</span><span contenteditable="true">Café de
+                    <span class="item-name"><span class="index-ref">[4.2]</span><span data-editable="true">Café de
                             Olla Aristeus</span></span>
                     <div class="item-price-row">
                         <span class="item-price">$ <input type="text" class="price-input" data-id="cafe"></span>
                     </div>
-                    <p class="item-desc" contenteditable="true">Preparado tradicionalmente con piloncillo y canela.</p>
+                    <p class="item-desc" data-editable="true">Preparado tradicionalmente con piloncillo y canela.</p>
                 </div>
             </div>
         </div>
@@ -1202,10 +1210,10 @@
             <div class="footer-main-row">
                 <div class="footer-info-block">
                     <a href="https://maps.app.goo.gl/MW1bLZP14tWyLZsC9" target="_blank" style="text-decoration: none; color: inherit;">
-                        <p class="footer-info" contenteditable="true"><i class="fas fa-map-marker-alt"></i> “El Lavadero SLP”, Calle 2a #185, Col. Aviación, San Luis Potosí</p>
+                        <p class="footer-info" data-editable="true"><i class="fas fa-map-marker-alt"></i> “El Lavadero SLP”, Calle 2a #185, Col. Aviación, San Luis Potosí</p>
                     </a>
-                    <p class="footer-info" contenteditable="true"><i class="fab fa-whatsapp"></i> +52 55 6148 5296</p>
-                    <p class="footer-info" contenteditable="true"><i class="fas fa-clock"></i> Mar-Vie: 9am-5pm | Sáb-Dom: 8am-3pm (Lun: Cerrado)</p>
+                    <p class="footer-info" data-editable="true"><i class="fab fa-whatsapp"></i> +52 55 6148 5296</p>
+                    <p class="footer-info" data-editable="true"><i class="fas fa-clock"></i> Mar-Vie: 9am-5pm | Sáb-Dom: 8am-3pm (Lun: Cerrado)</p>
                     
                     <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 20px;">
                         <a href="https://wa.me/message/6HQIB5PSPJCLG1" target="_blank" class="location-btn" style="background: #25D366; color: white;">
@@ -1224,13 +1232,13 @@
                 <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
             </div>
 
-            <p class="social-hashtag" contenteditable="true">#CHILAQUILESARISTEUS</p>
+            <p class="social-hashtag" data-editable="true">#CHILAQUILESARISTEUS</p>
         </div>
     </footer>
     </div>
 
     <!-- Cargar html2canvas para captura de imagen -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- La herramienta universal carga html2canvas automáticamente -->
 
     <!-- LIGHTBOX PARA PREVISUALIZACIÓN -->
     <div id="lightbox" onclick="closeLightbox()">
@@ -1239,48 +1247,7 @@
     </div>
 
     <script>
-        function capturarImagen() {
-            console.log('Botón presionado');
-            const area = document.getElementById('print-area');
-            
-            if (typeof html2canvas === 'undefined') {
-                alert('La librería de captura no ha cargado. Por favor, asegúrate de tener internet o intenta recargar la página.');
-                return;
-            }
-
-            if (!area) {
-                alert('Error: No se encontró el área de impresión (#print-area)');
-                return;
-            }
-
-            msg('⌛ GENERANDO IMAGEN...');
-            
-            // Ocultar elementos que no queremos en la foto
-            const refs = document.querySelectorAll('.index-ref, .img-index, .edit-bar, .carousel-dots');
-            refs.forEach(r => r.style.display = 'none');
-
-            setTimeout(() => {
-                html2canvas(area, {
-                    useCORS: true,
-                    allowTaint: true,
-                    scale: 2,
-                    backgroundColor: '#0f172a',
-                    logging: true
-                }).then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = 'menu-aristeus-print.png';
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
-                    
-                    refs.forEach(r => r.style.display = '');
-                    msg('✓ GUARDADO EN DESCARGAS');
-                }).catch(err => {
-                    console.error(err);
-                    alert('Error al generar imagen: ' + err.message);
-                    refs.forEach(r => r.style.display = '');
-                });
-            }, 500);
-        }
+        // La captura ahora se maneja por common/libs/universal-capture.js
 
         // === SISTEMA DE LIGHTBOX ===
         function openLightbox(src) {
@@ -1324,6 +1291,31 @@
 
         // Inicializar todo al cargar
         window.addEventListener('load', () => {
+            // ADMIN MODE DETECTION
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('admin') === 'aristeus') {
+                console.log("🛠️ ADMIN MODE ACTIVE");
+                document.body.classList.add('admin-active');
+                
+                // Mostrar barra y elementos de edición
+                const bar = document.querySelector('.edit-bar');
+                if (bar) bar.style.display = 'flex';
+                
+                document.querySelectorAll('.item-price-row, .index-ref, .img-index').forEach(el => {
+                    el.style.display = 'flex';
+                });
+
+                // Habilitar edición
+                document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                    el.contentEditable = "true";
+                });
+            } else {
+                // Forzar solo lectura si no es admin
+                document.querySelectorAll('[contenteditable]').forEach(el => {
+                    el.removeAttribute('contenteditable');
+                });
+            }
+
             try {
                 initInteractions();
             } catch(e) { console.error("Error en interacciones:", e); }
@@ -1403,6 +1395,14 @@
     </script>
         </div> <!-- Fin content-relative -->
     </div> <!-- Fin main-wrapper -->
+    <!-- Herramienta Universal de Captura -->
+    <script>
+        console.log("Intentando cargar Captura desde: ../../common/libs/universal-capture.js");
+    </script>
+    <script src="../../common/libs/universal-capture.js" 
+            data-theme="#c9a96e" 
+            data-target="#captureArea" 
+            data-filename="Menu_Aristeus_Premium"></script>
 </body>
 
 </html>

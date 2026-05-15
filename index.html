@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Project Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: rgba(255, 255, 255, 0.05);
+            --accent: #c9a96e;
+            --text: #f1f5f9;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #fff, var(--accent));
+            -webkit--webkit--webkit-background-clip: text; background-clip: text; -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .card h2 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+        }
+        .card p {
+            margin: 0;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(201, 169, 110, 0.2);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis Proyectos Antigravity</h1>
+    <div class="grid">
+        <a href="/08-chilaquiles-aristeus/web/menu-aristeus-ultra-premium-vf-2026.html" class="card">
+            <h2>🍴 Menú Aristeus</h2>
+            <p>Menú digital premium con alta resolución para impresión.</p>
+            <span class="badge">Listo para Captura</span>
+        </a>
+        <a href="/08-chilaquiles-aristeus/web/anuncio-apertura.html" class="card">
+            <h2>📢 Anuncio Apertura</h2>
+            <p>Flyer publicitario para redes sociales y WhatsApp.</p>
+            <span class="badge">Alta Definición</span>
+        </a>
+        <a href="/08-chilaquiles-aristeus/web/qr-poster-aristeus.html" class="card">
+            <h2>🔳 Poster QR</h2>
+            <p>Diseño de poster para local físico con QR dinámico.</p>
+            <span class="badge">Imprimible</span>
+        </a>
+        <a href="/19-venta-vento-2017/marketing/anuncio_visual_v2.html" class="card">
+            <h2>🚗 Vento 2017</h2>
+            <p>Anuncio de venta visual con especificaciones técnicas.</p>
+            <span class="badge">Premium Card</span>
+        </a>
+    </div>
+    <div style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem;">
+        Sirviendo desde: /Users/macbook/Proyectos
+    </div>
+</body>
+</html>

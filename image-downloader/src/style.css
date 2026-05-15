@@ -87,7 +87,7 @@
 		border-radius: 12px;
 		@apply border border-[color-mix(in_srgb,var(--color-slate-400)_20%,transparent)] dark:border-[color-mix(in_srgb,var(--color-slate-600)_20%,transparent)];
 		text-align: center;
-		line-height: 1;
+		line-height: 1.2;
 		transition: background-color 200ms;
 		@apply bg-slate-200 text-slate-950 hover:bg-slate-300 active:bg-slate-400 dark:bg-slate-300 dark:hover:bg-slate-400 dark:active:bg-slate-500;
 	}

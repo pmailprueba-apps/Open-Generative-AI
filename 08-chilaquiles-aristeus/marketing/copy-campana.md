@@ -106,7 +106,7 @@ No es solo comida, es una actitud.
 
 👉 Encuéntranos en [ubicación]
 
-#ChilaquilesMexicanos #FoodPorn #ComidaMexicana #Aristeus #Yucatan
+#ChilaquilesMexicanos #FoodPorn #ComidaMexicana #Aristeus #SLP #Ruta57
 ```
 
 ---
@@ -188,9 +188,9 @@ Precio: $XX.XX
 
 ```
 #AristeusChilaquiles #ChilaquilesMexicanos #DesayunoMexicano
-#ComidaMexicana #FoodieMexico #GastronomiaMexicana #Yucatan
+#ComidaMexicana #FoodieMexico #GastronomiaMexicana #SLP
 #FoodPorn #FoodLovers #BreakfastOfChampions #MexicanFood
-#ChilaquilesVerdes #ChilaquilesRojos #ComidaYucateca
+#ChilaquilesVerdes #ChilaquilesRojos #Ruta57
 # Aristëus #LosChilaquiles #Desayuno #ComidaCasera
 ```
 

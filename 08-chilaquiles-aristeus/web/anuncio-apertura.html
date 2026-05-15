@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aristeus | Anuncio Apertura</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet" crossorigin="anonymous">
     <style>
         :root {
             --gold: #D4AF37;
@@ -25,7 +25,7 @@
 
         .ad-container {
             width: 500px;
-            background: var(--black);
+            background: #050505; /* Solid black for Safari Capture */
             border: 2px solid var(--gold);
             position: relative;
             overflow: hidden;
@@ -58,33 +58,39 @@
 
         h1 {
             font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            margin: 0 0 20px 0;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.1; /* Adjusted for Safari */
         }
 
         h1 span {
             color: var(--gold);
+            display: block; /* Force salsa to its own line if needed or give it space */
+            font-size: 3.5rem;
         }
 
         p {
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.4;
         }
 
         .offer-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px dashed var(--gold);
-            padding: 20px;
-            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px dashed var(--gold);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 10px;
         }
 
         .offer-text {
             font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--white);
+            font-size: 1.3rem;
+            color: #ffffff !important; /* Force white for capture */
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-wa {
@@ -120,7 +126,7 @@
     </style>
 </head>
 <body>
-    <div class="ad-container">
+    <div class="ad-container" id="captureArea">
         <!-- REAL LOGO -->
         <img src="../assets/aristeus_final_logo.png" alt="Aristeus Logo" class="logo-main">
         
@@ -139,8 +145,14 @@
         </div>
 
         <div class="footer">
-            📍 UBICACIÓN: AUTOLAVADO RUTA 57 | SAN LUIS POTOSÍ
+            📍 UBICACIÓN: CALLE 2A #185, COL. AVIACIÓN | SAN LUIS POTOSÍ
         </div>
     </div>
+
+    <!-- Herramienta Universal de Captura -->
+    <script src="../../common/libs/universal-capture.js" 
+            data-theme="#c9a96e" 
+            data-target="#captureArea" 
+            data-filename="Anuncio_Apertura_Aristeus"></script>
 </body>
 </html>

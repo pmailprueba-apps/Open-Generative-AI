@@ -104,7 +104,13 @@ Lanzar y posicionar "Chilaquiles Aristeus" como el lugar favorito de chilaquiles
 
 ## Recursos Disponibles
 
-- [[08-chilaquiles-aristeus/MENU|📜 Menú Aristeus Oficial]] — Precios, salsas y combos.
+- [🚀 Anuncio de Apertura (Receta Secreta)](file:///Users/macbook/Proyectos/08-chilaquiles-aristeus/web/anuncio-apertura.html)
+- [🔥 Landing Page WhatsApp & QR](file:///Users/macbook/Proyectos/08-chilaquiles-aristeus/whatsapp/index.html)
+- [📱 Mockup Post Facebook](file:///Users/macbook/Proyectos/08-chilaquiles-aristeus/web/mockup-fb.html)
+- [[08-chilaquiles-aristeus/whatsapp/index.html|📱 Pedidos por WhatsApp (Link + QR)]]
+- [[08-chilaquiles-aristeus/guia-lanzamiento-visual.html|🚀 Guía Maestra de Lanzamiento (Estrategia Visual)]]
+- [[08-chilaquiles-aristeus/menu-aristeus-ultra-premium-vf-2026.html|📜 Menú Ultra Premium VF 2026 (Final)]]
+- [[08-chilaquiles-aristeus/MENU|📜 Menú Aristeus Antiguo]] — Precios, salsas y combos.
 - `uber_eats_proposal.md` — Propuesta para Uber Eats
 - `menu_chilaquiles.html` — Menú HTML
 - `FOODTRUCK/PLAN_RENOVACION.md` — Plan de renovación
