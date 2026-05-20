@@ -29,11 +29,60 @@ export function ClientesView() {
     if (!user?.barberia_id) return;
     try {
       setLoading(true);
-      const allUsers = await userService.getByBarberia(user.barberia_id);
-      const clients = allUsers.filter(u => u.role === "cliente");
       
-      setClientes(clients.filter(c => c.activo));
-      setPendientes(clients.filter(c => !c.activo));
+      // Obtener clientes únicos a partir de las citas de la barbería
+      const token = await user.getIdToken();
+      
+      // Si es barbero, solo ver sus propios clientes
+      const barberoParam = user.role === "barbero" && user.barbero_id
+        ? `&barberoId=${user.barbero_id}`
+        : "";
+      
+      const citasRes = await fetch(
+        `/api/barberias/${user.barberia_id}/citas?limit=500${barberoParam}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      if (!citasRes.ok) throw new Error("Error al cargar citas");
+      
+      const citas: any[] = await citasRes.json();
+      
+      // Agrupar clientes únicos por clienteId
+      const clienteMap = new Map<string, any>();
+      for (const cita of citas) {
+        const cId = cita.clienteId || cita.cliente_id;
+        if (cId && !clienteMap.has(cId)) {
+          clienteMap.set(cId, {
+            uid: cId,
+            nombre: cita.cliente_nombre || "Cliente",
+            email: "",
+            role: "cliente",
+            activo: true,
+          });
+        }
+      }
+
+      // Enriquecer con datos reales del usuario desde Firestore
+      const db = (await import("@/lib/firebase")).db;
+      const { doc, getDoc } = await import("firebase/firestore");
+      
+      const clientesEnriquecidos: Usuario[] = await Promise.all(
+        Array.from(clienteMap.values()).map(async (c) => {
+          try {
+            const snap = await getDoc(doc(db, "usuarios", c.uid));
+            if (snap.exists()) {
+              return { uid: c.uid, ...snap.data() } as Usuario;
+            }
+          } catch {}
+          return c as Usuario;
+        })
+      );
+
+      const activos = clientesEnriquecidos.filter(c => c.activo !== false);
+      const inactivos = clientesEnriquecidos.filter(c => c.activo === false);
+
+      setClientes(activos);
+      setPendientes(inactivos);
     } catch (e) {
       console.error(e);
       toast.error("Error al cargar clientes");

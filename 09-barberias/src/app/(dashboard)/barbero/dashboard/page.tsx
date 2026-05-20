@@ -21,6 +21,7 @@ interface MisCitas {
 export default function BarberoDashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const [citas, setCitas] = useState<MisCitas[]>([]);
+  const [citasActivas, setCitasActivas] = useState<MisCitas[]>([]);
   const [citasPendientes, setCitasPendientes] = useState<MisCitas[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalDia, setTotalDia] = useState(0);
@@ -60,9 +61,15 @@ export default function BarberoDashboardPage() {
       ]);
 
       setCitas(misCitas);
-      const total = misCitas.reduce((sum: number, c: MisCitas) => sum + (c.precio || 0), 0);
+      
+      // Excluir canceladas de los contadores
+      const CANCELADAS = ["cancelada_cliente", "cancelada_admin", "no_show"];
+      const activas = misCitas.filter((c: MisCitas) => !CANCELADAS.includes(c.estado));
+      setCitasActivas(activas);
+      
+      const total = activas.reduce((sum: number, c: MisCitas) => sum + (c.precio || 0), 0);
       setTotalDia(total);
-      setCompletadas(misCitas.filter((c: MisCitas) => c.estado === "completada").length);
+      setCompletadas(activas.filter((c: MisCitas) => c.estado === "completada").length);
       setCitasPendientes(misPendientes);
     } catch (e: any) {
       console.error("Error cargarBarberoDashboard:", e);
@@ -164,7 +171,7 @@ export default function BarberoDashboardPage() {
       <div className="grid grid-cols-3 gap-4">
         <div className="p-6 rounded-3xl bg-[var(--card)] border border-[rgba(201,168,76,0.12)] text-center shadow-xl">
           <p className="text-[10px] text-[var(--muted)] uppercase tracking-[0.2em] font-black mb-2">Citas</p>
-          <p className="text-4xl font-black text-[var(--white)]">{citas.length}</p>
+          <p className="text-4xl font-black text-[var(--white)]">{citasActivas.length}</p>
         </div>
         <div className="p-6 rounded-3xl bg-[var(--card)] border border-[rgba(201,168,76,0.12)] text-center shadow-xl">
           <p className="text-[10px] text-[var(--muted)] uppercase tracking-[0.2em] font-black mb-2">Completadas</p>

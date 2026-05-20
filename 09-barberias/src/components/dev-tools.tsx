@@ -14,9 +14,10 @@ const TEST_ACCOUNTS = [
 
 export function DevTools() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading } = useAuth();
+  const { user, loading, refreshUserClaims } = useAuth();
   const [isClient, setIsClient] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -35,6 +36,18 @@ export function DevTools() {
       alert("Error: Asegúrate de crear estas cuentas en Firebase Authentication con la contraseña: " + pass);
     } finally {
       setIsLoggingIn(false);
+    }
+  };
+
+  const handleRefreshClaims = async () => {
+    try {
+      setIsRefreshing(true);
+      await refreshUserClaims();
+      alert("✅ Claims actualizados. Rol: " + (user?.role || "??"));
+    } catch (e) {
+      console.error("Error al refrescar claims:", e);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -111,6 +124,13 @@ export function DevTools() {
             <p className="text-zinc-400 text-xs mb-2">
               Estado actual: {loading ? "Cargando..." : (user ? <span className="text-green-400">Logueado ({user.email})</span> : <span className="text-red-400">Sin sesión</span>)}
             </p>
+            {user && (
+              <div className="bg-zinc-900 p-2 rounded text-xs mb-3 flex justify-between">
+                <span className="text-zinc-400">Rol:</span>
+                <span className="text-yellow-400 font-bold">{user.role || "sin rol"}</span>
+                <span className="text-zinc-500">barbero_id: {user.barbero_id ? "✅" : "❌"}</span>
+              </div>
+            )}
 
             <div className="space-y-2 mt-3">
               <p className="text-zinc-500 text-[10px] uppercase tracking-wider mb-1">Cambio rápido de cuenta:</p>
@@ -126,7 +146,18 @@ export function DevTools() {
                 </button>
               ))}
             </div>
+
+            {user && (
+              <button
+                onClick={handleRefreshClaims}
+                disabled={isRefreshing}
+                className="mt-3 w-full px-3 py-2 bg-blue-900 hover:bg-blue-800 rounded transition-colors text-blue-300 disabled:opacity-50 text-xs font-bold"
+              >
+                {isRefreshing ? "Refrescando..." : "🔄 Refrescar Claims"}
+              </button>
+            )}
           </div>
+
         </div>
       )}
     </div>

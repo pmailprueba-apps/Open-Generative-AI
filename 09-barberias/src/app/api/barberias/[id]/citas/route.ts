@@ -3,6 +3,7 @@ import { crearCitaServer } from "@/lib/citas-server";
 import { getCitasPorFechaServer, cancelarCitaServer, actualizarEstadoCitaServer } from "@/lib/citas-server";
 import { verifyAuth } from "@/lib/auth-server";
 import { getAdminDb } from "@/lib/firebase-admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 export async function GET(
   request: Request,
@@ -14,16 +15,20 @@ export async function GET(
     const fecha = searchParams.get("fecha");
     const barberoId = searchParams.get("barberoId");
     const estado = searchParams.get("estado");
+    const limitParam = searchParams.get("limit");
+    const limit = limitParam ? parseInt(limitParam) : undefined;
 
     // Verificar autenticación
     const user = await verifyAuth(request);
     
     // Seguridad: Barbero o Admin solo pueden ver citas de su propia barbería
+    // Clientes pueden ver (el filtro por barberoId / clienteId se hace en getCitasPorFechaServer)
     const isSuper = user.role === "superadmin";
     const isOfThisBarberia = user.barberia_id === id;
     const isStaff = user.role === "admin" || user.role === "barbero";
+    const isCliente = user.role === "cliente" || user.role === "usuario";
 
-    if (!isSuper && (!isOfThisBarberia || !isStaff)) {
+    if (!isSuper && !isCliente && (!isOfThisBarberia || !isStaff)) {
       return NextResponse.json({ error: "No tienes permiso para ver citas de esta barbería" }, { status: 403 });
     }
 
@@ -33,7 +38,7 @@ export async function GET(
       return NextResponse.json({ error: "Faltan parámetros (ID requerido)" }, { status: 400 });
     }
 
-    const citasRaw = await getCitasPorFechaServer(id, fecha || undefined, barberoId || undefined, estado || undefined);
+    const citasRaw = await getCitasPorFechaServer(id, fecha || undefined, barberoId || undefined, estado || undefined, limit);
     
     // Enriquecer con nombres de clientes y barberos
     const { getAdminDb } = await import("@/lib/firebase-admin");
@@ -212,14 +217,14 @@ export async function PATCH(
         const chatId = [citaData.cliente_id, user.uid].sort().join("_");
         const msgsRef = db.collection("chats").doc(chatId).collection("messages");
 
-        const msgTexto = `✅ ¡Tu cita ha sido confirmada!\n\n📅 ${additionalData?.fecha || citaData?.fecha} a las ${additionalData?.hora || citaData?.hora}\n✂️ ${additionalData?.servicio_nombre || citaData?.servicio_nombre || "Servicio"}\n💇 Con ${barberoNombre}\n🏪 ${barberiaNombre}\n💰 Precio: $${(additionalData?.precio || citaData?.precio || 0).toLocaleString('es-MX')} MXN`;
+        const msgTexto = `✅ ¡Tu cita ha sido confirmada!\n\n📅 ${citaData?.fecha} a las ${citaData?.hora}\n✂️ ${citaData?.servicio_nombre || "Servicio"}\n💇 Con ${barberoNombre}\n🏪 ${barberiaNombre}\n💰 Precio: $${(citaData?.precio || 0).toLocaleString('es-MX')} MXN`;
 
         await msgsRef.add({
           text: msgTexto,
           senderId: user.uid,
           senderName: barberoNombre,
           isSystem: true,
-          createdAt: { serverTimestamp: () => new Date().toISOString() }
+          createdAt: FieldValue.serverTimestamp()
         });
 
         // Actualizar chat metadata
@@ -227,7 +232,7 @@ export async function PATCH(
           lastMessage: "✅ ¡Tu cita ha sido confirmada!",
           lastSenderId: user.uid,
           lastSenderName: barberoNombre,
-          updatedAt: { serverTimestamp: () => new Date().toISOString() },
+          updatedAt: FieldValue.serverTimestamp(),
           participants: [citaData.cliente_id, user.uid],
           isSystemChat: true
         }, { merge: true });

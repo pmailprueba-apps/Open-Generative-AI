@@ -53,7 +53,10 @@ export async function GET(
       .where("fecha", "==", hoy)
       .get();
 
-    const citasHoy = citasSnapshot.size;
+    const ESTADOS_CANCELADOS = ["cancelada_cliente", "cancelada_admin", "no_show"];
+
+    // Contar solo citas activas (no canceladas)
+    let citasHoy = 0;
 
     // Ingresos de hoy (citas completadas o confirmadas)
     let ingresosHoy = 0;
@@ -63,6 +66,11 @@ export async function GET(
     citasSnapshot.docs.forEach(doc => {
       const data = doc.data();
       const estado = data.estado || "";
+      
+      // Ignorar canceladas en todos los contadores
+      if (ESTADOS_CANCELADOS.includes(estado)) return;
+      
+      citasHoy++;
       
       // Contar ingresos si está confirmada o completada
       if (estado === "completada" || estado === "confirmada") {

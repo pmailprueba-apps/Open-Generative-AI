@@ -81,7 +81,11 @@ export async function POST(request: NextRequest) {
     // 3. Aplicar Claims
     const claims: Record<string, unknown> = { role };
     if (barberia_id) claims.barberia_id = barberia_id;
-    if (barbero_id) claims.barbero_id = barbero_id;
+    if (role === "barbero") {
+      claims.barbero_id = barbero_id || targetUid;
+    } else if (barbero_id) {
+      claims.barbero_id = barbero_id;
+    }
 
     await auth.setCustomUserClaims(targetUid, claims);
     
@@ -90,7 +94,7 @@ export async function POST(request: NextRequest) {
     const updateData: any = {
       role: role,
       barberia_id: barberia_id || null,
-      barbero_id: barbero_id || (role === "barbero" ? targetUid : null),
+      barbero_id: role === "barbero" ? (barbero_id || targetUid) : (barbero_id || null),
       updatedAt: new Date(),
     };
 

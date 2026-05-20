@@ -209,7 +209,7 @@ export async function getMetricasNegocioServer(barberiaId: string, barberoId?: s
 /**
  * Obtiene citas usando Admin SDK con filtros opcionales.
  */
-export async function getCitasPorFechaServer(barberiaId: string, fecha?: string, barberoId?: string, estado?: string) {
+export async function getCitasPorFechaServer(barberiaId: string, fecha?: string, barberoId?: string, estado?: string, limit?: number) {
   const db = getAdminDb();
   try {
     let query: any = db.collection("barberias").doc(barberiaId).collection("citas");
@@ -227,7 +227,9 @@ export async function getCitasPorFechaServer(barberiaId: string, fecha?: string,
     }
 
     if (!fecha && !estado && !barberoId) {
-      query = query.limit(100);
+      query = query.limit(limit || 100);
+    } else if (limit) {
+      query = query.limit(limit);
     }
 
     const snapshot = await query.get();

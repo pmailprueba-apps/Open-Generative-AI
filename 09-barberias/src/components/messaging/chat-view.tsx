@@ -79,6 +79,8 @@ export default function ChatView() {
         }
       });
       setActiveChats(chatsMap);
+    }, (error) => {
+      console.error("Error cargando chats activos:", error);
     });
 
     return () => unsubscribe();
@@ -109,7 +111,7 @@ export default function ChatView() {
         const userRole = (user.role as string)?.toLowerCase();
         let q;
 
-        // Permissions Logic
+        // Permissions Logic (Revertido a versión estable de respaldo)
         if (userRole === "superadmin") {
           q = query(usersRef, where("role", "in", ["admin", "barbero"]));
         } else if (userRole === "admin") {
@@ -127,8 +129,9 @@ export default function ChatView() {
             return { 
               uid: doc.id, 
               ...data,
-              // Mapear 'rol' de Firestore a 'role' de nuestra interfaz
-              role: data.rol || data.role || "usuario" 
+              // Mapear 'nombre' a 'displayName' y 'rol' a 'role' para compatibilidad
+              displayName: data.displayName || data.nombre || data.email?.split("@")[0] || "Usuario",
+              role: data.role || data.rol || "usuario" 
             } as ChatUser;
           });
           setTargetUsers(list);
@@ -153,11 +156,13 @@ export default function ChatView() {
     // Unique chat ID (sorted UIDs to keep it consistent)
     const chatId = [user.uid, selectedUser.uid].sort().join("_");
     const msgsRef = collection(db, "chats", chatId, "messages");
-    const q = query(msgsRef, orderBy("createdAt", "asc"), limit(50));
+    const q = query(msgsRef, orderBy("createdAt", "desc"), limit(50));
 
     const unsubscribe = onSnapshot(q, (snap) => {
       const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Message));
-      setMessages(list);
+      setMessages(list.reverse()); // Reverse to keep chronological order
+    }, (error) => {
+      console.error("Error cargando mensajes:", error);
     });
 
     return () => unsubscribe();

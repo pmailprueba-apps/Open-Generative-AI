@@ -75,52 +75,10 @@ service cloud.firestore {
 
     // Chats y Mensajería
     match /chats/{chatId} {
-      // Función interna para verificar si el usuario es participante
-      // Basado en la convención de chatId: uid1_uid2 (ordenados alfabéticamente)
-      function isChatParticipant() {
-        return isAuthenticated() && (
-          chatId.startsWith(request.auth.uid + "_") || 
-          chatId.endsWith("_" + request.auth.uid) ||
-          (resource != null && request.auth.uid in resource.data.get('participants', []))
-        );
-      }
+      allow read, write: if isAuthenticated();
 
-      // Permitir lectura si el usuario es participante o superadmin
-      allow read: if isAuthenticated() && (
-        isSuperAdmin() || isChatParticipant()
-      );
-
-      // Permitir creación si el usuario se incluye como participante o es superadmin
-      allow create: if isAuthenticated() && (
-        isSuperAdmin() || 
-        chatId.startsWith(request.auth.uid + "_") || 
-        chatId.endsWith("_" + request.auth.uid) ||
-        (request.resource.data.get('participants', []).hasAny([request.auth.uid]))
-      );
-
-      // Permitir actualización (ej. último mensaje) si es participante o superadmin
-      allow update: if isAuthenticated() && (
-        isSuperAdmin() || isChatParticipant()
-      );
-
-      // Mensajes individuales dentro de un chat
       match /messages/{messageId} {
-        // Para mensajes, confiamos en la convención del ID del chat (uid1_uid2)
-        // o en la existencia del documento padre con los participantes
-        allow read: if isAuthenticated() && (
-          isSuperAdmin() ||
-          chatId.startsWith(request.auth.uid + "_") || 
-          chatId.endsWith("_" + request.auth.uid) ||
-          (exists(/databases/$(database)/documents/chats/$(chatId)) && 
-           get(/databases/$(database)/documents/chats/$(chatId)).data.get('participants', []).hasAny([request.auth.uid]))
-        );
-        allow write: if isAuthenticated() && (
-          isSuperAdmin() ||
-          chatId.startsWith(request.auth.uid + "_") || 
-          chatId.endsWith("_" + request.auth.uid) ||
-          (exists(/databases/$(database)/documents/chats/$(chatId)) && 
-           get(/databases/$(database)/documents/chats/$(chatId)).data.get('participants', []).hasAny([request.auth.uid]))
-        );
+        allow read, write: if isAuthenticated();
       }
     }
 

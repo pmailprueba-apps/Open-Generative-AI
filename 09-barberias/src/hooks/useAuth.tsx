@@ -147,8 +147,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (email: string, password: string, nombre: string) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(result.user, { displayName: nombre });
+    
+    // Crear documento en Firestore para el usuario nuevo
+    try {
+      const { doc, setDoc, serverTimestamp } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      await setDoc(doc(db, "usuarios", result.user.uid), {
+        uid: result.user.uid,
+        email: result.user.email || email,
+        nombre,
+        role: "cliente",
+        activo: true,
+        puntos: 0,
+        creado_en: serverTimestamp(),
+        actualizado_en: serverTimestamp(),
+      });
+    } catch (e) {
+      console.error("Error creating Firestore user doc:", e);
+    }
+    
     const extendedUser = result.user as AuthUser;
     extendedUser.nombre = nombre;
+    extendedUser.role = "cliente";
     setUser(extendedUser);
   };
 
