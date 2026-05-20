@@ -162,7 +162,7 @@ mcp-builder, video, image-enhancer, banana
 
 ## 📌 ESTADO ACTUAL DEL PROYECTO (MAYO 2026)
 - **Menú Principal:** `menu-aristeus-ultra-premium-vf-2026.html`
-- **Contacto Actualizado:** +52 614 107 31 88
-- **Ubicación:** C. Segunda 185, Industrial Aviacion 1ra Secc, San Luis Potosí.
+- **Contacto Actualizado:** +52 55 6148 5296
+- **Ubicación:** "El Lavadero SLP", Calle 2a #185, Col. Aviación, San Luis Potosí.
 - **Configuración:** Precios y referencias numéricas ocultas por diseño.
 - **Despliegue:** Configurado para Firebase Hosting en canal de pruebas y producción.

@@ -12,7 +12,7 @@ tags: [dev, cloud, infraestructura]
 
 # Cloud Libre
 
-**Carpeta:** `/Users/macbook/Proyectos/cloude libre`
+**Carpeta:** `/Users/macbook/Proyectos/15-cloud-libre`
 **Estado:** 🟡 Estrategia
 **Tipo:** Dev / Cloud
 **Tags:** #dev #cloud #infraestructura

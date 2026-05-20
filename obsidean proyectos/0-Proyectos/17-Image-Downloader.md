@@ -12,7 +12,7 @@ tags: [dev, tool, imagenes, scraping]
 
 # Image Downloader
 
-**Carpeta:** `/Users/macbook/Proyectos/image-downloader`
+**Carpeta:** `/Users/macbook/Proyectos/17-image-downloader`
 **Estado:** 🟡 Estrategia
 **Tipo:** Desarrollo / Tool
 **Tags:** #dev #tool #imagenes #scraping

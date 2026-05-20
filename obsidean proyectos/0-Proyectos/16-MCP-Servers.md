@@ -12,7 +12,7 @@ tags: [dev, mcp, servers, ia]
 
 # MCP Servers
 
-**Carpeta:** `/Users/macbook/Proyectos/mcp-servers`
+**Carpeta:** `/Users/macbook/Proyectos/16-mcp-servers`
 **Estado:** 🟡 Estrategia
 **Tipo:** Desarrollo / DevOps
 **Tags:** #dev #mcp #servers #ia

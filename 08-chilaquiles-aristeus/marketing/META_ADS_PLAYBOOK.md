@@ -1,7 +1,7 @@
 # 🎯 Playbook de Meta Ads (Facebook e Instagram)
 
 ## 1. Configuración de Audiencia (Targeting)
-*   **Ubicación:** San Luis Potosí (Radio de 5-10km alrededor de Calle 2a #185, Col. Aviación).
+*   **Ubicación:** San Luis Potosí (Radio de 5-10km alrededor de "El Lavadero SLP", Calle 2a #185, Col. Aviación).
 *   **Intereses:** 
     *   Desayuno, Brunch, Comida Mexicana.
     *   Foodies, Gastronomía.

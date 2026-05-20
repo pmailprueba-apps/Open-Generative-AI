@@ -1,10 +1,10 @@
 {
   "collapse-filter": true,
-  "search": "",
+  "search": "path:0-Proyectos",
   "showTags": false,
   "showAttachments": false,
-  "hideUnresolved": false,
-  "showOrphans": true,
+  "hideUnresolved": true,
+  "showOrphans": false,
   "collapse-color-groups": true,
   "colorGroups": [],
   "collapse-display": true,
@@ -13,10 +13,10 @@
   "nodeSizeMultiplier": 1,
   "lineSizeMultiplier": 1,
   "collapse-forces": true,
-  "centerStrength": 0.518713248970312,
-  "repelStrength": 10,
+  "centerStrength": 0.45,
+  "repelStrength": 13,
   "linkStrength": 1,
-  "linkDistance": 250,
-  "scale": 0.25883865621816404,
+  "linkDistance": 180,
+  "scale": 0.04686208847965863,
   "close": true
 }

@@ -16,7 +16,7 @@ Uber Eats ofrece una activación gratuita para el restaurante, sin costos de anu
 *   **Pagos Semanales:** Depósito los lunes (reflejado en 5 días hábiles).
 
 ## Contacto y Siguiente Paso
-El equipo de Uber Eats contactará al número: **+52 614 107 3188**
+El equipo de Uber Eats contactará al número: **+52 55 6148 5296**
 
 **Números oficiales de Uber Eats:**
 *   Llamadas: +52 55 8525 9789

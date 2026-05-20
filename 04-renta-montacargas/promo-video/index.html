@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+          --yellow: #FFD700;
+          --black: #050505;
+          --white: #F5F5F5;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px; height: 1080px;
+        overflow: hidden; background: var(--black);
+        font-family: 'Inter', sans-serif;
+        color: var(--white);
+      }
+
+      /* HUD Overlays */
+      .hud-line {
+          position: absolute;
+          background: rgba(255, 215, 0, 0.2);
+          z-index: 10;
+      }
+      .hud-corner {
+          position: absolute;
+          width: 100px; height: 100px;
+          border: 2px solid var(--yellow);
+          opacity: 0.4;
+      }
+
+      /* Content Styling */
+      .hero-text {
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 20;
+      }
+      .main-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 160px;
+          font-weight: 900;
+          letter-spacing: -4px;
+          line-height: 1;
+          margin-bottom: 20px;
+      }
+      .highlight { color: var(--yellow); }
+      .tagline {
+          font-size: 48px;
+          text-transform: uppercase;
+          letter-spacing: 12px;
+          opacity: 0.8;
+      }
+
+      .logo-icon {
+          width: 120px; height: 120px;
+          background: var(--yellow);
+          color: var(--black);
+          display: flex; align-items: center; justify-content: center;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900; font-size: 64px;
+          margin: 0 auto 40px auto;
+          transform: skewX(-10deg);
+      }
+
+      .stats {
+          position: absolute;
+          bottom: 100px;
+          width: 100%;
+          display: flex; justify-content: center; gap: 80px;
+          font-family: 'Montserrat', sans-serif;
+      }
+      .stat-item { text-align: center; }
+      .stat-val { font-size: 80px; font-weight: 900; color: var(--yellow); }
+      .stat-label { font-size: 20px; text-transform: uppercase; opacity: 0.6; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      
+      <!-- Background HUD elements -->
+      <div id="hud-v" class="clip hud-line" data-start="0" data-duration="8" data-track-index="0" style="width: 1px; height: 100%; left: 50%;"></div>
+      <div id="hud-h" class="clip hud-line" data-start="0" data-duration="8" data-track-index="0" style="height: 1px; width: 100%; top: 50%;"></div>
+      
+      <div id="tl-corner" class="clip hud-corner" data-start="0" data-duration="8" data-track-index="0" style="top: 40px; left: 40px; border-right: 0; border-bottom: 0;"></div>
+      <div id="tr-corner" class="clip hud-corner" data-start="0" data-duration="8" data-track-index="0" style="top: 40px; right: 40px; border-left: 0; border-bottom: 0;"></div>
+      <div id="bl-corner" class="clip hud-corner" data-start="0" data-duration="8" data-track-index="0" style="bottom: 40px; left: 40px; border-right: 0; border-top: 0;"></div>
+      <div id="br-corner" class="clip hud-corner" data-start="0" data-duration="8" data-track-index="0" style="bottom: 40px; right: 40px; border-left: 0; border-top: 0;"></div>
+
+      <!-- Main Content -->
+      <div class="hero-text">
+          <div id="logo" class="clip logo-icon" data-start="0.5" data-duration="7" data-track-index="1">M</div>
+          <h1 id="title" class="clip main-title" data-start="1" data-duration="6.5" data-track-index="2">
+              MONTACARGAS<br><span class="highlight">DEL NORTE</span>
+          </h1>
+          <p id="tagline" class="clip tagline" data-start="1.5" data-duration="6" data-track-index="3">Tu Operación No Se Detiene</p>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats" class="clip stats" data-start="2.5" data-duration="5" data-track-index="4">
+          <div class="stat-item">
+              <div class="stat-val">4H</div>
+              <div class="stat-label">Respuesta Técnica</div>
+          </div>
+          <div class="stat-item">
+              <div class="stat-val">+50</div>
+              <div class="stat-label">Equipos Disponibles</div>
+          </div>
+          <div class="stat-item">
+              <div class="stat-val">100%</div>
+              <div class="stat-label">Operatividad</div>
+          </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // HUD Intro
+      tl.from(".hud-line", { scale: 0, opacity: 0, duration: 1.5, ease: "power4.out" }, 0);
+      tl.from(".hud-corner", { scale: 1.5, opacity: 0, duration: 1, stagger: 0.1 }, 0.2);
+
+      // Logo Animation (Glitch/Power on)
+      tl.from("#logo", { scale: 0, rotation: -45, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, 0.5);
+      
+      // Title Animation
+      tl.from("#title", { y: 100, opacity: 0, duration: 1.2, ease: "power3.out" }, 1);
+      
+      // Tagline reveal
+      tl.from("#tagline", { width: 0, opacity: 0, duration: 1.5, ease: "power2.inOut" }, 1.5);
+
+      // Stats reveal
+      tl.from(".stat-item", { y: 50, opacity: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" }, 2.5);
+
+      // Sustained motion
+      tl.to("#title", { scale: 1.05, duration: 6, ease: "none" }, 1);
+      
+      // Outro
+      tl.to("#root", { opacity: 0, duration: 0.5 }, 7.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

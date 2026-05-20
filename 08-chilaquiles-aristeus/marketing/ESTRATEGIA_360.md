@@ -31,7 +31,7 @@
 ---
 
 ## 4. Estrategia de Precios (Local vs Delivery)
-*   **Comunicación:** En redes sociales usaremos los precios "Local" como ancla, resaltando la experiencia en "El Lavadero SLP".
+*   **Comunicación:** En redes sociales usaremos los precios "Local" como ancla, resaltando la experiencia en "El Lavadero SLP" (Calle 2a #185, Col. Aviación).
 *   **Delivery:** Enfatizar que el empaque garantiza que los chilaquiles lleguen crujientes (el mayor dolor del cliente de chilaquiles a domicilio).
 
 ---

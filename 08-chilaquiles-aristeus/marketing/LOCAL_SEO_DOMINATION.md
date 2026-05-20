@@ -6,7 +6,7 @@ En San Luis Potosí, la mayoría de los clientes nuevos te encontrarán buscando
 *   **Nombre Oficial:** Aristëus Chilaquiles - Parada de Leyenda.
 *   **Categoría:** Restaurante de desayunos / Restaurante mexicano.
 *   **Fotos Obligatorias:** 
-    *   Fachada del local (El Lavadero SLP).
+    *   Fachada del local ("El Lavadero SLP", Calle 2a #185, Col. Aviación).
     *   Foto de los 3 platillos principales (usar las generadas por AI o fotos reales de alta calidad).
     *   Screenshot del Menú Digital.
 

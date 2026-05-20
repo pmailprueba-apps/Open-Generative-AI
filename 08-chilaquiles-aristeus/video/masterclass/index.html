@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>HyperFrames Masterclass - Aristeus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A96E;
+            --cream: #FAF6F0;
+            --navy: #1B2A4A;
+            --red: #C0392B;
+            --slate: #64748B;
+        }
+        body {
+            margin: 0;
+            background: var(--navy);
+            font-family: 'Outfit', sans-serif;
+            overflow: hidden;
+            color: var(--cream);
+        }
+        #root {
+            width: 1080px;
+            height: 1920px;
+            position: relative;
+            background: var(--navy);
+        }
+
+        .scene {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .scene-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .scene-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        .overlay.dark {
+            background: linear-gradient(to bottom, rgba(27,42,74,0.3), rgba(27,42,74,0.95));
+        }
+        .overlay.red-dark {
+            background: linear-gradient(to bottom, rgba(192,57,43,0.5), rgba(27,42,74,0.95));
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 80px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .font-serif { font-family: 'DM Serif Display', serif; }
+
+        .logo-main {
+            width: 500px;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+        }
+
+        .badge {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            font-size: 26px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(201,169,110,0.3);
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .menu-item {
+            background: rgba(250,246,240,0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(201,169,110,0.4);
+            padding: 40px;
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .cta-box {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 60px;
+            border-radius: 32px;
+            width: 100%;
+            margin-bottom: 60px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        /* FX Effects */
+        .fx-flash {
+            position: absolute;
+            inset: 0;
+            background: white;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .fx-shake {
+            animation: shake 0.3s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-1deg); }
+            50% { transform: translateX(10px) rotate(1deg); }
+            75% { transform: translateX(-5px) rotate(-0.5deg); }
+        }
+        .fx-glitch {
+            animation: glitch 0.4s ease-in-out;
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); filter: none; }
+            20% { transform: translate(-5px, 3px); filter: hue-rotate(90deg); }
+            40% { transform: translate(5px, -3px); filter: hue-rotate(180deg); }
+            60% { transform: translate(-3px, -2px); filter: hue-rotate(270deg); }
+            80% { transform: translate(3px, 2px); filter: hue-rotate(45deg); }
+        }
+        .fx-pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .fx-spin-in {
+            animation: spinIn 0.8s ease-out;
+        }
+        @keyframes spinIn {
+            0% { transform: rotate(-180deg) scale(0); opacity: 0; }
+            100% { transform: rotate(0deg) scale(1); opacity: 1; }
+        }
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"
+         data-composition-id="masterclass"
+         data-width="1080"
+         data-height="1920"
+         data-start="0"
+         data-duration="15">
+
+        <!-- AUDIO BACKGROUND -->
+        <audio id="bg-music" src="assets/music/happy_food.mp3" data-start="0" data-duration="15" autoplay loop></audio>
+
+        <!-- SOUND EFFECTS -->
+        <audio id="sfx-whoosh" src="assets/sfx/whoosh.mp3" data-start="5" data-duration="0.5" preload="auto"></audio>
+        <audio id="sfx-swoosh" src="assets/sfx/swoosh.mp3" data-start="10" data-duration="0.5" preload="auto"></audio>
+        <audio id="sfx-bell" src="assets/sfx/bell.mp3" data-start="5" data-duration="0.3" preload="auto"></audio>
+
+        <!-- FX ELEMENTS -->
+        <div id="fx-flash" class="fx-flash"></div>
+        <div id="fx-particles"></div>
+
+        <!-- SCENE 1: The Hook (0-6.5s) -->
+        <div id="s1" class="scene clip" data-start="0" data-duration="6.5" data-track-index="0" style="z-index: 1;">
+            <div class="scene-bg" id="s1-bg">
+                <img src="assets/chilaquiles_rojos.png" alt="Chilaquiles Rojos">
+                <div class="overlay dark"></div>
+            </div>
+            <div class="content-container">
+                <img src="assets/transparencia_aristeus_vf.png" class="logo-main" id="s1-logo">
+                <h1 class="font-serif text-9xl mb-6 leading-tight" id="s1-title">Artesanos de<br><span class="text-[#C9A96E]">la Salsa</span></h1>
+                <p class="text-4xl tracking-[12px] uppercase opacity-80 font-light" id="s1-sub">San Luis Potosí</p>
+            </div>
+        </div>
+
+        <!-- SCENE 2: The Menu (5-11.5s) -->
+        <div id="s2" class="scene clip" data-start="5" data-duration="6.5" data-track-index="1" style="z-index: 2;">
+            <div class="scene-bg" id="s2-bg">
+                <img src="assets/chilaquiles_verdes.png" alt="Chilaquiles Verdes">
+                <div class="overlay red-dark"></div>
+            </div>
+            <div class="content-container">
+                <div class="badge" id="s2-badge">Nuestros Favoritos</div>
+                <div class="menu-container">
+                    <div class="menu-item">
+                        <span class="text-5xl font-bold">Combo Full Tank</span>
+                        <span class="text-5xl text-[#C9A96E]">🌶️🌶️</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="text-5xl font-bold">El Despertar</span>
+                        <span class="text-5xl text-[#C9A96E]">🔥</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="text-5xl font-bold">Banquete del Patrón</span>
+                        <span class="text-5xl text-[#C9A96E]">👑</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 3: CTA (10-15s) -->
+        <div id="s3" class="scene clip" data-start="10" data-duration="5" data-track-index="0" style="z-index: 3;">
+            <div class="scene-bg" id="s3-bg">
+                <img src="assets/chilaquiles_con_pollo_.png" alt="Chilaquiles con Pollo">
+                <div class="overlay dark"></div>
+            </div>
+            <div class="content-container">
+                <h2 class="font-serif text-9xl mb-16 leading-tight" id="s3-title">¿Hambre?<br><span class="text-[#C9A96E]">Visítanos Hoy</span></h2>
+                <div class="cta-box" id="s3-cta">
+                    <p class="text-4xl font-black mb-4 tracking-wide">📍 EL LAVADERO SLP</p>
+                    <p class="text-3xl opacity-80 font-medium">Calle 2a #185, Col. Aviación</p>
+                </div>
+                <div class="flex items-center justify-center gap-6 text-5xl font-black" id="s3-whatsapp">
+                    <span class="text-green-400 text-6xl">📱</span> +52 55 6148 5296
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines["masterclass"] = tl;
+
+        // ==========================================
+        // SOUND EFFECT HELPER
+        // ==========================================
+        function playSFX(sfxId) {
+            const sfx = document.getElementById(sfxId);
+            if (sfx) {
+                sfx.currentTime = 0;
+                sfx.play().catch(() => {});
+            }
+        }
+
+        // ==========================================
+        // PARTICLE FX HELPER (Seeded PRNG for determinism)
+        // ==========================================
+        function seededRandom(seed) {
+            let s = seed;
+            return function() {
+                s = (s * 1103515245 + 12345) & 0x7fffffff;
+                return s / 0x7fffffff;
+            };
+        }
+
+        function createParticles(count, x, y, seed = 12345) {
+            const rng = seededRandom(seed);
+            const container = document.getElementById('fx-particles');
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                container.appendChild(p);
+
+                const angle = (Math.PI * 2 * i) / count;
+                const distance = 100 + rng() * 200;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                gsap.to(p, {
+                    x: tx,
+                    y: ty,
+                    opacity: 0,
+                    scale: 0,
+                    duration: 1 + rng() * 0.5,
+                    ease: "power2.out",
+                    onComplete: () => p.remove()
+                });
+            }
+        }
+
+        // ==========================================
+        // FLASH FX
+        // ==========================================
+        function flashScreen(duration = 0.1) {
+            const flash = document.getElementById('fx-flash');
+            gsap.to(flash, { opacity: 0.8, duration: duration, ease: "power2.out" });
+            gsap.to(flash, { opacity: 0, duration: duration, delay: duration, ease: "power2.in" });
+        }
+
+        // ==========================================
+        // CHOREOGRAPHY
+        // ==========================================
+
+        // --- SCENE 1 (0s to 6.5s) ---
+        // Logo entrance with pulse effect
+        tl.from("#s1-logo", {
+            scale: 0, rotation: -360,
+            duration: 1.5,
+            ease: "back.out(1.7)"
+        }, 0.2);
+
+        // Title with glitch effect
+        tl.from("#s1-title", {
+            y: 100,
+            opacity: 0,
+            duration: 1.0,
+            ease: "power3.out"
+        }, 0.6);
+
+        // Subtitle letter spacing animation
+        tl.from("#s1-sub", {
+            opacity: 0,
+            letterSpacing: "30px",
+            duration: 1.5,
+            ease: "power2.out"
+        }, 1.0);
+
+        // --- TRANSITION 1: S1 to S2 (t=5s) ---
+        // Flash + Whoosh + Shake
+        tl.call(() => {
+            flashScreen(0.15);
+            playSFX('sfx-whoosh');
+        }, [], 5);
+
+        // Circular reveal with shake
+        tl.fromTo("#s2",
+            { clipPath: "circle(0% at 50% 50%)", scale: 1.5 },
+            { clipPath: "circle(150% at 50% 50%)", scale: 1, duration: 1.2, ease: "power3.inOut" }, 5.1);
+
+        // Particles burst on reveal
+        tl.call(() => createParticles(20, 540, 960), [], 5.3);
+
+        // --- SCENE 2 (5s to 11.5s) ---
+        // Badge pop-in with spin
+        tl.from("#s2-badge", {
+            scale: 0, rotation: -180,
+            duration: 0.8,
+            ease: "back.out(2)"
+        }, 5.5);
+
+        // Menu items slide in with stagger
+        tl.from("#s2 .menu-item", {
+            x: 150,
+            opacity: 0,
+            rotation: 10,
+            duration: 0.7,
+            stagger: 0.2,
+            ease: "power3.out"
+        }, 5.8);
+
+        // --- TRANSITION 2: S2 to S3 (t=10s) ---
+        // Swoosh + Flash
+        tl.call(() => {
+            flashScreen(0.2);
+            playSFX('sfx-swoosh');
+        }, [], 10);
+
+        // Wipe up with glitch
+        tl.fromTo("#s3",
+            { clipPath: "inset(100% 0% 0% 0%)", filter: "brightness(2)" },
+            { clipPath: "inset(0% 0% 0% 0%)", filter: "brightness(1)", duration: 1.2, ease: "power3.inOut" }, 10.1);
+
+        // Big particles burst
+        tl.call(() => createParticles(30, 540, 400), [], 10.5);
+
+        // --- SCENE 3 (10s to 15s) ---
+        // Title glitch entrance
+        tl.from("#s3-title", {
+            y: 100,
+            opacity: 0,
+            duration: 1.0,
+            ease: "expo.out"
+        }, 10.6);
+
+        // CTA box pulse
+        tl.from("#s3-cta", {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.9,
+            ease: "back.out(1.2)"
+        }, 11.0);
+
+        // WhatsApp bounce in
+        tl.from("#s3-whatsapp", {
+            scale: 0,
+            opacity: 0,
+            duration: 0.8,
+            ease: "back.out(1.8)"
+        }, 11.5);
+
+        // Final pulse on WhatsApp
+        tl.to("#s3-whatsapp", {
+            scale: 1.1,
+            duration: 0.3,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: 1
+        }, 14.0);
+
+        // ==========================================
+        // SCENE SHAKE ON TRANSITIONS
+        // ==========================================
+        tl.call(() => {
+            document.getElementById('root').classList.add('fx-shake');
+            setTimeout(() => document.getElementById('root').classList.remove('fx-shake'), 300);
+        }, [], 5);
+
+        tl.call(() => {
+            document.getElementById('root').classList.add('fx-glitch');
+            setTimeout(() => document.getElementById('root').classList.remove('fx-glitch'), 400);
+        }, [], 10);
+
+        // DEV HELPER for browser preview without Studio
+        setTimeout(() => { if (!window.__hyperframes_env) tl.play(); }, 500);
+    </script>
+</body>
+</html>

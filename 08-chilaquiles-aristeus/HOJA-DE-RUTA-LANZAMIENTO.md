@@ -10,18 +10,19 @@ Este documento rastrea el progreso en tiempo real de la preparación para el gra
 
 ## 🟢 Fase 2: Infraestructura de Contacto
 - [x] Número WhatsApp Business (+52 55 6148 5296) actualizado en web.
+- [x] Ubicación confirmada: "El Lavadero SLP", Calle 2a #185, Col. Aviación, San Luis Potosí.
 - [x] Catálogo de Productos configurado con fotos gourmet.
 - [x] Mensaje de Bienvenida Automático con link al menú.
 - [x] Enlaces de Delivery (Rappi/Uber Eats) preparados.
 
 ## 🟡 Fase 3: Activación & Lanzamiento (Próximamente)
-- [ ] Campaña "El Secreto ha sido revelado".
-- [ ] Registro en Google Maps (Ubicación: Autolavado Ruta 57).
-- [ ] Lanzamiento de Ad en Meta (Facebook Ads).
+- [x] Campaña "El Secreto ha sido revelado" - Etapa iniciada.
+- [x] Registro en Google Maps ("El Lavadero SLP", Calle 2a #185, Col. Aviación, San Luis Potosí).
+- [x] Lanzamiento de Ad en Meta (Facebook/Instagram) - Primeras imágenes de pre-apertura publicadas.
 - [ ] Inauguración oficial.
 
 ---
-**Estado Actual:** ¡Listos para la fase operativa! El motor de WhatsApp ya está encendido y el menú brilla con calidad gourmet.
+**Estado Actual:** ¡Campaña "El Secreto ha sido revelado" activa! Fase de pre-lanzamiento en marcha. 🚀
 
 ---
 

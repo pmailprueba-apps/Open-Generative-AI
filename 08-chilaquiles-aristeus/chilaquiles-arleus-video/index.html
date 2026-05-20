@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #1b2a4a;
+        font-family: 'Arial Black', Arial, sans-serif;
+      }
+      .clip {
+        position: absolute;
+        width: 1080px;
+        height: 1920px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+      }
+      .scene-bg { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .scene-content { position: relative; z-index: 1; text-align: center; }
+      .overlay { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; z-index: 0; }
+      .logo-img { width: 380px; height: 380px; object-fit: contain; }
+      .food-img { width: 1080px; height: 1920px; object-fit: cover; position: absolute; top: 0; left: 0; }
+      .footer-info { font-size: 18px; color: #faf6f0; margin-top: 15px; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+
+      <!-- Scene 1: Logo Intro (0-3s) - Logo Aristeus with dark background -->
+      <div id="scene1" class="clip" data-start="0" data-duration="3" data-track-index="0">
+        <img class="food-img" src="assets/chilaquiles_rojos.png" alt="">
+        <div class="overlay" style="background: linear-gradient(135deg, rgba(27,42,74,0.92) 0%, rgba(13,21,32,0.88) 100%);"></div>
+        <div id="scene1-content" class="scene-content">
+          <img class="logo-img" src="assets/transparencia_aristeus_vf.png" alt="Aristeus Logo">
+          <div style="font-size: 55px; color: #c9a96e; margin-top: 25px; letter-spacing: 5px;">CHILAQUILES</div>
+          <div style="font-size: 26px; color: #faf6f0; margin-top: 12px; letter-spacing: 2px;">Artesanos de la Salsa</div>
+          <div style="width: 180px; height: 4px; background: linear-gradient(90deg, transparent, #c9a96e, transparent); margin: 20px auto;"></div>
+          <div style="font-size: 20px; color: #c9a96e;">🌶️ San Luis Potosí • Ruta 57</div>
+        </div>
+      </div>
+
+      <!-- Scene 2: El Secreto (3-6s) - Chilaquiles verdes with red overlay -->
+      <div id="scene2" class="clip" data-start="3" data-duration="3" data-track-index="0">
+        <img class="food-img" src="assets/chilaquiles_verdes.png" alt="">
+        <div class="overlay" style="background: linear-gradient(135deg, rgba(192,57,43,0.85) 0%, rgba(142,42,31,0.8) 100%);"></div>
+        <div id="scene2-content" class="scene-content">
+          <div style="font-size: 54px; color: #faf6f0; font-weight: bold; text-shadow: 2px 3px 10px rgba(0,0,0,0.4);">¡EL SECRETO</div>
+          <div style="font-size: 54px; color: #c9a96e; font-weight: bold; text-shadow: 2px 3px 10px rgba(0,0,0,0.4);">HA SIDO REVELADO!</div>
+          <div style="width: 150px; height: 3px; background: #c9a96e; margin: 25px auto; box-shadow: 0 0 10px #c9a96e;"></div>
+          <div style="font-size: 28px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.4);">🌶️ Food Truck • San Luis Potosí</div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Products (6-10s) - Chilaquiles con pollo -->
+      <div id="scene3" class="clip" data-start="6" data-duration="4" data-track-index="0">
+        <img class="food-img" src="assets/chilaquiles_con_pollo_.png" alt="">
+        <div class="overlay" style="background: linear-gradient(180deg, rgba(13,21,32,0.92) 0%, rgba(27,42,74,0.88) 50%, rgba(13,21,32,0.92) 100%);"></div>
+        <div id="scene3-content" class="scene-content">
+          <div style="font-size: 40px; color: #c9a96e; margin-bottom: 35px; letter-spacing: 3px; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">🌶️ NUESTROS CLÁSICOS</div>
+          <div style="display: flex; flex-direction: column; gap: 24px; align-items: center;">
+            <div style="font-size: 32px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">🥇 <span style="color: #c9a96e; font-weight: bold;">Combo Full Tank</span></div>
+            <div style="font-size: 32px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">🔥 <span style="color: #c9a96e; font-weight: bold;">El Despertar</span></div>
+            <div style="font-size: 32px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">👑 <span style="color: #c9a96e; font-weight: bold;">Banquete del Patrón</span></div>
+            <div style="font-size: 32px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">🌊 <span style="color: #c9a96e; font-weight: bold;">Joyas del Mar</span></div>
+          </div>
+          <div style="font-size: 24px; color: #c9a96e; margin-top: 35px;">+ Bebidas, Toritos, Tacos y más...</div>
+        </div>
+      </div>
+
+      <!-- Scene 4: Location (10-13s) - Food truck photo -->
+      <div id="scene4" class="clip" data-start="10" data-duration="3" data-track-index="0">
+        <img class="food-img" src="assets/aristeus_firma_oro.png" alt="">
+        <div class="overlay" style="background: linear-gradient(135deg, rgba(27,42,74,0.9) 0%, rgba(13,21,32,0.85) 100%);"></div>
+        <div id="scene4-content" class="scene-content">
+          <div style="font-size: 42px; color: #c0392b; margin-bottom: 25px; font-weight: bold; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">📍 ENCUÉNTRANOS</div>
+          <div style="font-size: 46px; color: #c9a96e; font-weight: bold; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">"El Lavadero SLP"</div>
+          <div style="width: 120px; height: 3px; background: #c9a96e; margin: 20px auto; box-shadow: 0 0 8px #c9a96e;"></div>
+          <div style="font-size: 30px; color: #faf6f0; margin-top: 15px; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">Calle 2a #185, Col. Aviación</div>
+          <div style="font-size: 30px; color: #faf6f0; text-shadow: 1px 2px 5px rgba(0,0,0,0.5);">San Luis Potosí</div>
+          <div style="font-size: 26px; color: #c9a96e; margin-top: 35px;">🕐 Lun-Vie: 9:00 - 18:00 | Sáb: 8:00 - 15:00</div>
+        </div>
+      </div>
+
+      <!-- Scene 5: CTA (13-17s) - Dulces with gold overlay -->
+      <div id="scene5" class="clip" data-start="13" data-duration="4" data-track-index="0">
+        <img class="food-img" src="assets/chilaquiles_duclces_de_cajeta.png" alt="">
+        <div id="scene5-bg" class="overlay" style="background: linear-gradient(135deg, rgba(201,169,110,0.88) 0%, rgba(184,149,106,0.85) 100%);"></div>
+        <div id="scene5-content" class="scene-content">
+          <div style="font-size: 50px; color: #1b2a4a; font-weight: bold;">¡ORDENA AHORA!</div>
+          <div style="width: 100px; height: 3px; background: #1b2a4a; margin: 20px auto;"></div>
+          <div style="font-size: 34px; color: #1b2a4a;">Escríbenos por WhatsApp</div>
+          <div style="font-size: 42px; color: #1b2a4a; margin-top: 30px; font-weight: bold;">📱 +52 55 6148 5296</div>
+          <div style="font-size: 22px; color: #1b2a4a; margin-top: 30px; opacity: 0.85;">Ruta 57 • San Luis Potosí</div>
+        </div>
+      </div>
+
+      <!-- Scene 6: Logo Final (17-18s) - Logo grande con fondo oscuro -->
+      <div id="scene6" class="clip" data-start="17" data-duration="1" data-track-index="1">
+        <img class="food-img" src="assets/logo_aristeus_final.png" alt="">
+        <div class="overlay" style="background: linear-gradient(135deg, rgba(27,42,74,0.85) 0%, rgba(13,21,32,0.9) 100%);"></div>
+        <div id="scene6-content" class="scene-content">
+          <img class="logo-img" style="width: 420px; height: 420px;" src="assets/transparencia_aristeus_vf.png" alt="Aristeus">
+          <div style="font-size: 38px; color: #c9a96e; margin-top: 30px; letter-spacing: 8px; font-weight: bold;">ARISTEUS</div>
+          <div style="font-size: 22px; color: #faf6f0; margin-top: 10px;">Artesanos de la Salsa</div>
+          <div style="width: 150px; height: 2px; background: linear-gradient(90deg, transparent, #c9a96e, transparent); margin: 20px auto;"></div>
+          <div style="font-size: 18px; color: #c9a96e;">📍 San Luis Potosí, SLP • Ruta 57</div>
+          <div style="font-size: 16px; color: #faf6f0; margin-top: 8px; opacity: 0.8;">@chilaquilesaristews</div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0-3s): Logo intro
+      tl.from("#scene1-content", { opacity: 0, scale: 0.7, duration: 0.8 }, 0);
+      tl.to("#scene1-content", { opacity: 0, scale: 0.95, duration: 0.6 }, 2.4);
+      tl.set("#scene1-content", { opacity: 0 }, 3.00);
+
+      // Scene 2 (3-6s): Secreto reveal
+      tl.from("#scene2-content", { y: 80, opacity: 0, duration: 0.7 }, 3);
+      tl.to("#scene2-content", { opacity: 0, y: -50, duration: 0.6 }, 5.4);
+      tl.set("#scene2-content", { opacity: 0 }, 6.00);
+
+      // Scene 3 (6-10s): Products
+      tl.from("#scene3-content", { y: 60, opacity: 0, duration: 0.6 }, 6);
+      tl.from("#scene3-content div", { y: 40, opacity: 0, stagger: 0.15, duration: 0.5 }, 6.4);
+      tl.to("#scene3-content", { opacity: 0, duration: 0.6 }, 9.4);
+      tl.set("#scene3-content", { opacity: 0 }, 10.00);
+
+      // Scene 4 (10-13s): Location
+      tl.from("#scene4-content", { opacity: 0, y: 40, duration: 0.6 }, 10);
+      tl.to("#scene4-content", { opacity: 0, duration: 0.6 }, 12.4);
+      tl.set("#scene4-content", { opacity: 0 }, 13.00);
+
+      // Scene 5 (13-17s): CTA with pulse
+      tl.from("#scene5-content", { scale: 0.85, opacity: 0, duration: 0.5 }, 13);
+      tl.to("#scene5-bg", { scale: 1.04, duration: 0.5, ease: "power2.inOut", yoyo: true, repeat: 1 }, 13.6);
+      tl.to("#scene5-content", { opacity: 0, duration: 0.6 }, 16.4);
+      tl.set("#scene5-content", { opacity: 0 }, 17.00);
+
+      // Scene 6 (17-18s): Final logo
+      tl.from("#scene6-content", { scale: 0.6, opacity: 0, duration: 0.5 }, 17);
+      tl.from("#scene6 img.logo-img", { rotation: -10, scale: 0.5, duration: 0.6, ease: "back.out(1.7)" }, 17.1);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

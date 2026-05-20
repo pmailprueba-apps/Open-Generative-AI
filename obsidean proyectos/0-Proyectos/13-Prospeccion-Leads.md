@@ -12,7 +12,7 @@ tags: [ventas, leads, prospeccion, slp]
 
 # Prospección de Leads
 
-**Carpeta:** `/Users/macbook/Proyectos/PROSPECCION_LEADS`
+**Carpeta:** `/Users/macbook/Proyectos/13-prospeccion-leads`
 **Estado:** 🟡 En proceso
 **Tipo:** Ventas / Leads
 **Tags:** #ventas #leads #prospeccion #slp

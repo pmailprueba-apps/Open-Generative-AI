@@ -42,9 +42,9 @@ Utiliza esta estructura de referencia para solicitar cambios específicos en el 
 ---
 
 ## 📍 SECCIÓN 5: INFORMACIÓN DE CONTACTO (FOOTER)
-*   **Dirección:** C. Segunda 185, Industrial Aviacion 1ra Secc, 78140 San Luis Potosí, S.L.P.
-*   **WhatsApp:** +52 614 107 31 88
-*   **Horario:** 9am - 6pm (Lunes a Domingo)
+*   **Dirección:** "El Lavadero SLP", Calle 2a #185, Col. Aviación, San Luis Potosí.
+*   **WhatsApp:** +52 55 6148 5296
+*   **Horario:** 9:00 - 18:00 (Lunes a Viernes), 8:00 - 15:00 (Sábado), Domingos cerrado
 
 ---
 
