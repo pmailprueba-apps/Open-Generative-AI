@@ -1,0 +1,11 @@
+services:
+  discord-bot:
+    build: .
+    container_name: discord-ai-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /share/CACHEDEV1_DATA:/host/share
+    network_mode: bridge

@@ -1,0 +1,18 @@
+{
+  "name": "discord-ai-bot",
+  "version": "1.0.0",
+  "description": "Bot de Discord con IA para QNAP Aldukehome",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "npx tsx src/index.ts"
+  },
+  "dependencies": {
+    "discord.js": "^14.18.0",
+    "dotenv": "^17.4.2",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.0"
+  }
+}
