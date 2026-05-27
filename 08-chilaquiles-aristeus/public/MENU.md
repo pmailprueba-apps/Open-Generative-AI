@@ -26,7 +26,7 @@
 *El favorito de la ruta. Chilaquiles (Imperiales o Dulces) + Proteína extra + Frijoles refritos + Bebida (500ml).*
 
 **[1.2] El Despertar de Aristeus** | **$135.00**
-*Salsa de chile cuaresmeño, totopos frescos, queso menonita, crema de rancho y proteína (Pollo/Huevo/Chorizo).*
+*Salsa verde, totopos frescos, crema de rancho y proteína (Pollo/Huevo/Chorizo).*
 
 **[1.3] Banquete del Patrón** | **$185.00**
 *Chilaquiles con Arrachera premium marinada y asada a las brasas.*
