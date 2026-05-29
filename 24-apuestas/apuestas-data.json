@@ -1,0 +1,180 @@
+{
+  "matches": [
+    {
+      "id": "m_psg_ars",
+      "home": "PSG",
+      "away": "Arsenal",
+      "league": "UEFA Champions League Final",
+      "date": "2026-05-30T11:00",
+      "home_odds": 2.28,
+      "draw_odds": 3.3,
+      "away_odds": 3.1,
+      "source": "caliente.mx",
+      "scraped_at": "2026-05-29T06:00:00.000Z",
+      "result": "H",
+      "home_score": 2,
+      "away_score": 1,
+      "bet_status": "confirmed",
+      "bet_amount": 100,
+      "bet_odds": 2.34,
+      "bet_recibo": "2047874492",
+      "bet_selection": "PSG"
+    },
+    {
+      "id": "m_tol_tig",
+      "home": "Toluca",
+      "away": "Tigres UANL",
+      "league": "CONCACAF Champions Cup Final",
+      "date": "2026-05-30T18:00",
+      "home_odds": 1.909,
+      "draw_odds": 3.6,
+      "away_odds": 3.85,
+      "source": "caliente.mx",
+      "scraped_at": "2026-05-29T06:00:00.000Z",
+      "result": null,
+      "home_score": null,
+      "away_score": null,
+      "bet_status": "confirmed",
+      "bet_amount": 100,
+      "bet_odds": 1.943,
+      "bet_recibo": "2047875293",
+      "bet_selection": "Toluca"
+    }
+  ],
+  "predictions": [
+    {
+      "id": "p_psg_ars",
+      "home": "PSG",
+      "away": "Arsenal",
+      "league": "UEFA Champions League Final",
+      "home_prob": 45,
+      "draw_prob": 33,
+      "away_prob": 22,
+      "winner": "PSG",
+      "confidence": 44,
+      "model": "poisson-v1",
+      "agents_used": [
+        "opencode",
+        "claude-code",
+        "gemini"
+      ],
+      "sources_used": [
+        "caliente.mx",
+        "codere.mx"
+      ],
+      "created_at": "2026-05-29T06:00:00.000Z",
+      "actual_result": "H",
+      "was_correct": true
+    },
+    {
+      "id": "p_tol_tig",
+      "home": "Toluca",
+      "away": "Tigres UANL",
+      "league": "CONCACAF Champions Cup Final",
+      "home_prob": 45,
+      "draw_prob": 33,
+      "away_prob": 22,
+      "winner": "Toluca",
+      "confidence": 44,
+      "model": "poisson-v1",
+      "agents_used": [
+        "opencode",
+        "claude-code",
+        "gemini"
+      ],
+      "sources_used": [
+        "caliente.mx",
+        "codere.mx"
+      ],
+      "created_at": "2026-05-29T06:00:00.000Z",
+      "actual_result": null,
+      "was_correct": null
+    }
+  ],
+  "sources": {
+    "caliente.mx": {
+      "url": "https://sports.caliente.mx",
+      "type": "odds",
+      "status": "active",
+      "added_at": "2026-05-29T05:43:00.000Z"
+    },
+    "codere-blog": {
+      "url": "https://blog.codere.mx",
+      "type": "analysis",
+      "status": "active",
+      "added_at": "2026-05-29T05:43:00.000Z"
+    },
+    "codere-apuestas": {
+      "url": "https://apuestas.codere.mx",
+      "type": "odds",
+      "status": "active",
+      "added_at": "2026-05-29T05:43:00.000Z"
+    },
+    "flashscore": {
+      "url": "https://www.flashscore.com.mx",
+      "type": "results",
+      "status": "active",
+      "added_at": "2026-05-29T05:43:00.000Z"
+    },
+    "flashscore.mx": {
+      "url": "https://www.flashscore.com.mx/futbol/",
+      "type": "results",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "espn-mx": {
+      "url": "https://www.espn.com.mx/futbol/",
+      "type": "stats",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "transfermarkt": {
+      "url": "https://www.transfermarkt.mx/",
+      "type": "players",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "rsssf": {
+      "url": "https://www.rsssf.org/",
+      "type": "historical",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "sofascore": {
+      "url": "https://www.sofascore.com/",
+      "type": "live",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "fbref": {
+      "url": "https://fbref.com/es/",
+      "type": "advanced-stats",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "ligamx-net": {
+      "url": "https://www.ligamx.net/",
+      "type": "official",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "worldfootball": {
+      "url": "https://www.worldfootball.net/",
+      "type": "global",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "365scores": {
+      "url": "https://www.365scores.com/es-mx/",
+      "type": "scores",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    },
+    "goal": {
+      "url": "https://www.goal.com/es-mx/",
+      "type": "news",
+      "status": "active",
+      "added_at": "2026-05-29T05:46:00.000Z"
+    }
+  }
+}

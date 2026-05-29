@@ -1,0 +1,53 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//APUESTA.IA//Predicciones Deportivas//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:APUESTA.IA - Predicciones
+X-WR-TIMEZONE:America/Mexico_City
+
+BEGIN:VEVENT
+UID:apuestas-psg-arsenal-20260530@apuestas.ia
+DTSTAMP:20260529T050000Z
+DTSTART:20260530T110000
+DTEND:20260530T130000
+SUMMARY:⚽ PSG vs Arsenal - Final Champions League
+DESCRIPTION:Apuesta: $100 a PSG +134\nRecibo: #2047874492\nPosible ganancia: $234\n\nAPUESTA.IA - Predicción: PSG 45% | Empate 33% | Arsenal 22%
+LOCATION:Puskás Aréna, Budapest
+STATUS:CONFIRMED
+PRIORITY:5
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: PSG vs Arsenal en 1 hora - Champions League Final
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:¡PSG vs Arsenal ya casi empieza! Revisa tu apuesta en Caliente.mx
+END:VALARM
+END:VEVENT
+
+BEGIN:VEVENT
+UID:apuestas-toluca-tigres-20260530@apuestas.ia
+DTSTAMP:20260529T050000Z
+DTSTART:20260530T180000
+DTEND:20260530T200000
+SUMMARY:⚽ Toluca vs Tigres - Final CONCACAF Champions Cup
+DESCRIPTION:Apuesta: $100 a Toluca -106\nRecibo: #2047875293\nPosible ganancia: $195\n\nAPUESTA.IA - Predicción: Toluca 45% | Empate 33% | Tigres 22%
+LOCATION:Estadio Nemesio Díez, Toluca
+STATUS:CONFIRMED
+PRIORITY:5
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: Toluca vs Tigres en 1 hora - CONCACAF Final
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:¡Toluca vs Tigres ya casi empieza! Suerte con tu apuesta 🍀
+END:VALARM
+END:VEVENT
+
+END:VCALENDAR

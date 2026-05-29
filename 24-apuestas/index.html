@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>APUESTA.IA - El Futuro de las Predicciones Deportivas</title>
+ <!-- Google Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="css/style.css">
+ <meta name="description" content="APUESTA.IA: Plataforma premium de analítica deportiva basada en IA profunda y modelos predictivos multimodales de 2026.">
+</head>
+<body>
+ <header class="app-header">
+ <div class="header-logo">
+ <span class="logo-accent">APUESTA</span>.IA
+ </div>
+ <div class="header-badge">
+ <span class="pulse-dot"></span>
+ MOTOR DE INFERENCIA 2026
+ </div>
+ <div class="guardian-status" id="guardianStatusHeader">
+ <svg class="icon-shield" viewBox="0 0 24 24" width="18" height="18">
+ <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
+ GUARDIÁN IA DESACTIVADO
+ </div>
+ </header>
+
+ <main class="app-container">
+ <!-- Hero Concept Block -->
+ <section class="concept-hero">
+ <div class="concept-badge">PARADIGMA 2026</div>
+ <h1>Las Estadísticas Tradicionales son Obsoletas</h1>
+ <p>Los modelos del pasado se limitaban a promedios históricos. En la era del <strong>Mundial de Fútbol 2026</strong>, APUESTA.IA utiliza <strong>Deep Learning Multimodal</strong> y redes Transformers para fusionar biometría en vivo, fatiga acumulada, microclima del estadio y el sentimiento social en tiempo real.</p>
+ </section>
+
+ <!-- Main Dashboard Grid -->
+ <div class="dashboard-grid">
+ 
+ <!-- COLUMN 1: LIVE SIMULATOR & WHAT-IF -->
+ <section class="dashboard-card primary-column">
+ <div class="card-header">
+ <div class="card-title-group">
+ <span class="card-live-indicator" id="liveMatchIndicator">EN VIVO</span>
+ <h2 style="font-size: 1.1rem; margin: 0;">Simulador de Inferencia</h2>
+ </div>
+ <div class="match-select-container">
+ <select id="matchSelector" class="custom-select">
+ <option value="psg-ars" selected>PSG vs Arsenal (En Vivo)</option>
+ <option value="tol-tig">Toluca vs Tigres (Próximo)</option>
+ <option value="pu-ca">Pumas vs Cruz Azul (Finalizado)</option>
+ </select>
+ </div>
+ </div>
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+ <span class="match-league" id="matchLeagueText">UEFA Champions League • Final</span>
+ </div>
+
+ <!-- Match Live Card -->
+ <div class="match-live-card">
+ <div class="team-container team-home">
+ <div class="team-shield psg-shield" id="shieldHome">PSG</div>
+ <div class="team-name" id="nameHome">PSG</div>
+ </div>
+ <div class="score-container">
+ <div class="score-display">
+ <span id="scoreHome">1</span>
+ <span class="score-divider">:</span>
+ <span id="scoreAway">1</span>
+ </div>
+ <div class="match-time" id="matchTime">Min 68:14</div>
+ </div>
+ <div class="team-container team-away">
+ <div class="team-shield ars-shield" id="shieldAway">ARS</div>
+ <div class="team-name" id="nameAway">Arsenal</div>
+ </div>
+ </div>
+
+ <!-- Caliente Odds / Stats Summary -->
+ <div class="caliente-odds-panel" id="calienteOddsPanel" style="display: none;">
+ <div class="odds-header">
+ <span class="caliente-logo">CAL Caliente.mx</span>
+ <span class="odds-label-final">Momios de Cierre</span>
+ </div>
+ <div class="odds-grid">
+ <div class="odds-card">
+ <span class="odds-team">Pumas UNAM</span>
+ <span class="odds-value" id="oddsHome">+185</span>
+ </div>
+ <div class="odds-card">
+ <span class="odds-team">Empate</span>
+ <span class="odds-value" id="oddsDraw">+230</span>
+ </div>
+ <div class="odds-card">
+ <span class="odds-team">Cruz Azul</span>
+ <span class="odds-value" id="oddsAway" style="color: var(--neon-green); font-weight: 800;">+140</span>
+ </div>
+ </div>
+ <div class="aggregate-banner">
+ <span>Copa: Juego de Vuelta — Cruz Azul gana 2-1 en el global</span>
+ </div>
+ </div>
+
+ <!-- Win Probability SVG Graph -->
+ <div class="probability-visualizer">
+ <h3>Probabilidad de Victoria Recalibrada</h3>
+ <div class="probability-chart-container">
+ <svg class="probability-gauge" viewBox="0 0 200 100">
+ <!-- Background track -->
+ <path class="gauge-track" d="M20,90 A80,80 0 0,1 180,90" fill="none" stroke="#1f293d" stroke-width="12" stroke-linecap="round"/>
+ <!-- Active track (Home Win) -->
+ <path id="gaugeHome" class="gauge-path gauge-home-path" d="M20,90 A80,80 0 0,1 180,90" fill="none" stroke="url(#homeGrad)" stroke-width="14" stroke-linecap="round"/>
+ <!-- Gradients -->
+ <defs>
+ <linearGradient id="homeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+  <stop offset="0%" stop-color="#00f0ff" />
+  <stop offset="100%" stop-color="#00ff66" />
+ </linearGradient>
+ </defs>
+ </svg>
+ <div class="gauge-values">
+ <div class="gauge-val-item val-home">
+ <span class="val-label">PSG</span>
+ <span class="val-num" id="valHomePercent">48%</span>
+ </div>
+ <div class="gauge-val-item val-draw">
+ <span class="val-label">Empate</span>
+ <span class="val-num" id="valDrawPercent">28%</span>
+ </div>
+ <div class="gauge-val-item val-away">
+ <span class="val-label">Arsenal</span>
+ <span class="val-num" id="valAwayPercent">24%</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- What-If Multimodal Calculator -->
+ <div class="what-if-panel">
+ <div class="panel-header">
+ <h3>Calculadora de Escenarios "What-If"</h3>
+ <p class="panel-subtitle">Ajusta las variables de 2026 para recalibrar instantáneamente la predicción del modelo.</p>
+ </div>
+
+ <div class="sliders-grid">
+ <!-- Wearable / Fatigue -->
+ <div class="slider-control">
+ <div class="slider-info">
+ <label for="inputFatigue">
+  <span class="label-title">Fatiga Acumulada PSG</span>
+  <span class="label-desc">Biometría de Wearables en tiempo real</span>
+ </label>
+ <span class="slider-value" id="valFatigue">35%</span>
+ </div>
+ <input type="range" id="inputFatigue" min="10" max="90" value="35" class="custom-slider">
+ </div>
+
+ <!-- Climate -->
+ <div class="slider-control">
+ <div class="slider-info">
+ <label for="inputClimate">
+  <span class="label-title">Humedad y Microclima</span>
+  <span class="label-desc">Incidencia térmica en el Estadio</span>
+ </label>
+ <span class="slider-value" id="valClimate">60%</span>
+ </div>
+ <input type="range" id="inputClimate" min="0" max="100" value="60" class="custom-slider">
+ </div>
+
+ <!-- Social Sentiment -->
+ <div class="slider-control">
+ <div class="slider-info">
+ <label for="inputSentiment">
+  <span class="label-title">Sentimiento Social (Arsenal)</span>
+  <span class="label-desc">Sinergia digital de la afición en vivo</span>
+ </label>
+ <span class="slider-value" id="valSentiment">75%</span>
+ </div>
+ <input type="range" id="inputSentiment" min="10" max="95" value="75" class="custom-slider">
+ </div>
+
+ <!-- Tactical Toggle -->
+ <div class="toggle-control">
+ <div class="toggle-info">
+ <span class="toggle-title">Alineación Ofensiva Arsenal</span>
+ <span class="toggle-desc">Sustitución táctica por delantero estrella</span>
+ </div>
+ <label class="switch">
+ <input type="checkbox" id="inputTactics">
+ <span class="switch-slider"></span>
+ </label>
+ </div>
+ </div>
+ </div>
+
+ <!-- Explainable AI Panel -->
+ <div class="xai-panel">
+ <div class="xai-header">
+ <svg class="icon-ai" viewBox="0 0 24 24" width="16" height="16">
+ <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+ </svg>
+ <span>COMENTARIO EXPLICATIVO DE LA IA (XAI)</span>
+ </div>
+ <p id="xaiCommentary">Analizando señales multimodales... El nivel de fatiga del PSG (35%) es óptimo, permitiéndole mantener la presión alta. Sin embargo, el alto sentimiento favorable hacia Arsenal en redes sociales y la humedad del 60% sugieren una resistencia física que favorece transiciones rápidas.</p>
+ </div>
+
+ <!-- SECCIÓN DINÁMICA DE APUESTA.IA (ESTADÍSTICAS Y BANCA) -->
+ {{DYNAMIC_STATS_AND_BETS}}
+ </section>
+
+ <!-- COLUMN 2: INEGI DATA & RESPONSIBLE BETTING -->
+ <section class="dashboard-column flex-column">
+ 
+ <!-- CARD 2.1: INEGI MOPRADEF -->
+ <div class="dashboard-card">
+ <div class="card-header border-accent">
+ <div class="card-title-group">
+ <span class="card-badge-accent">MÉTRICAS 2025-2026</span>
+ <h2>Inteligencia y Práctica Deportiva Nacional</h2>
+ </div>
+ </div>
+ <p class="card-intro">Análisis interactivo cruzando los hábitos deportivos de la población mexicana (INEGI MOPRADEF) y el balance de la Liga MX.</p>
+
+ <!-- Interactive Tabs for INEGI stats -->
+ <div class="inegi-tabs">
+ <button class="tab-btn active" data-tab="active-pop">Actividad Física</button>
+ <button class="tab-btn" data-tab="gender-gap">Brecha de Género</button>
+ <button class="tab-btn" data-tab="frequency">Frecuencia</button>
+ <button class="tab-btn" data-tab="ligamx-balance">Liga MX 25/26</button>
+ </div>
+
+ <!-- Interactive Chart Container -->
+ <div class="inegi-chart-box">
+ <div class="chart-bars-wrapper" id="inegiChartWrapper">
+ <!-- Will be populated dynamically by JS -->
+ </div>
+ </div>
+
+ <!-- Leaders Table Container -->
+ <div class="inegi-leaders-table" id="inegiLeadersTable" style="display: none;">
+ <!-- Will be populated dynamically by JS -->
+ </div>
+
+ <!-- MOPRADEF IA Insight -->
+ <div class="mopradef-insight-card">
+ <div class="insight-title"> ELECTRICO INSIGHT PREDICTIVO DE LA IA</div>
+ <p id="mopradefInsightText">
+ El 44.5% de los mexicanos mayores de 18 años se mantiene activo (pico en 10 años). La IA correlaciona este incremento con un aumento del 14.8% en la resistencia de canteranos menores de la Liga MX, influyendo positivamente en las métricas de alta intensidad física.
+ </p>
+ </div>
+ </div>
+
+ <!-- CARD 2.2: CALCULADORA DE COBERTURAS (HEDGING SIMULATOR) -->
+ <div class="dashboard-card hedging-card">
+ <div class="card-header border-glow">
+ <div class="card-title-group">
+ <span class="card-badge-accent" style="background: rgba(0, 255, 102, 0.08); color: var(--neon-green); border-color: rgba(0, 255, 102, 0.3);">OPTIMIZADOR DE RIESGO</span>
+ <h2 style="font-size: 1.15rem; margin: 0;">Calculadora de Cobertura</h2>
+ </div>
+ <div class="preset-container">
+ <button class="preset-btn active" id="presetPsgToluca">Cargar $100 PSG + Toluca</button>
+ </div>
+ </div>
+ 
+ <p class="card-intro">Simula el impacto de dividir tu banca en apuestas sencillas asíncronas para amortizar pérdidas o asegurar ganancias anticipadas.</p>
+ 
+ <!-- Input Fields Section -->
+ <div class="hedging-inputs">
+ <!-- Bet 1 (PSG) -->
+ <div class="bet-input-group">
+ <div class="bet-group-header" style="color: var(--neon-cyan);">
+ <span>Apuesta Temprana (11:00 hrs)</span>
+ </div>
+ <div class="inputs-row">
+ <div class="field-item">
+  <label for="hedgingTeam1">Selección / Equipo</label>
+  <input type="text" id="hedgingTeam1" value="PSG (vs Arsenal)" class="custom-text-input">
+ </div>
+ <div class="field-item">
+  <label for="hedgingOdds1">Momio / Cuota</label>
+  <input type="number" id="hedgingOdds1" value="2.28" step="0.01" min="1.01" class="custom-num-input">
+ </div>
+ <div class="field-item">
+  <label for="hedgingStake1">Monto ($)</label>
+  <input type="number" id="hedgingStake1" value="100" step="5" min="10" class="custom-num-input">
+ </div>
+ </div>
+ </div>
+
+ <!-- Bet 2 (Toluca) -->
+ <div class="bet-input-group">
+ <div class="bet-group-header" style="color: var(--neon-orange);">
+ <span>Apuesta Tardía (18:00 hrs)</span>
+ </div>
+ <div class="inputs-row">
+ <div class="field-item">
+  <label for="hedgingTeam2">Selección / Equipo</label>
+  <input type="text" id="hedgingTeam2" value="Toluca (vs Tigres)" class="custom-text-input">
+ </div>
+ <div class="field-item">
+  <label for="hedgingOdds2">Momio / Cuota</label>
+  <input type="number" id="hedgingOdds2" value="1.909" step="0.01" min="1.01" class="custom-num-input">
+ </div>
+ <div class="field-item">
+  <label for="hedgingStake2">Monto ($)</label>
+  <input type="number" id="hedgingStake2" value="100" step="5" min="10" class="custom-num-input">
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Scenarios Result Grid -->
+ <div class="scenarios-grid">
+ <!-- Scenario 1: Ganan Ambos -->
+ <div class="scenario-result-card win-win" id="resultCardBoth">
+ <div class="scenario-meta">
+ <span class="scenario-badge">GANAN AMBOS Ambos Ganan</span>
+ <span class="scenario-math" id="mathBoth">$100×1.909 + $100×2.28</span>
+ </div>
+ <div class="scenario-values">
+ <div class="val-block">
+  <span class="val-label">Retorno</span>
+  <span class="val-amount" id="returnBoth">$418.90</span>
+ </div>
+ <div class="val-block">
+  <span class="val-label">Neto</span>
+  <span class="val-amount profit" id="netBoth">+$218.90</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Scenario 2: Gana 1 Solo -->
+ <div class="scenario-result-card win-lose-1" id="resultCardOnly1">
+ <div class="scenario-meta">
+ <span class="scenario-badge" id="badgeOnly1">SOLO Solo PSG Gana</span>
+ <span class="scenario-math" id="mathOnly1">$100×2.28</span>
+ </div>
+ <div class="scenario-values">
+ <div class="val-block">
+  <span class="val-label">Retorno</span>
+  <span class="val-amount" id="returnOnly1">$228.00</span>
+ </div>
+ <div class="val-block">
+  <span class="val-label">Neto</span>
+  <span class="val-amount profit" id="netOnly1">+$28.00</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Scenario 3: Gana 2 Solo -->
+ <div class="scenario-result-card win-lose-2" id="resultCardOnly2">
+ <div class="scenario-meta">
+ <span class="scenario-badge" id="badgeOnly2">SOLO Solo Toluca Gana</span>
+ <span class="scenario-math" id="mathOnly2">$100×1.909</span>
+ </div>
+ <div class="scenario-values">
+ <div class="val-block">
+  <span class="val-label">Retorno</span>
+  <span class="val-amount" id="returnOnly2">$190.90</span>
+ </div>
+ <div class="val-block">
+  <span class="val-label">Neto</span>
+  <span class="val-amount loss" id="netOnly2">-$9.10</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Scenario 4: Pierden Ambos -->
+ <div class="scenario-result-card lose-lose" id="resultCardNone">
+ <div class="scenario-meta">
+ <span class="scenario-badge">PIERDEN AMBOS Ambos Pierden</span>
+ <span class="scenario-math" id="mathNone">$0.00</span>
+ </div>
+ <div class="scenario-values">
+ <div class="val-block">
+  <span class="val-label">Retorno</span>
+  <span class="val-amount">$0.00</span>
+ </div>
+ <div class="val-block">
+  <span class="val-label">Neto</span>
+  <span class="val-amount loss" id="netNone">-$200.00</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Módulo de Arbitraje en Vivo (Segundo Tiempo) -->
+ <div class="bet-input-group live-arbitrage-box" style="border: 1px solid rgba(0, 240, 255, 0.15); background: linear-gradient(135deg, rgba(0, 240, 255, 0.02), rgba(0, 0, 0, 0.35)); margin-top: 1rem; margin-bottom: 1rem;">
+ <div class="bet-group-header" style="color: var(--neon-cyan); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(0, 240, 255, 0.15);">
+ <span style="font-size: 0.8rem; font-weight: 800;"> ELECTRICO MÓDULO DE ARBITRAJE EN VIVO (SEGUNDO TIEMPO)</span>
+ <span class="live-pulse"></span>
+ </div>
+ <p style="font-size: 0.72rem; color: var(--text-muted); margin: 0; line-height: 1.4;">
+ Si el primer partido (apuesta temprana) va ganando, ingresa el momio de contra-apuesta en vivo (Empate o rival) para bloquear ganancias garantizadas al 100% sin importar cómo termine el día.
+ </p>
+ 
+ <div class="inputs-row" style="grid-template-columns: 1fr 1fr; margin-top: 0.5rem; gap: 1rem;">
+ <div class="field-item">
+ <label for="liveHedgeOdds" style="color: var(--neon-cyan); font-weight: 700;">Momio Contra-Apuesta</label>
+ <input type="number" id="liveHedgeOdds" value="3.50" step="0.05" min="1.01" class="custom-num-input" style="border-color: rgba(0, 240, 255, 0.25);">
+ </div>
+ <div class="field-item" style="justify-content: center;">
+ <div style="font-size: 0.72rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.25rem;">
+  <div>Cobertura sugerida: <strong id="liveHedgeStake" style="color: var(--neon-cyan); font-family: monospace;">$65.14</strong></div>
+  <div>Ganancia bloqueada: <strong id="liveHedgeNet" style="color: var(--neon-green); font-family: monospace;">+$62.86</strong></div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Interactive Hedging Advice Panel -->
+ <div class="hedging-advice-box" id="hedgingAdviceBox">
+ <div class="advice-header">
+ <span>ESCUDO ANÁLISIS DE COBERTURA ACTIVO</span>
+ </div>
+ <p id="hedgingAdviceText">
+ ¡Estrategia asíncrona ideal! Si el primer partido (PSG) resulta victorioso, aseguras una ganancia neta de +$28.00, eliminando el estrés del segundo partido. En caso de fallo temprano, Toluca actúa como amortiguador reteniendo el 95.5% del capital total.
+ </p>
+ </div>
+ </div>
+
+ <!-- CARD 2.3: RESPONSIBLE GAMING (IA GUARDIAN) -->
+ <div class="dashboard-card guardian-card" id="guardianCard">
+ <div class="card-header border-shield">
+ <div class="card-title-group">
+ <span class="shield-badge">GUARDIÁN ÉTICO</span>
+ <h2>Guardia de Juego Responsable</h2>
+ </div>
+ <label class="switch">
+ <input type="checkbox" id="btnToggleGuardian">
+ <span class="switch-slider"></span>
+ </label>
+ </div>
+ 
+ <p class="guardian-desc">El primer sistema del mundo que monitoriza tus parámetros de apuestas para evitar conductas de riesgo y asegurar la diversión saludable.</p>
+ 
+ <!-- Stress Dashboard & Safe Betting Area -->
+ <div class="guardian-dashboard">
+ <div class="stress-meter-box">
+ <div class="stress-meter-header">
+ <span>Índice de Estrés de Juego</span>
+ <span id="stressValue" class="stress-val-safe">18% (Seguro)</span>
+ </div>
+ <div class="stress-progress-bg">
+ <div id="stressProgressBar" class="stress-progress-fill" style="width: 18%"></div>
+ </div>
+ </div>
+
+ <div class="guardian-action-area">
+ <button class="btn-bet" id="btnPlaceBet">Simular Apuesta de 100 MXN</button>
+ <button class="btn-bet-disabled" id="btnBetDisabled" style="display:none;" disabled>Apuesta Bloqueada (Límite Superado)</button>
+ <span class="guardian-tip" id="guardianTip">Tu ritmo cardíaco simulado y frecuencia de apuestas están dentro de la zona de juego recreativo.</span>
+ </div>
+ </div>
+ </section>
+ 
+ <!-- HISTORIAL DE PREDICCIONES DINÁMICO (TABLA DE ALTO RENDIMIENTO) -->
+ <section class="dashboard-card full-width-column" style="grid-column: 1 / -1; margin-top: 1rem;">
+ <div class="card-header border-glow" style="border-bottom: 1px solid rgba(0, 240, 255, 0.15); padding-bottom: 0.75rem;">
+ <div class="card-title-group">
+ <span class="card-badge-accent" style="background: rgba(0, 240, 255, 0.08); color: var(--neon-cyan); border-color: rgba(0, 240, 255, 0.3); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; padding: 0.15rem 0.5rem; border-radius: 4px;">REGISTRO HISTÓRICO</span>
+ <h2 style="font-size: 1.15rem; margin: 0; color: #fff;">Historial Completo de Inferencia Predictiva</h2>
+ </div>
+ </div>
+ <div class="table-responsive" style="overflow-x: auto; margin-top: 0.5rem;">
+ {{DYNAMIC_PREDICTIONS_TABLE}}
+ </div>
+ </section>
+ </div>
+ </main>
+
+ <footer class="app-footer">
+ <p>&copy; 2026 APUESTA.IA - Basado en la obsolescencia metodológica de WSC Sports y datos oficiales del MOPRADEF 2025 de INEGI.</p>
+ </footer>
+
+ <script src="js/main.js"></script>
+</body>
+</html>
