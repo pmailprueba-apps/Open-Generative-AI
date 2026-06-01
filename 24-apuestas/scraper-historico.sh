@@ -9,7 +9,7 @@
 set -euo pipefail
 TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 LOGFILE="/tmp/apuestas-scraper.log"
-DB="node /Users/macbook/Proyectos/24-apuestas/apuestas-db.js"
+DB="node /app/apuestas-db.js"
 
 log() { echo "[$TIMESTAMP] $1" | tee -a "$LOGFILE"; }
 scrape() {

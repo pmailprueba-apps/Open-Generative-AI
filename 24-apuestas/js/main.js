@@ -97,6 +97,112 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPlaceBet = document.getElementById('btnPlaceBet');
     const btnBetDisabled = document.getElementById('btnBetDisabled');
     const guardianTip = document.getElementById('guardianTip');
+    const btnRunScout = document.getElementById('btnRunScout');
+
+    // Scout running state
+    let scoutRunning = false;
+    let scoutPollInterval = null;
+    const btnScoutText = document.getElementById('btnScoutText');
+    const scoutStatusIndicator = document.getElementById('scoutStatusIndicator');
+
+    // Poll scout status on load & periodically
+    function pollScoutStatus() {
+        fetch('/scout/status')
+            .then(r => r.json())
+            .then(data => {
+                const wasRunning = scoutRunning;
+                scoutRunning = data.running;
+                updateScoutUI();
+                if (wasRunning && !scoutRunning) {
+                    // Scout just finished
+                    showScoutNotification('✅ SCOUT finalizado');
+                }
+            })
+            .catch(() => {});
+    }
+
+    function updateScoutUI() {
+        if (!btnRunScout || !btnScoutText || !scoutStatusIndicator) return;
+        if (scoutRunning) {
+            btnRunScout.style.borderColor = 'var(--neon-red)';
+            btnRunScout.style.color = 'var(--neon-red)';
+            btnRunScout.style.background = 'rgba(255, 51, 102, 0.1)';
+            btnScoutText.textContent = 'DETENER SCOUT';
+            btnRunScout.disabled = false;
+            scoutStatusIndicator.style.display = 'inline-block';
+            scoutStatusIndicator.style.background = 'var(--neon-green)';
+        } else {
+            btnRunScout.style.borderColor = 'var(--neon-cyan)';
+            btnRunScout.style.color = 'var(--neon-cyan)';
+            btnRunScout.style.background = 'rgba(0, 240, 255, 0.1)';
+            btnScoutText.textContent = 'INICIAR SCOUT';
+            btnRunScout.disabled = false;
+            scoutStatusIndicator.style.display = 'none';
+        }
+    }
+
+    function showScoutNotification(msg) {
+        const old = document.getElementById('scoutToast');
+        if (old) old.remove();
+        const toast = document.createElement('div');
+        toast.id = 'scoutToast';
+        toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: rgba(11,15,25,0.95); border: 1px solid rgba(0,255,102,0.3); color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; z-index: 9999; backdrop-filter: blur(12px); box-shadow: 0 8px 30px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease;';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.5s'; setTimeout(() => toast.remove(), 500); }, 4000);
+    }
+
+    if (btnRunScout) {
+        btnRunScout.addEventListener('click', () => {
+            if (scoutRunning) {
+                // STOP
+                if (!confirm('¿Detener el SCOUT en ejecución?')) return;
+                fetch('/scout/stop', { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        scoutRunning = false;
+                        updateScoutUI();
+                        showScoutNotification('⏹ SCOUT detenido');
+                    })
+                    .catch(() => alert('Error al detener SCOUT'));
+                return;
+            }
+
+            // START
+            if (!confirm('¿Iniciar el Agente SCOUT?\n\nSe ejecutará scraper-historico.sh para recolectar datos de 14+ fuentes.')) return;
+
+            btnScoutText.textContent = 'INICIANDO...';
+            btnRunScout.disabled = true;
+
+            fetch('/run-scout', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'started') {
+                        scoutRunning = true;
+                        updateScoutUI();
+                        showScoutNotification('▶ SCOUT iniciado');
+                    } else if (data.status === 'complete') {
+                        scoutRunning = false;
+                        updateScoutUI();
+                        showScoutNotification('✅ SCOUT completado con éxito');
+                    } else if (data.error) {
+                        alert('Error: ' + data.error);
+                        scoutRunning = false;
+                        updateScoutUI();
+                    }
+                })
+                .catch(err => {
+                    alert('Fallo de conexión');
+                    scoutRunning = false;
+                    updateScoutUI();
+                });
+        });
+    }
+
+    // Poll every 3 seconds for status changes
+    pollScoutStatus();
+    if (scoutPollInterval) clearInterval(scoutPollInterval);
+    scoutPollInterval = setInterval(pollScoutStatus, 3000);
 
     // State Variables
     let currentMatch = 'psg-ars';
@@ -109,21 +215,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // LIVE MATCH SIMULATION (CLOCK TICK)
     // -------------------------------------------------------------
+    function setPSGFinal() {
+        scoreHomeEl.textContent = "2";
+        scoreAwayEl.textContent = "1";
+        matchTimeEl.textContent = "Finalizado";
+        matchTimeEl.style.color = "var(--neon-green)";
+        liveMatchIndicator.textContent = "FINALIZADO";
+        liveMatchIndicator.style.background = "var(--neon-green)";
+        nameHome.textContent = "PSG";
+        nameAway.textContent = "Arsenal";
+        shieldHome.textContent = "PSG";
+        shieldAway.textContent = "ARS";
+        matchLeagueText.textContent = "UEFA Champions League • Final";
+        valHomePercent.textContent = "45%";
+        valDrawPercent.textContent = "33%";
+        valAwayPercent.textContent = "22%";
+    }
+    setPSGFinal();
+
     setInterval(() => {
-        if (currentMatch !== 'psg-ars') return;
+        if (currentMatch === 'psg-ars') return;
+
         matchSecond += 1;
         if (matchSecond >= 60) {
             matchSecond = 0;
             matchMinute += 1;
-        }
-        
-        // Loop time at 90 minutes
-        if (matchMinute >= 90) {
-            matchMinute = 68;
-            matchSecond = 14;
-            // Randomize score sometimes on loop
-            scoreHomeEl.textContent = Math.random() > 0.6 ? "2" : "1";
-            scoreAwayEl.textContent = Math.random() > 0.7 ? "2" : "1";
         }
 
         const secStr = matchSecond < 10 ? '0' + matchSecond : matchSecond;
@@ -293,43 +409,21 @@ document.addEventListener('DOMContentLoaded', () => {
     matchSelector.addEventListener('change', (e) => {
         currentMatch = e.target.value;
         if (currentMatch === 'psg-ars') {
-            // Restore PSG vs Arsenal Live Simulation
-            liveMatchIndicator.textContent = "EN VIVO";
-            liveMatchIndicator.style.background = "var(--neon-red)";
-            matchLeagueText.textContent = "UEFA Champions League • Final";
-            
-            shieldHome.textContent = "🗼";
-            nameHome.textContent = "PSG";
-            shieldAway.textContent = "🔫";
-            nameAway.textContent = "Arsenal";
-
-            scoreHomeEl.textContent = "1";
-            scoreAwayEl.textContent = "1";
-            matchTimeEl.textContent = `Min ${matchMinute}:${matchSecond < 10 ? '0' + matchSecond : matchSecond}`;
-
-            // Re-enable inputs
-            inputFatigue.disabled = false;
-            inputClimate.disabled = false;
-            inputSentiment.disabled = false;
-            inputTactics.disabled = false;
-
-            // Restore current slider values
-            valFatigue.textContent = `${inputFatigue.value}%`;
-            valClimate.textContent = `${inputClimate.value}%`;
-            valSentiment.textContent = `${inputSentiment.value}%`;
-
+            setPSGFinal();
+            inputFatigue.disabled = true;
+            inputClimate.disabled = true;
+            inputSentiment.disabled = true;
+            inputTactics.disabled = true;
             calienteOddsPanel.style.display = "none";
-
-            recalculateProbabilities();
         } else if (currentMatch === 'tol-tig') {
             // Set Toluca vs Tigres Up-coming Scenario Simulation
-            liveMatchIndicator.textContent = "PRÓXIMO";
+            liveMatchIndicator.textContent = "STANDBY";
             liveMatchIndicator.style.background = "var(--neon-cyan)";
             matchLeagueText.textContent = "CONCACAF Champions Cup • Final";
             
-            shieldHome.textContent = "😈";
+            shieldHome.textContent = "TOL";
             nameHome.textContent = "Toluca";
-            shieldAway.textContent = "🐯";
+            shieldAway.textContent = "TIG";
             nameAway.textContent = "Tigres UANL";
 
             scoreHomeEl.textContent = "-";

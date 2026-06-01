@@ -4,7 +4,7 @@
 # Revisa fuentes web para obtener el marcador real y actualiza la DB
 
 LOG="/tmp/apuestas-resultados.log"
-DB="node /Users/macbook/Proyectos/24-apuestas/apuestas-db.js"
+DB="node /app/apuestas-db.js"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M')] $1" | tee -a "$LOG"; }
 

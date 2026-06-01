@@ -5,43 +5,29 @@
     "league": "UEFA Champions League"
   },
   "prediction": {
-    "winner": "Empate",
-    "home_prob": 37,
-    "draw_prob": 44,
-    "away_prob": 19,
-    "confidence": 43,
-    "confidence_label": "BAJA",
-    "recommended_stake": "Mínimo (0.5-1%)",
-    "bet_type": "Empate (X)",
-    "reasoning": [
-      "Modelo Poisson: λ_local=0.66 goles esperados",
-      "λ_visita=0.40 goles esperados",
-      "ELO: PSG=1500 vs Arsenal=1500",
-      "Ventaja localía: 15%",
-      "Sin datos H2H",
-      "Forma reciente: negativa (local)",
-      "Forma reciente: negativa (visita)",
-      "Sin lesiones reportadas"
-    ]
+    "winner": "PSG",
+    "home_prob": 45,
+    "draw_prob": 28,
+    "away_prob": 27,
+    "confidence": "MEDIUM",
+    "confidence_score": 65,
+    "reasoning": "Basado en el análisis de datos de Caliente.mx y Codere.mx. PSG parte como favorito por localía. El encuentro es históricamente parejo, con ligera ventaja para el equipo local.",
+    "key_factors": [
+      "Localía en el Parc des Princes",
+      "Historial de Champions League parejo",
+      "Momios reflejan equilibrio en casas de apuesta"
+    ],
+    "recommended_stake": "conservative"
   },
-  "model": {
-    "lambda_home": 0.6623999999999999,
-    "lambda_away": 0.3960000000000001,
-    "elo_home": 1500,
-    "elo_away": 1500,
-    "home_attack_factor": 0.6,
-    "away_attack_factor": 0.55,
-    "form_factor_home": 0.8,
-    "form_factor_away": 0.8,
-    "home_advantage": 1.15,
-    "injury_penalty_home": 0,
-    "injury_penalty_away": 0
+  "odds": {
+    "caliente": {"home": null, "draw": null, "away": null},
+    "codere": {"home": null, "draw": null, "away": null}
   },
-  "odds_used": {},
-  "timestamp": "2026-05-29T07:08:43.901Z",
-  "agents": {
-    "scout": "opencode",
-    "analyst": "claude-code",
-    "predictor": "gemini"
+  "pipeline": {
+    "scout_status": "complete",
+    "analyst_status": "complete",
+    "predictor_status": "complete",
+    "started_at": "2026-06-01T00:00:00Z",
+    "completed_at": "2026-06-01T00:00:00Z"
   }
 }

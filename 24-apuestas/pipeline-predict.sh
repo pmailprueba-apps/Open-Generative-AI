@@ -156,5 +156,5 @@ echo ""
 echo "Predicción completa: $PREDICTION_OUTPUT"
 
 # Guardar en el directorio del proyecto para referencia
-cp "$PREDICTION_OUTPUT" "/Users/macbook/Proyectos/24-apuestas/ultima_prediccion.json" 2>/dev/null || true
+cp "$PREDICTION_OUTPUT" "/app/ultima_prediccion.json" 2>/dev/null || true
 echo "Predicción copiada a 24-apuestas/ultima_prediccion.json"

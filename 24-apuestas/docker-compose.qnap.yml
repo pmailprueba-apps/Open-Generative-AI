@@ -1,0 +1,30 @@
+services:
+  prediction-api:
+    build: .
+    container_name: apuestas-api
+    ports:
+      - "3456:3456"
+    environment:
+      - PORT=3456
+      - DB_PATH=/data/apuestas-data.json
+      - DATA_FILE=/data/datos_partido.json
+      - PRED_FILE=/data/ultima_prediccion.json
+    volumes:
+      - apuestas-data:/data
+    restart: unless-stopped
+
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile.scraper
+    container_name: apuestas-scraper
+    profiles:
+      - scraper
+    volumes:
+      - apuestas-data:/data
+    environment:
+      - DB_PATH=/data/apuestas-data.json
+    restart: "no"
+
+volumes:
+  apuestas-data:

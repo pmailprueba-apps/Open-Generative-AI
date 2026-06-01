@@ -240,7 +240,7 @@ if (require.main === module) {
   const away = args.away || 'Arsenal';
 
   // Try to load existing data from last run
-  const dataFile = '/Users/macbook/Proyectos/24-apuestas/datos_partido.json';
+  const dataFile = process.env.DATA_FILE || path.join(__dirname, 'datos_partido.json');
   let savedData = {};
   try {
     savedData = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
@@ -283,7 +283,7 @@ if (require.main === module) {
   }
 
   // Save prediction
-  const predPath = '/Users/macbook/Proyectos/24-apuestas/ultima_prediccion.json';
+  const predPath = process.env.PRED_FILE || path.join(__dirname, 'ultima_prediccion.json');
   fs.writeFileSync(predPath, JSON.stringify(result, null, 2));
 }
 

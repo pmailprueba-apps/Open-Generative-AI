@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'apuestas-data.json');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'apuestas-data.json');
 
 function loadDB() {
   try { return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8')); }
