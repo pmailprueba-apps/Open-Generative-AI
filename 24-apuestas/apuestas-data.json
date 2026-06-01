@@ -31,9 +31,9 @@
       "away_odds": 3.85,
       "source": "caliente.mx",
       "scraped_at": "2026-05-29T06:00:00.000Z",
-      "result": null,
-      "home_score": null,
-      "away_score": null,
+      "result": "D",
+      "home_score": 1,
+      "away_score": 1,
       "bet_status": "confirmed",
       "bet_amount": 100,
       "bet_odds": 1.943,
@@ -52,9 +52,9 @@
       "away_odds": 3.8,
       "source": "predictor",
       "scraped_at": "2026-06-01T23:37:46.745Z",
-      "result": null,
-      "home_score": null,
-      "away_score": null,
+      "result": "D",
+      "home_score": 1,
+      "away_score": 1,
       "bet_status": null,
       "bet_amount": null,
       "bet_odds": null,
@@ -108,8 +108,8 @@
         "codere.mx"
       ],
       "created_at": "2026-05-29T06:00:00.000Z",
-      "actual_result": null,
-      "was_correct": null
+      "actual_result": "D",
+      "was_correct": false
     }
   ],
   "sources": {
