@@ -7,3 +7,9 @@ BACKUPS/
 public/
 dist/
 build/
+
+# Repos externos independientes
+Open-Generative-AI/
+Open-Higgsfield-AI/
+hermes-agent/
+marketingskills/

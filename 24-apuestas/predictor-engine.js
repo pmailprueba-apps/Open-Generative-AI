@@ -197,16 +197,28 @@ function predict(home, away, options = {}) {
       confidence_label: confidenceLabel,
       recommended_stake: stakeRec,
       bet_type: winner === home ? `Local (1)` : winner === away ? `Visitante (2)` : 'Empate (X)',
-      reasoning: [
-        `Modelo Poisson: λ_local=${Math.max(lambdaHome, 0.1).toFixed(2)} goles esperados`,
-        `λ_visita=${Math.max(lambdaAway, 0.1).toFixed(2)} goles esperados`,
-        `ELO: ${home}=${homeElo} vs ${away}=${awayElo}`,
-        `Ventaja localía: ${(homeAdvantage * 100 - 100).toFixed(0)}%`,
-        h2h.length > 0 ? `${h2h.length} enfrentamientos previos analizados` : 'Sin datos H2H',
-        `Forma reciente: ${homeFormStrength > 0.5 ? 'positiva' : 'negativa'} (local)`,
-        `Forma reciente: ${awayFormStrength > 0.5 ? 'positiva' : 'negativa'} (visita)`,
-        injuries.length > 0 ? `${injuries.length} lesiones consideradas` : 'Sin lesiones reportadas'
-      ].filter(Boolean)
+      reasoning: (function() {
+        const r = [];
+        r.push(`Modelo Poisson: λ_local=${Math.max(lambdaHome, 0.1).toFixed(2)} goles esperados`);
+        r.push(`λ_visita=${Math.max(lambdaAway, 0.1).toFixed(2)} goles esperados`);
+        r.push(`ELO: ${home}=${homeElo} vs ${away}=${awayElo}`);
+        r.push(`Ventaja localía: ${(homeAdvantage * 100 - 100).toFixed(0)}%`);
+        if (h2h.length > 0) r.push(`${h2h.length} enfrentamientos previos analizados`);
+        if (homeForm.length > 0) r.push(`Forma reciente local: ${homeFormStrength > 0.5 ? 'positiva' : 'negativa'}`);
+        if (awayForm.length > 0) r.push(`Forma reciente visita: ${awayFormStrength > 0.5 ? 'positiva' : 'negativa'}`);
+        if (injuries.length > 0) r.push(`${injuries.length} lesiones consideradas`);
+        // Odds status
+        const oddsAvailable = odds && odds.caliente && odds.caliente.home && odds.caliente.home !== null;
+        if (oddsAvailable) {
+          r.push(`✅ Blend activado: 70% Poisson + 30% odds de mercado (Local=${odds.caliente.home}, Empate=${odds.caliente.draw}, Visita=${odds.caliente.away})`);
+        } else {
+          r.push(`⚠️  Sin odds de mercado — predicción basada solo en modelo Poisson puro`);
+          r.push(`💡 Para activar blend mercado: pasa odds manuales al script`);
+        }
+        // Data source honesty
+        r.push(`📡 Fuentes: ${oddsAvailable ? 'Caliente.mx (odds)' : 'FlashScore (partidos)'} + modelo matemático`);
+        return r;
+      })()
     },
     model: {
       lambda_home: Math.max(lambdaHome, 0.1),

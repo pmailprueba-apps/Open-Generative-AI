@@ -210,6 +210,30 @@
  </div>
  </div>
 
+ <!-- Manual Odds Input Panel -->
+ <div id="oddsInputPanel" class="what-if-panel" style="margin-top: 0.5rem;">
+ <div class="panel-header">
+ <h3 style="display: flex; align-items: center; gap: 6px;">📊 Entrada Manual de Odds</h3>
+ <p class="panel-subtitle">Si ves los momios en tu celular, ingrésalos aquí para activar el blend mercado + modelo Poisson.</p>
+ </div>
+ <div class="inputs-row" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+ <div class="field-item">
+ <label for="manualOddsHome" style="color: var(--neon-cyan); font-weight: 700;">Momio Local</label>
+ <input type="number" id="manualOddsHome" value="2.10" step="0.01" min="1.01" class="custom-num-input" placeholder="2.10">
+ </div>
+ <div class="field-item">
+ <label for="manualOddsDraw" style="color: #fff; font-weight: 700;">Momio Empate</label>
+ <input type="number" id="manualOddsDraw" value="3.40" step="0.01" min="1.01" class="custom-num-input" placeholder="3.40">
+ </div>
+ <div class="field-item">
+ <label for="manualOddsAway" style="color: var(--neon-orange); font-weight: 700;">Momio Visita</label>
+ <input type="number" id="manualOddsAway" value="3.80" step="0.01" min="1.01" class="custom-num-input" placeholder="3.80">
+ </div>
+ </div>
+ <button id="btnApplyOdds" style="margin-top: 0.75rem; width: 100%; background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(0,255,102,0.08)); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); padding: 0.6rem; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">🔗 APLICAR ODDS AL MODELO</button>
+ <div id="oddsStatusBadge" style="margin-top: 0.5rem; padding: 0.4rem 0.75rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-align: center; background: rgba(255,159,28,0.1); color: #ff9f1c; border: 1px solid rgba(255,159,28,0.25);">⚠️ Blend desactivado — solo Poisson puro</div>
+ </div>
+
  <!-- Explainable AI Panel -->
  <div class="xai-panel">
  <div class="xai-header">

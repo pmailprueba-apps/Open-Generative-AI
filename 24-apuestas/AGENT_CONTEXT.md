@@ -3,17 +3,20 @@
 <system_overview>
 Project Name: APUESTA.IA (24-apuestas)
 Path: /Users/macbook/Proyectos/24-apuestas
-Purpose: Multi-agent orchestration platform for sports betting predictions. Finds Positive Expected Value (EV+) bets by coordinating 3 distinct AI agents to scrape data, run mathematical models (Poisson + ELO), and compare outcomes against real bookmaker odds (Caliente.mx, Codere, etc.).
+Purpose: Multi-agent orchestration platform for sports betting predictions. Uses Poisson + ELO mathematical models. Real bookmaker odds SOLO si el usuario las ingresa manualmente — Caliente.mx está bloqueado por Cloudflare y no se puede raspar automáticamente.
 Environment: Local execution on MacBook (Node.js v25.9.0, Next.js).
 </system_overview>
 
 <architecture>
 The system relies on 3 main agents, coordinated by Mission Control (localhost:3000):
 
-1. SCOUT (ID: 187 - scraper/curl):
+1. SCOUT (ID: 187 — scraper/curl):
    - Role: Data extractor and scraper.
-   - Task: Scrapes 14+ active data sources (Caliente, Codere, FlashScore, ESPN, etc.) via cron jobs or manually (`scraper-historico.sh`).
-   - Output: Generates structured JSON files containing odds, stats, recent form, H2H, and injuries.
+   - Task: Scrapes available sources via curl/agent-browser.
+   - ⚠️ LIMITACIÓN: Caliente.mx bloqueado por Cloudflare. agent-browser tampoco pasa el challenge.
+   - Fuentes que SÍ funcionan: FlashScore, Codere blog, ESPN, Goal.com, RSSSF, FBref (vía curl).
+   - Odds reales: SOLO si el usuario las ingresa manualmente (parámetros en consultar.sh o dashboard).
+   - Output: JSON con datos disponibles. Sin odds → modelo usa solo Poisson puro.
 
 2. ANALYST (ID: 188 - claude-code):
    - Role: Statistical modeling.

@@ -992,6 +992,103 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
+    // MANUAL ODDS INPUT — Enviar odds al servidor
+    // -------------------------------------------------------------
+    const btnApplyOdds = document.getElementById('btnApplyOdds');
+    const manualOddsHome = document.getElementById('manualOddsHome');
+    const manualOddsDraw = document.getElementById('manualOddsDraw');
+    const manualOddsAway = document.getElementById('manualOddsAway');
+    const oddsStatusBadge = document.getElementById('oddsStatusBadge');
+
+    function updateOddsStatus(hasOdds) {
+        if (!oddsStatusBadge) return;
+        if (hasOdds) {
+            oddsStatusBadge.textContent = '✅ Blend activado: 70% Poisson + 30% odds de mercado';
+            oddsStatusBadge.style.background = 'rgba(0,255,102,0.1)';
+            oddsStatusBadge.style.color = 'var(--neon-green)';
+            oddsStatusBadge.style.borderColor = 'rgba(0,255,102,0.25)';
+        } else {
+            oddsStatusBadge.textContent = '⚠️ Blend desactivado — solo Poisson puro';
+            oddsStatusBadge.style.background = 'rgba(255,159,28,0.1)';
+            oddsStatusBadge.style.color = '#ff9f1c';
+            oddsStatusBadge.style.borderColor = 'rgba(255,159,28,0.25)';
+        }
+    }
+
+    // Check current odds status from server
+    function checkOddsStatus() {
+        fetch('/scout/status')
+            .then(r => r.json())
+            .then(data => {
+                // Also check datos_partido.json for odds
+                fetch('/last')
+                    .then(r => r.json())
+                    .then(pred => {
+                        const odds = pred?.odds_used?.caliente;
+                        updateOddsStatus(odds && odds.home);
+                    })
+                    .catch(() => {});
+            })
+            .catch(() => {});
+    }
+
+    if (btnApplyOdds) {
+        btnApplyOdds.addEventListener('click', () => {
+            const h = parseFloat(manualOddsHome?.value);
+            const d = parseFloat(manualOddsDraw?.value);
+            const a = parseFloat(manualOddsAway?.value);
+
+            if (!h || !d || !a || h < 1.01 || d < 1.01 || a < 1.01) {
+                alert('Ingresa momios válidos mayores a 1.01');
+                return;
+            }
+
+            btnApplyOdds.textContent = '⏳ APLICANDO...';
+            btnApplyOdds.disabled = true;
+
+            fetch('/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ odds: { caliente: { home: h, draw: d, away: a } } })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === 'stored') {
+                    updateOddsStatus(true);
+                    alert('✅ Odds aplicados al modelo. La próxima predicción usará blend mercado + Poisson.');
+                    // Recalcular predicción con estos odds
+                    const sel = document.getElementById('matchSelector');
+                    const matchOpt = sel?.value || 'psg-ars';
+                    const matches = {
+                        'psg-ars': { home: 'PSG', away: 'Arsenal', league: 'UEFA Champions League' },
+                        'tol-tig': { home: 'Toluca', away: 'Tigres', league: 'CONCACAF Champions Cup' },
+                        'pu-ca': { home: 'Pumas', away: 'Cruz Azul', league: 'Liga MX' }
+                    };
+                    const m = matches[matchOpt] || matches['psg-ars'];
+                    fetch('/predict-final', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(m)
+                    })
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d.prediction) {
+                            const msg = `🔄 Predicción recalculada con odds reales:\n${d.match.home} ${d.prediction.home_prob}% | Empate ${d.prediction.draw_prob}% | ${d.match.away} ${d.prediction.away_prob}%\n🏆 Ganador: ${d.prediction.winner} (${d.prediction.confidence}% confianza)`;
+                            alert(msg);
+                        }
+                    })
+                    .catch(() => {});
+                }
+            })
+            .catch(err => alert('Error al guardar odds: ' + err.message))
+            .finally(() => {
+                btnApplyOdds.textContent = '🔗 APLICAR ODDS AL MODELO';
+                btnApplyOdds.disabled = false;
+            });
+        });
+    }
+
+    // -------------------------------------------------------------
     // INIT APPLICATION
     // -------------------------------------------------------------
     // Render first tab
@@ -1002,4 +1099,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial hedging calculation
     recalculateHedging();
+
+    // Check odds status
+    checkOddsStatus();
 });
