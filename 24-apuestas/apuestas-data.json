@@ -104,6 +104,26 @@
       "bet_odds": null,
       "bet_recibo": null,
       "bet_selection": null
+    },
+    {
+      "id": "m_spurs_knicks_1780367084666",
+      "home": "New York Knicks",
+      "away": "San Antonio Spurs",
+      "league": "NBA",
+      "date": "2026-06-03T18:30",
+      "home_odds": 2.65,
+      "away_odds": 1.5,
+      "source": "caliente.mx",
+      "scraped_at": "2026-06-02T02:24:44.666Z",
+      "result": null,
+      "home_score": null,
+      "away_score": null,
+      "bet_status": "confirmed",
+      "bet_amount": 100,
+      "bet_odds": 1.5,
+      "bet_recibo": "2051019416",
+      "bet_selection": "San Antonio Spurs",
+      "sport": "basketball"
     }
   ],
   "predictions": [

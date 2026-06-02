@@ -348,6 +348,24 @@ ${winnerBanner}
   </div>
 </div>
 
+<!-- Banner de Apuesta Activa (destacado) -->
+${pendingMatches.length > 0 ? pendingMatches.map(m => `
+<div style="background: linear-gradient(135deg, rgba(0,240,255,0.08), rgba(0,255,102,0.03)); border: 2px solid var(--neon-cyan); border-radius: 16px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; animation: pulseGlow 2s infinite;">
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="font-size: 2rem; line-height: 1;">${m.sport === 'basketball' ? '🏀' : m.sport === 'baseball' ? '⚾' : '⚽'}</div>
+    <div>
+      <div style="font-size: 1.1rem; font-weight: 800; color: var(--neon-cyan);">APUESTA ACTIVA</div>
+      <div style="font-size: 0.95rem; color: #fff; font-weight: 600;">${m.home} vs ${m.away}</div>
+      <div style="font-size: 0.75rem; color: var(--text-muted);">${m.bet_selection} @ ${m.bet_odds} | ${m.league || ''} | Recibo #${m.bet_recibo}</div>
+    </div>
+  </div>
+  <div style="text-align: right;">
+    <div style="font-size: 0.75rem; color: var(--text-muted);">Posible retorno</div>
+    <div style="font-size: 1.8rem; font-weight: 800; color: var(--neon-green);">$${Math.round(m.bet_amount * m.bet_odds)}</div>
+    <div style="font-size: 0.8rem; color: var(--neon-green);">+$${Math.round(m.bet_amount * m.bet_odds - m.bet_amount)} neto</div>
+  </div>
+</div>`).join('') : ''}
+
 <!-- Apuestas Activas -->
 ${pendingMatches.length > 0 ? `
 <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.25rem; margin-top: 1rem;">

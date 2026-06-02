@@ -61,7 +61,10 @@ function predict(home, away, options = {}) {
   const stdDev = 11.5;
 
   // Probabilidades moneyline 1X2 (adaptado)
-  const probHome = normalCDF(0, spreadExpected, stdDev);
+  // normalCDF(0, mean, std) = P(X ≤ 0) cuando X ~ N(mean, std)
+  // Si spreadExpected > 0, home es favorito: P(home gana) = P(diferencia > 0)
+  // Si spreadExpected < 0, away es favorito
+  const probHome = 1 - normalCDF(0, spreadExpected, stdDev);
   const probAway = 1 - probHome;
   
   // Probabilidad de cubrir el spread (-3, -5, etc.)
@@ -85,11 +88,14 @@ function predict(home, away, options = {}) {
     homeEV = (probHome * calOdds.home) - 1;
     awayEV = (probAway * calOdds.away) - 1;
     const bestEV = Math.max(homeEV, awayEV);
+    const bestTeam = homeEV > awayEV ? home : away;
+    const bestOdds = homeEV > awayEV ? calOdds.home : calOdds.away;
     if (bestEV > 0.05) {
-      const team = homeEV > awayEV ? home : away;
-      const odds_ = homeEV > awayEV ? calOdds.home : calOdds.away;
-      const kelly = (odds_ - 1) * (homeEV > awayEV ? probHome : probAway) - (1 - (homeEV > awayEV ? probHome : probAway));
-      recommendation = `${team} (Moneyline) | EV: ${(bestEV*100).toFixed(2)}% | Kelly: ${(kelly * 0.25 * 100).toFixed(2)}%`;
+      const prob = homeEV > awayEV ? probHome : probAway;
+      const kelly = ((bestOdds - 1) * prob - (1 - prob)) / (bestOdds - 1);
+      recommendation = `${bestTeam} (Moneyline) | EV: +${(bestEV*100).toFixed(2)}% | Kelly: ${(kelly * 0.25 * 100).toFixed(2)}%`;
+    } else {
+      recommendation = `NO APOSTAR (mejor EV: ${bestTeam} ${(bestEV*100).toFixed(1)}%)`;
     }
   }
 

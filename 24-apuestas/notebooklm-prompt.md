@@ -101,3 +101,11 @@ Para cada área, proporcionar:
 - Incluir papers de 2015-2026 (investigación reciente)
 - Buscar específicamente casos de uso en LATAM (Liga MX, Brasileirão, Libertadores)
 - Si hay modelos contradictorios (ej. ML vs Poisson), incluir ambas perspectivas con evidencia
+
+---
+
+## 8. Estándares de Implementación (Jupyter & ML Best Practices)
+
+- **Implementación Analítica:** Todas las soluciones matemáticas propuestas deben estructurarse de tal forma que puedan implementarse en un entorno de **Jupyter Notebook (`.ipynb`)** para realizar análisis de datos exploratorio, aislando variables (ej. fatiga, altitud).
+- **Prevención de Bias Temporal:** Para los modelos predictivos y series de tiempo en fútbol, explicar cómo realizar una validación cruzada cronológica (*chronological split* o *walk-forward validation*) en lugar de un split aleatorio, para evitar la filtración de datos futuros (*data snooping bias*).
+- **Librerías Recomendadas:** Indicar claramente qué librerías de Python (`scikit-learn`, `xgboost`, `bigframes.ml`) y herramientas de evaluación (matrices de confusión, curvas ROC para 1X2) son las más óptimas para cada algoritmo de Machine Learning propuesto.
