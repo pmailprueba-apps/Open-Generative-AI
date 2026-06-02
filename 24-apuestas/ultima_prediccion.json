@@ -1,51 +1,51 @@
 {
   "match": {
-    "home": "Turkey W",
-    "away": "Germany",
+    "home": "Monterrey",
+    "away": "Pumas UNAM W",
     "league": "UEFA Champions League"
   },
   "prediction": {
-    "winner": "Germany",
-    "home_prob": 39,
-    "draw_prob": 37,
-    "away_prob": 24,
-    "confidence": 37,
+    "winner": "Empate",
+    "home_prob": 41,
+    "draw_prob": 38,
+    "away_prob": 21,
+    "confidence": 40,
     "confidence_label": "BAJA",
-    "recommended_stake": "Kelly Fraccional (1/4): 4.02% del Bankroll",
-    "expected_value": 1.6063688127571307,
-    "bet_type": "Visitante (2)",
+    "recommended_stake": "Kelly Fraccional (1/4): 2.86% del Bankroll",
+    "expected_value": 0.26154821283297736,
+    "bet_type": "Empate (X)",
     "reasoning": [
-      "Dixon-Coles (Poisson ajustado): λ_local=0.89, λ_visita=0.63",
-      "ELO: Turkey W=1589 vs Germany=1609",
+      "Dixon-Coles (Poisson ajustado): λ_local=0.88, λ_visita=0.54",
+      "ELO: Monterrey=1561 vs Pumas UNAM W=1564",
       "Ventaja localía: 15%",
       "Forma reciente local: positiva",
       "Forma reciente visita: positiva",
-      "📈 Mercado evaluado: Local=1.44, Empate=4.2, Visita=11",
-      "✅ EV POSITIVO detectado: +160.64% de retorno esperado sobre inversión.",
+      "📈 Mercado evaluado: Local=2.22, Empate=3.29, Visita=2",
+      "✅ EV POSITIVO detectado: +26.15% de retorno esperado sobre inversión.",
       "⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo."
     ]
   },
   "model": {
-    "lambda_home": 0.894846129236249,
-    "lambda_away": 0.6281556699040154,
-    "elo_home": 1589,
-    "elo_away": 1609,
-    "home_attack_factor": 0.5654993233292777,
-    "away_attack_factor": 0.5816256202814956,
-    "form_factor_home": 1.1466666666666667,
-    "form_factor_away": 1.2000000000000002,
+    "lambda_home": 0.8755740276966624,
+    "lambda_away": 0.5392159927461099,
+    "elo_home": 1561,
+    "elo_away": 1564,
+    "home_attack_factor": 0.5948193122939283,
+    "away_attack_factor": 0.5547489637305657,
+    "form_factor_home": 1.0666666666666667,
+    "form_factor_away": 1.08,
     "home_advantage": 1.15,
     "injury_penalty_home": 0,
     "injury_penalty_away": 0
   },
   "odds_used": {
     "caliente": {
-      "home": 1.44,
-      "draw": 4.2,
-      "away": 11
+      "home": 2.22,
+      "draw": 3.29,
+      "away": 2
     }
   },
-  "timestamp": "2026-06-02T01:42:14.348Z",
+  "timestamp": "2026-06-02T01:46:41.450Z",
   "agents": {
     "scout": "opencode",
     "analyst": "claude-code",

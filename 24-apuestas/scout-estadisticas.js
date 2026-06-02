@@ -168,8 +168,10 @@ async function searchTeam(name) {
       const nationalTeams = data.response.filter(r =>
         r.team.country && r.team.name.toLowerCase().includes(r.team.country.toLowerCase())
       );
-      const mxTeams = data.response.filter(r => r.team.country === 'Mexico');
-      if (mxTeams.length > 0) return mxTeams.map(r => r.team);
+      const priorityTeams = data.response.filter(r => 
+        r.team.country === 'Mexico' || r.team.country === 'USA' || r.team.country === 'Colombia'
+      );
+      if (priorityTeams.length > 0) return priorityTeams.map(r => r.team);
       if (nationalTeams.length > 0) return nationalTeams.map(r => r.team);
       return data.response.map(r => r.team) || [];
     }

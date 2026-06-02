@@ -44,7 +44,42 @@ function readBody(req, cb) {
 // ─── SCOUT PROCESS MANAGER ──────────────────────────────────────────
 let scoutProcess = null;
 let scoutLog = [];
+
+// ─── SCANNER PROCESS MANAGER ────────────────────────────────────────
+let scannerProcess = null;
+let scannerLog = [];
+
 const PROJECT_DIR = __dirname;
+
+function runScannerScript() {
+  return new Promise((resolve, reject) => {
+    const { spawn } = require('child_process');
+    const script = path.join(PROJECT_DIR, 'scanner-proactivo.js');
+    scannerLog = [];
+
+    scannerProcess = spawn('node', [script], {
+      cwd: PROJECT_DIR,
+      env: { ...process.env, PATH: process.env.PATH }
+    });
+
+    scannerProcess.stdout.on('data', (data) => {
+      const lines = data.toString().split('\n').filter(Boolean);
+      lines.forEach(l => scannerLog.push(l));
+    });
+
+    scannerProcess.stderr.on('data', (data) => {
+      const lines = data.toString().split('\n').filter(Boolean);
+      lines.forEach(l => scannerLog.push('[ERR] ' + l));
+    });
+
+    scannerProcess.on('close', (code) => {
+      scannerProcess = null;
+      if (code === 0) resolve();
+      else reject(new Error(`Scanner exited with code ${code}`));
+    });
+  });
+}
+
 
 function runScoutScript() {
   return new Promise((resolve, reject) => {
@@ -190,6 +225,28 @@ const server = http.createServer((req, res) => {
         running: scoutProcess !== null,
         logs: scoutLog.slice(-20)
       });
+    }
+
+    // POST /scan-upcoming — Ejecuta el RADAR PROACTIVO
+    if (pathname === '/scan-upcoming' && method === 'POST') {
+      if (scannerProcess) {
+        return send(res, { error: 'El Radar Escáner ya está en ejecución', status: 'running' });
+      }
+      runScannerScript().catch(() => {}); // fire and forget
+      return send(res, { status: 'started', message: 'Escáner Radar iniciado' });
+    }
+
+    // GET /scan-status — Lee los logs del Radar Escáner
+    if (pathname === '/scan-status' && method === 'GET') {
+      let report = null;
+      try {
+        const reportPath = path.join(PROJECT_DIR, 'radar-report.json');
+        if (fs.existsSync(reportPath)) {
+          report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+        }
+      } catch (e) {}
+      
+      return send(res, { running: !!scannerProcess, logs: scannerLog, report: report });
     }
 
     // GET / o /dashboard — HTML Premium e interactivo con Inyección de Datos Reales de apuestas-db.js

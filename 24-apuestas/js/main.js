@@ -97,112 +97,106 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPlaceBet = document.getElementById('btnPlaceBet');
     const btnBetDisabled = document.getElementById('btnBetDisabled');
     const guardianTip = document.getElementById('guardianTip');
-    const btnRunScout = document.getElementById('btnRunScout');
+    const btnScanRadar = document.getElementById('btnScanRadar');
 
-    // Scout running state
-    let scoutRunning = false;
-    let scoutPollInterval = null;
-    const btnScoutText = document.getElementById('btnScoutText');
-    const scoutStatusIndicator = document.getElementById('scoutStatusIndicator');
+    // Scan running state
+    let scanRunning = false;
+    let scanPollInterval = null;
+    const btnScanText = document.getElementById('btnScanText');
+    const scanStatusIndicator = document.getElementById('scanStatusIndicator');
 
-    // Poll scout status on load & periodically
-    function pollScoutStatus() {
-        fetch('/scout/status')
+    // Poll scan status on load & periodically
+    function pollScanStatus() {
+        fetch('/scan-status')
             .then(r => r.json())
             .then(data => {
-                const wasRunning = scoutRunning;
-                scoutRunning = data.running;
-                updateScoutUI();
-                if (wasRunning && !scoutRunning) {
-                    // Scout just finished
-                    showScoutNotification('✅ SCOUT finalizado');
+                const wasRunning = scanRunning;
+                scanRunning = data.running;
+                updateScanUI();
+                if (wasRunning && !scanRunning) {
+                    // Scan just finished
+                    showScanNotification('✅ ESCANEO finalizado');
+                    if (data.report && data.report.length > 0) {
+                        alert(`¡${data.report.length} apuestas de valor encontradas!\nRevisa la consola para más detalles.`);
+                        // Here we could inject a modal or table with the results.
+                    } else if (data.report && data.report.length === 0) {
+                        alert('Escaneo completado. No se encontraron apuestas con ventaja matemática.');
+                    }
                 }
             })
             .catch(() => {});
     }
 
-    function updateScoutUI() {
-        if (!btnRunScout || !btnScoutText || !scoutStatusIndicator) return;
-        if (scoutRunning) {
-            btnRunScout.style.borderColor = 'var(--neon-red)';
-            btnRunScout.style.color = 'var(--neon-red)';
-            btnRunScout.style.background = 'rgba(255, 51, 102, 0.1)';
-            btnScoutText.textContent = 'DETENER SCOUT';
-            btnRunScout.disabled = false;
-            scoutStatusIndicator.style.display = 'inline-block';
-            scoutStatusIndicator.style.background = 'var(--neon-green)';
+    function updateScanUI() {
+        if (!btnScanRadar || !btnScanText || !scanStatusIndicator) return;
+        if (scanRunning) {
+            btnScanRadar.style.borderColor = 'var(--neon-green)';
+            btnScanRadar.style.color = 'var(--neon-green)';
+            btnScanRadar.style.background = 'rgba(0, 255, 102, 0.1)';
+            btnScanText.textContent = 'ESCANEO EN CURSO...';
+            btnScanRadar.disabled = true; // No lo dejamos detener manualmente por ahora
+            scanStatusIndicator.style.display = 'inline-block';
+            scanStatusIndicator.style.background = 'var(--neon-green)';
         } else {
-            btnRunScout.style.borderColor = 'var(--neon-cyan)';
-            btnRunScout.style.color = 'var(--neon-cyan)';
-            btnRunScout.style.background = 'rgba(0, 240, 255, 0.1)';
-            btnScoutText.textContent = 'INICIAR SCOUT';
-            btnRunScout.disabled = false;
-            scoutStatusIndicator.style.display = 'none';
+            btnScanRadar.style.borderColor = 'var(--neon-cyan)';
+            btnScanRadar.style.color = 'var(--neon-cyan)';
+            btnScanRadar.style.background = 'rgba(0, 240, 255, 0.1)';
+            btnScanText.textContent = 'RADAR 24/7';
+            btnScanRadar.disabled = false;
+            scanStatusIndicator.style.display = 'none';
         }
     }
 
-    function showScoutNotification(msg) {
-        const old = document.getElementById('scoutToast');
+    function showScanNotification(msg) {
+        const old = document.getElementById('scanToast');
         if (old) old.remove();
         const toast = document.createElement('div');
-        toast.id = 'scoutToast';
+        toast.id = 'scanToast';
         toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: rgba(11,15,25,0.95); border: 1px solid rgba(0,255,102,0.3); color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; z-index: 9999; backdrop-filter: blur(12px); box-shadow: 0 8px 30px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease;';
         toast.textContent = msg;
         document.body.appendChild(toast);
         setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.5s'; setTimeout(() => toast.remove(), 500); }, 4000);
     }
 
-    if (btnRunScout) {
-        btnRunScout.addEventListener('click', () => {
-            if (scoutRunning) {
-                // STOP
-                if (!confirm('¿Detener el SCOUT en ejecución?')) return;
-                fetch('/scout/stop', { method: 'POST' })
-                    .then(r => r.json())
-                    .then(data => {
-                        scoutRunning = false;
-                        updateScoutUI();
-                        showScoutNotification('⏹ SCOUT detenido');
-                    })
-                    .catch(() => alert('Error al detener SCOUT'));
-                return;
-            }
+    if (btnScanRadar) {
+        btnScanRadar.addEventListener('click', () => {
+            if (scanRunning) return;
 
             // START
-            if (!confirm('¿Iniciar el Agente SCOUT?\n\nSe ejecutará scraper-historico.sh para recolectar datos de 14+ fuentes.')) return;
+            if (!confirm('¿Iniciar el RADAR 24/7?\n\nBuscará en la API de Football partidos programados en los próximos 7 días, calculará el True ELO y extraerá oportunidades rentables (EV+). Esto tomará ~30 segundos debido al rate-limit de la API.')) return;
 
-            btnScoutText.textContent = 'INICIANDO...';
-            btnRunScout.disabled = true;
+            btnScanText.textContent = 'INICIANDO...';
+            btnScanRadar.disabled = true;
 
-            fetch('/run-scout', { method: 'POST' })
+            fetch('/scan-upcoming', { method: 'POST' })
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === 'started') {
-                        scoutRunning = true;
-                        updateScoutUI();
-                        showScoutNotification('▶ SCOUT iniciado');
+                        scanRunning = true;
+                        updateScanUI();
+                        showScanNotification('🚀 Escáner iniciado en 2do plano');
                     } else if (data.status === 'complete') {
-                        scoutRunning = false;
-                        updateScoutUI();
-                        showScoutNotification('✅ SCOUT completado con éxito');
+                        scanRunning = false;
+                        updateScanUI();
+                        showScanNotification('✅ Escáner completado con éxito');
                     } else if (data.error) {
                         alert('Error: ' + data.error);
-                        scoutRunning = false;
-                        updateScoutUI();
+                        scanRunning = false;
+                        updateScanUI();
                     }
                 })
                 .catch(err => {
                     alert('Fallo de conexión');
-                    scoutRunning = false;
-                    updateScoutUI();
+                    scanRunning = false;
+                    updateScanUI();
                 });
         });
     }
 
     // Poll every 3 seconds for status changes
-    pollScoutStatus();
-    if (scoutPollInterval) clearInterval(scoutPollInterval);
-    scoutPollInterval = setInterval(pollScoutStatus, 3000);
+    pollScanStatus();
+    if (scanPollInterval) clearInterval(scanPollInterval);
+    scanPollInterval = setInterval(pollScanStatus, 3000);
 
     // State Variables
     let currentMatch = 'psg-ars';
