@@ -11,15 +11,15 @@
       "away_odds": 3.1,
       "source": "caliente.mx",
       "scraped_at": "2026-05-29T06:00:00.000Z",
-      "result": "H",
-      "home_score": 2,
-      "away_score": 1,
-      "bet_status": "won",
+      "result": null,
+      "home_score": null,
+      "away_score": null,
+      "bet_status": "lost",
       "bet_amount": 100,
       "bet_odds": 2.34,
       "bet_recibo": "2047874492",
       "bet_selection": "PSG",
-      "bet_result": "won"
+      "bet_result": "lost"
     },
     {
       "id": "m_tol_tig",
@@ -86,8 +86,8 @@
         "codere.mx"
       ],
       "created_at": "2026-05-29T06:00:00.000Z",
-      "actual_result": "H",
-      "was_correct": true
+      "actual_result": "A",
+      "was_correct": false
     },
     {
       "id": "p_tol_tig",
