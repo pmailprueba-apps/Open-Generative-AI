@@ -66,7 +66,10 @@ function predict(home, away, options = {}) {
       const odds_ = homeEV > awayEV ? calOdds.home : calOdds.away;
       const prob = homeEV > awayEV ? probHome : probAway;
       const kelly = ((odds_ - 1) * prob - (1 - prob)) / (odds_ - 1);
-      recommendation = `${team} (Moneyline) | EV: ${(bestEV*100).toFixed(2)}% | Kelly: ${(kelly * 0.25 * 100).toFixed(2)}%`;
+      recommendation = `${team} (Moneyline) | EV: +${(bestEV*100).toFixed(2)}% | Kelly: ${(kelly * 0.25 * 100).toFixed(2)}%`;
+    } else {
+      const best = homeEV > awayEV ? `Local (${(homeEV*100).toFixed(1)}%)` : `Visita (${(awayEV*100).toFixed(1)}%)`;
+      recommendation = `NO APOSTAR (EV negativo: ${best})`;
     }
   }
 
