@@ -97,13 +97,23 @@ async function extractOdds() {
   // Filter if searching for specific team
   let filtered = matches;
   if (SEARCH_HOME && !IS_UPDATE) {
-    filtered = matches.filter(m =>
-      m.home.toLowerCase().includes(SEARCH_HOME.toLowerCase()) ||
-      m.away.toLowerCase().includes(SEARCH_AWAY?.toLowerCase() || '') ||
-      m.home.toLowerCase().includes(SEARCH_AWAY?.toLowerCase() || '') ||
-      m.away.toLowerCase().includes(SEARCH_HOME.toLowerCase())
-    );
-    console.log(`🔍 Buscando: ${SEARCH_HOME} vs ${SEARCH_AWAY || '?'}`);
+    const h = SEARCH_HOME.toLowerCase().replace(/[^a-z0-9áéíóúñ]/g, '');
+    const a = (SEARCH_AWAY || '').toLowerCase().replace(/[^a-z0-9áéíóúñ]/g, '');
+    filtered = matches.filter(m => {
+      const mh = m.home.toLowerCase().replace(/[^a-z0-9áéíóúñ]/g, '');
+      const ma = m.away.toLowerCase().replace(/[^a-z0-9áéíóúñ]/g, '');
+      return mh.includes(h) || ma.includes(h) || mh.includes(a) || ma.includes(a);
+    });
+    if (filtered.length === 0) {
+      // Try partial name matching (e.g., "Mex" matches "Mexico")
+      filtered = matches.filter(m =>
+        m.home.toLowerCase().includes(SEARCH_HOME.substring(0,4).toLowerCase()) ||
+        m.away.toLowerCase().includes(SEARCH_HOME.substring(0,4).toLowerCase()) ||
+        m.home.toLowerCase().includes((SEARCH_AWAY || '').substring(0,4).toLowerCase()) ||
+        m.away.toLowerCase().includes((SEARCH_AWAY || '').substring(0,4).toLowerCase())
+      );
+    }
+    console.log(`🔍 Buscando: ${SEARCH_HOME} vs ${SEARCH_AWAY || '?'} → ${filtered.length} resultados`);
   }
 
   // Display results
