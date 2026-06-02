@@ -196,9 +196,10 @@ const server = http.createServer((req, res) => {
     if ((pathname === '/' || pathname === '/dashboard') && method === 'GET') {
       const db = loadDB();
       const stats = getStats();
-      const confirmed = db.matches.filter(m => m.bet_status === 'confirmed');
-      const wonMatches = db.matches.filter(m => m.result && m.bet_status === 'confirmed');
-      const pendingMatches = db.matches.filter(m => !m.result && m.bet_status === 'confirmed');
+      const confirmed = db.matches.filter(m => m.bet_status === 'confirmed' || m.bet_status === 'won' || m.bet_status === 'lost');
+      const wonMatches = db.matches.filter(m => m.result && (m.bet_status === 'confirmed' || m.bet_status === 'won'));
+      const lostMatches = db.matches.filter(m => m.result && m.bet_status === 'lost');
+      const pendingMatches = db.matches.filter(m => !m.result && (m.bet_status === 'confirmed'));
       const correctPredictions = db.predictions.filter(p => p.was_correct === true);
       const totalReturn = wonMatches.reduce((sum, m) => sum + Math.round(m.bet_amount * m.bet_odds), 0);
       const totalStaked = confirmed.reduce((sum, m) => sum + (m.bet_amount || 0), 0);

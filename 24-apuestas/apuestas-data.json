@@ -14,11 +14,12 @@
       "result": "H",
       "home_score": 2,
       "away_score": 1,
-      "bet_status": "confirmed",
+      "bet_status": "won",
       "bet_amount": 100,
       "bet_odds": 2.34,
       "bet_recibo": "2047874492",
-      "bet_selection": "PSG"
+      "bet_selection": "PSG",
+      "bet_result": "won"
     },
     {
       "id": "m_tol_tig",
@@ -34,11 +35,12 @@
       "result": "D",
       "home_score": 1,
       "away_score": 1,
-      "bet_status": "confirmed",
+      "bet_status": "lost",
       "bet_amount": 100,
       "bet_odds": 1.943,
       "bet_recibo": "2047875293",
-      "bet_selection": "Toluca"
+      "bet_selection": "Toluca",
+      "bet_result": "lost"
     },
     {
       "id": "m1780357066745",
