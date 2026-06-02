@@ -1,0 +1,45 @@
+{
+  "home": "Toluca",
+  "away": "Tigres UANL",
+  "homeForm": [
+    "W",
+    "D",
+    "W",
+    "D",
+    "W"
+  ],
+  "awayForm": [
+    "L",
+    "D",
+    "D",
+    "D",
+    "W"
+  ],
+  "h2h": [
+    [
+      3,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "homeELO": 1647,
+  "awayELO": 1571,
+  "homeAvgGF": 1.8,
+  "homeAvgGA": 1,
+  "awayAvgGF": 1,
+  "awayAvgGA": 1.1,
+  "homeTeamId": 2281,
+  "awayTeamId": 2279,
+  "source": "api-football.com"
+}

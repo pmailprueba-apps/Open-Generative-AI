@@ -1,49 +1,52 @@
 {
   "match": {
-    "home": "Curazao",
-    "away": "Paises Bajos",
-    "league": "Amistoso"
+    "home": "Toluca",
+    "away": "Tigres UANL",
+    "league": "UEFA Champions League"
   },
   "prediction": {
-    "winner": "-",
-    "home_prob": 36,
-    "draw_prob": 45,
-    "away_prob": 19,
-    "confidence": 35,
-    "confidence_label": "BAJA",
-    "recommended_stake": "0% (No apostar)",
-    "expected_value": 0,
-    "bet_type": "DATOS INSUFICIENTES (sin estadísticas de equipos)",
+    "winner": "Toluca",
+    "home_prob": 55,
+    "draw_prob": 33,
+    "away_prob": 12,
+    "confidence": 56,
+    "confidence_label": "MEDIA",
+    "recommended_stake": "Kelly Fraccional (1/4): 3.57% del Bankroll",
+    "expected_value": 0.15687649843353424,
+    "bet_type": "Local (1)",
     "reasoning": [
-      "Dixon-Coles (Poisson ajustado): λ_local=0.66, λ_visita=0.40",
-      "ELO: Curazao=1500 vs Paises Bajos=1500",
+      "Dixon-Coles (Poisson ajustado): λ_local=1.16, λ_visita=0.40",
+      "ELO: Toluca=1647 vs Tigres UANL=1571",
       "Ventaja localía: 15%",
-      "⚠️  DATOS INSUFICIENTES: No hay estadísticas reales de estos equipos en la base de datos.",
-      "📡 Para obtener datos precisos, usa: node scout-estadisticas.js \"Curazao\" \"Paises Bajos\"",
-      "⚠️  Hay odds pero sin datos de equipos — EV no es confiable."
+      "4 enfrentamientos previos analizados",
+      "Forma reciente local: positiva",
+      "Forma reciente visita: positiva",
+      "📈 Mercado evaluado: Local=2.1, Empate=3.3, Visita=3.5",
+      "✅ EV POSITIVO detectado: +15.69% de retorno esperado sobre inversión.",
+      "⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo."
     ]
   },
   "model": {
-    "lambda_home": 0.6623999999999999,
-    "lambda_away": 0.3960000000000001,
-    "elo_home": 1500,
-    "elo_away": 1500,
-    "home_attack_factor": 0.6,
-    "away_attack_factor": 0.55,
-    "form_factor_home": 0.8,
-    "form_factor_away": 0.8,
+    "lambda_home": 1.1646091664858715,
+    "lambda_away": 0.39549334091760074,
+    "elo_home": 1647,
+    "elo_away": 1571,
+    "home_attack_factor": 0.7291932769521837,
+    "away_attack_factor": 0.4315728294604983,
+    "form_factor_home": 1.12,
+    "form_factor_away": 1.0533333333333335,
     "home_advantage": 1.15,
     "injury_penalty_home": 0,
     "injury_penalty_away": 0
   },
   "odds_used": {
     "caliente": {
-      "home": 34,
-      "draw": 13,
-      "away": 1.04
+      "home": 2.1,
+      "draw": 3.3,
+      "away": 3.5
     }
   },
-  "timestamp": "2026-06-02T01:18:58.316Z",
+  "timestamp": "2026-06-02T01:37:08.038Z",
   "agents": {
     "scout": "opencode",
     "analyst": "claude-code",
