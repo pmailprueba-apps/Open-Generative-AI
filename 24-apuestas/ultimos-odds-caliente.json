@@ -1,1 +1,542 @@
-[]
+[
+  {
+    "home": "Canada",
+    "away": "Uzbekistan",
+    "home_odds": 1.64,
+    "draw_odds": 3.55,
+    "away_odds": 5.5,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Universitario de Vinto",
+    "away": "Club Aurora",
+    "home_odds": 2.45,
+    "draw_odds": 2.15,
+    "away_odds": 4.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "SV Estrella",
+    "away": "Jong Aruba",
+    "home_odds": 6,
+    "draw_odds": 4,
+    "away_odds": 1.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Tecnico Universitario",
+    "away": "Barcelona SC",
+    "home_odds": 2.375,
+    "draw_odds": 2.8,
+    "away_odds": 3.35,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Detroit Tigers",
+    "away": "Tampa Bay Rays",
+    "home_odds": 1.35,
+    "draw_odds": 3.55,
+    "away_odds": 2.95,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Uzbekistan",
+    "away": "Universitario de Vinto",
+    "home_odds": 5.5,
+    "draw_odds": 2.15,
+    "away_odds": 2.45,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Club Aurora",
+    "away": "SV Estrella",
+    "home_odds": 4.4,
+    "draw_odds": 4,
+    "away_odds": 6,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Jong Aruba",
+    "away": "Tecnico Universitario",
+    "home_odds": 1.4,
+    "draw_odds": 2.8,
+    "away_odds": 2.375,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Barcelona SC",
+    "away": "Albania",
+    "home_odds": 3.35,
+    "draw_odds": 3.2,
+    "away_odds": 2.25,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Israel",
+    "away": "Corea del Sur",
+    "home_odds": 2.95,
+    "draw_odds": 4.9,
+    "away_odds": 1.32,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "El Salvador",
+    "away": "Eslovenia",
+    "home_odds": 7.8,
+    "draw_odds": 4.35,
+    "away_odds": 1.3,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Chipre",
+    "away": "México",
+    "home_odds": 11,
+    "draw_odds": 4.2,
+    "away_odds": 1.44,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Sudafrica",
+    "away": "Corea del Sur",
+    "home_odds": 8.1,
+    "draw_odds": 3.2,
+    "away_odds": 2.68,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Republica Checa",
+    "away": "Canada",
+    "home_odds": 2.68,
+    "draw_odds": 3.55,
+    "away_odds": 1.83,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Bosnia & Herzegovina",
+    "away": "EE.UU",
+    "home_odds": 4.3,
+    "draw_odds": 3.3,
+    "away_odds": 1.98,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Paraguay",
+    "away": "Qatar",
+    "home_odds": 4,
+    "draw_odds": 5.8,
+    "away_odds": 15,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Suiza",
+    "away": "Brasil",
+    "home_odds": 1.22,
+    "draw_odds": 3.85,
+    "away_odds": 1.57,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Marruecos",
+    "away": "Haiti",
+    "home_odds": 6.2,
+    "draw_odds": 4.4,
+    "away_odds": 7.2,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Escocia",
+    "away": "Australia",
+    "home_odds": 1.44,
+    "draw_odds": 3.75,
+    "away_odds": 4.3,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Turquía",
+    "away": "Alemania",
+    "home_odds": 1.79,
+    "draw_odds": 17.5,
+    "away_odds": 1.03,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Curazao",
+    "away": "Países Bajos",
+    "home_odds": 33,
+    "draw_odds": 3.55,
+    "away_odds": 1.95,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Japón",
+    "away": "Costa de Marfil",
+    "home_odds": 3.8,
+    "draw_odds": 3,
+    "away_odds": 3.35,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Ecuador",
+    "away": "Suecia",
+    "home_odds": 2.34,
+    "draw_odds": 3.45,
+    "away_odds": 1.9,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Túnez",
+    "away": "España",
+    "home_odds": 4.1,
+    "draw_odds": 8.8,
+    "away_odds": 1.09,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Cabo Verde",
+    "away": "Bélgica",
+    "home_odds": 33,
+    "draw_odds": 3.9,
+    "away_odds": 1.71,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Egipto",
+    "away": "Arabia Saudita",
+    "home_odds": 4.55,
+    "draw_odds": 4.2,
+    "away_odds": 6.6,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Uruguay",
+    "away": "Irán",
+    "home_odds": 1.48,
+    "draw_odds": 3.4,
+    "away_odds": 1.88,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Nueva Zelanda",
+    "away": "Francia",
+    "home_odds": 4.3,
+    "draw_odds": 4.3,
+    "away_odds": 1.43,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Senegal",
+    "away": "Irak",
+    "home_odds": 7.7,
+    "draw_odds": 6.4,
+    "away_odds": 11.5,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Noruega",
+    "away": "Argentina",
+    "home_odds": 1.23,
+    "draw_odds": 4.35,
+    "away_odds": 1.39,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Argelia",
+    "away": "Austria",
+    "home_odds": 9.2,
+    "draw_odds": 5.1,
+    "away_odds": 1.34,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Jordania",
+    "away": "Portugal",
+    "home_odds": 8.4,
+    "draw_odds": 5.5,
+    "away_odds": 1.26,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Congo DR",
+    "away": "Inglaterra",
+    "home_odds": 12,
+    "draw_odds": 3.65,
+    "away_odds": 1.7,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Croacia",
+    "away": "Ghana",
+    "home_odds": 5.1,
+    "draw_odds": 3.4,
+    "away_odds": 1.98,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Panamá",
+    "away": "Uzbekistan",
+    "home_odds": 3.85,
+    "draw_odds": 4.5,
+    "away_odds": 8.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Colombia",
+    "away": "Republica Checa",
+    "home_odds": 1.39,
+    "draw_odds": 3.25,
+    "away_odds": 1.98,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Sudafrica",
+    "away": "Suiza",
+    "home_odds": 4.1,
+    "draw_odds": 3.9,
+    "away_odds": 1.57,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Bosnia & Herzegovina",
+    "away": "Canada",
+    "home_odds": 5.9,
+    "draw_odds": 4.7,
+    "away_odds": 1.31,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Qatar",
+    "away": "México",
+    "home_odds": 12,
+    "draw_odds": 3.4,
+    "away_odds": 1.82,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Corea del Sur",
+    "away": "EE.UU",
+    "home_odds": 4.6,
+    "draw_odds": 3.7,
+    "away_odds": 1.7,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Australia",
+    "away": "Escocia",
+    "home_odds": 5,
+    "draw_odds": 3.3,
+    "away_odds": 3.8,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Marruecos",
+    "away": "Brasil",
+    "home_odds": 2.02,
+    "draw_odds": 13.5,
+    "away_odds": 1.05,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Haiti",
+    "away": "Turquía",
+    "home_odds": 27,
+    "draw_odds": 3.2,
+    "away_odds": 2.24,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Paraguay",
+    "away": "Países Bajos",
+    "home_odds": 3.35,
+    "draw_odds": 3.9,
+    "away_odds": 1.65,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Suecia",
+    "away": "Alemania",
+    "home_odds": 5.1,
+    "draw_odds": 4.2,
+    "away_odds": 1.54,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Costa de Marfil",
+    "away": "Ecuador",
+    "home_odds": 5.9,
+    "draw_odds": 5.3,
+    "away_odds": 1.27,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Curazao",
+    "away": "Túnez",
+    "home_odds": 11.5,
+    "draw_odds": 3.4,
+    "away_odds": 4.65,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Japón",
+    "away": "España",
+    "home_odds": 1.82,
+    "draw_odds": 7.9,
+    "away_odds": 1.12,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Arabia Saudita",
+    "away": "Bélgica",
+    "home_odds": 25,
+    "draw_odds": 4.45,
+    "away_odds": 1.42,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Irán",
+    "away": "Uruguay",
+    "home_odds": 7.6,
+    "draw_odds": 4.4,
+    "away_odds": 1.44,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Cabo Verde",
+    "away": "Nueva Zelanda",
+    "home_odds": 7.2,
+    "draw_odds": 3.55,
+    "away_odds": 5.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Egipto",
+    "away": "Argentina",
+    "home_odds": 1.69,
+    "draw_odds": 3.8,
+    "away_odds": 1.63,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Austria",
+    "away": "Francia",
+    "home_odds": 5.4,
+    "draw_odds": 7.8,
+    "away_odds": 1.12,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Irak",
+    "away": "Noruega",
+    "home_odds": 27,
+    "draw_odds": 3.45,
+    "away_odds": 2.1,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Senegal",
+    "away": "Jordania",
+    "home_odds": 3.4,
+    "draw_odds": 3.8,
+    "away_odds": 5.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.834Z"
+  },
+  {
+    "home": "Argelia",
+    "away": "Portugal",
+    "home_odds": 1.63,
+    "draw_odds": 5.4,
+    "away_odds": 1.24,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.835Z"
+  },
+  {
+    "home": "Uzbekistan",
+    "away": "Inglaterra",
+    "home_odds": 14.5,
+    "draw_odds": 5,
+    "away_odds": 1.29,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.835Z"
+  },
+  {
+    "home": "Ghana",
+    "away": "Panamá",
+    "home_odds": 12.5,
+    "draw_odds": 3.95,
+    "away_odds": 7.4,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.835Z"
+  },
+  {
+    "home": "Croacia",
+    "away": "Colombia",
+    "home_odds": 1.49,
+    "draw_odds": 3.95,
+    "away_odds": 1.48,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.835Z"
+  },
+  {
+    "home": "Congo DR",
+    "away": "Republica Checa",
+    "home_odds": 7.4,
+    "draw_odds": 3.35,
+    "away_odds": 3.9,
+    "source": "caliente.mx",
+    "scraped_at": "2026-06-02T01:22:06.835Z"
+  }
+]

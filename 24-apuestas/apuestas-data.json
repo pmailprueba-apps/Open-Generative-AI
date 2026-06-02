@@ -83,6 +83,27 @@
       "bet_odds": null,
       "bet_recibo": null,
       "bet_selection": null
+    },
+    {
+      "id": "m1780363138317",
+      "home": "curazao",
+      "away": "paises bajos",
+      "league": "Amistoso",
+      "date": "2026-06-02T01:18:58.316Z",
+      "venue": "",
+      "home_odds": 34,
+      "draw_odds": 13,
+      "away_odds": 1.04,
+      "source": "predictor",
+      "scraped_at": "2026-06-02T01:18:58.317Z",
+      "result": null,
+      "home_score": null,
+      "away_score": null,
+      "bet_status": null,
+      "bet_amount": null,
+      "bet_odds": null,
+      "bet_recibo": null,
+      "bet_selection": null
     }
   ],
   "predictions": [

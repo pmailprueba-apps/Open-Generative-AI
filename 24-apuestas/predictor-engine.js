@@ -209,7 +209,12 @@ function predict(home, away, options = {}) {
   probDraw = Math.round(normDrawDec * 100);
   probAway = 100 - probHome - probDraw;
 
-  // 11. Determinar Apuesta de Valor (EV+) y Kelly Stake
+  // 11. Evaluar calidad de datos — ¿tenemos info real de los equipos?
+  const hasRealData = homeForm.length > 0 || awayForm.length > 0 || h2h.length > 0 ||
+                      homeElo !== 1500 || awayElo !== 1500;
+  const isGeneric = !hasRealData && homeElo === 1500 && awayElo === 1500;
+
+  // 12. Determinar Apuesta de Valor (EV+) y Kelly Stake
   let betRecommendation = "NO APOSTAR (EV Negativo)";
   let targetTeam = "-";
   let targetProb = 0;
@@ -217,42 +222,49 @@ function predict(home, away, options = {}) {
   let targetEV = 0;
   let kellyStake = 0;
 
-  if (hasOdds) {
-    // Buscamos el EV más alto
+  if (hasOdds && !isGeneric) {
+    // Buscamos el EV más alto — solo con datos reales de equipos
     const evs = [
       { type: 'Local (1)', team: home, ev: homeEV, p: normHomeDec, odds: marketHome },
       { type: 'Empate (X)', team: 'Empate', ev: drawEV, p: normDrawDec, odds: marketDraw },
       { type: 'Visitante (2)', team: away, ev: awayEV, p: normAwayDec, odds: marketAway }
     ];
-    evs.sort((a, b) => b.ev - a.ev); // Mayor a menor
+    evs.sort((a, b) => b.ev - a.ev);
     
     const bestBet = evs[0];
-    if (bestBet.ev > 0) {
+    if (bestBet.ev > 0.05) { // Umbral mínimo 5% EV
       targetTeam = bestBet.team;
       targetProb = Math.round(bestBet.p * 100);
       targetOdds = bestBet.odds;
       targetEV = bestBet.ev;
-      kellyStake = calculateKelly(bestBet.p, bestBet.odds, 0.25); // Fraccional 1/4
+      kellyStake = calculateKelly(bestBet.p, bestBet.odds, 0.25);
       betRecommendation = bestBet.type;
     }
+  } else if (hasOdds && isGeneric) {
+    // Tenemos odds pero no datos de equipos — modo conservador
+    betRecommendation = "DATOS INSUFICIENTES (sin estadísticas de equipos)";
   } else {
-    // Si no hay odds, solo nos basamos en máxima probabilidad pura
+    // Sin odds, solo probabilidad matemática
     const maxProb = Math.max(probHome, probDraw, probAway);
     targetTeam = maxProb === probHome ? home : maxProb === probDraw ? 'Empate' : away;
     betRecommendation = maxProb === probHome ? 'Local (1)' : maxProb === probDraw ? 'Empate (X)' : 'Visitante (2)';
   }
 
-  const confidence = Math.round(30 + (Math.max(probHome, probDraw, probAway) - 33) * 1.2);
+  let confidence = Math.round(30 + (Math.max(probHome, probDraw, probAway) - 33) * 1.2);
+  // Penalizar confianza si no hay datos reales de equipos
+  if (isGeneric) confidence = Math.min(confidence, 35);
   const confidenceLabel = confidence >= 70 ? 'ALTA' : confidence >= 55 ? 'MEDIA' : 'BAJA';
   
   // Stake recomendado final
-  let stakeRec = "0%";
-  if (hasOdds && targetEV > 0) {
+  let stakeRec = "0% (No apostar)";
+  if (hasOdds && targetEV > 0.05 && !isGeneric) {
     stakeRec = `Kelly Fraccional (1/4): ${kellyStake.toFixed(2)}% del Bankroll`;
+  } else if (hasOdds && targetEV > 0 && isGeneric) {
+    stakeRec = "1% (EV+ pero sin datos de equipos — cautela máxima)";
+  } else if (hasOdds && targetEV <= 0.05 && targetEV > 0) {
+    stakeRec = "0.5% (EV marginal — riesgo alto)";
   } else if (!hasOdds) {
-    stakeRec = confidence >= 70 ? '3-5% (Por confianza teórica)' : '1% (Por confianza teórica)';
-  } else {
-    stakeRec = "0% (EV Negativo detectado - Evitar mercado)";
+    stakeRec = isGeneric ? '0.5% (Solo Poisson, sin datos de equipos)' : '1-3% (Por confianza teórica)';
   }
 
   const result = {
@@ -276,19 +288,27 @@ function predict(home, away, options = {}) {
         if (homeForm.length > 0) r.push(`Forma reciente local: ${homeFormStrength > 0.5 ? 'positiva' : 'negativa'}`);
         if (awayForm.length > 0) r.push(`Forma reciente visita: ${awayFormStrength > 0.5 ? 'positiva' : 'negativa'}`);
         if (injuries.length > 0) r.push(`${injuries.length} lesiones consideradas`);
-        // Odds status
-        if (hasOdds) {
-          r.push(`📈 Mercado evaluado: Local=${marketHome}, Empate=${marketDraw}, Visita=${marketAway}`);
-          if (targetEV > 0) {
-            r.push(`✅ EV POSITIVO detectado: ${(targetEV * 100).toFixed(2)}% de retorno esperado sobre inversión.`);
-            r.push(`⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo.`);
-          } else {
-            r.push(`🛑 PELIGRO: Todos los mercados tienen EV Negativo. El modelo matemático rechaza la apuesta (la cuota no cubre el riesgo real).`);
-          }
-        } else {
-          r.push(`⚠️  Sin odds de mercado — predicción basada solo en probabilidad matemática, no se puede calcular EV ni Kelly Stake.`);
+        // Data quality warning
+        if (isGeneric) {
+          r.push(`⚠️  DATOS INSUFICIENTES: No hay estadísticas reales de estos equipos en la base de datos.`);
+          r.push(`📡 Para obtener datos precisos, usa: node scout-estadisticas.js "${home}" "${away}"`);
         }
-        r.push(`📡 Fuentes: Modelo Predictivo Independiente`);
+        // Odds status
+        if (hasOdds && !isGeneric) {
+          r.push(`📈 Mercado evaluado: Local=${marketHome}, Empate=${marketDraw}, Visita=${marketAway}`);
+          if (targetEV > 0.05) {
+            r.push(`✅ EV POSITIVO detectado: +${(targetEV * 100).toFixed(2)}% de retorno esperado sobre inversión.`);
+            r.push(`⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo.`);
+          } else if (targetEV > 0) {
+            r.push(`⚠️  EV marginal (+${(targetEV * 100).toFixed(2)}%) — el valor no compensa el riesgo.`);
+          } else {
+            r.push(`🛑 EV Negativo: Todos los mercados tienen valor esperado negativo. El modelo rechaza la apuesta.`);
+          }
+        } else if (hasOdds && isGeneric) {
+          r.push(`⚠️  Hay odds pero sin datos de equipos — EV no es confiable.`);
+        } else {
+          r.push(`⚠️  Sin odds de mercado — solo probabilidad matemática teórica.`);
+        }
         return r;
       })()
     },

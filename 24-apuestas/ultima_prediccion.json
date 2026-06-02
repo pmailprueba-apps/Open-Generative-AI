@@ -1,27 +1,26 @@
 {
   "match": {
-    "home": "Toluca",
-    "away": "Tigres",
-    "league": "Liga MX"
+    "home": "Curazao",
+    "away": "Paises Bajos",
+    "league": "Amistoso"
   },
   "prediction": {
-    "winner": "Empate",
+    "winner": "-",
     "home_prob": 36,
     "draw_prob": 45,
     "away_prob": 19,
-    "confidence": 44,
+    "confidence": 35,
     "confidence_label": "BAJA",
-    "recommended_stake": "Kelly Fraccional (1/4): 5.64% del Bankroll",
-    "expected_value": 0.5411739814687551,
-    "bet_type": "Empate (X)",
+    "recommended_stake": "0% (No apostar)",
+    "expected_value": 0,
+    "bet_type": "DATOS INSUFICIENTES (sin estadísticas de equipos)",
     "reasoning": [
       "Dixon-Coles (Poisson ajustado): λ_local=0.66, λ_visita=0.40",
-      "ELO: Toluca=1500 vs Tigres=1500",
+      "ELO: Curazao=1500 vs Paises Bajos=1500",
       "Ventaja localía: 15%",
-      "📈 Mercado evaluado: Local=2.1, Empate=3.4, Visita=3.8",
-      "✅ EV POSITIVO detectado: 54.12% de retorno esperado sobre inversión.",
-      "⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo.",
-      "📡 Fuentes: Modelo Predictivo Independiente"
+      "⚠️  DATOS INSUFICIENTES: No hay estadísticas reales de estos equipos en la base de datos.",
+      "📡 Para obtener datos precisos, usa: node scout-estadisticas.js \"Curazao\" \"Paises Bajos\"",
+      "⚠️  Hay odds pero sin datos de equipos — EV no es confiable."
     ]
   },
   "model": {
@@ -39,12 +38,12 @@
   },
   "odds_used": {
     "caliente": {
-      "home": 2.1,
-      "draw": 3.4,
-      "away": 3.8
+      "home": 34,
+      "draw": 13,
+      "away": 1.04
     }
   },
-  "timestamp": "2026-06-02T01:17:01.949Z",
+  "timestamp": "2026-06-02T01:18:58.316Z",
   "agents": {
     "scout": "opencode",
     "analyst": "claude-code",
