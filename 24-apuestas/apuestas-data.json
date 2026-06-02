@@ -62,6 +62,27 @@
       "bet_odds": null,
       "bet_recibo": null,
       "bet_selection": null
+    },
+    {
+      "id": "m1780363005411",
+      "home": "toluca",
+      "away": "tigres",
+      "league": "Liga MX",
+      "date": "2026-06-02T01:16:45.410Z",
+      "venue": "",
+      "home_odds": 2.1,
+      "draw_odds": 3.4,
+      "away_odds": 3.8,
+      "source": "predictor",
+      "scraped_at": "2026-06-02T01:16:45.411Z",
+      "result": null,
+      "home_score": null,
+      "away_score": null,
+      "bet_status": null,
+      "bet_amount": null,
+      "bet_odds": null,
+      "bet_recibo": null,
+      "bet_selection": null
     }
   ],
   "predictions": [

@@ -198,7 +198,6 @@ const server = http.createServer((req, res) => {
       const stats = getStats();
       const confirmed = db.matches.filter(m => m.bet_status === 'confirmed' || m.bet_status === 'won' || m.bet_status === 'lost');
       const wonMatches = db.matches.filter(m => m.result && (m.bet_status === 'confirmed' || m.bet_status === 'won'));
-      const lostMatches = db.matches.filter(m => m.result && m.bet_status === 'lost');
       const pendingMatches = db.matches.filter(m => !m.result && (m.bet_status === 'confirmed'));
       const correctPredictions = db.predictions.filter(p => p.was_correct === true);
       const totalReturn = wonMatches.reduce((sum, m) => sum + Math.round(m.bet_amount * m.bet_odds), 0);
@@ -245,12 +244,13 @@ ${winnerBanner}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
   <!-- Stats Card -->
   <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.25rem;">
-  <h3 style="font-size: 0.85rem; color: var(--neon-cyan); margin-bottom: 0.75rem; font-weight: 800; border-bottom: 1px dashed rgba(0,240,255,0.2); padding-bottom: 0.5rem; letter-spacing: 0.5px;"> ESTADISTICAS DEL MOTOR</h3>
-  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Partidos Analizados:</span><strong style="color:#fff">${stats.total_matches}</strong></div>
-  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Predicciones Totales:</span><strong style="color:#fff">${stats.total_predictions}</strong></div>
-  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Precisión de Inferencia:</span><strong style="color:var(--neon-green)">${stats.accuracy !== null ? stats.accuracy + '%' : 'Pendiente'}</strong></div>
-  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Acertadas:</span><strong style="color:var(--neon-green)">${correctPredictions.length}</strong></div>
-  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.85rem;"><span style="color:var(--text-secondary)">Fuentes de Datos:</span><strong style="color:var(--neon-cyan)">${stats.active_sources} Activas</strong></div>
+  <h3 style="font-size: 0.85rem; color: var(--neon-cyan); margin-bottom: 0.75rem; font-weight: 800; border-bottom: 1px dashed rgba(0,240,255,0.2); padding-bottom: 0.5rem; letter-spacing: 0.5px;">🧠 MOTOR MATEMÁTICO</h3>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Modelo:</span><strong style="color:var(--neon-cyan)">Dixon-Coles + ELO</strong></div>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Gestión:</span><strong style="color:var(--neon-cyan)">Kelly Fraccional (1/4)</strong></div>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Análisis:</span><strong style="color:var(--neon-cyan)">Risk-Neutral (EV+)</strong></div>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Partidos:</span><strong style="color:#fff">${stats.total_matches}</strong></div>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.02);"><span style="color:var(--text-secondary)">Precisión:</span><strong style="color:var(--neon-green)">${stats.accuracy !== null ? stats.accuracy + '%' : 'Pendiente'}</strong></div>
+  <div style="display:flex; justify-content:space-between; padding: 0.35rem 0; font-size: 0.8rem;"><span style="color:var(--text-secondary)">Fuentes:</span><strong style="color:var(--neon-cyan)">${stats.active_sources} Activas</strong></div>
   </div>
 
   <!-- Bankroll Card -->

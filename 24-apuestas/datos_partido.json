@@ -2,6 +2,10 @@
   "league": "Liga MX",
   "flashscore_live": "[{\"home\":\"Würzburger KickersVencedor: Würzburger Kickers\",\"away\":\"Lokomotive Leipzig\",\"score\":\"2\"},{\"home\":\"Estrella\",\"away\":\"Jong Aruba\",\"score\":\"-\"},{\"home\":\"BATE 2\",\"away\":\"FC Slonim\",\"score\":\"2\"},{\"home\":\"Molodechno\",\"away\":\"Dinamo Minsk 2\",\"score\":\"1\"},{\"home\":\"Volna Pinsk\",\"away\":\"Niva Dolbizno\",\"score\":\"1\"}]",
   "odds": {
-    "caliente": {}
+    "caliente": {
+      "home": 2.1,
+      "draw": 3.4,
+      "away": 3.8
+    }
   }
 }

@@ -6,21 +6,22 @@
   },
   "prediction": {
     "winner": "Empate",
-    "home_prob": 37,
-    "draw_prob": 44,
+    "home_prob": 36,
+    "draw_prob": 45,
     "away_prob": 19,
-    "confidence": 43,
+    "confidence": 44,
     "confidence_label": "BAJA",
-    "recommended_stake": "Mínimo (0.5-1%)",
+    "recommended_stake": "Kelly Fraccional (1/4): 5.64% del Bankroll",
+    "expected_value": 0.5411739814687551,
     "bet_type": "Empate (X)",
     "reasoning": [
-      "Modelo Poisson: λ_local=0.66 goles esperados",
-      "λ_visita=0.40 goles esperados",
+      "Dixon-Coles (Poisson ajustado): λ_local=0.66, λ_visita=0.40",
       "ELO: Toluca=1500 vs Tigres=1500",
       "Ventaja localía: 15%",
-      "⚠️  Sin odds de mercado — predicción basada solo en modelo Poisson puro",
-      "💡 Para activar blend mercado: pasa odds manuales al script",
-      "📡 Fuentes: FlashScore (partidos) + modelo matemático"
+      "📈 Mercado evaluado: Local=2.1, Empate=3.4, Visita=3.8",
+      "✅ EV POSITIVO detectado: 54.12% de retorno esperado sobre inversión.",
+      "⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo.",
+      "📡 Fuentes: Modelo Predictivo Independiente"
     ]
   },
   "model": {
@@ -37,9 +38,13 @@
     "injury_penalty_away": 0
   },
   "odds_used": {
-    "caliente": {}
+    "caliente": {
+      "home": 2.1,
+      "draw": 3.4,
+      "away": 3.8
+    }
   },
-  "timestamp": "2026-06-01T23:40:47.477Z",
+  "timestamp": "2026-06-02T01:17:01.949Z",
   "agents": {
     "scout": "opencode",
     "analyst": "claude-code",

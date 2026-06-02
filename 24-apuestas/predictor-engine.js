@@ -52,6 +52,30 @@ function factorial(n) {
   return n * factorial(n - 1);
 }
 
+// ─── DIXON-COLES ADJUSTMENT ──────────────────────────────────────────
+function dixonColesAdjustment(lambdaH, lambdaA, rho, x, y) {
+  if (x === 0 && y === 0) return 1 - (lambdaH * lambdaA * rho);
+  if (x === 0 && y === 1) return 1 + (lambdaH * rho);
+  if (x === 1 && y === 0) return 1 + (lambdaA * rho);
+  if (x === 1 && y === 1) return 1 - rho;
+  return 1;
+}
+
+// ─── EXPECTED VALUE (EV) & KELLY CRITERION ────────────────────────────
+function calculateEV(probDecimal, decimalOdds) {
+  if (!decimalOdds || decimalOdds <= 1) return 0;
+  return (probDecimal * decimalOdds) - 1;
+}
+
+function calculateKelly(probDecimal, decimalOdds, fraction = 0.25) { // Kelly fraccional (1/4)
+  if (!decimalOdds || decimalOdds <= 1) return 0;
+  const b = decimalOdds - 1;
+  const p = probDecimal;
+  const q = 1 - p;
+  const kelly = (b * p - q) / b;
+  return kelly > 0 ? (kelly * fraction) * 100 : 0; // return percentage
+}
+
 // ─── ELO RATING SYSTEM ────────────────────────────────────────────────
 function expectedScore(ratingA, ratingB) {
   return 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
@@ -135,72 +159,117 @@ function predict(home, away, options = {}) {
   const lambdaHome = 1.2 * homeAttack * formFactorHome * homeAdvantage * h2hFactor.home - homeInjuryPenalty;
   const lambdaAway = 0.9 * awayAttack * formFactorAway * h2hFactor.away - awayInjuryPenalty;
 
-  // 7. Matriz de probabilidades Poisson (hasta 6 goles)
+  // 7 & 8. Matriz de probabilidades Poisson con Ajuste Dixon-Coles
   const maxGoals = 6;
-  const homeProbs = [];
-  const awayProbs = [];
-  for (let i = 0; i <= maxGoals; i++) {
-    homeProbs.push(poissonProb(Math.max(lambdaHome, 0.1), i));
-    awayProbs.push(poissonProb(Math.max(lambdaAway, 0.1), i));
-  }
-
-  // 8. Calcular 1X2
+  const rho = -0.05; // Ajuste negativo estándar para sobredimensionar empates de bajo goleo
   let probHome = 0, probDraw = 0, probAway = 0;
+
   for (let h = 0; h <= maxGoals; h++) {
     for (let a = 0; a <= maxGoals; a++) {
-      const p = homeProbs[h] * awayProbs[a];
+      const baseHome = poissonProb(Math.max(lambdaHome, 0.1), h);
+      const baseAway = poissonProb(Math.max(lambdaAway, 0.1), a);
+      const dcFactor = dixonColesAdjustment(Math.max(lambdaHome, 0.1), Math.max(lambdaAway, 0.1), rho, h, a);
+      
+      const p = baseHome * baseAway * Math.max(0, dcFactor);
+      
       if (h > a) probHome += p;
       else if (h === a) probDraw += p;
       else probAway += p;
     }
   }
 
-  // 9. Ajustar por odds de casa de apuesta (si están disponibles)
+  // 9. Análisis Risk-Neutral de Mercado (Valor Esperado)
+  let homeEV = 0, drawEV = 0, awayEV = 0;
+  let hasOdds = false;
+  let marketHome = 0, marketDraw = 0, marketAway = 0;
+
   if (odds.caliente && odds.caliente.home) {
-    // Usar mejores odds disponibles (normal o mejorados)
-    const bestHome = odds.caliente_mejorados?.home || odds.caliente.home;
-    const bestDraw = odds.caliente_mejorados?.draw || odds.caliente.draw;
-    const bestAway = odds.caliente_mejorados?.away || odds.caliente.away;
+    hasOdds = true;
+    marketHome = odds.caliente_mejorados?.home || odds.caliente.home;
+    marketDraw = odds.caliente_mejorados?.draw || odds.caliente.draw;
+    marketAway = odds.caliente_mejorados?.away || odds.caliente.away;
     
-    const impliedHome = 1 / bestHome;
-    const impliedDraw = 1 / bestDraw;
-    const impliedAway = 1 / bestAway;
-    const margin = impliedHome + impliedDraw + impliedAway;
-    
-    // Blend: 70% modelo, 30% mercado
-    probHome = probHome * 0.7 + (impliedHome / margin) * 0.3;
-    probDraw = probDraw * 0.7 + (impliedDraw / margin) * 0.3;
-    probAway = probAway * 0.7 + (impliedAway / margin) * 0.3;
+    // El modelo ya NO hace "blend" con el mercado. El modelo matemático DEBE ser
+    // independiente para poder encontrar las discrepancias (ineficiencias) del mercado.
+    // Solo calculamos el Expected Value (EV).
+    const totalRawProb = probHome + probDraw + probAway;
+    homeEV = calculateEV(probHome / totalRawProb, marketHome);
+    drawEV = calculateEV(probDraw / totalRawProb, marketDraw);
+    awayEV = calculateEV(probAway / totalRawProb, marketAway);
   }
 
   // 10. Normalizar a 100%
   const total = probHome + probDraw + probAway;
-  probHome = Math.round((probHome / total) * 100);
-  probDraw = Math.round((probDraw / total) * 100);
+  // Guardar decimales originales para Kelly antes de redondear a 100
+  const normHomeDec = probHome / total;
+  const normDrawDec = probDraw / total;
+  const normAwayDec = probAway / total;
+  
+  probHome = Math.round(normHomeDec * 100);
+  probDraw = Math.round(normDrawDec * 100);
   probAway = 100 - probHome - probDraw;
 
-  // 11. Determinar ganador y confianza
-  const maxProb = Math.max(probHome, probDraw, probAway);
-  const winner = maxProb === probHome ? home : maxProb === probDraw ? 'Empate' : away;
-  const confidence = Math.round(30 + (maxProb - 33) * 1.2);
+  // 11. Determinar Apuesta de Valor (EV+) y Kelly Stake
+  let betRecommendation = "NO APOSTAR (EV Negativo)";
+  let targetTeam = "-";
+  let targetProb = 0;
+  let targetOdds = 0;
+  let targetEV = 0;
+  let kellyStake = 0;
+
+  if (hasOdds) {
+    // Buscamos el EV más alto
+    const evs = [
+      { type: 'Local (1)', team: home, ev: homeEV, p: normHomeDec, odds: marketHome },
+      { type: 'Empate (X)', team: 'Empate', ev: drawEV, p: normDrawDec, odds: marketDraw },
+      { type: 'Visitante (2)', team: away, ev: awayEV, p: normAwayDec, odds: marketAway }
+    ];
+    evs.sort((a, b) => b.ev - a.ev); // Mayor a menor
+    
+    const bestBet = evs[0];
+    if (bestBet.ev > 0) {
+      targetTeam = bestBet.team;
+      targetProb = Math.round(bestBet.p * 100);
+      targetOdds = bestBet.odds;
+      targetEV = bestBet.ev;
+      kellyStake = calculateKelly(bestBet.p, bestBet.odds, 0.25); // Fraccional 1/4
+      betRecommendation = bestBet.type;
+    }
+  } else {
+    // Si no hay odds, solo nos basamos en máxima probabilidad pura
+    const maxProb = Math.max(probHome, probDraw, probAway);
+    targetTeam = maxProb === probHome ? home : maxProb === probDraw ? 'Empate' : away;
+    betRecommendation = maxProb === probHome ? 'Local (1)' : maxProb === probDraw ? 'Empate (X)' : 'Visitante (2)';
+  }
+
+  const confidence = Math.round(30 + (Math.max(probHome, probDraw, probAway) - 33) * 1.2);
   const confidenceLabel = confidence >= 70 ? 'ALTA' : confidence >= 55 ? 'MEDIA' : 'BAJA';
-  const stakeRec = confidence >= 70 ? 'Moderado (3-5%)' : confidence >= 55 ? 'Conservador (1-3%)' : 'Mínimo (0.5-1%)';
+  
+  // Stake recomendado final
+  let stakeRec = "0%";
+  if (hasOdds && targetEV > 0) {
+    stakeRec = `Kelly Fraccional (1/4): ${kellyStake.toFixed(2)}% del Bankroll`;
+  } else if (!hasOdds) {
+    stakeRec = confidence >= 70 ? '3-5% (Por confianza teórica)' : '1% (Por confianza teórica)';
+  } else {
+    stakeRec = "0% (EV Negativo detectado - Evitar mercado)";
+  }
 
   const result = {
     match: { home, away, league },
     prediction: {
-      winner,
+      winner: targetTeam,
       home_prob: probHome,
       draw_prob: probDraw,
       away_prob: probAway,
       confidence: Math.min(confidence, 95),
       confidence_label: confidenceLabel,
       recommended_stake: stakeRec,
-      bet_type: winner === home ? `Local (1)` : winner === away ? `Visitante (2)` : 'Empate (X)',
+      expected_value: targetEV,
+      bet_type: betRecommendation,
       reasoning: (function() {
         const r = [];
-        r.push(`Modelo Poisson: λ_local=${Math.max(lambdaHome, 0.1).toFixed(2)} goles esperados`);
-        r.push(`λ_visita=${Math.max(lambdaAway, 0.1).toFixed(2)} goles esperados`);
+        r.push(`Dixon-Coles (Poisson ajustado): λ_local=${Math.max(lambdaHome, 0.1).toFixed(2)}, λ_visita=${Math.max(lambdaAway, 0.1).toFixed(2)}`);
         r.push(`ELO: ${home}=${homeElo} vs ${away}=${awayElo}`);
         r.push(`Ventaja localía: ${(homeAdvantage * 100 - 100).toFixed(0)}%`);
         if (h2h.length > 0) r.push(`${h2h.length} enfrentamientos previos analizados`);
@@ -208,15 +277,18 @@ function predict(home, away, options = {}) {
         if (awayForm.length > 0) r.push(`Forma reciente visita: ${awayFormStrength > 0.5 ? 'positiva' : 'negativa'}`);
         if (injuries.length > 0) r.push(`${injuries.length} lesiones consideradas`);
         // Odds status
-        const oddsAvailable = odds && odds.caliente && odds.caliente.home && odds.caliente.home !== null;
-        if (oddsAvailable) {
-          r.push(`✅ Blend activado: 70% Poisson + 30% odds de mercado (Local=${odds.caliente.home}, Empate=${odds.caliente.draw}, Visita=${odds.caliente.away})`);
+        if (hasOdds) {
+          r.push(`📈 Mercado evaluado: Local=${marketHome}, Empate=${marketDraw}, Visita=${marketAway}`);
+          if (targetEV > 0) {
+            r.push(`✅ EV POSITIVO detectado: ${(targetEV * 100).toFixed(2)}% de retorno esperado sobre inversión.`);
+            r.push(`⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo.`);
+          } else {
+            r.push(`🛑 PELIGRO: Todos los mercados tienen EV Negativo. El modelo matemático rechaza la apuesta (la cuota no cubre el riesgo real).`);
+          }
         } else {
-          r.push(`⚠️  Sin odds de mercado — predicción basada solo en modelo Poisson puro`);
-          r.push(`💡 Para activar blend mercado: pasa odds manuales al script`);
+          r.push(`⚠️  Sin odds de mercado — predicción basada solo en probabilidad matemática, no se puede calcular EV ni Kelly Stake.`);
         }
-        // Data source honesty
-        r.push(`📡 Fuentes: ${oddsAvailable ? 'Caliente.mx (odds)' : 'FlashScore (partidos)'} + modelo matemático`);
+        r.push(`📡 Fuentes: Modelo Predictivo Independiente`);
         return r;
       })()
     },
@@ -274,14 +346,18 @@ if (require.main === module) {
     console.log(`  Partido:    ${home} vs ${away}`);
     console.log(`  Liga:       ${options.league || 'UEFA Champions League'}`);
     console.log('');
-    console.log(`  📊 Probabilidades calculadas:`);
+    console.log(`  📊 Probabilidades Matemáticas (Dixon-Coles):`);
     console.log(`     ${home}:     ${result.prediction.home_prob}%`);
     console.log(`     Empate:        ${result.prediction.draw_prob}%`);
     console.log(`     ${away}:     ${result.prediction.away_prob}%`);
     console.log('');
-    console.log(`  🏆 GANADOR: ${result.prediction.winner}`);
-    console.log(`  🎯 Confianza: ${result.prediction.confidence}% (${result.prediction.confidence_label})`);
-    console.log(`  💰 Stake: ${result.prediction.recommended_stake}`);
+    console.log(`  🎯 DECISIÓN DEL MODELO: ${result.prediction.bet_type}`);
+    if (result.prediction.expected_value > 0) {
+        console.log(`  📈 Expected Value (EV): +${(result.prediction.expected_value * 100).toFixed(2)}%`);
+    } else if (result.prediction.expected_value < 0 && result.prediction.winner === '-') {
+        console.log(`  🛑 Expected Value (EV): NEGATIVO (Matemáticamente Inviable)`);
+    }
+    console.log(`  💰 Gestión Riesgo (Stake): ${result.prediction.recommended_stake}`);
     console.log('');
     console.log('  📋 Factores del modelo:');
     result.prediction.reasoning.forEach(r => console.log(`     • ${r}`));

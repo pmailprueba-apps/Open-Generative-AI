@@ -99,45 +99,50 @@ m = d['match']
 md = d['model']
 odds = d.get('odds_used', {})
 cal = odds.get('caliente', {})
+ev = p.get('expected_value', 0)
 print()
 print('┌────────────────────────────────────────────────────────┐')
+print(f'│  🔮 APUESTA.IA — PREDICCIÓN MULTI-AGENTE              │')
+print('├────────────────────────────────────────────────────────┤')
 print(f'│  Partido:    {m[\"home\"]} vs {m[\"away\"]}')
 print(f'│  Liga:       {m[\"league\"]}')
 print(f'│  Hora:       {d[\"timestamp\"][:19]}')
 print('├────────────────────────────────────────────────────────┤')
-print(f'│  {m[\"home\"]}:     {p[\"home_prob\"]}%')
-print(f'│  Empate:          {p[\"draw_prob\"]}%')
-print(f'│  {m[\"away\"]}:     {p[\"away_prob\"]}%')
+print(f'│  📊 PROBABILIDADES (Dixon-Coles):')
+print(f'│     {m[\"home\"]}:     {p[\"home_prob\"]}%')
+print(f'│     Empate:          {p[\"draw_prob\"]}%')
+print(f'│     {m[\"away\"]}:     {p[\"away_prob\"]}%')
 print('├────────────────────────────────────────────────────────┤')
-print(f'│  🏆 GANADOR: {p[\"winner\"]}')
-print(f'│  Apuesta:      {p[\"bet_type\"]}')
-print(f'│  Confianza:    {p[\"confidence\"]}% ({p[\"confidence_label\"]})')
-print(f'│  Stake rec:    {p[\"recommended_stake\"]}')
-print('├────────────────────────────────────────────────────────┤')
-# Mostrar odds usados si existen
+print(f'│  🏆 DECISIÓN: {p[\"bet_type\"]}')
 if cal.get('home'):
-    print(f'│  📊 Odds reales: {cal[\"home\"]} | {cal[\"draw\"]} | {cal[\"away\"]}')
-else:
-    print(f'│  📊 Odds: NO DISPONIBLES (modelo Poisson puro)')
+    print(f'│  📈 Expected Value (EV): {ev * 100:.2f}%')
+    if ev > 0:
+        print(f'│  ✅ EV POSITIVO — Apuesta con valor matemático')
+    else:
+        print(f'│  🛑 EV NEGATIVO — Modelo rechaza la apuesta')
+print(f'│  💰 Gestión (Kelly 1/4): {p[\"recommended_stake\"]}')
+print(f'│  🎯 Confianza:    {p[\"confidence\"]}% ({p[\"confidence_label\"]})')
 print('├────────────────────────────────────────────────────────┤')
-print('│  📋 Factores del modelo:')
+if cal.get('home'):
+    print(f'│  📊 Odds evaluados: {cal.get(\"home\",\"?\")} | {cal.get(\"draw\",\"?\")} | {cal.get(\"away\",\"?\")}')
+else:
+    print(f'│  ⚠ Sin odds — sin EV, sin Kelly')
+print('├────────────────────────────────────────────────────────┤')
+print(f'│  📋 Análisis del modelo:')
 for r in p['reasoning']:
     print(f'│     • {r}')
 print('├────────────────────────────────────────────────────────┤')
-print(f'│  📊 Poisson: λ_local={md[\"lambda_home\"]:.2f} | λ_visita={md[\"lambda_away\"]:.2f}')
-if cal.get('home'):
-    print(f'│  📈 Blend: 70% Poisson + 30% odds de mercado')
-else:
-    print(f'│  ⚠  Sin blend de mercado — solo Poisson')
+print(f'│  📊 Dixon-Coles: λ_local={md[\"lambda_home\"]:.2f} | λ_visita={md[\"lambda_away\"]:.2f}')
+print(f'│  🤖 Scout(caliente) → Analyst(dixon-coles) → Predictor(kelly)')
 print('└────────────────────────────────────────────────────────┘')
 " 2>&1
 
 echo ""
 if [ "$ODDS_HOME" != "null" ]; then
-  echo "📊 Predicción con odds REALES de mercado"
+  echo "📊 Análisis Risk-Neutral completado (Dixon-Coles + Kelly + EV)"
 else
-  echo "⚠️  Predicción SIN odds de mercado — los porcentajes son teóricos"
-  echo "💡 Pasa odds manuales para activar blend mercado+modelo:"
+  echo "⚠️  Sin odds de mercado — solo Dixon-Coles (sin EV ni Kelly)"
+  echo "💡 Pasa odds manuales para activar Value Betting:"
   echo "   ./consultar.sh \"$MATCH_HOME\" \"$MATCH_AWAY\" \"$MATCH_LEAGUE\" 2.10 3.40 3.80"
 fi
 echo "💾 Resultado guardado en ultima_prediccion.json"
