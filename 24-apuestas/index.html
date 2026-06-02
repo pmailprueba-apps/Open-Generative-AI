@@ -43,29 +43,39 @@
  </div>
  </header>
 
- <main class="app-container">
- <!-- Hero Concept Block -->
- <section class="concept-hero">
- <div class="concept-badge">PARADIGMA 2026</div>
- <h1>Las Estadísticas Tradicionales son Obsoletas</h1>
- <p>Los modelos del pasado se limitaban a promedios históricos. En la era del <strong>Mundial de Fútbol 2026</strong>, APUESTA.IA utiliza <strong>Deep Learning Multimodal</strong> y redes Transformers para fusionar biometría en vivo, fatiga acumulada, microclima del estadio y el sentimiento social en tiempo real.</p>
- </section>
+  <main class="app-container">
 
- <!-- Main Dashboard Grid -->
- <div class="dashboard-grid">
+  <!-- SPORT SELECTOR TABS -->
+  <div class="sport-tabs" style="display: flex; gap: 6px; margin-bottom: 1.5rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 14px; padding: 4px;">
+    <button class="sport-tab active" data-sport="football" style="flex: 1; padding: 10px 16px; border-radius: 10px; border: none; background: var(--neon-cyan); color: #0b0f19; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;">
+      ⚽ FÚTBOL
+    </button>
+    <button class="sport-tab" data-sport="basketball" style="flex: 1; padding: 10px 16px; border-radius: 10px; border: none; background: transparent; color: var(--text-secondary); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;">
+      🏀 BÁSQUET
+    </button>
+    <button class="sport-tab" data-sport="baseball" style="flex: 1; padding: 10px 16px; border-radius: 10px; border: none; background: transparent; color: var(--text-secondary); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;">
+      ⚾ BÉISBOL
+    </button>
+  </div>
+
+  <!-- Main Dashboard Grid -->
+  <div class="dashboard-grid">
+
+ <!-- RADAR RESULTS PANEL -->
+ <section id="radarResultsPanel" style="display: none; grid-column: 1 / -1; margin-bottom: 1rem;">
+    <!-- Filled by main.js -->
+ </section>
  
  <!-- COLUMN 1: LIVE SIMULATOR & WHAT-IF -->
  <section class="dashboard-card primary-column">
  <div class="card-header">
  <div class="card-title-group">
- <span class="card-live-indicator" id="liveMatchIndicator">EN VIVO</span>
+ <span class="card-live-indicator" id="liveMatchIndicator" style="display:none;">EN VIVO</span>
  <h2 style="font-size: 1.1rem; margin: 0;">Simulador de Inferencia</h2>
  </div>
  <div class="match-select-container">
  <select id="matchSelector" class="custom-select">
- <option value="psg-ars" selected>PSG 2-1 Arsenal (Finalizado) ✅</option>
- <option value="tol-tig">Toluca vs Tigres (Standby) ⏳</option>
- <option value="pu-ca">Pumas vs Cruz Azul (Finalizado)</option>
+ <option value="psg-ars" selected>Esperando Datos de Radar...</option>
  </select>
  </div>
  </div>
@@ -76,20 +86,20 @@
  <!-- Match Live Card -->
  <div class="match-live-card">
  <div class="team-container team-home">
- <div class="team-shield psg-shield" id="shieldHome">PSG</div>
- <div class="team-name" id="nameHome">PSG</div>
+ <div class="team-shield psg-shield" id="shieldHome">?</div>
+ <div class="team-name" id="nameHome">Local</div>
  </div>
  <div class="score-container">
  <div class="score-display">
- <span id="scoreHome">1</span>
+ <span id="scoreHome">-</span>
  <span class="score-divider">:</span>
- <span id="scoreAway">1</span>
+ <span id="scoreAway">-</span>
  </div>
- <div class="match-time" id="matchTime">Min 68:14</div>
+ <div class="match-time" id="matchTime" style="color: var(--text-muted);">Esperando...</div>
  </div>
  <div class="team-container team-away">
- <div class="team-shield ars-shield" id="shieldAway">ARS</div>
- <div class="team-name" id="nameAway">Arsenal</div>
+ <div class="team-shield ars-shield" id="shieldAway">?</div>
+ <div class="team-name" id="nameAway">Visitante</div>
  </div>
  </div>
 
@@ -137,16 +147,16 @@
  </svg>
  <div class="gauge-values">
  <div class="gauge-val-item val-home">
- <span class="val-label">PSG</span>
- <span class="val-num" id="valHomePercent">48%</span>
+ <span class="val-label" id="labelProbHome">Local</span>
+ <span class="val-num" id="valHomePercent">--%</span>
  </div>
  <div class="gauge-val-item val-draw">
  <span class="val-label">Empate</span>
- <span class="val-num" id="valDrawPercent">28%</span>
+ <span class="val-num" id="valDrawPercent">--%</span>
  </div>
  <div class="gauge-val-item val-away">
- <span class="val-label">Arsenal</span>
- <span class="val-num" id="valAwayPercent">24%</span>
+ <span class="val-label" id="labelProbAway">Visitante</span>
+ <span class="val-num" id="valAwayPercent">--%</span>
  </div>
  </div>
  </div>
@@ -164,7 +174,7 @@
  <div class="slider-control">
  <div class="slider-info">
  <label for="inputFatigue">
-  <span class="label-title">Fatiga Acumulada PSG</span>
+  <span class="label-title">Fatiga Acumulada Local</span>
   <span class="label-desc">Biometría de Wearables en tiempo real</span>
  </label>
  <span class="slider-value" id="valFatigue">35%</span>
@@ -188,7 +198,7 @@
  <div class="slider-control">
  <div class="slider-info">
  <label for="inputSentiment">
-  <span class="label-title">Sentimiento Social (Arsenal)</span>
+  <span class="label-title">Sentimiento Social (Visita)</span>
   <span class="label-desc">Sinergia digital de la afición en vivo</span>
  </label>
  <span class="slider-value" id="valSentiment">75%</span>
@@ -199,7 +209,7 @@
  <!-- Tactical Toggle -->
  <div class="toggle-control">
  <div class="toggle-info">
- <span class="toggle-title">Alineación Ofensiva Arsenal</span>
+ <span class="toggle-title">Alineación Ofensiva Visita</span>
  <span class="toggle-desc">Sustitución táctica por delantero estrella</span>
  </div>
  <label class="switch">
@@ -242,7 +252,7 @@
  </svg>
  <span>COMENTARIO EXPLICATIVO DE LA IA (XAI)</span>
  </div>
- <p id="xaiCommentary">Analizando señales multimodales... El nivel de fatiga del PSG (35%) es óptimo, permitiéndole mantener la presión alta. Sin embargo, el alto sentimiento favorable hacia Arsenal en redes sociales y la humedad del 60% sugieren una resistencia física que favorece transiciones rápidas.</p>
+ <p id="xaiCommentary">Sistema en espera. Utilice el Radar 24/7 en la esquina superior derecha para buscar oportunidades de valor (EV+).</p>
  </div>
 
  <!-- SECCIÓN DINÁMICA DE APUESTA.IA (ESTADÍSTICAS Y BANCA) -->
@@ -299,7 +309,7 @@
  <h2 style="font-size: 1.15rem; margin: 0;">Calculadora de Cobertura</h2>
  </div>
  <div class="preset-container">
- <button class="preset-btn active" id="presetPsgToluca">Cargar $100 PSG + Toluca</button>
+ <button class="preset-btn active" id="presetPsgToluca">Cargar $100 Ejemplo Asíncrono</button>
  </div>
  </div>
  
@@ -307,7 +317,7 @@
  
  <!-- Input Fields Section -->
  <div class="hedging-inputs">
- <!-- Bet 1 (PSG) -->
+ <!-- Bet 1 -->
  <div class="bet-input-group">
  <div class="bet-group-header" style="color: var(--neon-cyan);">
  <span>Apuesta Temprana (11:00 hrs)</span>
@@ -315,11 +325,11 @@
  <div class="inputs-row">
  <div class="field-item">
   <label for="hedgingTeam1">Selección / Equipo</label>
-  <input type="text" id="hedgingTeam1" value="PSG (vs Arsenal)" class="custom-text-input">
+  <input type="text" id="hedgingTeam1" value="" placeholder="Ej. Real Madrid (Local)" class="custom-text-input">
  </div>
  <div class="field-item">
   <label for="hedgingOdds1">Momio / Cuota</label>
-  <input type="number" id="hedgingOdds1" value="2.28" step="0.01" min="1.01" class="custom-num-input">
+  <input type="number" id="hedgingOdds1" value="" placeholder="Ej. 1.85" step="0.01" min="1.01" class="custom-num-input">
  </div>
  <div class="field-item">
   <label for="hedgingStake1">Monto ($)</label>
@@ -328,7 +338,7 @@
  </div>
  </div>
 
- <!-- Bet 2 (Toluca) -->
+ <!-- Bet 2 -->
  <div class="bet-input-group">
  <div class="bet-group-header" style="color: var(--neon-orange);">
  <span>Apuesta Tardía (18:00 hrs)</span>
@@ -336,7 +346,7 @@
  <div class="inputs-row">
  <div class="field-item">
   <label for="hedgingTeam2">Selección / Equipo</label>
-  <input type="text" id="hedgingTeam2" value="Toluca (vs Tigres)" class="custom-text-input">
+  <input type="text" id="hedgingTeam2" value="" placeholder="Ej. Equipo 2" class="custom-text-input">
  </div>
  <div class="field-item">
   <label for="hedgingOdds2">Momio / Cuota</label>
@@ -373,7 +383,7 @@
  <!-- Scenario 2: Gana 1 Solo -->
  <div class="scenario-result-card win-lose-1" id="resultCardOnly1">
  <div class="scenario-meta">
- <span class="scenario-badge" id="badgeOnly1">SOLO Solo PSG Gana</span>
+ <span class="scenario-badge" id="badgeOnly1">SOLO Solo Partido 1 Gana</span>
  <span class="scenario-math" id="mathOnly1">$100×2.28</span>
  </div>
  <div class="scenario-values">
@@ -391,7 +401,7 @@
  <!-- Scenario 3: Gana 2 Solo -->
  <div class="scenario-result-card win-lose-2" id="resultCardOnly2">
  <div class="scenario-meta">
- <span class="scenario-badge" id="badgeOnly2">SOLO Solo Toluca Gana</span>
+ <span class="scenario-badge" id="badgeOnly2">SOLO Solo Partido 2 Gana</span>
  <span class="scenario-math" id="mathOnly2">$100×1.909</span>
  </div>
  <div class="scenario-values">
@@ -455,7 +465,7 @@
  <span>ESCUDO ANÁLISIS DE COBERTURA ACTIVO</span>
  </div>
  <p id="hedgingAdviceText">
- ¡Estrategia asíncrona ideal! Si el primer partido (PSG) resulta victorioso, aseguras una ganancia neta de +$28.00, eliminando el estrés del segundo partido. En caso de fallo temprano, Toluca actúa como amortiguador reteniendo el 95.5% del capital total.
+ ¡Estrategia asíncrona ideal! Si el primer partido resulta victorioso, aseguras una ganancia neta, eliminando el estrés del segundo partido. En caso de fallo temprano, el Partido 2 actúa como amortiguador.
  </p>
  </div>
  </div>

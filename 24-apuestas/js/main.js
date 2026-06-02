@@ -116,16 +116,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (wasRunning && !scanRunning) {
                     // Scan just finished
                     showScanNotification('✅ ESCANEO finalizado');
+                    
+                    const radarPanel = document.getElementById('radarResultsPanel');
                     if (data.report && data.report.length > 0) {
-                        alert(`¡${data.report.length} apuestas de valor encontradas!\nRevisa la consola para más detalles.`);
-                        // Here we could inject a modal or table with the results.
+                        // Construir tarjetas dinámicas
+                        let cardsHtml = `<h2 style="font-size: 1.1rem; color: var(--neon-cyan); margin-bottom: 0.5rem; text-transform: uppercase;">🚨 ${data.report.length} OPORTUNIDAD(ES) ENCONTRADA(S)</h2>`;
+                        cardsHtml += `<div style="display: flex; gap: 1rem; flex-wrap: wrap;">`;
+                        
+                        data.report.forEach((rep, i) => {
+                            cardsHtml += `
+                                <div style="background: rgba(11,15,25,0.8); border: 1px solid var(--neon-cyan); border-radius: 8px; padding: 1rem; flex: 1; min-width: 280px; box-shadow: 0 4px 15px rgba(0, 240, 255, 0.1);">
+                                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem;">${rep.fixture}</h3>
+                                    <p style="margin: 0; font-size: 0.85rem; color: #a1aabf;">Apuesta sugerida: <strong style="color: var(--neon-green)">${rep.betType}</strong></p>
+                                    <p style="margin: 0; font-size: 0.85rem; color: #a1aabf;">Momio / Prob Real: ${rep.odds} / ${(rep.realProb*100).toFixed(1)}%</p>
+                                    <div style="margin-top: 10px; display:flex; justify-content: space-between; align-items:center;">
+                                        <span style="background: rgba(0,255,102,0.2); color: var(--neon-green); padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">EV+ ${(rep.expectedValue*100).toFixed(1)}%</span>
+                                        <button class="btn-primary" onclick="loadMatchToSimulator('${rep.fixture}', '${rep.betType}', '${rep.odds}')" style="padding: 6px 12px; font-size: 0.75rem;">Cargar al Simulador</button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        cardsHtml += `</div>`;
+                        
+                        radarPanel.innerHTML = cardsHtml;
+                        radarPanel.style.display = 'block';
                     } else if (data.report && data.report.length === 0) {
-                        alert('Escaneo completado. No se encontraron apuestas con ventaja matemática.');
+                        radarPanel.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Escaneo completado. No se encontraron apuestas con ventaja matemática en los próximos 7 días.</p>`;
+                        radarPanel.style.display = 'block';
                     }
                 }
             })
             .catch(() => {});
     }
+
+    // Función global para cargar resultados del radar al simulador
+    window.loadMatchToSimulator = function(fixtureStr, betType, oddsStr) {
+        document.getElementById('nameHome').textContent = fixtureStr.split(' vs ')[0];
+        document.getElementById('nameAway').textContent = fixtureStr.split(' vs ')[1];
+        document.getElementById('shieldHome').textContent = fixtureStr.split(' vs ')[0].substring(0,3).toUpperCase();
+        document.getElementById('shieldAway').textContent = fixtureStr.split(' vs ')[1].substring(0,3).toUpperCase();
+        
+        document.getElementById('hedgingTeam1').value = `${betType} (${fixtureStr})`;
+        document.getElementById('hedgingOdds1').value = oddsStr;
+        
+        document.getElementById('xaiCommentary').textContent = `Cargado desde RADAR 24/7. Oportunidad matemática (EV+) detectada en el mercado de ${betType}.`;
+        
+        // Empezar el reloj desde cero o algún valor
+        currentMatch = fixtureStr;
+        matchMinute = 0;
+        matchSecond = 0;
+        document.getElementById('matchTime').style.color = "var(--text-color)";
+        document.getElementById('liveMatchIndicator').textContent = "SIMULANDO";
+        document.getElementById('liveMatchIndicator').style.background = "var(--neon-cyan)";
+        document.getElementById('matchLeagueText').textContent = "Pre-Match Scanner";
+        
+        // Esconder el panel si se desea, o hacer auto-scroll
+        document.getElementById('hedgingTeam1').scrollIntoView({ behavior: 'smooth' });
+    };
 
     function updateScanUI() {
         if (!btnScanRadar || !btnScanText || !scanStatusIndicator) return;
@@ -199,9 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
     scanPollInterval = setInterval(pollScanStatus, 3000);
 
     // State Variables
-    let currentMatch = 'psg-ars';
-    let matchMinute = 68;
-    let matchSecond = 14;
+    let currentMatch = '';
+    let matchMinute = 0;
+    let matchSecond = 0;
     let bettingStress = 18;
     let guardianActive = false;
     let betCooldownActive = false;
@@ -209,26 +256,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // LIVE MATCH SIMULATION (CLOCK TICK)
     // -------------------------------------------------------------
-    function setPSGFinal() {
-        scoreHomeEl.textContent = "2";
-        scoreAwayEl.textContent = "1";
-        matchTimeEl.textContent = "Finalizado";
-        matchTimeEl.style.color = "var(--neon-green)";
-        liveMatchIndicator.textContent = "FINALIZADO";
-        liveMatchIndicator.style.background = "var(--neon-green)";
-        nameHome.textContent = "PSG";
-        nameAway.textContent = "Arsenal";
-        shieldHome.textContent = "PSG";
-        shieldAway.textContent = "ARS";
-        matchLeagueText.textContent = "UEFA Champions League • Final";
-        valHomePercent.textContent = "45%";
-        valDrawPercent.textContent = "33%";
-        valAwayPercent.textContent = "22%";
+    function setEmptyState() {
+        scoreHomeEl.textContent = "-";
+        scoreAwayEl.textContent = "-";
+        matchTimeEl.textContent = "Esperando Datos...";
+        matchTimeEl.style.color = "var(--text-muted)";
+        liveMatchIndicator.textContent = "STANDBY";
+        liveMatchIndicator.style.background = "var(--bg-card-hover)";
+        nameHome.textContent = "Local";
+        nameAway.textContent = "Visitante";
+        shieldHome.textContent = "?";
+        shieldAway.textContent = "?";
+        matchLeagueText.textContent = "Seleccione una oportunidad";
+        valHomePercent.textContent = "--%";
+        valDrawPercent.textContent = "--%";
+        valAwayPercent.textContent = "--%";
     }
-    setPSGFinal();
+    setEmptyState();
 
     setInterval(() => {
-        if (currentMatch === 'psg-ars') return;
+        if (!currentMatch) return;
 
         matchSecond += 1;
         if (matchSecond >= 60) {
@@ -402,87 +449,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Match Switcher Event Listener
     matchSelector.addEventListener('change', (e) => {
         currentMatch = e.target.value;
-        if (currentMatch === 'psg-ars') {
-            setPSGFinal();
-            inputFatigue.disabled = true;
-            inputClimate.disabled = true;
-            inputSentiment.disabled = true;
-            inputTactics.disabled = true;
-            calienteOddsPanel.style.display = "none";
-        } else if (currentMatch === 'tol-tig') {
-            // Set Toluca vs Tigres Up-coming Scenario Simulation
-            liveMatchIndicator.textContent = "STANDBY";
-            liveMatchIndicator.style.background = "var(--neon-cyan)";
-            matchLeagueText.textContent = "CONCACAF Champions Cup • Final";
-            
-            shieldHome.textContent = "TOL";
-            nameHome.textContent = "Toluca";
-            shieldAway.textContent = "TIG";
-            nameAway.textContent = "Tigres UANL";
-
-            scoreHomeEl.textContent = "-";
-            scoreAwayEl.textContent = "-";
-            matchTimeEl.textContent = "Sábado, 30 de Mayo, 18:00 hrs";
-
-            // Re-enable inputs
-            inputFatigue.disabled = false;
-            inputClimate.disabled = false;
-            inputSentiment.disabled = false;
-            inputTactics.disabled = false;
-
-            // Restore current slider values
-            valFatigue.textContent = `${inputFatigue.value}%`;
-            valClimate.textContent = `${inputClimate.value}%`;
-            valSentiment.textContent = `${inputSentiment.value}%`;
-
-            calienteOddsPanel.style.display = "none";
-
-            recalculateProbabilities();
-        } else if (currentMatch === 'pu-ca') {
-            // Set Pumas vs Cruz Azul Final Match State
-            liveMatchIndicator.textContent = "FINALIZADO";
-            liveMatchIndicator.style.background = "#1f293d";
-            matchLeagueText.textContent = "Liga MX • Liguilla - Vuelta";
-
-            shieldHome.textContent = "🐾";
-            nameHome.textContent = "Pumas UNAM";
-            shieldAway.textContent = "🚂";
-            nameAway.textContent = "Cruz Azul";
-
-            scoreHomeEl.textContent = "1";
-            scoreAwayEl.textContent = "2";
-            matchTimeEl.textContent = "Domingo, 24 de Mayo, 2026";
-
-            // Disable sliders
-            inputFatigue.disabled = true;
-            inputClimate.disabled = true;
-            inputSentiment.disabled = true;
-            inputTactics.disabled = true;
-
-            // Set static values representing the historic game
-            valFatigue.textContent = "78%";
-            valClimate.textContent = "85%";
-            valSentiment.textContent = "92%";
-            
-            // Set slider positions visually
-            inputFatigue.value = 78;
-            inputClimate.value = 85;
-            inputSentiment.value = 92;
-            inputTactics.checked = true;
-
-            calienteOddsPanel.style.display = "block";
-
-            // Draw locked win probabilities
-            valHomePercent.textContent = "20%";
-            valDrawPercent.textContent = "15%";
-            valAwayPercent.textContent = "65%";
-
-            const activePercentage = 27.5;
-            const strokeDashOffset = 251.3 - (activePercentage * 251.3 / 100);
-            gaugeHome.style.strokeDasharray = `${251.3 - strokeDashOffset} 251.3`;
-
-            xaiCommentary.innerHTML = `💡 **Inferencia Retroactiva (Liguilla 25/26):** Cruz Azul concretó su pase de vuelta ganando **2-1 en el global** (1-2 en la Vuelta). El motor predictivo identificó una alta fatiga en las transiciones de Pumas (**78%**), que junto al planteamiento táctico ultra-ofensivo de Cruz Azul y una sinergia psicológica digital del **92%** de su afición, neutralizaron la localía universitaria en C.U. bajo condiciones lluviosas y de alta humedad (**85%**). *[Calibración exacta de momios de Caliente]*`;
-        }
+        
+        setEmptyState();
+        inputFatigue.disabled = true;
+        inputClimate.disabled = true;
+        inputSentiment.disabled = true;
+        inputTactics.disabled = true;
+        calienteOddsPanel.style.display = "none";
+        
+        resetSliders();
+        xaiCommentary.textContent = "Esperando oportunidad del Radar 24/7...";
     });
 
     // -------------------------------------------------------------
@@ -1081,6 +1057,65 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // -------------------------------------------------------------
+    // SPORT TABS — Cambiar deporte y actualizar dashboard
+    // -------------------------------------------------------------
+    const sportTabs = document.querySelectorAll('.sport-tab');
+    let activeSport = 'football';
+
+    function switchSport(sport) {
+        activeSport = sport;
+        sportTabs.forEach(tab => {
+            const isActive = tab.dataset.sport === sport;
+            tab.style.background = isActive ? 'var(--neon-cyan)' : 'transparent';
+            tab.style.color = isActive ? '#0b0f19' : 'var(--text-secondary)';
+            tab.classList.toggle('active', isActive);
+        });
+
+        // Cambiar header del dashboard según deporte
+        const matchLeagueText = document.getElementById('matchLeagueText');
+        const liveMatchIndicator = document.getElementById('liveMatchIndicator');
+        const matchSelector = document.getElementById('matchSelector');
+        
+        if (sport === 'football') {
+            matchLeagueText.textContent = 'Ligas mundiales • Fútbol';
+            if (matchSelector) {
+                matchSelector.innerHTML = `
+                    <option value="psg-ars">PSG vs Arsenal (Finalizado)</option>
+                    <option value="tol-tig" selected>Toluca vs Tigres (Concacaf)</option>
+                    <option value="pu-ca">Pumas vs Cruz Azul (Liga MX)</option>
+                `;
+            }
+            document.getElementById('oddsInputPanel').style.display = 'block';
+        } else if (sport === 'basketball') {
+            matchLeagueText.textContent = 'NBA • Básquetbol';
+            if (matchSelector) {
+                matchSelector.innerHTML = `
+                    <option value="nba1" selected>Lakers vs Celtics</option>
+                    <option value="nba2">Warriors vs Bucks</option>
+                    <option value="nba3">Nuggets vs Heat</option>
+                `;
+            }
+        } else if (sport === 'baseball') {
+            matchLeagueText.textContent = 'MLB • Béisbol';
+            if (matchSelector) {
+                matchSelector.innerHTML = `
+                    <option value="mlb1" selected>Yankees vs Dodgers</option>
+                    <option value="mlb2">Mets vs Braves</option>
+                    <option value="mlb3">Astros vs Rangers</option>
+                `;
+            }
+        }
+
+        // Notificar al dashboard
+        const event = new CustomEvent('sportChanged', { detail: { sport } });
+        document.dispatchEvent(event);
+    }
+
+    sportTabs.forEach(tab => {
+        tab.addEventListener('click', () => switchSport(tab.dataset.sport));
+    });
 
     // -------------------------------------------------------------
     // INIT APPLICATION

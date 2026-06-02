@@ -11,8 +11,8 @@
     "away_prob": 21,
     "confidence": 40,
     "confidence_label": "BAJA",
-    "recommended_stake": "Kelly Fraccional (1/4): 2.86% del Bankroll",
-    "expected_value": 0.26154821283297736,
+    "recommended_stake": "Kelly Fraccional (1/4): 4.12% del Bankroll",
+    "expected_value": 0.4647763443835786,
     "bet_type": "Empate (X)",
     "reasoning": [
       "Dixon-Coles (Poisson ajustado): λ_local=0.88, λ_visita=0.54",
@@ -20,8 +20,8 @@
       "Ventaja localía: 15%",
       "Forma reciente local: positiva",
       "Forma reciente visita: positiva",
-      "📈 Mercado evaluado: Local=2.22, Empate=3.29, Visita=2",
-      "✅ EV POSITIVO detectado: +26.15% de retorno esperado sobre inversión.",
+      "📈 Mercado evaluado: Local=2.75, Empate=3.82, Visita=4.42",
+      "✅ EV POSITIVO detectado: +46.48% de retorno esperado sobre inversión.",
       "⚖️  Criterio de Kelly aplicado para gestión estricta de riesgo."
     ]
   },
@@ -40,12 +40,12 @@
   },
   "odds_used": {
     "caliente": {
-      "home": 2.22,
-      "draw": 3.29,
-      "away": 2
+      "home": 2.75,
+      "draw": 3.82,
+      "away": 4.42
     }
   },
-  "timestamp": "2026-06-02T01:46:41.450Z",
+  "timestamp": "2026-06-02T01:52:25.651Z",
   "agents": {
     "scout": "opencode",
     "analyst": "claude-code",

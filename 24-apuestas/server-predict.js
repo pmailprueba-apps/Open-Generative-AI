@@ -3,7 +3,9 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { predict } = require('./predictor-engine.js');
+const { predict: predictFootball } = require('./predictor-engine.js');
+const { predict: predictBasketball } = require('./predictor-basketball.js');
+const { predict: predictBaseball } = require('./predictor-baseball.js');
 const { addMatch, addPrediction, loadDB, getStats, normalizeName } = require('./apuestas-db.js');
 
 const PORT = parseInt(process.env.PORT) || 3456;
@@ -159,30 +161,57 @@ const server = http.createServer((req, res) => {
       });
     }
 
+    // Helper: elegir motor según deporte
+    function getPredictor(sport) {
+      switch (sport) {
+        case 'basketball': return predictBasketball;
+        case 'baseball': return predictBaseball;
+        default: return predictFootball;
+      }
+    }
+
+    // POST /predict/:sport — Predicción multi-deporte
+    if ((pathname.startsWith('/predict/') || pathname === '/predict') && method === 'POST') {
+      const sport = pathname.startsWith('/predict/') ? pathname.split('/')[2] : 'football';
+      return readBody(req, (body, err) => {
+        if (err) return send(res, { error: 'Invalid JSON' }, 400);
+        const home = body.home || 'PSG';
+        const away = body.away || 'Arsenal';
+        const options = { ...loadData(), ...body };
+        const predictor = getPredictor(sport);
+        const result = predictor(home, away, options);
+        send(res, result);
+      });
+    }
+
     // POST /analyze — Analyst analiza
     if (pathname === '/analyze' && method === 'POST') {
       return readBody(req, (body, err) => {
         if (err) return send(res, { error: 'Invalid JSON' }, 400);
         const home = body.home || 'PSG';
         const away = body.away || 'Arsenal';
+        const sport = body.sport || 'football';
         const options = { ...loadData(), ...body };
-        const result = predict(home, away, options);
-        send(res, { agent: 'Analyst', match: { home, away }, probabilities: { home: result.prediction.home_prob, draw: result.prediction.draw_prob, away: result.prediction.away_prob } });
+        const predictor = getPredictor(sport);
+        const result = predictor(home, away, options);
+        send(res, { agent: 'Analyst', match: { home, away }, probabilities: { home: result.prediction.home_win_prob, draw: result.prediction.draw_prob, away: result.prediction.away_win_prob } });
       });
     }
 
-    // POST /predict-final — Predictor guarda predicción final
+    // POST /predict-final — Predictor guarda predicción final (multi-sport)
     if (pathname === '/predict-final' && method === 'POST') {
       return readBody(req, (body, err) => {
         if (err) return send(res, { error: 'Invalid JSON' }, 400);
         const home = body.home || 'PSG';
         const away = body.away || 'Arsenal';
+        const sport = body.sport || 'football';
         const options = { ...loadData(), ...body };
-        const result = predict(home, away, options);
-        fs.writeFileSync(PRED_FILE, JSON.stringify(result, null, 2));
+        const predictor = getPredictor(sport);
+        const result = predictor(home, away, options);
+        fs.writeFileSync(PRED_FILE, JSON.stringify({ ...result, sport }, null, 2));
 
         addMatch({
-          home, away, league: result.match.league,
+          home, away, league: result.match.league, sport,
           date: body.date || new Date().toISOString(),
           home_odds: result.odds_used?.caliente?.home || null,
           draw_odds: result.odds_used?.caliente?.draw || null,

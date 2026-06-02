@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "match": "Monterrey vs Pumas UNAM",
+    "date": "Simulación",
+    "home": "Monterrey",
+    "away": "Pumas UNAM",
+    "odds": "2.75,3.82,4.42",
+    "prediction": "Empate",
+    "home_prob": 41,
+    "ev": 12.75,
+    "kelly_stake": "Kelly Fraccional (1/4): 4.12% del Bankroll"
+  }
+]
