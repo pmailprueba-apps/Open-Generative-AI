@@ -15,6 +15,7 @@ echo "==========================================================="
 
 # ─── FASE 1: SCOUT (Extracción de API Real) ──────────────────────
 echo "[1/3] Ejecutando SCOUT_AGENT (API-Football)..."
+rm -f ultimas-estadisticas.json  # Clean slate for each run
 node scout-estadisticas.js "$MATCH_HOME" "$MATCH_AWAY"
 
 if [ ! -f "ultimas-estadisticas.json" ]; then

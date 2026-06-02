@@ -20,15 +20,53 @@ function loadDB() {
 }
 function saveDB(db) { fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2)); }
 
-async function api(endpoint) {
-  const res = await fetch(`${BASE}${endpoint}`, {
-    headers: { "x-apisports-key": TOKEN }
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`API ${res.status}: ${text.substring(0, 100)}`);
+const CACHE_PATH = path.join(__dirname, '.api-cache.json');
+let apiCache = {};
+try { apiCache = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf-8')); } catch {}
+
+function saveCache() {
+  // Keep only last 200 entries
+  const keys = Object.keys(apiCache);
+  if (keys.length > 200) {
+    const toRemove = keys.sort().slice(0, keys.length - 200);
+    toRemove.forEach(k => delete apiCache[k]);
   }
-  return res.json();
+  fs.writeFileSync(CACHE_PATH, JSON.stringify(apiCache));
+}
+
+async function api(endpoint, retries = 3) {
+  const cacheKey = endpoint;
+  if (apiCache[cacheKey]) {
+    return apiCache[cacheKey];
+  }
+  
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`${BASE}${endpoint}`, {
+        headers: { "x-apisports-key": TOKEN }
+      });
+      
+      if (res.status === 429) {
+        const waitMs = Math.min(1000 * Math.pow(2, attempt), 10000);
+        console.log(`   ⏳ Rate limit alcanzado. Esperando ${waitMs/1000}s (intento ${attempt}/${retries})...`);
+        await new Promise(r => setTimeout(r, waitMs));
+        continue;
+      }
+      
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`API ${res.status}: ${text.substring(0, 100)}`);
+      }
+      
+      const data = await res.json();
+      apiCache[cacheKey] = data;
+      saveCache();
+      return data;
+    } catch (e) {
+      if (attempt === retries) throw e;
+      await new Promise(r => setTimeout(r, 1000 * attempt));
+    }
+  }
 }
 
 function updateElo(homeELO, awayELO, homeScore, awayScore) {
@@ -46,12 +84,97 @@ function updateElo(homeELO, awayELO, homeScore, awayScore) {
   };
 }
 
+const TEAM_NAME_MAP = {
+  'méxico': ['Mexico', 'México', 'Mexico National Team'],
+  'mexico': ['Mexico', 'México', 'Mexico National Team'],
+  'ee.uu': ['USA', 'United States', 'USMNT'],
+  'ee uu': ['USA', 'United States', 'USMNT'],
+  'brasil': ['Brazil', 'Brasil'],
+  'suiza': ['Switzerland', 'Swiss'],
+  'alemania': ['Germany', 'Deutschland'],
+  'turquía': ['Turkey', 'Turkiye', 'Turkey National Team'],
+  'túnez': ['Tunisia', 'Tunisia National Team'],
+  'argelia': ['Algeria', 'Algeria National Team'],
+  'arabia saudita': ['Saudi Arabia', 'Saudi Arabia National Team'],
+  'costa de marfil': ['Ivory Coast', 'Côte d\'Ivoire', 'Ivory Coast National Team'],
+  'corea del sur': ['South Korea', 'Korea Republic', 'South Korea National Team'],
+  'países bajos': ['Netherlands', 'Holland', 'Netherlands National Team'],
+  'inglaterra': ['England', 'England National Team'],
+  'escocia': ['Scotland', 'Scotland National Team'],
+  'croacia': ['Croatia', 'Croatia National Team'],
+  'noruega': ['Norway', 'Norway National Team'],
+  'suecia': ['Sweden', 'Sweden National Team'],
+  'austria': ['Austria', 'Austria National Team'],
+  'portugal': ['Portugal', 'Portugal National Team'],
+  'jordania': ['Jordan', 'Jordan National Team'],
+  'senegal': ['Senegal', 'Senegal National Team'],
+  'argentina': ['Argentina', 'Argentina National Team'],
+  'egipto': ['Egypt', 'Egypt National Team'],
+  'españa': ['Spain', 'Spain National Team'],
+  'tigres': ['Tigres UANL', 'Tigres', 'Tigres de la UANL'],
+  'toluca': ['Toluca', 'Deportivo Toluca'],
+  'pumas': ['Pumas UNAM', 'UNAM', 'Pumas'],
+  'cruz azul': ['Cruz Azul'],
+  'chivas': ['Guadalajara', 'Chivas'],
+  'monterrey': ['Monterrey', 'Rayados'],
+  'américa': ['Club America', 'America'],
+  'polonia': ['Poland'],
+  'ucrania': ['Ukraine'],
+  'canadá': ['Canada'],
+  'canada': ['Canada'],
+  'uzbekistán': ['Uzbekistan'],
+  'uzbekistan': ['Uzbekistan'],
+  'chipre': ['Cyprus'],
+  'el salvador': ['El Salvador', 'El Salvador National Team'],
+  'eslovenia': ['Slovenia'],
+  'sudáfrica': ['South Africa'],
+  'sudafrica': ['South Africa'],
+  'bosnia': ['Bosnia', 'Bosnia and Herzegovina'],
+  'paraguay': ['Paraguay'],
+  'qatar': ['Qatar'],
+  'marruecos': ['Morocco'],
+  'haiti': ['Haiti'],
+  'curazao': ['Curacao'],
+  'japón': ['Japan'],
+  'japon': ['Japan'],
+  'ecuador': ['Ecuador'],
+  'irán': ['Iran'],
+  'iran': ['Iran'],
+  'uruguay': ['Uruguay'],
+  'nueva zelanda': ['New Zealand'],
+  'francia': ['France'],
+  'congo dr': ['Congo DR', 'DR Congo'],
+  'república checa': ['Czech Republic', 'Czechia'],
+  'colombia': ['Colombia'],
+  'ghana': ['Ghana'],
+  'panamá': ['Panama'],
+  'panama': ['Panama'],
+  'canadá': ['Canada'],
+  'canada': ['Canada'],
+  'croacia': ['Croatia'],
+  'colombia': ['Colombia'],
+  'ucrania': ['Ukraine']
+};
+
 async function searchTeam(name) {
-  const data = await api(`/teams?search=${encodeURIComponent(name)}`);
-  // Priorizar equipos de México
-  const mxTeams = data.response.filter(r => r.team.country === 'Mexico');
-  if (mxTeams.length > 0) return mxTeams.map(r => r.team);
-  return data.response.map(r => r.team) || [];
+  const cleanName = name.trim().toLowerCase();
+  const altNames = TEAM_NAME_MAP[cleanName] || [name, name.replace(/[áéíóú]/g, c => 'aeiou'['áéíóú'.indexOf(c)])];
+  
+  // Try each name variant
+  for (const altName of altNames) {
+    const data = await api(`/teams?search=${encodeURIComponent(altName)}`);
+    if (data.response && data.response.length > 0) {
+      // Prioritize national teams (country matches name) and Mexican teams
+      const nationalTeams = data.response.filter(r =>
+        r.team.country && r.team.name.toLowerCase().includes(r.team.country.toLowerCase())
+      );
+      const mxTeams = data.response.filter(r => r.team.country === 'Mexico');
+      if (mxTeams.length > 0) return mxTeams.map(r => r.team);
+      if (nationalTeams.length > 0) return nationalTeams.map(r => r.team);
+      return data.response.map(r => r.team) || [];
+    }
+  }
+  return [];
 }
 
 async function getTeamMatches(teamId) {
