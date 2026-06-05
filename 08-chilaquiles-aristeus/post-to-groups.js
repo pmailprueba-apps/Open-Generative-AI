@@ -29,37 +29,71 @@ async function postToGroup(page, groupId, message, imagePath) {
     return false;
   }
 
-  // 1. Click the composer to open the post editor
-  await page.evaluate(() => {
-    const spans = document.querySelectorAll('span');
-    for (const s of spans) {
-      if (s.innerText.includes('Escribe algo') || s.innerText.includes('Write something')) {
-        s.click();
-        return;
+  // 1. Upload image FIRST (before opening composer)
+  if (imagePath && fs.existsSync(imagePath)) {
+    const idx = await page.evaluate(() => {
+      const inputs = document.querySelectorAll('input[type="file"]');
+      for (let i = inputs.length - 1; i >= 0; i--) {
+        const accept = inputs[i].getAttribute('accept') || '';
+        if (accept.includes('image/*')) return i;
+      }
+      return -1;
+    });
+
+    if (idx >= 0) {
+      try {
+        const ext = path.extname(imagePath).toLowerCase().replace('.', '');
+        const mime = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' :
+                     ext === 'png' ? 'image/png' : 'image/' + ext;
+        const fileData = fs.readFileSync(imagePath);
+
+        await page.evaluate(({ inputIdx, data, mimeType, fileName }) => {
+          const inputs = document.querySelectorAll('input[type="file"]');
+          const target = inputs[inputIdx];
+          if (!target) return;
+
+          const blob = new Blob([new Uint8Array(data)], { type: mimeType });
+          const file = new File([blob], fileName, { type: mimeType });
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          target.files = dt.files;
+          target.dispatchEvent(new Event('change', { bubbles: true }));
+          target.dispatchEvent(new Event('input', { bubbles: true }));
+        }, { inputIdx: idx, data: [...fileData], mimeType: mime, fileName: path.basename(imagePath) });
+
+        console.log('  Imagen cargada');
+        await sleep(5000);
+      } catch (e) {
+        console.log('  Error imagen:', e.message.substring(0, 50));
       }
     }
-  });
-  await sleep(3000);
-
-  // 2. Upload image (try all file inputs)
-  if (imagePath && fs.existsSync(imagePath)) {
-    const inputs = await page.$$('input[type="file"]');
-    let uploaded = false;
-    // Try each file input until one works
-    for (const inp of inputs) {
-      try {
-        await inp.uploadFile(imagePath);
-        uploaded = true;
-        break;
-      } catch {}
-    }
-    if (uploaded) {
-      console.log('  Imagen cargada');
-      await sleep(5000);
-    } else {
-      console.log('  No se pudo cargar imagen');
-    }
   }
+
+  // 2. Click the NEW POST composer (top of page, not comment boxes)
+  await page.evaluate(() => {
+    const divs = document.querySelectorAll('div[role="button"]');
+    for (const d of divs) {
+      const text = d.innerText || '';
+      if (text.includes('Escribe algo') || text.includes('Write something')) {
+        const parent = d.closest('[role="region"], [role="feed"], div[data-pagelet]');
+        if (parent && (parent.innerText.includes('Foto/video') || parent.innerText.includes('Sentimiento/actividad'))) {
+          d.click();
+          return;
+        }
+      }
+    }
+    const spans = document.querySelectorAll('span');
+    let topSpan = null;
+    let topY = Infinity;
+    for (const s of spans) {
+      if (s.innerText.includes('Escribe algo') || s.innerText.includes('Write something')) {
+        const rect = s.getBoundingClientRect();
+        if (rect.top < topY) { topY = rect.top; topSpan = s; }
+      }
+    }
+    if (topSpan) topSpan.click();
+  });
+  await sleep(4000);
 
   // 3. Type message via keyboard
   await page.keyboard.type(message, { delay: 10 });
@@ -145,11 +179,11 @@ Ejemplo:
       console.log('Sesion valida');
     }
 
-    for (const gid of GROUPS) {
+    for (let gi = 0; gi < GROUPS.length; gi++) {
+      const gid = GROUPS[gi];
       let groupPage = page;
       try {
-        // Use a fresh page/tab for each group
-        if (GROUPS.indexOf(gid) > 0) {
+        if (gi > 0) {
           groupPage = await browser.newPage();
           await groupPage.setViewport({ width: 1400, height: 900 });
         }
@@ -157,8 +191,7 @@ Ejemplo:
       } catch (e) {
         console.log(`  Error en grupo ${gid}: ${e.message.substring(0, 80)}`);
       }
-      // Close tab if not the first one
-      if (gid !== GROUPS[0]) {
+      if (gi > 0) {
         await groupPage.close().catch(() => {});
       }
       await sleep(2000);
