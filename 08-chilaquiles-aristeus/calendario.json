@@ -1,0 +1,89 @@
+{
+  "horarios": ["12:00", "15:00"],
+  "dias": {
+    "Lunes": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "¿Verdes o rojos? La pregunta más importante de tu semana 💚❤️\n\nEn Aristëus no tienes que elegir mal. Ambos son artesanales, con totopo crujiente y salsa de la casa.\n\n📍 Calle 2a #185, Col. Aviación (El Lavadero SLP)\n🚗 Pide por UberEats\n📲 O escríbenos por WhatsApp"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "La hora del antojo llegó 🕒\n\n¿Ya probaste nuestras Bolas de Arroz? La combinación perfecta para acompañar tus chilaquiles.\n\n📍 El Lavadero SLP\n🚗 UberEats activo"
+      }
+    ],
+    "Martes": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "🔥 El Despertar de Aristëus — Salsa roja de chorizo (Salsa Imperial), totopos, queso menonita, crema de rancho.\n\nEl desayuno que despierta hasta al más dormido.\n\n📍 Calle 2a #185, Col. Aviación\n🚗 UberEats activo"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Martes de antojo… ¿Te traemos algo?\n\nCada totopo sale crujiente, cada salsa es artesanal. No es comida rápida, es experiencia Aristëus.\n\n📲 Pide al 55 6148 5296"
+      }
+    ],
+    "Miércoles": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "Detrás de cada totopo crujiente hay una historia de calidad.\n\nEn Aristëus no cortamos esquinas. Cada ingrediente es seleccionado para darte la mejor experiencia.\n\n📍 El Lavadero SLP\n📲 Pide al 55 6148 5296"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Mitad de semana, solución completa 🌮\n\nChilaquiles de autor + Toritos Imperiales. La combinación que necesita tu miércoles.\n\n🚗 UberEats / WhatsApp"
+      }
+    ],
+    "Jueves": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "¿Con qué proteína te quedas? 🤔\n\n🔸 Pollo\n🔸 Huevo\n🔸 Arrachera\n🔸 Camarón\n\nTodos disponibles en nuestros chilaquiles de autor.\n\n📍 Calle 2a #185, Col. Aviación"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Jueves de Joyas del Mar 🌊\n\nNuestros camarones salteados con especias de la casa son la mejor razón para darte un gusto.\n\n📲 Pide tu orden: 55 6148 5296"
+      }
+    ],
+    "Viernes": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "¡Viernes de Premio! 🏆\n\nEl Banquete del Patrón: Chilaquiles con Arrachera premium marinada y asada a las brasas.\n\n$130 precio local / $162.50 delivery\n\nPide por UberEats o mándanos WhatsApp."
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Viernes + Chilaquiles + Arrachera = Felicidad 🔥\n\nTu premio por sobrevivir la semana. Te lo mereces.\n\n📍 Calle 2a #185, Col. Aviación\n🚗 UberEats / WhatsApp"
+      }
+    ],
+    "Sábado": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "Sábado de antojo… ¿te traemos unos chilaquiles? 🏎️\n\nAbiertos de 8am a 3pm. Llegamos hasta tu casa.\n\n📍 Calle 2a #185, Col. Aviación\n🚗 UberEats / WhatsApp"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Sábado, el día perfecto para un desayuno de verdad.\n\nSin prisas, con sabor, con Aristëus.\n\n🌮 Chilaquiles artesanales\n🥟 Toritos Imperiales\n🍚 Bolas de Arroz\n\n📍 El Lavadero SLP"
+      }
+    ],
+    "Domingo": [
+      {
+        "hora": "12:00",
+        "img": "",
+        "copy": "Domingo de chilaquiles, domingo de Aristëus 💛\n\nHoy descansamos, pero el antojo no. Pide delivery y te llevamos la Ruta 57 hasta tu mesa.\n\n🚗 UberEats activo\n📲 55 6148 5296"
+      },
+      {
+        "hora": "15:00",
+        "img": "",
+        "copy": "Cerrando el fin de semana como se debe.\n\n¿Dulce o salado? El Tesoro Dulce de Aristëus (cajeta + chocolate) es el cierre perfecto.\n\n🍯 Pide el tuyo: 55 6148 5296"
+      }
+    ]
+  }
+}

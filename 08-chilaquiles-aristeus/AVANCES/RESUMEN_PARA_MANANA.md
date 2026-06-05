@@ -1,30 +1,32 @@
 # 📊 Estado del Proyecto: Aristeus "Artesanos de la Salsa"
-**Fecha de corte:** 14 de mayo, 2026
+**Fecha de corte:** 5 de junio, 2026
 
-Este archivo es un resumen para retomar el trabajo en la siguiente sesión.
+## ✅ Última Sesión — Publicación Masiva en Grupos de Facebook
+
+### Implementación técnica
+1. **`post-to-groups.js`** — Script de automatización con Puppeteer para publicar en grupos de Facebook con imagen + texto.
+2. **`post.js`** — Se añadió `postToGroups()` vía Graph API (cuando la página sea miembro del grupo).
+3. **`publicar_programado.js`** — Ahora ejecuta publicación en grupos DESPUÉS de publicar en página + Instagram.
+4. **`Dockerfile`** — Actualizado con Chromium para Puppeteer, se copia `post-to-groups.js`.
+5. **`.config.json`** — Configurado con `FB_GROUPS` (23 IDs), `PAGE_ID` corregido, nuevo `PAGE_TOKEN`.
+
+### Publicación realizada
+- **22 de 23 grupos publicados** con imagen y texto promocional de Aristeus.
+- Grupos objetivos: colonias Aviación, Jacarandas, Morales, Saucito, Vasco de Quiroga, Pozos; grupos de comida/ventas en SLP.
+- Solo falló: "Turista en Mi Ciudad, San Luis Potosí!" (no permite posts comerciales).
+
+### Flujo actual
+```
+cron (12:00 y 15:00)
+  → publicar_programado.js
+      → post.js → Facebook Page + Instagram
+      → post-to-groups.js → 22 grupos de Facebook
+```
+
+### Próximos pasos
+1. Agregar la página Aristeus como miembro de los grupos para que `post.js --groups` también funcione vía API.
+2. Agregar más grupos de la lista de Alejandro (en `memanto/`).
+3. Configurar respaldo automático.
 
 ---
-
-## ✅ Resumen de la Última Sesión
-1.  **Blindaje de Producción**: Se eliminaron los atributos `contenteditable` por defecto. El sitio ahora es de "solo lectura" para el público general.
-2.  **Sistema Admin Mode**: Se implementó una entrada secreta para el dueño.
-    *   **Enlace:** `https://aristeus-premium-menu.web.app/?admin=aristeus`
-    *   **Función:** Habilita edición de textos y precios solo para el poseedor del enlace.
-3.  **Activos de Marketing**: 
-    *   Se capturó y guardó el **Mockup de Facebook** en `assets/mockup_facebook_aristeus.png`.
-    *   Se añadieron sellos de autenticidad y branding premium a la galería de imágenes.
-4.  **Control de Versiones**: Se realizó un `git commit` y un respaldo físico en `.zip` dentro de la carpeta `respaldos/`.
-
----
-
-## 🚀 Siguientes Pasos (Fase 3: Activación)
-Al abrir esta sesión mañana, estos son los objetivos prioritarios:
-
-1.  **Campaña "Firma de Oro"**: Utilizar los mockups generados para programar las primeras publicaciones en Facebook/Instagram.
-2.  **Google Maps**: Registrar oficialmente la ubicación en la **Colonia Aviación (Calle 2a #185)** para que los clientes puedan llegar con el botón de la web.
-3.  **Auditoría Final de UX**: Hacer una prueba real de pedido vía WhatsApp con el menú en producción para asegurar que el flujo es 100% fluido.
-4.  **Anuncio de Apertura**: Capturar la imagen del archivo `web/anuncio-apertura.html` para distribución digital.
-
----
-
-**Nota para el Sistema:** Antigravity, cuando el usuario regrese, lee este archivo para recordarle en qué punto exacto nos quedamos. El proyecto está en **Fase de Lanzamiento Inminente**.
+**Nota:** El proyecto pasó de Fase de Lanzamiento a Fase de Activación con presencia en 22+ grupos de Facebook.

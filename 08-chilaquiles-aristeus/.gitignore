@@ -1,0 +1,7 @@
+.config.json
+node_modules/
+respaldos/
+obsidian_backup/
+.fb-profile/
+.fb-debug-*.png
+.tiktok-profile/

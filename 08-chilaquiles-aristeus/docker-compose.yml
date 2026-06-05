@@ -1,0 +1,9 @@
+version: '3'
+services:
+  aristeus-publisher:
+    build: .
+    container_name: aristeus-publisher
+    restart: unless-stopped
+    volumes:
+      - ./.config.json:/app/.config.json
+      - ./.fb-profile:/app/.fb-profile
