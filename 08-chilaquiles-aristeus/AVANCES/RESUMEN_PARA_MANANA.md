@@ -1,32 +1,34 @@
 # 📊 Estado del Proyecto: Aristeus "Artesanos de la Salsa"
 **Fecha de corte:** 5 de junio, 2026
 
-## ✅ Última Sesión — Publicación Masiva en Grupos de Facebook
+## ✅ Sesión Final — Publicación Masiva CORREGIDA con Imágenes
 
-### Implementación técnica
-1. **`post-to-groups.js`** — Script de automatización con Puppeteer para publicar en grupos de Facebook con imagen + texto.
-2. **`post.js`** — Se añadió `postToGroups()` vía Graph API (cuando la página sea miembro del grupo).
-3. **`publicar_programado.js`** — Ahora ejecuta publicación en grupos DESPUÉS de publicar en página + Instagram.
-4. **`Dockerfile`** — Actualizado con Chromium para Puppeteer, se copia `post-to-groups.js`.
-5. **`.config.json`** — Configurado con `FB_GROUPS` (23 IDs), `PAGE_ID` corregido, nuevo `PAGE_TOKEN`.
+### Problema encontrado y solucionado
+- **Problema:** `uploadFile()` de Puppeteer no disparaba React de Facebook → las imágenes no se adjuntaban
+- **Solución:** Usar `DataTransfer` + `File` vía `page.evaluate()` para que React detecte el cambio
+- **Flujo correcto:** Subir imagen ANTES de abrir el composer, al ÚLTIMO input que acepte `image/*`
+- **Composer:** Detectar el de NUEVO POST (con botones Foto/video + Sentimiento/actividad), no comment boxes
 
-### Publicación realizada
-- **22 de 23 grupos publicados** con imagen y texto promocional de Aristeus.
-- Grupos objetivos: colonias Aviación, Jacarandas, Morales, Saucito, Vasco de Quiroga, Pozos; grupos de comida/ventas en SLP.
-- Solo falló: "Turista en Mi Ciudad, San Luis Potosí!" (no permite posts comerciales).
+### Publicación final con imágenes
+- **21 grupos publicados** con imagen + texto
+- 1 no publicó: "Turista en Mi Ciudad, San Luis Potosí!" (botón deshabilitado)
+- Grupos con aprobación de admins: los posts quedan en cola hasta aprobarse
 
-### Flujo actual
+### Para mañana (rápido)
+```bash
+# Publicar solo grupos (con la imagen del día)
+node post-to-groups.js "Texto del día" "contenido/{dia}/imagen.png"
+
+# O ejecutar el programador automático (12:00 y 15:00)
+node publicar_programado.js
 ```
-cron (12:00 y 15:00)
-  → publicar_programado.js
-      → post.js → Facebook Page + Instagram
-      → post-to-groups.js → 22 grupos de Facebook
+
+### Comandos útiles
+```bash
+# Ver estado de sesión
+ls -la .fb-profile/
+
+# Si expira la sesión, borrar perfil y re-ejecutar:
+rm -rf .fb-profile
+node post-to-groups.js "test login"
 ```
-
-### Próximos pasos
-1. Agregar la página Aristeus como miembro de los grupos para que `post.js --groups` también funcione vía API.
-2. Agregar más grupos de la lista de Alejandro (en `memanto/`).
-3. Configurar respaldo automático.
-
----
-**Nota:** El proyecto pasó de Fase de Lanzamiento a Fase de Activación con presencia en 22+ grupos de Facebook.
