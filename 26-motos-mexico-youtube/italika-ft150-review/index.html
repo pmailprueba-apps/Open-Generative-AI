@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 1920px; height: 1080px;
+        overflow: hidden; background: #0D0D0D;
+        font-family: 'Oswald', sans-serif;
+      }
+      .scene {
+        position: absolute; inset: 0;
+        width: 1920px; height: 1080px;
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center;
+        padding: 80px 120px;
+      }
+      .bg-glow {
+        position: absolute; width: 800px; height: 800px;
+        border-radius: 50%; filter: blur(120px);
+        opacity: 0.12; pointer-events: none;
+      }
+      .bg-glow-1 { top: -200px; right: -200px; background: #FF5722; }
+      .bg-glow-2 { bottom: -300px; left: -150px; background: #FFB300; }
+      .bg-glow-3 { top: -100px; left: -100px; background: #FF5722; width: 600px; height: 600px; }
+      .bg-glow-4 { bottom: -200px; right: -100px; background: #FFB300; width: 700px; height: 700px; }
+
+      .clip { position: relative; }
+
+      .title-xl { font-size: 120px; font-weight: 900; color: #FFF; text-transform: uppercase; text-align: center; line-height: 1; letter-spacing: 2px; }
+      .title-lg { font-size: 80px; font-weight: 700; color: #FFF; text-transform: uppercase; text-align: center; line-height: 1.1; }
+      .title-md { font-size: 52px; font-weight: 600; color: #FFF; text-align: center; line-height: 1.2; font-family: 'Montserrat', sans-serif; }
+      .subtitle { font-size: 30px; font-weight: 400; color: #CCC; text-align: center; font-family: 'Montserrat', sans-serif; }
+      .accent { color: #FF5722; }
+
+      .specs-grid {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 20px 60px; width: 100%; max-width: 1400px;
+      }
+      .spec-item {
+        display: flex; flex-direction: column;
+        padding: 16px 24px;
+        background: rgba(255,255,255,0.05);
+        border-left: 4px solid #FF5722; border-radius: 4px;
+      }
+      .spec-label { font-size: 20px; color: #888; font-family: 'Montserrat', sans-serif; }
+      .spec-value { font-size: 36px; font-weight: 700; color: #FFF; }
+
+      .verdict-score {
+        width: 200px; height: 200px; border-radius: 50%;
+        border: 6px solid #FF5722;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 72px; font-weight: 900; color: #FF5722;
+      }
+
+      .photo-strip {
+        display: flex; gap: 16px;
+        width: 100%; max-width: 1600px;
+        justify-content: center;
+      }
+      .photo-strip img {
+        width: 30%; aspect-ratio: 16/9;
+        object-fit: cover; border-radius: 6px;
+        border: 2px solid rgba(255,255,255,0.08);
+      }
+
+      .pros-list, .cons-list {
+        display: flex; flex-direction: column;
+        gap: 12px; width: 100%; max-width: 900px;
+      }
+      .pro-item {
+        display: flex; align-items: center; gap: 16px;
+        padding: 14px 24px;
+        background: rgba(255,87,34,0.08);
+        border-radius: 6px; border-left: 4px solid #FF5722;
+      }
+      .pro-text { font-size: 26px; color: #FFF; font-family: 'Montserrat', sans-serif; }
+      
+      .con-item {
+        display: flex; align-items: center; gap: 16px;
+        padding: 14px 24px;
+        background: rgba(255,0,0,0.06);
+        border-radius: 6px; border-left: 4px solid #FF4444;
+      }
+      .con-text { font-size: 26px; color: #FFF; font-family: 'Montserrat', sans-serif; }
+
+      .cta-button {
+        padding: 18px 56px; background: #FF5722;
+        border-radius: 50px;
+        font-size: 32px; font-weight: 700; color: #FFF;
+        text-transform: uppercase;
+      }
+
+      .ghost-text {
+        position: absolute; font-size: 160px; font-weight: 900;
+        color: rgba(255,255,255,0.03);
+        text-transform: uppercase; pointer-events: none;
+        user-select: none;
+      }
+      
+      .photo-bg {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; opacity: 0.15;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="130"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Audio narration -->
+      <audio id="narration" src="assets/narration.mp3" data-start="0" data-duration="130" data-track-index="0" data-volume="1"></audio>
+
+      <!-- Background glows -->
+      <div class="bg-glow bg-glow-1" id="glow1"></div>
+      <div class="bg-glow bg-glow-2" id="glow2"></div>
+
+      <!-- ===== SCENE 1: INTRO (0-13s) ===== -->
+      <div class="scene clip" id="s1" data-start="0" data-duration="13" data-track-index="1">
+        <div class="ghost-text" style="top:60px;right:40px;" id="s1-g1">ITALLIKA</div>
+        <div class="ghost-text" style="bottom:60px;left:30px;" id="s1-g2">FT150</div>
+        <div class="clip" id="s1-title" data-start="0.5" data-duration="12" data-track-index="2">
+          <div style="font-size:26px;color:#FF5722;font-family:'Montserrat',sans-serif;text-align:center;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;">ALEX RAM MOTOVLOGS</div>
+          <div class="title-xl">ITALIKA FT150</div>
+          <div class="title-lg accent" style="margin-top:8px;">1 AÑO DESPUÉS</div>
+          <div class="subtitle" style="margin-top:24px;">¿La mejor moto barata de México?</div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 2: WHAT IS IT + SPECS (13-28s) ===== -->
+      <div class="scene clip" id="s2" data-start="13" data-duration="15" data-track-index="3">
+        <div class="ghost-text" style="top:30px;right:10px;" id="s2-g">ESPECIFICACIONES</div>
+        <div class="clip" id="s2-heading" data-start="13.5" data-duration="14" data-track-index="4">
+          <div class="title-lg" style="margin-bottom:30px;">¿QUÉ ES LA <span class="accent">FT150</span>?</div>
+          <div class="subtitle" style="margin-bottom:30px;">Motoneta urbana 150cc · ~$24,000 MXN</div>
+          <div class="specs-grid">
+            <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-value">150cc 4T</span></div>
+            <div class="spec-item"><span class="spec-label">Precio</span><span class="spec-value">~$24,000 MXN</span></div>
+            <div class="spec-item"><span class="spec-label">Vel. Máx</span><span class="spec-value">95 km/h</span></div>
+            <div class="spec-item"><span class="spec-label">Rendimiento</span><span class="spec-value">~40 km/L</span></div>
+          </div>
+          <div class="subtitle" style="margin-top:20px;font-size:22px;">585,280 unidades vendidas • Q1 2026</div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 3: THE GOOD / PROS (28-60s) ===== -->
+      <div class="scene clip" id="s3" data-start="28" data-duration="32" data-track-index="5">
+        <div class="ghost-text" style="bottom:40px;right:20px;" id="s3-g">LO BUENO</div>
+        <div class="clip" id="s3-photos" data-start="28.5" data-duration="8" data-track-index="6">
+          <img src="assets/photos/60805329_10156783289123751_8166481461206056960_o.jpg" class="photo-bg" style="opacity:0.2;">
+          <div class="title-lg accent" style="position:relative;z-index:1;">✅ LO BUENO</div>
+        </div>
+        <div class="clip pros-list" id="s3-list" data-start="36" data-duration="23" data-track-index="7" style="position:relative;">
+          <div class="pro-item"><div class="pro-text">⛽ <b>Rendimiento:</b> $200 de gasolina = toda la semana</div></div>
+          <div class="pro-item"><div class="pro-text">🔧 <b>Mantenimiento barato:</b> Servicio ~$300-400 c/1,000 km</div></div>
+          <div class="pro-item"><div class="pro-text">🧳 <b>Espacio:</b> Casco integral + mandado bajo el asiento</div></div>
+          <div class="pro-item"><div class="pro-text">🏙️ <b>Agilidad:</b> En CDMX te mueves como pez en el agua</div></div>
+          <div class="pro-item"><div class="pro-text">💡 <b>Luces LED</b> de fábrica en modelos 2025/2026</div></div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 4: THE BAD / CONS (60-90s) ===== -->
+      <div class="scene clip" id="s4" data-start="60" data-duration="30" data-track-index="8">
+        <div class="ghost-text" style="top:40px;left:10px;" id="s4-g">LO MALO</div>
+        <div class="clip" id="s4-photos" data-start="60.5" data-duration="8" data-track-index="9">
+          <img src="assets/photos/60811109_10156783283608751_4323986427219017728_o.jpg" class="photo-bg" style="opacity:0.2;">
+          <div class="title-lg" style="color:#FF4444;position:relative;z-index:1;">❌ LO MALO</div>
+        </div>
+        <div class="clip cons-list" id="s4-list" data-start="68" data-duration="21" data-track-index="10" style="position:relative;">
+          <div class="con-item"><div class="con-text">🛑 <b>Frenos:</b> Tambor atrás, emergencia = insuficiente</div></div>
+          <div class="con-item"><div class="con-text">💥 <b>Suspensión dura:</b> Los baches de CDMX se sienten todos</div></div>
+          <div class="con-item"><div class="con-text">🐢 <b>Velocidad:</b> 95 km/h marcados, ~85 reales</div></div>
+          <div class="con-item"><div class="con-text">🪑 <b>Asiento incómodo</b> después de 40 min seguidos</div></div>
+          <div class="con-item"><div class="con-text">🔩 <b>Calidad:</b> Plásticos se rayan, tornillos se aflojan</div></div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 5: WHO IS IT FOR? (90-108s) ===== -->
+      <div class="scene clip" id="s5" data-start="90" data-duration="18" data-track-index="11">
+        <div class="ghost-text" style="bottom:50px;right:30px;" id="s5-g">¿PARA QUIÉN?</div>
+        <div class="clip" id="s5-heading" data-start="90.5" data-duration="17" data-track-index="12">
+          <div class="title-lg" style="margin-bottom:30px;">¿PARA <span class="accent">QUIÉN</span> ES?</div>
+          <div style="display:flex;gap:40px;width:100%;max-width:1200px;justify-content:center;">
+            <div style="flex:1;padding:24px;background:rgba(255,87,34,0.08);border-radius:8px;">
+              <div style="font-size:36px;margin-bottom:12px;">✅</div>
+              <div style="font-size:28px;color:#FFF;font-family:'Montserrat',sans-serif;">Ideal para:</div>
+              <div style="font-size:22px;color:#AAA;font-family:'Montserrat',sans-serif;margin-top:8px;">
+                • Repartidores (Uber, Rappi, Didi)<br>
+                • Moverse en CDMX / ciudad<br>
+                • Presupuesto ajustado (-$25K)<br>
+                • Primera moto
+              </div>
+            </div>
+            <div style="flex:1;padding:24px;background:rgba(255,0,0,0.06);border-radius:8px;">
+              <div style="font-size:36px;margin-bottom:12px;">❌</div>
+              <div style="font-size:28px;color:#FFF;font-family:'Montserrat',sans-serif;">No es para:</div>
+              <div style="font-size:22px;color:#AAA;font-family:'Montserrat',sans-serif;margin-top:8px;">
+                • Viajes largos en carretera<br>
+                • Gente pesada (+90 kg)<br>
+                • Los que buscan velocidad<br>
+                • Terracería
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 6: VEREDICT (108-122s) ===== -->
+      <div class="scene clip" id="s6" data-start="108" data-duration="14" data-track-index="13">
+        <div class="clip" id="s6-heading" data-start="108.5" data-duration="12" data-track-index="14">
+          <div class="title-lg" style="margin-bottom:16px;">VEREDICTO</div>
+          <div class="verdict-score">7.5</div>
+          <div style="font-size:22px;color:#888;margin-top:8px;font-family:'Montserrat',sans-serif;">/ 10</div>
+          <div class="subtitle" style="margin-top:20px;max-width:700px;font-size:26px;">
+            "No es perfecta, pero por $24,000 es difícil pedir más."
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 7: OUTRO (122-130s) ===== -->
+      <div class="scene clip" id="s7" data-start="122" data-duration="8" data-track-index="15">
+        <div class="clip" id="s7-cta" data-start="122.5" data-duration="7" data-track-index="16">
+          <div class="title-lg accent" style="margin-bottom:16px;">¡SUSCRÍBETE!</div>
+          <div class="cta-button">@MotocicletasMX</div>
+          <div class="subtitle" style="margin-top:24px;font-size:22px;">Alex Ram Motovlogs — Reviews de motos en México</div>
+          <div style="margin-top:12px;font-size:18px;color:#888;font-family:'Montserrat',sans-serif;">Próximo: Vento Rocketman 300 vs Italika 250Z</div>
+        </div>
+        <div class="clip" id="s7-fadeout" data-start="124" data-duration="5" data-track-index="17" style="position:absolute;inset:0;background:#0D0D0D;pointer-events:none;"></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Persistent glow breathing
+      tl.to("#glow1", { scale: 1.15, opacity: 0.18, duration: 3, ease: "sine.inOut", repeat: 20 }, 0);
+      tl.to("#glow2", { scale: 1.2, opacity: 0.1, duration: 4, ease: "sine.inOut", repeat: 15 }, 0.5);
+
+      // Scene 1: Intro (0-13s)
+      tl.from("#s1-g1", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, 0.3);
+      tl.from("#s1-g2", { opacity: 0, x: -40, duration: 0.8, ease: "power2.out" }, 0.4);
+      tl.from("#s1-title", { opacity: 0, y: 40, duration: 0.7, ease: "power3.out" }, 0.5);
+      tl.to("#s1-title", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 11);
+
+      // Scene 2: Specs (13-28s)
+      tl.from("#s2-g", { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.out" }, 13.2);
+      tl.from("#s2-heading", { opacity: 0, y: 30, duration: 0.5, ease: "power3.out" }, 13.5);
+      tl.from("#s2-heading .spec-item", { opacity: 0, x: -30, duration: 0.4, ease: "power2.out", stagger: 0.12 }, 15);
+
+      // Scene 3: Pros (28-60s)
+      tl.from("#s3-g", { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" }, 28.2);
+      tl.from("#s3-photos", { opacity: 0, scale: 1.05, duration: 0.5, ease: "power2.out" }, 28.5);
+      tl.from("#s3-list .pro-item", { opacity: 0, x: -40, duration: 0.4, ease: "power2.out", stagger: 0.2 }, 36.5);
+
+      // Scene 4: Cons (60-90s)
+      tl.from("#s4-g", { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" }, 60.2);
+      tl.from("#s4-photos", { opacity: 0, scale: 1.05, duration: 0.5, ease: "power2.out" }, 60.5);
+      tl.from("#s4-list .con-item", { opacity: 0, x: -40, duration: 0.4, ease: "power2.out", stagger: 0.2 }, 68.5);
+
+      // Scene 5: For who? (90-108s)
+      tl.from("#s5-g", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 90.2);
+      tl.from("#s5-heading", { opacity: 0, y: 30, duration: 0.5, ease: "power3.out" }, 90.5);
+      tl.from("#s5-heading div div", { opacity: 0, y: 20, duration: 0.4, ease: "power2.out", stagger: 0.3 }, 92);
+
+      // Scene 6: Veredict (108-122s)
+      tl.from("#s6-heading", { opacity: 0, y: 20, duration: 0.4, ease: "power2.out" }, 108.5);
+      tl.from(".verdict-score", { opacity: 0, scale: 0.3, duration: 0.6, ease: "back.out(2)" }, 110);
+
+      // Scene 7: Outro (122-130s)
+      tl.from("#s7-cta", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 122.5);
+      tl.to("#s7-fadeout", { opacity: 1, duration: 2, ease: "power2.in" }, 124);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
