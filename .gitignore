@@ -13,3 +13,9 @@ Open-Generative-AI/
 Open-Higgsfield-AI/
 hermes-agent/
 marketingskills/
+
+# Credenciales y archivos sensibles
+canva-backup-codes.txt
+CREDENCIALES_QNAP.md
+generate-canva-auth.js
+agent_chrome_profile/
