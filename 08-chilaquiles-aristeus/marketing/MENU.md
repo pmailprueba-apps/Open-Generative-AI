@@ -22,24 +22,24 @@
 
 ## [1.0] 🌶️ Chilaquiles de Autor
 
-**[1.1] ⛽ Combo Full Tank** | **$165.00**
-*El favorito de la ruta. Chilaquiles (Imperiales o Dulces) + Proteína extra + Frijoles refritos + Bebida (500ml).*
+<!-- **[1.1] ⛽ Combo Full Tank** | **$165.00**
+*El favorito de la ruta. Chilaquiles (Imperiales o Dulces) + Proteína extra + Frijoles refritos + Bebida (500ml).* -->
 
-**[1.2] El Despertar de Aristeus** | **$135.00**
-*Salsa de chile cuaresmeño, totopos frescos, queso menonita, crema de rancho y proteína (Pollo/Huevo/Chorizo).*
+**[1.2] El Despertar de Aristeus (Rojos)** | **$137.50**
+*Salsa roja de chorizo, totopos frescos, queso menonita, crema de rancho, frijoles y proteína (Pollo, Huevo o Arrachera).*
 
-**[1.3] Banquete del Patrón** | **$185.00**
-*Chilaquiles con Arrachera premium marinada y asada a las brasas.*
+**[1.3] Banquete del Patrón** | **$162.50**
+*Chilaquiles con Arrachera premium marinada y asada a las brasas, acompañados de frijoles.*
 
 ![Chilaquiles Rojos](fotos de productos /chilaquiles_rojos.png) **[F-1.2]**
 
 ---
 
-## [1.4] 🌿 Joyas del Mar | **$195.00**
-*Chilaquiles con Camarones salteados con especias de la casa.*
+## [1.4] 🌿 Joyas del Mar | **$175.00**
+*Chilaquiles con Camarones salteados con especias de la casa, acompañados de frijoles.*
 
-**Chilaquiles Verdes Tradicionales** | **$135.00**
-*Salsa verde tradicional con mermelada de frutos rojos.*
+**Chilaquiles Verdes Tradicionales** | **$137.50**
+*Salsa verde tradicional, totopos, queso, crema, frijoles y proteína (Pollo, Huevo o Arrachera).*
 
 ---
 ![Chilaquiles Verdes](fotos de productos /chilaquiles_verdes.png) **[F-1.4]**
@@ -56,20 +56,21 @@
 ## [4.0] 🥤 Bebidas & Cafetería
 
 **[4.1] Aguas de la Ruta (500ml)** | **$35.00**
-**[4.2] Café de Olla Aristeus** | **$30.00**
+<!-- **[4.2] Café de Olla Aristeus** | **$30.00** -->
 
 ---
 
 ## [2.0] 🌊 Delicias del Mar
-**[2.1] Taco Gobernador Supremo** | **$155.00 (Orden 3)**
-**[2.2] Sirena Aristeus (Pescadillas)** | **$125.00**
+<!-- **[2.1] Taco Gobernador Supremo** | **$155.00 (Orden 3)** -->
+**[2.2] Sirena Aristeus (Pescadillas)** | **$93.75 (Orden 3 pzs)**
 
 ---
 
 ## [3.0] 🐂 Los Toritos & Esferas
 **[3.1] Torito Imperial (Camarón)** | **$75.00**
 **Torito de Sabor (Queso)** | **$65.00**
-**[3.2] Esferas de Arroz (3pzs)** | **$115.00**
+**[3.2] Esfera de Arroz (1 pza)** | **$118.75**
+*Fresca y deliciosa bola de arroz rellena de queso Philadelphia, aguacate, pepino y tu elección de proteína (Camarón, Arrachera o Tocino). Acompañada de nuestras salsas especiales que crean un equilibrio ideal entre frescura y cremosidad.*
 
 ---
 
@@ -78,5 +79,5 @@
 
 ---
 
-*Creado: Mayo 2026*
+*Actualizado: 1 de Junio 2026*
 *Manuel Alejandro Ramos Tejada*
